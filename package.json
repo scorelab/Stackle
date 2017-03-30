@@ -1,0 +1,23 @@
+{
+  "name": "stackle",
+  "version": "1.0.0",
+  "description": "Web Communication portal for OpenSource organizations to discuss project ideas and issues ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psnmissaka/Stackle.git"
+  },
+  "keywords": [
+    "stackle",
+    "SCORE"
+  ],
+  "author": "SCoRe Lab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psnmissaka/Stackle/issues"
+  },
+  "homepage": "https://github.com/psnmissaka/Stackle#readme"
+}
