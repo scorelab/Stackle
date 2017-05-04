@@ -1,0 +1,25 @@
+{
+  "name": "stackle",
+  "description": "Web Communication portal for OpenSource organizations to discuss project ideas and issues",
+  "main": "server.js",
+  "authors": [
+    "SCoRe Lab"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "stackle",
+    "SCORE"
+  ],
+  "homepage": "https://github.com/psnmissaka/Stackle#readme",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.98.2"
+  }
+}
