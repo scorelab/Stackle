@@ -1,4 +1,4 @@
-var Mongoose = require('Mongoose');
+var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
 	github : {
