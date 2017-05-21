@@ -28,7 +28,10 @@ const server = app.listen(port, hostname, () => {
 
 mongoose.connect(database.url,function(err){
     if(err){
-        return console.log(err);
+        mongoose.connect(database.alturl,function(err){
+            return console.log(err);
+        })
+        return console.log("Couldnt connect to db url 1. connecting to alternate");
     }
     console.log("Mongo connect sucess!");
     app.listen(port, function(){
