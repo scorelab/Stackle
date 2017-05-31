@@ -2,6 +2,7 @@
 <html ng-app="stackleApp">
 <head>
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/angular-material.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Stackle Home</title>
 
 	<!-- Latest minor release -->
@@ -12,7 +13,7 @@
 <body>
 	<toolbar></toolbar>
 
-	<div layout-padding>
+	<div>
 		<ui-view></ui-view>
 	</div>
 
@@ -28,5 +29,6 @@
 	<script src="app.js"></script>
 	<script type="text/javascript" src="app/components/toolbar/toolbar.directive.js"></script>
 	<script type="text/javascript" src="app/components/profile/profile.controller.js"></script>
+	<script type="text/javascript" src="app/components/landing/landing.controller.js"></script>
 </body>
 </html>

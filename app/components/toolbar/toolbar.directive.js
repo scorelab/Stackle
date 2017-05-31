@@ -23,7 +23,7 @@
 				auth.signin({},function(profile, token){
 					store.set('profile', profile);
 					store.set('id_token', token);
-					$location.path('/home');
+					$location.path('/landing');
 				}, function(err){
 					console.log(err);
 				});

@@ -20,6 +20,11 @@ angular
 				url :'/profile',
 				templateUrl : 'app/components/profile/profile.html',
 				controller : 'profileController as user'
+			})
+			.state('landing',{
+				url : '/landing',
+				templateUrl : 'app/components/landing/landing.html',
+				controller : 'landingController as home'
 			});
 	})
 
