@@ -2,8 +2,14 @@
 	<div layout="row">
 		<div flex id="orgmenu" layout-margin layout-padding>
 			<div layout="column">
-				<div flex>Organization</div>
-				<div flex>Your organization</div>
+				<div flex>
+					<md-input-container>
+					  <label>Search Organization</label>
+					  <!-- <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon> -->
+					  <input type="text" ng-model="organization">
+					</md-input-container>
+				</div>
+				<div flex>Your organizations</div>
 			</div>
 		</div>
 		<div flex class="container" id="newsfeed" layout-margin layout-padding>Feed</div>

@@ -2,7 +2,7 @@
 
 angular
 	.module('stackleApp',['auth0','angular-storage','angular-jwt','ngMaterial','ui.router'])
-	.config(function($provide, authProvider, $urlRouterProvider, $stateProvider, $httpProvider, jwtInterceptorProvider){
+	.config(function($provide, authProvider, $urlRouterProvider, $stateProvider, $httpProvider, jwtInterceptorProvider, $mdIconProvider){
 
 		authProvider.init({
 			domain : 'psnmissaka.au.auth0.com',
@@ -11,6 +11,10 @@ angular
 
 		$urlRouterProvider.otherwise('/home');
 
+		$mdIconProvider
+		       .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+		       .defaultIconSet('img/icons/sets/core-icons.svg', 24);
+		
 		$stateProvider
 			.state('home',{
 				url : '/home',
