@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 
 var reply = mongoose.Schema({
 	description : String,
-	user : String,
+	user : [user],
 	date : String
 });
 
 var comment = mongoose.Schema({
 	description : String,
-	user : String,
+	user : [user],
 	votes : Number,
 	date : String,
 	replies : [reply]
@@ -21,7 +21,7 @@ var post = mongoose.Schema({
 	tags : [],
 	repository : String,
 	link_issue : String,
-	user : String,
+	user : [user],
 	date : String,
 	votes : Number,
 	comments : [comment]
