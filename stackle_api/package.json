@@ -2,7 +2,7 @@
   "name": "stackle",
   "version": "1.0.0",
   "description": "Web Communication portal for OpenSource organizations to discuss project ideas and issues ",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -23,11 +23,19 @@
   "homepage": "https://github.com/psnmissaka/Stackle#readme",
   "dependencies": {
     "angular": "^1.6.3",
+    "angular-jwt": "^0.1.9",
+    "angular-storage": "0.0.15",
+    "angular-ui-router": "^1.0.3",
+    "auth0-angular": "^4.2.7",
     "body-parser": "^1.17.1",
     "bower": "^1.8.0",
     "express": "^4.15.2",
     "method-override": "^2.3.8",
     "mongoose": "^4.9.6",
-    "morgan": "^1.8.1"
+    "morgan": "^1.8.1",
+    "nodemon": "^1.11.0"
+  },
+  "engines" :{
+    "node" : "6.9.5"
   }
 }
