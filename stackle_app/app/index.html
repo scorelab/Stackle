@@ -8,6 +8,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" type="text/css" href="../bower_components/angular-material/angular-material.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -71,12 +72,25 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-aria/angular-aria.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+
+    <script type="text/javascript" src="../node_modules/angular-jwt/dist/angular-jwt.js"></script>
+    <script type="text/javascript" src="../node_modules/angular-storage/dist/angular-storage.js"></script>
+    <script type="text/javascript" src="../node_modules/auth0-angular/build/auth0-angular.js"></script>
+    <script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/landing.js"></script>
+        <script src="scripts/controllers/profile.js"></script>
+        <script src="scripts/controllers/stackfeed.js"></script>
         <!-- endbuild -->
 </body>
 </html>
