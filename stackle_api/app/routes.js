@@ -12,17 +12,19 @@ module.exports = function(app){
 
 	})
 
-	app.get('/api/home/posts', function(req,res){
+	app.get('/api/posts', function(req,res){
 		
 	})
 
-	app.get('/api/home/:org_id', function(req,res){
+	app.get('/api/:org_id', function(req,res){
 
 	})
 
-	app.get('/api/home/notifications', function(req,res){
+	app.get('/api/notifications', function(req,res){
 		
 	})
+
+	app.get('/api/')
 
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html'); 
