@@ -29,5 +29,10 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "angular-jwt": "^0.1.9",
+    "angular-storage": "0.0.15",
+    "angular-ui-router": "^1.0.3"
   }
 }
