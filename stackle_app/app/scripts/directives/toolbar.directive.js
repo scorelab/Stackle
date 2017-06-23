@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('stackleApp')
+        .module('stackleAppApp')
         .directive('toolbar',toolbar);
 
         function toolbar(){
             return {
-                templateUrl: 'app/components/toolbar/toolbar.html',
+                templateUrl: 'views/toolbar.html',
                 controller : toolbarController,
                 controllerAs: 'toolbar'
             }
