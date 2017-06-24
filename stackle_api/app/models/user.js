@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var user = mongoose.Schema({
+var userSchema = mongoose.Schema({
 	userId : String,
 	github : {
 		id : String,
@@ -15,3 +15,5 @@ var user = mongoose.Schema({
 		name : String
 	}
 });
+
+module.exports = mongoose.model('User', userSchema);

@@ -7,6 +7,7 @@ var database = require('./config/database');            // load the database con
 var morgan = require('morgan');             // log requests to the console (express4)
 var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var db = mongoose.connection;
 
 app.use('/', express.static(__dirname +  '/'));
 app.use(morgan('dev'));                                         // log every request to the console
@@ -15,16 +16,14 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+var routes = require('./app/routes')(app,db);
+
+
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 const hostname = 'localhost';
-
-
-const server = app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);  
-});
 
 mongoose.connect(database.url,function(err){
     console.log("Connecting to the database..");
