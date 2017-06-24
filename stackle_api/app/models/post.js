@@ -27,4 +27,12 @@ var postSchema = mongoose.Schema({
 	comments : [commentSchema]
 });
 
-module.exports = mongoose.model('Post', postSchema);
+var Post = mongoose.model('Post', postSchema);
+var Comment = mongoose.model('Comment', commentSchema);
+var Reply = mongoose.model('Reply', replySchema);
+
+module.exports = {
+	Post : Post,
+	Comment : Comment,
+	Reply : Reply
+}
