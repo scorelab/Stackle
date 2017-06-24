@@ -4,7 +4,8 @@ var stackSchema = mongoose.Schema({
 	name : String,
 	description : String,
 	stackleUrl : String,
-	githubUrl : String
+	githubUrl : String,
+	created_user : String
 });
 
-module.export = mongoose.model('Stack', stackSchema);
+module.exports = mongoose.model('Stack', stackSchema);
