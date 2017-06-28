@@ -7,6 +7,7 @@
 
 body {
   padding: 0;
+  background-color: #ECEFF1;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -57,6 +58,26 @@ body {
 }
 .marketing p + h4 {
   margin-top: 28px;
+}
+
+#orgmenu{
+  background-color: white;
+  height: 100%;
+  width: 25%;
+
+}
+
+#newsfeed{
+  background-color: white;
+  height: 100%;
+  width: 50%;
+
+}
+
+#notification{
+  background-color: white;
+  height: 100%;
+  width: 25%;
 }
 
 /* Responsive: Portrait tablets and up */

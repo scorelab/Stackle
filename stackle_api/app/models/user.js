@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var user = mongoose.Schema({
+var userSchema = mongoose.Schema({
 	userId : String,
 	github : {
 		id : String,
@@ -13,5 +13,8 @@ var user = mongoose.Schema({
 		token : String,
 		email : String,
 		name : String
-	}
+	},
+	subscribed_stacks : []
 });
+
+module.exports = mongoose.model('User', userSchema);
