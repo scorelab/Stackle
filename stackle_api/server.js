@@ -16,11 +16,13 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+
 var routes = require('./app/routes')(app,db);
 
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/index.html'));
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 });
 
 const hostname = 'localhost';

@@ -133,8 +133,8 @@ module.exports = function(app,db){
 	})
 
 
-	app.get('*', function(req, res) {
-		res.sendfile('./public/index.html'); 
+	app.get('/*', function(req, res) {
+		res.sendfile('./public/404.html'); 
 	});
 
 }
