@@ -52,7 +52,7 @@ angular
       })
       .state('landing',{
         url : '/landing',
-        templateUrl : 'app/views/landing.html',
+        templateUrl : 'views/landing.html',
         controller : 'landingController as home'
       });
 
