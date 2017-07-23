@@ -9,10 +9,17 @@
                       <input type="text" ng-model="organization">
                     </md-input-container>
                 </div>
-                <div flex>Your organizations</div>
+                <div flex>
+                  <label>Your organizations</label>
+                  <div>
+                    <script type="text/javascript">
+                      localStorage.getItem("profile");
+                    </script>
+                  </div>
+                </div>
             </div>
         </div>
         <div flex class="container" id="newsfeed" layout-margin layout-padding>Feed</div>
         <div flex class="container" id="notification" layout-margin layout-padding>Notifications</div>
-    </div>  
+    </div>
 </div>

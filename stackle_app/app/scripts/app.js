@@ -43,11 +43,11 @@ angular
     $stateProvider
       .state('home',{
         url : '/home',
-        templateUrl : 'app/views/home.html'
+        templateUrl : 'views/home.html'
       })
       .state('profile',{
         url :'/profile',
-        templateUrl : 'app/views/profile.html',
+        templateUrl : 'views/profile.html',
         controller : 'profileController as user'
       })
       .state('landing',{
