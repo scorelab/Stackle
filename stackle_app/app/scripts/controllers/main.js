@@ -14,4 +14,5 @@ angular.module('stackleAppApp')
       'AngularJS',
       'Karma'
     ];
+
   });

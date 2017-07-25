@@ -54,15 +54,25 @@ angular
         url : '/landing',
         templateUrl : 'views/landing.html',
         controller : 'landingController'
-      });
-
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
+      .state('main',{
+        url : '/',
+        templateUrl : 'views/main.html',
+        controller : 'MainCtrl'
+      })
+      .state('otherwise',{
+        url : '*path',
+        templateUrl : '404.html'
+      })
+
+
+    // $routeProvider
+    //   .when('/', {
+    //     templateUrl: 'views/main.html',
+    //     controller: 'MainCtrl',
+    //     controllerAs: 'main'
+    //   })
+    //   .otherwise({
+    //     redirectTo: '/'
+    //   });
   });
