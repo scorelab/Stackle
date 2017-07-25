@@ -64,15 +64,4 @@ angular
         url : '*path',
         templateUrl : '404.html'
       })
-
-
-    // $routeProvider
-    //   .when('/', {
-    //     templateUrl: 'views/main.html',
-    //     controller: 'MainCtrl',
-    //     controllerAs: 'main'
-    //   })
-    //   .otherwise({
-    //     redirectTo: '/'
-    //   });
   });
