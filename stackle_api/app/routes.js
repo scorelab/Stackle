@@ -123,8 +123,23 @@ module.exports = function(app,db){
 			if(err){
 				console.log("Error saving the stack to database");
 				res.send("Error saving stack!");
-			}else{
+			}else if(success){
 				res.send("Sucessfully created the stack");
+			}else{
+				res.send("Null");
+			}
+		})
+	})
+
+	//delete stack
+	app.delete('api/delete/stack/:stackid', function(req,res){
+		var stack_id = req.params.stackid;
+
+		Stack.remove({ _id : stack_id} , function(err,success){
+			if(err){
+				res.send("Couldn't delete Stack");
+			}else{
+				res.send("")
 			}
 		})
 	})
