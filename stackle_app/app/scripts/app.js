@@ -53,7 +53,7 @@ angular
       .state('landing',{
         url : '/landing',
         templateUrl : 'views/landing.html',
-        controller : 'landingController as home'
+        controller : 'landingController'
       });
 
     $routeProvider
@@ -65,8 +65,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-
-
-
-
   });

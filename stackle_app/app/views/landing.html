@@ -10,16 +10,15 @@
                     </md-input-container>
                 </div>
                 <div flex>
-                  <label>Your organizations</label>
-                  <div>
-                    <script type="text/javascript">
-                      localStorage.getItem("profile");
-                    </script>
+                  <label id="orghd">Your organizations</label>
+                  <div class="container" ng-repeat="org in orgs">
+                    {{org.login}}
                   </div>
                 </div>
             </div>
         </div>
         <div flex class="container" id="newsfeed" layout-margin layout-padding>Feed</div>
         <div flex class="container" id="notification" layout-margin layout-padding>Notifications</div>
+
     </div>
 </div>

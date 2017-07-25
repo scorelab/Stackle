@@ -17,6 +17,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/landing.css">
     <!-- endbuild -->
   </head>
   <body ng-app="stackleAppApp">
@@ -30,9 +31,9 @@
     </div>
 
     <!-- <div ng-view=""></div> -->
-      <div>
-        <ui-view> </ui-view>
-      </div>
+    <div>
+      <ui-view></ui-view>
+    </div>
 
 
     <div class="footer">
@@ -98,13 +99,14 @@
     <script type="text/javascript" src="/vendor/angular-storage.js"></script>
     <script type="text/javascript" src="/vendor/angular-ui-router.js"></script>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/landing.js"></script>
-        <script src="scripts/controllers/profile.js"></script>
-        <script src="scripts/controllers/stackfeed.js"></script>
-        <script src="scripts/directives/toolbar.directive.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/services/user.service.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/landing.js"></script>
+    <script src="scripts/controllers/profile.js"></script>
+    <script src="scripts/controllers/stackfeed.js"></script>
+    <script src="scripts/directives/toolbar.directive.js"></script>
+    <!-- endbuild -->
 </body>
 </html>
