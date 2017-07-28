@@ -43,30 +43,25 @@ angular
     $stateProvider
       .state('home',{
         url : '/home',
-        templateUrl : 'app/views/home.html'
+        templateUrl : 'views/home.html'
       })
       .state('profile',{
         url :'/profile',
-        templateUrl : 'app/views/profile.html',
+        templateUrl : 'views/profile.html',
         controller : 'profileController as user'
       })
       .state('landing',{
         url : '/landing',
-        templateUrl : 'app/views/landing.html',
-        controller : 'landingController as home'
-      });
-
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl : 'views/landing.html',
+        controller : 'landingController'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
-
-
-
-
+      .state('main',{
+        url : '/',
+        templateUrl : 'views/main.html',
+        controller : 'MainCtrl'
+      })
+      .state('otherwise',{
+        url : '*path',
+        templateUrl : '404.html'
+      })
   });

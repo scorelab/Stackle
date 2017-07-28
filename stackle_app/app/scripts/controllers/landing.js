@@ -1,10 +1,11 @@
-'use strict';
+(function(){
+  'use strict';
+  angular
+    .module('stackleAppApp')
+    .controller('landingController', [ '$scope', 'userService', landingController]);
 
-angular.module('stackleAppApp')
-  .controller('landingController', function ($http) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  function landingController($scope, userService) {
+    $scope.orgs = userService.getOrgs();
+  }
+
+})();

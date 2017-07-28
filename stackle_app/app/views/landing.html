@@ -1,6 +1,6 @@
-<div class="container" id="landing">
+<div id="landing">
     <div layout="row">
-        <div flex id="orgmenu" layout-margin layout-padding>
+        <div flex="25" id="orgmenu" layout-margin layout-padding>
             <div layout="column">
                 <div flex>
                     <md-input-container>
@@ -9,10 +9,16 @@
                       <input type="text" ng-model="organization">
                     </md-input-container>
                 </div>
-                <div flex>Your organizations</div>
+                <div flex>
+                  <label id="orghd">Your organizations</label>
+                  <div class="container" ng-repeat="org in orgs">
+                    {{org.login}}
+                  </div>
+                </div>
             </div>
         </div>
-        <div flex class="container" id="newsfeed" layout-margin layout-padding>Feed</div>
-        <div flex class="container" id="notification" layout-margin layout-padding>Notifications</div>
-    </div>  
+        <div flex="60" id="newsfeed" layout-margin layout-padding>Feed</div>
+        <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
+
+    </div>
 </div>
