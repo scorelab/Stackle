@@ -1,24 +1,32 @@
 <div id="landing">
-    <div layout="row">
-        <div flex="25" id="orgmenu" layout-margin layout-padding>
-            <div layout="column">
-                <div flex>
-                    <md-input-container>
-                      <label>Search Organization</label>
-                      <!-- <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon> -->
-                      <input type="text" ng-model="organization">
-                    </md-input-container>
-                </div>
-                <div flex>
-                  <label id="orghd">Your organizations</label>
-                  <div class="container" ng-repeat="org in orgs">
-                    {{org.login}}
-                  </div>
-                </div>
-            </div>
+  <div layout="row">
+    <div flex="25" id="orgmenu" layout-margin layout-padding>
+      <div layout="column">
+        <div flex>
+          <md-input-container>
+            <label>Search Organization</label>
+            <!-- <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon> -->
+            <input type="text" ng-model="org" ng-keyup="sorg = searchOrg(org)">
+          </md-input-container>
+          <md-content>
+            {{org}}
+          </md-content>
         </div>
-        <div flex="60" id="newsfeed" layout-margin layout-padding>Feed</div>
-        <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
-
+        <div flex>
+          <!-- <md-content>
+                    {{org}}
+                  </md-content> -->
+        </div>
+        <div flex>
+          <label id="orghd">Your organizations</label>
+          <div class="container" ng-repeat="org in orgs">
+            {{org.login}}
+          </div>
+        </div>
+      </div>
     </div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding>Feed</div>
+    <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
+
+  </div>
 </div>

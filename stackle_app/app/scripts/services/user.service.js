@@ -20,7 +20,5 @@
       return {
         getOrgs : getOrgs
       }
-
     }
-
 })();
