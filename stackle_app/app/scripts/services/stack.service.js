@@ -2,12 +2,12 @@
   'use strict';
 
   angular.module('stackleAppApp')
-    .service('userService',['$http', stackService]);
+    .service('stackService',['$http', stackService]);
 
     function stackService($http){
 
       var searchStack = function(name){
-        var url = "https://api.github.com/orgs/{{name}}";
+        var url = "https://api.github.com/orgs/"+name;
 
         console.log("Searching org :" + name);
 

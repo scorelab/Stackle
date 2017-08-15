@@ -18,7 +18,6 @@ module.exports = function(app,db){
 
 	app.get('/home', function(req,res){
 		//needs to intergrate with github for implementation
-
 		res.end();
 	})
 
@@ -115,7 +114,7 @@ module.exports = function(app,db){
 	})
 
 	//create stack
-	app.post('/api/newstack', function(req,res){
+	app.post('/api/stack/create', function(req,res){
 
 		var stack = new Stack(req.body);
 
@@ -123,7 +122,7 @@ module.exports = function(app,db){
 			if(err){
 				console.log("Error saving the stack to database");
 				res.send("Error saving stack!");
-			}else if(success){
+			}else if(stack){
 				res.send("Sucessfully created the stack");
 			}else{
 				res.send("Null");
