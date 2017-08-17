@@ -1,114 +1,120 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!--<link rel="stylesheet" type="text/css" href="../bower_components/angular-material/angular-material.css">-->
-    <script src="https://cdn.auth0.com/js/lock-9.min.js"></script>
-    <!-- endbower -->
-    <!-- CDN -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <!-- END CDN -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/landing.css">
-    <link rel="stylesheet" href="styles/profile.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="stackleAppApp">
-    <!--[if lte IE 8]>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <!--<link rel="stylesheet" type="text/css" href="../bower_components/angular-material/angular-material.css">-->
+  <script src="https://cdn.auth0.com/js/lock-9.min.js"></script>
+  <!-- endbower -->
+  <!-- CDN -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <!-- END CDN -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/landing.css">
+  <link rel="stylesheet" href="styles/profile.css">
+  <!-- endbuild -->
+</head>
+
+<body ng-app="stackleAppApp">
+  <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <toolbar></toolbar>
+  <!-- Add your site or application content here -->
+  <div class="header">
+    <toolbar></toolbar>
+  </div>
+
+  <!-- <div ng-view=""></div> -->
+  <div>
+    <ui-view></ui-view>
+  </div>
+
+
+  <div class="footer">
+    <div class="container">
+      <p><span class="glyphicon glyphicon-heart"></span> SCoReLab of UCSC</p>
     </div>
-
-    <!-- <div ng-view=""></div> -->
-    <div>
-      <ui-view></ui-view>
-    </div>
+  </div>
 
 
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> SCoReLab of UCSC</p>
-      </div>
-    </div>
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+  <script>
+    !function (A, n, g, u, l, a, r) {
+    A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+      (A[l].q = A[l].q || []).push(arguments)    
+}, A[l].l = +new Date, a = n.createElement(g),
+      r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-
-    <!--<script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+  <!-- <script type="text/javascript" src="../bower_components/angular/angular.js"></script> 
     <script type="text/javascript" src="../bower_components/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="../bower_components/angular-aria/angular-aria.js"></script>
-    <script type="text/javascript" src="../bower_components/angular-material/angular-material.js"></script>-->
-    <!-- <script type="text/javascript" src="../bower_components/angular-cookies/angular-cookies.js"></script> -->
-    <!-- <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script> -->
-    <!-- <script type="text/javascript" src="../bower_components/angular-route/angular-route.js"></script> -->
-    <!-- <script type="text/javascript" src="../bower_components/angular-sanitize/angular-sanitize.js"></script> -->
-    <!-- <script type="text/javascript" src="../bower_components/angular-touch/angular-touch.js"></script> -->
-    <!-- <script type="text/javascript" src="../bower_components/auth0.js/build/auth0.js"></script> -->
-    <!-- <script type="text/javascript" src="../bower_components/auth0-angular/build/auth0-angular.js"></script> -->
+    <script type="text/javascript" src="../bower_components/angular-material/angular-material.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/angular-cookies/angular-cookies.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/angular-resource/angular-resource.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/angular-route/angular-route.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/angular-sanitize/angular-sanitize.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/angular-touch/angular-touch.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/auth0.js/build/auth0.js"></script> -->
+  <!-- <script type="text/javascript" src="../bower_components/auth0-angular/build/auth0-angular.js"></script> -->
 
 
-    <!-- endbower -->
-    <!-- CDN  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+  <!-- endbower -->
+  <!-- CDN  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script> 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
-    <!-- End CDN -->
-    <!-- vendor -->
-    <script type="text/javascript" src="/vendor/angular-cookies.js"></script>
-    <script type="text/javascript" src="/vendor/angular-resource.js"></script>
-    <script type="text/javascript" src="/vendor/angular-route.js"></script>
-    <script type="text/javascript" src="/vendor/angular-sanitize.js"></script>
-    <script type="text/javascript" src="/vendor/angular-touch.js"></script>
-    <script type="text/javascript" src="/vendor/auth0.js"></script>
-    <script type="text/javascript" src="/vendor/auth0-angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js"></script>
+  <!-- End CDN -->
+  <!-- vendor -->
+  <script type="text/javascript" src="/vendor/angular-cookies.js"></script>
+  <script type="text/javascript" src="/vendor/angular-resource.js"></script>
+  <script type="text/javascript" src="/vendor/angular-route.js"></script>
+  <script type="text/javascript" src="/vendor/angular-sanitize.js"></script>
+  <script type="text/javascript" src="/vendor/angular-touch.js"></script>
+  <script type="text/javascript" src="/vendor/auth0.js"></script>
+  <script type="text/javascript" src="/vendor/auth0-angular.js"></script>
 
-    <!-- end vendor -->
-    <!-- endbuild -->
+  <!-- end vendor -->
+  <!-- endbuild -->
 
-<!--     <script type="text/javascript" src="../node_modules/angular-jwt/dist/angular-jwt.js"></script>
+  <!--     <script type="text/javascript" src="../node_modules/angular-jwt/dist/angular-jwt.js"></script>
     <script type="text/javascript" src="../node_modules/angular-storage/dist/angular-storage.js"></script>
     <script type="text/javascript" src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script> -->
 
-    <script type="text/javascript" src="/vendor/angular-jwt.js"></script>
-    <script type="text/javascript" src="/vendor/angular-storage.js"></script>
-    <script type="text/javascript" src="/vendor/angular-ui-router.js"></script>
+  <script type="text/javascript" src="/vendor/angular-jwt.js"></script>
+  <script type="text/javascript" src="/vendor/angular-storage.js"></script>
+  <script type="text/javascript" src="/vendor/angular-ui-router.js"></script>
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script type="text/javascript" src="scripts/services/user.service.js"></script>
-    <script type="text/javascript" src="scripts/services/stack.service.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/landing.js"></script>
-    <script src="scripts/controllers/profile.js"></script>
-    <script src="scripts/controllers/stackfeed.js"></script>
-    <script src="scripts/directives/toolbar.directive.js"></script>
-    <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script type="text/javascript" src="scripts/services/user.service.js"></script>
+  <script type="text/javascript" src="scripts/services/stack.service.js"></script>
+  <script type="text/javascript" src="scripts/services/post.service.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/landing.js"></script>
+  <script src="scripts/controllers/profile.js"></script>
+  <script src="scripts/controllers/stackfeed.js"></script>
+  <script src="scripts/directives/toolbar.directive.js"></script>
+  <!-- endbuild -->
 </body>
+
 </html>
