@@ -6,16 +6,16 @@
           <md-input-container>
             <label>Search Organization</label>
             <!-- <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon> -->
-            <input type="text" ng-model="org" ng-keyup="sorg = searchOrg(org)">
+            <input type="text" ng-model="orgname" ng-mouseup="result = searchOrg(orgname)">
           </md-input-container>
           <md-content>
-            {{org}}
+            {{result}}
           </md-content>
         </div>
         <div flex>
-          <!-- <md-content>
+           <md-content>
                     {{org}}
-                  </md-content> -->
+                  </md-content> 
         </div>
         <div flex>
           <label id="orghd">Your organizations</label>
@@ -25,7 +25,8 @@
         </div>
       </div>
     </div>
-    <div flex="60" id="newsfeed" layout-margin layout-padding>Feed</div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="orgname">Feed</div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="!orgname">Searching..</div>
     <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
 
   </div>
