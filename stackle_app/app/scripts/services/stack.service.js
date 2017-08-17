@@ -6,17 +6,17 @@
 
   function stackService($http) {
 
-    var searchStack = function (name) {
+    var searchStack = function (name, cb) {
       if (name) {
         var url = "https://api.github.com/orgs/" + name;
 
         console.log("Searching org :" + name);
 
-        $http.get(url).then(function success(response) {
-          return response;
-        }, function error(response) {
-          return "error occured";
-        })
+        $http.get(url).then(function (result){
+          return cb(result);
+        }, function (error){
+          return cb(error);
+        });
       }else{
         return "Can't get!";
       }

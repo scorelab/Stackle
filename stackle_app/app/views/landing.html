@@ -25,8 +25,15 @@
         </div>
       </div>
     </div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="result">
+        <h2>{{org_name}}</h2><span><img src="{{logo_url}}" id="org_logo"></span>
+        <p>{{description}}</p>
+        <h4>Number of Repositories : {{num_repos}}</h4>
+        <a href="{{repo_url}}">Click here for repos</a>
+
+    </div>
     <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="orgname">Feed</div>
-    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="!orgname">Searching..</div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="!result">Searching..</div>
     <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
 
   </div>
