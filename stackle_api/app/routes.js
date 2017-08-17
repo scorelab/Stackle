@@ -76,7 +76,7 @@ module.exports = function(app,db){
 	})
 
 	//returns posts relating to specific org
-	app.get('/api/:org_name', function(req,res){
+	app.get('/api/posts/org/:org_name', function(req,res){
 
 		var orgname  = req.params.org_name;
 
@@ -87,6 +87,18 @@ module.exports = function(app,db){
 				res.send(posts);
 		})
 
+	})
+
+	//get a specific org
+	app.get('/api/org/:orgname', function(req,res){
+		var orgname = req.params.orgname;
+		Stack.find({name : orgname}, function (err, org){
+			if(err){
+				console.log('Error');
+			}else{
+				res.send(org);
+			}
+		})
 	})
 
 	//comment on a post
@@ -103,7 +115,7 @@ module.exports = function(app,db){
 	})
 
 	//get all stacks (orgs)
-	app.get('api/orgs', function(req,res){
+	app.get('/api/orgs', function(req,res){
 
 		Stack.find({}, function(err, stacks){
 			if(err)
