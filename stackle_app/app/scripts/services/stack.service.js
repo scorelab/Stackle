@@ -9,9 +9,6 @@
     var searchStack = function (name, cb) {
       if (name) {
         var url = "https://api.github.com/orgs/" + name;
-
-        console.log("Searching org :" + name);
-
         $http.get(url).then(function (result){
           return cb(result);
         }, function (error){
@@ -21,6 +18,21 @@
         return "Can't get!";
       }
       
+    }
+
+    var stackExist = function(name, cb){
+      if(name) {
+        var url = 'http://localhost:8080/api/org/' + name ;
+        $http.get(url).then(function (result){
+          // console.log(result.data);
+          if(result.data = '[]'){
+            return cb(false);
+          } 
+          return cb(true);
+        }, function (error){
+          return cb(error);
+        })
+      }
     }
 
     var createStack = function (name, username) {
@@ -42,7 +54,8 @@
 
     return {
       searchStack: searchStack,
-      createStack: createStack
+      createStack: createStack,
+      stackExist : stackExist
     }
 
   }

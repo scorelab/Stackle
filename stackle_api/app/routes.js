@@ -23,6 +23,8 @@ module.exports = function (app, db) {
 
 	//get all posts
 	app.get('/api/posts', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		Post.find({}, function (err, posts) {
 			if (err)
 				console.log("Cant get all posts!")
@@ -81,6 +83,8 @@ module.exports = function (app, db) {
 
 	//get a specific org
 	app.get('/api/org/:orgname', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		var orgname = req.params.orgname;
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
@@ -149,7 +153,7 @@ module.exports = function (app, db) {
 		})
 	})
 
-	app.get('/api/notifications', function (req, res) {})
+	app.get('/api/notifications', function (req, res) { })
 
 	app.get('/*', function (req, res) {
 		res.sendfile('./public/404.html');

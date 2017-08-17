@@ -5,7 +5,7 @@
         .service('postService', ['$http', postService]);
 
     function postService($http) {
-        var server = 'locahost:8080';
+        var server = 'http://localhost:8080/';
 
         var getAllPosts = function () {
             var apiurl = server + 'api/posts';
@@ -22,4 +22,4 @@
         }
     }
 
-})
+})();
