@@ -56,7 +56,7 @@ angular
         controller : 'landingController'
       })
       .state('main',{
-        url : '/',
+        url : '',
         templateUrl : 'views/main.html',
         controller : 'MainCtrl'
       })

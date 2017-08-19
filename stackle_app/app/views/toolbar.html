@@ -14,13 +14,15 @@
         <md-button
             aria-label = "Home"
             ui-sref="landing"
-            ng-if="toolbar.auth.isAuthenticated">
+            ng-if="toolbar.auth.isAuthenticated"
+            ui-sref-active="active">
             Home
         </md-button>
         <md-button
             aria-label = "profile"
             ui-sref="profile"
-            ng-if="toolbar.auth.isAuthenticated">
+            ng-if="toolbar.auth.isAuthenticated"
+            ui-sref-active="active">
             Profile
         </md-button>
         <md-button
