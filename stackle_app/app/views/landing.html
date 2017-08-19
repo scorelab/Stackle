@@ -31,7 +31,7 @@
       <h4>Number of Repositories : {{num_repos}}</h4>
       <a href="{{repo_url}}">Click here for repos</a>
 
-      <a href="/create_post"><md-button>Create Post</md-button></a>
+      <md-button class="md-primary"><a href="/create_post">Create Post</a></md-button>
     </div>
     <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="searched">
       <md-subheader class="md-primary">Your Feed</md-subheader>
@@ -46,7 +46,8 @@
       </div>
 
     </div>
-    <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
+    <div flex="15" id="notification" layout-margin layout-padding>
+    </div>
 
   </div>
 </div>

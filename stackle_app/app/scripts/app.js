@@ -60,8 +60,13 @@ angular
         templateUrl : 'views/main.html',
         controller : 'MainCtrl'
       })
+      .state('createPost', {
+        url : '/post/createPost',
+        templateUrl : 'views/posts/create-post.html',
+        controller : 'createPostController'
+      })
       .state('otherwise',{
-        url : '*path',
+        url : '/#!/*path',
         templateUrl : '404.html'
       })
   });
