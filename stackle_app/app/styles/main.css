@@ -117,3 +117,11 @@ body {
 .postvote{
   text-align: center;
 }
+
+.tagslike{
+  margin-right: 5px;
+  margin-left : 5px;
+  padding: 5px;
+  font-size: 14px;
+  background-color: greenyellow;
+}

@@ -7,13 +7,11 @@
     function postService($http) {
         var server = 'http://localhost:8080/';
 
-        var getAllPosts = function () {
+        var getAllPosts = function (callback) {
             var apiurl = server + 'api/posts';
 
             $http.get(apiurl).then(function (response) {
-                return response.data;
-            }, function error(error) {
-                return error;
+                callback(response.data);
             })
         }
 
