@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="row">
+	<div layout="row">
 		<div flex="60" class="stacklePost" layout-margin layout-padding>
 			<md-subheader class="md-primary">Create your Post</md-subheader>
 			<form>
@@ -9,12 +9,12 @@
 				 </md-input-container> 
 				<br>
 				<md-input-container class="md-block">
-					<label for="title">Description</label>
+					<label for="description">Description</label>
 					<textarea ng-model="post.description" md-maxlength="200" rows="3" md-select-on-focus></textarea>
 				 </md-input-container> 
 				<br>
 				<md-input-container>
-					<label for="title">Repository</label>
+					<label for="repo">Repository</label>
 					<input type="text" ng-model="post.repo">
 				 </md-input-container> 
 				<br>

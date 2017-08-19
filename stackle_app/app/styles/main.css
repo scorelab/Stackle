@@ -99,3 +99,21 @@ body {
 .stacklePost{
   background-color: white;
 }
+
+.comments{
+  margin-left : 5px;
+  font-size: 14px;
+}
+
+.poster{
+  font-size : 12px;
+  color: #777;
+}
+
+.tag_chips{
+  font-size: 12px;
+} 
+
+.postvote{
+  text-align: center;
+}

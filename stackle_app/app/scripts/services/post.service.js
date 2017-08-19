@@ -17,8 +17,17 @@
             })
         }
 
+        var getPost = function (postid, callback) {
+            var apiUrl = server + 'api/post/' + postid;
+
+            $http.get(apiUrl).then(function(response){
+                callback(response.data);
+            });
+        }
+
         return {
-            getAllPosts: getAllPosts
+            getAllPosts: getAllPosts,
+            getPost : getPost
         }
     }
 

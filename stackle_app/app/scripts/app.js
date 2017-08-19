@@ -65,6 +65,11 @@ angular
         templateUrl : 'views/posts/create-post.html',
         controller : 'createPostController'
       })
+      .state('viewPost', {
+        url : '/post/viewPost',
+        templateUrl : 'views/posts/view-post.html',
+        controller : 'viewPostController'
+      })
       .state('otherwise',{
         url : '/#!/*path',
         templateUrl : '404.html'

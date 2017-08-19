@@ -45,8 +45,22 @@ module.exports = function (app, db) {
 		});
 	})
 
+	//get a post by id
+	app.get('/api/post/:postid', function (req ,res){
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		var objectid = req.params.postid;
+		Post.findOne({ _id : objectid}, function (err , post){
+			if(err){
+				res.send(err)
+			}else{
+				res.send(post);
+			}
+		})
+	})
+
 	//delete a post by ID
-	app.delete('/api/delete/post/:postid', function (req, res) {
+	app.delete('/api/post/:postid', function (req, res) {
 		var postid = req.params.postid;
 		Post.remove({ _id: postid }, function (err, success) {
 			if (err) {
