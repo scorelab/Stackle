@@ -171,8 +171,22 @@ module.exports = function (app, db) {
 		});
 	})
 
+	//getting subscribed stacks for a user
+	app.get('/api/stack/subscribed/:userid', function(req ,res){
+		User.findOne({userId : req.params.userid}, function(err, result){
+			if(err){
+				res.send(err);
+			}else if(result){
+				var sub_stack = result.subscribed_stacks;
+				res.send(sub_stack);
+			}else{
+				res.send("Can't get!");
+			}
+		})
+	})
+
 	//create user
-	app.post('api/newuser', function (req, res) {
+	app.post('/api/newuser', function (req, res) {
 		var user = new User(req.body);
 		user.save(function (err, user) {
 			if (err) {
