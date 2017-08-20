@@ -17,7 +17,6 @@
       }
     })
     
-    // $scope.posts = postService.getAllPosts();
     $scope.searched = false;
 
     $scope.searchOrg = function (name) {
@@ -35,6 +34,16 @@
       })
     }
     $scope.orgname = '';
+
+    var user_id = JSON.parse(localStorage.getItem("profile")).identities[0].user_id;
+    userService.getSubscribedStacks(user_id, function(data){
+      console.log(data);
+      if(data.length != 0){
+        $scope.sub_stacks = data;
+      }else{
+        $scope.subscribed = false;
+      }
+    })
   }
 
 })();

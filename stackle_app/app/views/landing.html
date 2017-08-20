@@ -19,8 +19,10 @@
         </div>
         <div flex>
           <label id="orghd">Your organizations</label>
-          <div class="container" ng-repeat="org in orgs">
-            {{org.login}}
+          <div class="container">
+            <md-list-item class="md-1-line" ng-repeat="stack in sub_stacks" ng-click="null">
+              {{stack}}
+          </md-list-item>
           </div>
         </div>
       </div>

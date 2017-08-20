@@ -173,6 +173,8 @@ module.exports = function (app, db) {
 
 	//getting subscribed stacks for a user
 	app.get('/api/stack/subscribed/:userid', function(req ,res){
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		User.findOne({userId : req.params.userid}, function(err, result){
 			if(err){
 				res.send(err);
