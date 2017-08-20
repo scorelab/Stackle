@@ -46,14 +46,14 @@ module.exports = function (app, db) {
 	})
 
 	//get a post by id
-	app.get('/api/post/:postid', function (req ,res){
+	app.get('/api/post/:postid', function (req, res) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		var objectid = req.params.postid;
-		Post.findOne({ _id : objectid}, function (err , post){
-			if(err){
+		Post.findOne({ _id: objectid }, function (err, post) {
+			if (err) {
 				res.send(err)
-			}else{
+			} else {
 				res.send(post);
 			}
 		})
@@ -154,8 +154,25 @@ module.exports = function (app, db) {
 		})
 	})
 
+	//user subscribing to an stack
+	app.post('/api/subscribe', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		
+		var userid = req.body.uid;
+		var stackname = req.body.stack_name;
+		var query = { userId : userid };
+		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
+			if(err){
+				res.send("Error Updating");
+			}else{
+				res.send("Success!!");
+			}
+		});
+	})
+
 	//create user
-	app.post('/api/newuser', function (req, res) {
+	app.post('api/newuser', function (req, res) {
 		var user = new User(req.body);
 		user.save(function (err, user) {
 			if (err) {
@@ -167,7 +184,7 @@ module.exports = function (app, db) {
 		})
 	})
 
-	app.get('/api/notifications', function (req, res) { })
+	app.get('/api/notifications', function (req, res) { });
 
 	app.get('/*', function (req, res) {
 		res.sendfile('./public/404.html');
