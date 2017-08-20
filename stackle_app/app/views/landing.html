@@ -6,16 +6,16 @@
           <md-input-container>
             <label>Search Organization</label>
             <!-- <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon> -->
-            <input type="text" ng-model="org" ng-keyup="sorg = searchOrg(org)">
+            <input type="text" ng-model="orgname" ng-mouseup="result = searchOrg(orgname)">
           </md-input-container>
           <md-content>
-            {{org}}
+            {{result}}
           </md-content>
         </div>
         <div flex>
-          <!-- <md-content>
-                    {{org}}
-                  </md-content> -->
+          <md-content>
+            {{org}}
+          </md-content>
         </div>
         <div flex>
           <label id="orghd">Your organizations</label>
@@ -25,7 +25,27 @@
         </div>
       </div>
     </div>
-    <div flex="60" id="newsfeed" layout-margin layout-padding>Feed</div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="!searched">
+      <h2>{{org_name}}</h2><span><img src="{{logo_url}}" id="org_logo"></span>
+      <p>{{description}}</p>
+      <h4>Number of Repositories : {{num_repos}}</h4>
+      <a href="{{repo_url}}">Click here for repos</a>
+
+      <a href="/create_post"><md-button>Create Post</md-button></a>
+    </div>
+    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="searched">
+      <md-subheader class="md-primary">Your Feed</md-subheader>
+      <div ng-repeat="post in posts">
+        <h4>{{post.title}}</h4>
+        <md-content>
+          <p>{{post.description}}</p>
+        </md-content>
+        <md-chips>
+          <md-chip-template>{{post.org_name}}</md-chip-template>
+        </md-chips>
+      </div>
+
+    </div>
     <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
 
   </div>
