@@ -19,8 +19,10 @@
         </div>
         <div flex>
           <label id="orghd">Your organizations</label>
-          <div class="container" ng-repeat="org in orgs">
-            {{org.login}}
+          <div class="container">
+            <md-list-item class="md-1-line" ng-repeat="stack in sub_stacks" ng-click="null">
+              {{stack}}
+          </md-list-item>
           </div>
         </div>
       </div>
@@ -31,22 +33,27 @@
       <h4>Number of Repositories : {{num_repos}}</h4>
       <a href="{{repo_url}}">Click here for repos</a>
 
-      <a href="/create_post"><md-button>Create Post</md-button></a>
+      <md-button class="md-primary"><a href="/create_post">Create Post</a></md-button>
     </div>
     <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="searched">
       <md-subheader class="md-primary">Your Feed</md-subheader>
       <div ng-repeat="post in posts">
-        <h4>{{post.title}}</h4>
+        <h4>{{post.title}}</h4> 
+        <p><span class="md-whiteframe-1dp tagslike">{{post.org_name}}</span>
+          <span class="md-whiteframe-1dp tagslike">{{post.repository}}</span><p>
         <md-content>
           <p>{{post.description}}</p>
         </md-content>
         <md-chips>
-          <md-chip-template>{{post.org_name}}</md-chip-template>
+          <md-chip-template class="tag_chips">{{post.org_name}}</md-chip-template>
         </md-chips>
+        <p class="poster"><span>Posted by {{post.user}} on {{post.date}} | </span>
+        {{post.comments.length}} Comments</p>
       </div>
 
     </div>
-    <div flex="15" id="notification" layout-margin layout-padding>Notifications</div>
+    <div flex="15" id="notification" layout-margin layout-padding>
+    </div>
 
   </div>
 </div>

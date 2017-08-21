@@ -7,16 +7,16 @@
   function landingController($scope, userService, stackService ,postService) {
     $scope.orgs = userService.getOrgs();
     
-    $scope.getPosts = function(){
-      postService.getAllPosts('hello' , function(res){
-        console.log(res);
-        $scope.posts = res;
-      })
-    }
-
-    $scope.getPosts();
+    postService.getAllPosts(function(data){
+      console.log("Getting posts!")
+      console.log(data);
+      if(data.length!=0){
+        $scope.posts = data;
+      }else{
+        $scope.postError = true;
+      }
+    })
     
-    // $scope.posts = postService.getAllPosts();
     $scope.searched = false;
 
     $scope.searchOrg = function (name) {
@@ -34,6 +34,16 @@
       })
     }
     $scope.orgname = '';
+
+    var user_id = JSON.parse(localStorage.getItem("profile")).identities[0].user_id;
+    userService.getSubscribedStacks(user_id, function(data){
+      console.log(data);
+      if(data.length != 0){
+        $scope.sub_stacks = data;
+      }else{
+        $scope.subscribed = false;
+      }
+    })
   }
 
 })();

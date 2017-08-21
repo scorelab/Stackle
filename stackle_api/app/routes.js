@@ -45,8 +45,22 @@ module.exports = function (app, db) {
 		});
 	})
 
+	//get a post by id
+	app.get('/api/post/:postid', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		var objectid = req.params.postid;
+		Post.findOne({ _id: objectid }, function (err, post) {
+			if (err) {
+				res.send(err)
+			} else {
+				res.send(post);
+			}
+		})
+	})
+
 	//delete a post by ID
-	app.delete('/api/delete/post/:postid', function (req, res) {
+	app.delete('/api/post/:postid', function (req, res) {
 		var postid = req.params.postid;
 		Post.remove({ _id: postid }, function (err, success) {
 			if (err) {
@@ -140,6 +154,39 @@ module.exports = function (app, db) {
 		})
 	})
 
+	//user subscribing to an stack
+	app.post('/api/subscribe', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		
+		var userid = req.body.uid;
+		var stackname = req.body.stack_name;
+		var query = { userId : userid };
+		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
+			if(err){
+				res.send("Error Updating");
+			}else{
+				res.send("Success!!");
+			}
+		});
+	})
+
+	//getting subscribed stacks for a user
+	app.get('/api/stack/subscribed/:userid', function(req ,res){
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		User.findOne({userId : req.params.userid}, function(err, result){
+			if(err){
+				res.send(err);
+			}else if(result){
+				var sub_stack = result.subscribed_stacks;
+				res.send(sub_stack);
+			}else{
+				res.send("Can't get!");
+			}
+		})
+	})
+
 	//create user
 	app.post('/api/newuser', function (req, res) {
 		var user = new User(req.body);
@@ -153,7 +200,7 @@ module.exports = function (app, db) {
 		})
 	})
 
-	app.get('/api/notifications', function (req, res) { })
+	app.get('/api/notifications', function (req, res) { });
 
 	app.get('/*', function (req, res) {
 		res.sendfile('./public/404.html');
