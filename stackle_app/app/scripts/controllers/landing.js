@@ -7,10 +7,9 @@
   function landingController($scope, userService, stackService ,postService) {
     $scope.user_id = JSON.parse(localStorage.getItem("profile")).identities[0].user_id;
     $scope.orgs = userService.getOrgs();
+    $scope.org_post = false;
     
     postService.getAllPosts(function(data){
-      console.log("Getting posts!")
-      console.log(data);
       if(data.length!=0){
         $scope.posts = data;
       }else{
@@ -45,7 +44,6 @@
 
     
     userService.getSubscribedStacks($scope.user_id, function(data){
-      console.log(data);
       if(data.length != 0){
         $scope.sub_stacks = data;
       }else{
@@ -53,6 +51,15 @@
       }
     });
     
+    $scope.getOrgPosts = function(org_name){
+      postService.getOrgPosts(org_name , function(res){
+        console.log(res);
+        $scope.org_post = false;
+        $scope.org_posts = res;
+        $scope.org_post = true;
+      })
+    };
+
   }
 
 })();

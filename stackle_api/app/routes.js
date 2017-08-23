@@ -86,6 +86,8 @@ module.exports = function (app, db) {
 
 	//returns posts relating to specific org
 	app.get('/api/posts/org/:org_name', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		var orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
 			if (err)
