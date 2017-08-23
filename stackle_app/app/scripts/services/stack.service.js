@@ -9,27 +9,27 @@
     var searchStack = function (name, cb) {
       if (name) {
         var url = "https://api.github.com/orgs/" + name;
-        $http.get(url).then(function (result){
+        $http.get(url).then(function (result) {
           return cb(result);
-        }, function (error){
+        }, function (error) {
           return cb(error);
         });
-      }else{
+      } else {
         return "Can't get!";
       }
-      
+
     }
 
-    var stackExist = function(name, cb){
-      if(name) {
-        var url = 'http://localhost:8080/api/org/' + name ;
-        $http.get(url).then(function (result){
+    var stackExist = function (name, cb) {
+      if (name) {
+        var url = 'http://localhost:8080/api/org/' + name;
+        $http.get(url).then(function (result) {
           // console.log(result.data);
-          if(result.data = '[]'){
+          if (result.data = '[]') {
             return cb(false);
-          } 
+          }
           return cb(true);
-        }, function (error){
+        }, function (error) {
           return cb(error);
         })
       }
@@ -52,10 +52,24 @@
       })
     }
 
+    var subscribeStack = function (userid, stackname, callback) {
+      var apiUrl = 'http://localhost:8080/api/subscribe';
+      var data = {
+        uid: userid,
+        stack_name: stackname
+      };
+      $http.post(apiUrl, data).then(function (response) {
+        callback(response);
+      }, function (error) {
+        callback(error);
+      })
+    };
+
     return {
       searchStack: searchStack,
       createStack: createStack,
-      stackExist : stackExist
+      stackExist: stackExist,
+      subscribeStack: subscribeStack
     }
 
   }

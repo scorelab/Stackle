@@ -43,7 +43,8 @@
       }else{
         $scope.subscribed = false;
       }
-    })
+    });
+    
   }
 
 })();
