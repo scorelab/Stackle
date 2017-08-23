@@ -156,9 +156,6 @@ module.exports = function (app, db) {
 
 	//user subscribing to an stack
 	app.post('/api/subscribe', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		
 		var userid = req.body.uid;
 		var stackname = req.body.stack_name;
 		var query = { userId : userid };
@@ -174,6 +171,7 @@ module.exports = function (app, db) {
 	//getting subscribed stacks for a user
 	app.get('/api/stack/subscribed/:userid', function(req ,res){
 		res.header("Access-Control-Allow-Origin", "*");
+		res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		User.findOne({userId : req.params.userid}, function(err, result){
 			if(err){

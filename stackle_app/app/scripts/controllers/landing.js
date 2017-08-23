@@ -5,6 +5,7 @@
     .controller('landingController', ['$scope', 'userService', 'stackService', 'postService', landingController]);
 
   function landingController($scope, userService, stackService ,postService) {
+    $scope.user_id = JSON.parse(localStorage.getItem("profile")).identities[0].user_id;
     $scope.orgs = userService.getOrgs();
     
     postService.getAllPosts(function(data){
@@ -35,8 +36,15 @@
     }
     $scope.orgname = '';
 
-    var user_id = JSON.parse(localStorage.getItem("profile")).identities[0].user_id;
-    userService.getSubscribedStacks(user_id, function(data){
+    $scope.subscribe = function(user_id, org_name){
+      stackService.subscribeStack(user_id, org_name, function(data){
+        $scope.submessage = data;
+        console.log($scope.submessage);
+      })
+    };
+
+    
+    userService.getSubscribedStacks($scope.user_id, function(data){
       console.log(data);
       if(data.length != 0){
         $scope.sub_stacks = data;

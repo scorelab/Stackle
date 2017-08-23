@@ -27,14 +27,14 @@
         </div>
       </div>
     </div>
-    <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="!searched">
+    <div flex="60" id="org_details" layout-margin layout-padding ng-hide="!searched">
       <h2>{{org_name}}</h2><span><img src="{{logo_url}}" id="org_logo"></span>
       <p>{{description}}</p>
       <h4>Number of Repositories : {{num_repos}}</h4>
       <a href="{{repo_url}}">Click here for repos</a>
 
       <md-button class="md-primary md-raised">Create Post</md-button>
-      <md-button class="md-primary md-raised" (click)="">Subscribe</md-button>
+      <md-button class="md-primary md-raised" ng-click="subscribe(user_id, org_name)">Subscribe</md-button>
     </div>
     <div flex="60" id="newsfeed" layout-margin layout-padding ng-hide="searched">
       <md-subheader class="md-primary">Your Feed</md-subheader>
