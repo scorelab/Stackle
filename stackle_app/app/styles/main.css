@@ -95,3 +95,33 @@ body {
     border-bottom: 0;
   }
 }
+
+.stacklePost{
+  background-color: white;
+}
+
+.comments{
+  margin-left : 5px;
+  font-size: 14px;
+}
+
+.poster{
+  font-size : 12px;
+  color: #777;
+}
+
+.tag_chips{
+  font-size: 12px;
+} 
+
+.postvote{
+  text-align: center;
+}
+
+.tagslike{
+  margin-right: 5px;
+  margin-left : 5px;
+  padding: 5px;
+  font-size: 14px;
+  background-color: greenyellow;
+}
