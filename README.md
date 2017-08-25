@@ -27,7 +27,6 @@ These are the instructions on how to setup the project locally.
 ### Stackle App
 1. `cd`in to the **stackle_app** directory
 2. run `npm install` to install the packages required.
-3. Once all the packages are installed, `cd` in to `stackle_app/app` directory
-4. Run `http-server -p 8082`
+3. Once all the packages are installed, run `gulp serve`
 
 
