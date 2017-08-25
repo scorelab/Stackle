@@ -2,7 +2,7 @@
   "name": "stackleapp",
   "private": true,
   "scripts": {
-    "start": "http-server -p 8081"
+    "start": "gulp serve"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

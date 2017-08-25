@@ -10,3 +10,6 @@ services:
       image : mongo
       ports:
         - "27017:27017"
+    angular:
+      build : './stackle_app'
+      ports : "9000:9000"
