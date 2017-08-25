@@ -1,8 +1,8 @@
 {
   "name": "stackleapp",
   "private": true,
-  "scripts" :{
-    "start" : "http-server -p 8081"
+  "scripts": {
+    "start": "http-server -p 8081"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
