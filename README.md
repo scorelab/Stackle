@@ -29,4 +29,9 @@ These are the instructions on how to setup the project locally.
 2. run `npm install` to install the packages required.
 3. Once all the packages are installed, run `gulp serve`
 
+# Running with Docker
+1. Change the url in the database config file in stackle_api/config/database.js  as `url : 'mongodb://mongo:27017/stackle'`
+2. In the root of the Stackle directory, run `docker-compose build`
+3. Once build completes, run `docker-compose up`
+
 
