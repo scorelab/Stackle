@@ -154,8 +154,8 @@ gulp.task('client:build', ['html', 'styles'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
 
-  return gulp.src(paths.views.main)
-    .pipe($.useref({searchPath: [yeoman.app, '.tmp']}))
+  return gulp.src(paths.views.files)
+    .pipe($.useref())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify())
