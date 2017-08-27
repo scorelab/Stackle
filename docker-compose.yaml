@@ -1,6 +1,6 @@
 version: '2'
 services:
-    node:
+    api:
       build: './stackle_api'
       ports:
         - "8080:8080"
@@ -8,8 +8,6 @@ services:
         - mongo
     mongo:
       image : mongo
-      ports:
-        - "27017:27017"
     angular:
       build : './stackle_app'
       ports : 
