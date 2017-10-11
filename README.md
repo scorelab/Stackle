@@ -12,19 +12,30 @@ Users interact with the application through the AngularJS front-end which commun
 
 ***
 
-#Setting Up the Project
+# Setting Up the Project
 These are the instructions on how to setup the project locally.
 
 ## Pre-requisites
 * NodeJS 6.X or higher
 * MongoDB Community edition
 
+## Installing MongoDB
+
+### On Windows
+1. Download the lastest production release of MongoDB (3.4.6 or higher) from [here](https://www.mongodb.com/download-center#community).
+2. Create the data directory to store all data. Create a the directory on the drive from which you start MongoDB. (Ex: If you are starting the MongoDB from the drive 'C'. You should create the directory as C:\data\db\ ).
+3. To start the MongoDB, fire up a command line and run **mongod.exe** (ex: "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" )
+4. To connect to the MongoDB, use the **mongo.exe** shell. For that open up a command line an run *mongo*. (Ex: "C:\Program Files\MongoDB\Server\3.4\bin\mongo.exe" ).
+
+For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/administration/install-community/) on installing MongoDB Community edtion.
+
+
 ## Stackle API
 1. `cd` in to the **stackle_api** directory.
 2. Run `npm install` to install the packages required. 
 3. once all the packages are installed run `npm start`
 
-### Stackle App
+## Stackle App
 1. `cd`in to the **stackle_app** directory
 2. run `npm install` to install the packages required.
 3. Once all the packages are installed, run `gulp serve`
