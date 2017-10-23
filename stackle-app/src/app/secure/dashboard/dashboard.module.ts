@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FeedComponent } from './feed/feed.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   declarations: [
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    FeedComponent
   ],
   providers: [
   ]
