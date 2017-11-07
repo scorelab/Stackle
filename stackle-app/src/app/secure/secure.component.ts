@@ -1,19 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-secure',
   templateUrl: './secure.component.html',
   styleUrls: ['./secure.component.css']
 })
-export class SecureComponent implements OnInit, OnDestroy {
+export class SecureComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngOnDestroy() {
   }
 
 }

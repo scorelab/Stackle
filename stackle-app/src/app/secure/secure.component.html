@@ -1,0 +1,24 @@
+<mat-grid-list cols="1" rowHeight="2:1" class="mat-typography">
+  <mat-toolbar id="toolbar">Stackle - By Opensource for Opensource</mat-toolbar>
+</mat-grid-list>
+<mat-grid-list cols="6" class="mat-typography">
+  <mat-grid-tile [colspan]="1">
+    <mat-grid-list cols="1">
+      <mat-grid-tile [colspan]="1">
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Input">
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-list>
+          <mat-list-item>Item 1</mat-list-item>
+          <mat-list-item>Item 2</mat-list-item>
+          <mat-list-item>Item 3</mat-list-item>
+        </mat-list>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="5">Router outlet</mat-grid-tile>
+</mat-grid-list>
