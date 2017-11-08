@@ -1,24 +1,36 @@
-<mat-grid-list cols="1" rowHeight="2:1" class="mat-typography">
-  <mat-toolbar id="toolbar">Stackle - By Opensource for Opensource</mat-toolbar>
-</mat-grid-list>
-<mat-grid-list cols="6" class="mat-typography">
-  <mat-grid-tile [colspan]="1">
-    <mat-grid-list cols="1">
-      <mat-grid-tile [colspan]="1">
-        <div class="example-container">
+<div class="container-fluid">
+  <div class="row">
+    <nav id="navbar" class="navbar navbar-default Stackle - By Opensource for Opensource">
+      <div class="col-md-4 ">
+          <h1 class="mat-h1">Stackle - By Opensource for Opensource</h1>
+      </div>
+      <div class="col-md-8">
+        <ul class="nav navbar-nav">
+          <li>Home</li>
+          <li>Profile</li>
+          <li>Logout</li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="row" id="home-body">
+    <div class="col-md-2">
+      <h4 class="mat-h4">Search for Stacks</h4>
+      <div class="example-container">
+        <form>
           <mat-form-field>
-            <input matInput placeholder="Input">
+            <input matInput placeholder="Stack Name">
           </mat-form-field>
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-list>
-          <mat-list-item>Item 1</mat-list-item>
-          <mat-list-item>Item 2</mat-list-item>
-          <mat-list-item>Item 3</mat-list-item>
-        </mat-list>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-grid-tile>
-  <mat-grid-tile [colspan]="5">Router outlet</mat-grid-tile>
-</mat-grid-list>
+          <button mat-button color="primary" type="submit">Search</button>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-md-10">
+      Router outlet goes here
+    </div>
+  </div>
+  <div class="row">
+    Footer goes here
+  </div>
+</div>

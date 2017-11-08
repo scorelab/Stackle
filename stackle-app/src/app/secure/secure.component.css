@@ -6,3 +6,13 @@
   .example-container > * {
     width: 100%;
   }
+
+  #home-body{
+    padding: 5px;
+    height: 90vh;
+  }
+
+  #navbar{
+    display: inline;
+    vertical-align: middle
+  }
