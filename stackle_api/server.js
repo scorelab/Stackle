@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-var port     = process.env.PORT || 8080;
+var port     = process.env.PORT || 3000;
 var mongoose = require('mongoose'); 
 var database = require('./config/database');            // load the database config
 var morgan = require('morgan');             // log requests to the console (express4)
@@ -21,7 +21,7 @@ var routes = require('./app/routes')(app,db);
 
 
 app.use(function (err, req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:8082");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   console.error(err.stack);

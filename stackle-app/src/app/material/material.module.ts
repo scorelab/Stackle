@@ -12,7 +12,8 @@ import {
   MatSidenavModule,
   MatFormFieldModule,
   MatInputModule,
-  MatListModule
+  MatListModule,
+  MatProgressBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -27,7 +28,8 @@ import {
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    MatProgressBarModule
   ],
   declarations: [],
   exports: [
@@ -41,7 +43,8 @@ import {
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule { }

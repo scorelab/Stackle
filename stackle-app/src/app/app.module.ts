@@ -1,11 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpModule} from '@angular/http';
 
 // material module
 import { MaterialModule } from './material/material.module';
 import { PublicModule } from './public/public.module';
 import { SecureModule } from './secure/secure.module';
+
+// services 
+import { PostService } from './services/post.service';
 
 import { AppComponent } from './app.component';
 
@@ -28,12 +32,15 @@ import { LoginComponent } from './public/login/login.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpModule,
     AppRoutingModule,
     MaterialModule,
     PublicModule,
     SecureModule
   ],
-  providers: [],
+  providers: [
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

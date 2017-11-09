@@ -1,3 +1,33 @@
-<p>
-  common-feed works!
-</p>
+<div class="container-fluid">
+  <div *ngIf="loading">
+      <mat-progress-bar mode="query"></mat-progress-bar>
+  </div>
+  <div *ngIf="posts">
+    <div class="row post" *ngFor="let post of posts">
+
+      <mat-card class="example-card col-md-6">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{post.title}}</mat-card-title>
+          <mat-card-subtitle>{{post.org_name}} Repository: {{post.repository}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <!-- <mat-card-content>
+        <p>
+          {{post.description}}
+        </p>
+      </mat-card-content> -->
+        <h5>{{post.votes}} Votes
+          <span>{{post.comments.length}} Comments</span>
+        </h5>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="!posts">
+    No posts available
+  </div>
+</div>
