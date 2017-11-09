@@ -1,20 +1,22 @@
 <div class="container-fluid">
-  <div class="row">
-    <nav id="navbar" class="navbar navbar-default Stackle - By Opensource for Opensource">
-      <div class="col-md-4 ">
-          <h1 class="mat-h1">Stackle - By Opensource for Opensource</h1>
-      </div>
-      <div class="col-md-8">
-        <ul class="nav navbar-nav">
-          <li>Home</li>
-          <li>Profile</li>
-          <li>Logout</li>
-        </ul>
-      </div>
-    </nav>
+  <div class="row" id="home-nav">
+    <div class="col-md-4">
+      <h2 class="mat-h2">Stackle - By Opensource for Opensource</h2>
+    </div>
+    <div class="col col-md-5">
+    </div>
+    <div class="col col-md-1">
+      <h3 class="mat-h3">Home</h3>
+    </div>
+    <div class="col col-md-1 nav-text">
+      <h3 class="mat-h3">Profile</h3>
+    </div>
+    <div class="col col-md-1 nav-text">
+      <h3 class="mat-h3">Logout</h3>
+    </div>
   </div>
   <div class="row" id="home-body">
-    <div class="col-md-2">
+    <div class="col-md-2" id="sidebar">
       <h4 class="mat-h4">Search for Stacks</h4>
       <div class="example-container">
         <form>
@@ -23,11 +25,19 @@
           </mat-form-field>
           <button mat-button color="primary" type="submit">Search</button>
         </form>
-
+      </div>
+      <hr>
+      <div class="mat-typography">
+        <h4 class="mat-h4">Your Stacks</h4>
+        <mat-list>
+          <mat-list-item class="mat-menu-item">Score Lab</mat-list-item>
+          <mat-list-item class="mat-menu-item">Google</mat-list-item>
+          <mat-list-item class="mat-menu-item">Fossasia</mat-list-item>
+        </mat-list>
       </div>
     </div>
     <div class="col-md-10">
-      Router outlet goes here
+      <router-outlet></router-outlet>
     </div>
   </div>
   <div class="row">

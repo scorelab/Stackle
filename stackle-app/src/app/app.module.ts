@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 
 // material module
 import { MaterialModule } from './material/material.module';
+import { PublicModule } from './public/public.module';
+import { SecureModule } from './secure/secure.module';
 
 import { AppComponent } from './app.component';
 
@@ -27,7 +29,9 @@ import { LoginComponent } from './public/login/login.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    PublicModule,
+    SecureModule
   ],
   providers: [],
   bootstrap: [AppComponent]

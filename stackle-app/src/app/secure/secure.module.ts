@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SecureRoutingModule } from './secure-routing.module';
+import { SecureComponent } from './secure.component';
+
 // material imports
 import {
   MatButtonModule,
@@ -14,13 +17,15 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    SecureRoutingModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule
   ],
-  declarations: [],
+  declarations: [
+  ],
   exports: [
     CommonModule,
     MatButtonModule,
@@ -30,4 +35,4 @@ import {
     MatCardModule
   ]
 })
-export class MaterialModule { }
+export class SecureModule { }
