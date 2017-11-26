@@ -17,4 +17,9 @@ export class PostService {
   getAllPosts(params?){
     return this.http.get(`${this.apiUrl}/api/posts`, this.options);
   }
+
+  getPost(id){
+    return this.http.get(`${this.apiUrl}/api/post/${id}`, this.options);
+  }
+
 }

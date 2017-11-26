@@ -27,7 +27,8 @@ import { LoginComponent } from './public/login/login.component';
     SecureComponent,
     CommonFeedComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,

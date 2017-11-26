@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { PostService } from '../../services/post.service';
 
@@ -8,10 +9,11 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./common-feed.component.css']
 })
 export class CommonFeedComponent implements OnInit {
-  private loading:boolean = false;
+  private loading: boolean = false;
   private posts;
 
   constructor(
+    private router: Router,
     private postService: PostService
   ) { }
 
@@ -26,6 +28,10 @@ export class CommonFeedComponent implements OnInit {
       console.log(error);
       this.loading = false;
     })
+  }
+
+  private navigateToPost(post_id) {
+    this.router.navigate(['/post/' + post_id]);
   }
 
 }

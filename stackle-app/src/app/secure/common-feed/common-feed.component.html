@@ -8,7 +8,7 @@
       <mat-card class="example-card col-md-6">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{post.title}}</mat-card-title>
+          <mat-card-title (click)="navigateToPost(post._id)">{{post.title}}</mat-card-title>
           <mat-card-subtitle>{{post.org_name}} Repository: {{post.repository}}</mat-card-subtitle>
         </mat-card-header>
 

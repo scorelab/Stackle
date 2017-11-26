@@ -1,0 +1,20 @@
+.description{
+    padding : 3px;
+    background-color: #F5F5F5;
+}
+
+.comment-section{
+    /* background-color: #F5F5F5; */
+}
+
+.comment{
+    padding : 3px;
+}
+
+.comment-user{
+    color: #0D47A1
+}
+
+.comment-date{
+    color : #78909C;
+}

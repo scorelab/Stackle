@@ -1,38 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule} from '../material/material.module';
 
 import { SecureRoutingModule } from './secure-routing.module';
 import { SecureComponent } from './secure.component';
+import { PostComponent } from './shared/post/post.component';
 
-// material imports
-import {
-  MatButtonModule,
-  MatMenuModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatCardModule,
-  MatGridListModule
-} from '@angular/material';
 
 @NgModule({
   imports: [
-    CommonModule,
     SecureRoutingModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule
+    MaterialModule,
   ],
   declarations: [
+    PostComponent
   ],
   exports: [
-    CommonModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule
+    MaterialModule
   ]
 })
 export class SecureModule { }
