@@ -13,6 +13,10 @@ var Reply = postModels.Reply;
 module.exports = function (app, db) {
 
 	//api
+	app.get('/', function (req, res) {
+	    res.sendFile(__dirname + '/dist/index.html');
+	});
+	
 	app.get('/api/login/', function (req, res) {
 	})
 
