@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/angular
+# Created by https://www.gitignore.io/api/angular,bower
 
 ### Angular ###
 ## Angular ##
@@ -32,4 +32,10 @@ testem.log
 #System Files
 .DS_Store
 
-# End of https://www.gitignore.io/api/angular
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+# End of https://www.gitignore.io/api/angular,bower
