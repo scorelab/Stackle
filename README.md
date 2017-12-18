@@ -43,6 +43,11 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
 # Running with Docker
 1. Change the url in the database config file in stackle_api/config/database.js  as `url : 'mongodb://mongo:27017/stackle'`
 2. In the root of the Stackle directory, run `docker-compose build`
+   - If you are on Linux machine, execute the following steps to install compose. 
+     ```
+     sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+     sudo chmod +x /usr/local/bin/docker-compose
+     ```
 3. Once build completes, run `docker-compose up`
 
 
