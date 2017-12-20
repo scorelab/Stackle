@@ -17,7 +17,7 @@
   ],
   "contributors":["Pasan Missaka Gamaetige","Tharindu Prabhath Ranathunga","Milindu Sanoj Kumarage"],
   "author": "SCoRe Lab",
-  "license": "ISC",
+  "license": "Apache Version 2",
   "bugs": {
     "url": "https://github.com/psnmissaka/Stackle/issues"
   },
