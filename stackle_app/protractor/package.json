@@ -1,0 +1,127 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "protractor@~1.4.0",
+        "scope": null,
+        "escapedName": "protractor",
+        "name": "protractor",
+        "rawSpec": "~1.4.0",
+        "spec": ">=1.4.0 <1.5.0",
+        "type": "range"
+      },
+      "/home/padamchopra/Documents/GitClones/Bassa/ui"
+    ]
+  ],
+  "_from": "protractor@>=1.4.0 <1.5.0",
+  "_id": "protractor@1.4.0",
+  "_inCache": true,
+  "_location": "/protractor",
+  "_npmUser": {
+    "name": "juliemr",
+    "email": "ju.ralph@gmail.com"
+  },
+  "_npmVersion": "1.4.14",
+  "_phantomChildren": {
+    "ctype": "0.5.3",
+    "json-stringify-safe": "5.0.1",
+    "lru-cache": "2.7.3",
+    "sigmund": "1.0.1",
+    "tough-cookie": "2.3.3"
+  },
+  "_requested": {
+    "raw": "protractor@~1.4.0",
+    "scope": null,
+    "escapedName": "protractor",
+    "name": "protractor",
+    "rawSpec": "~1.4.0",
+    "spec": ">=1.4.0 <1.5.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "/gulp-protractor"
+  ],
+  "_resolved": "https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz",
+  "_shasum": "090b11d671a3a4f0a5945f3e3d048c18efbd3435",
+  "_shrinkwrap": null,
+  "_spec": "protractor@~1.4.0",
+  "_where": "/home/padamchopra/Documents/GitClones/Bassa/ui",
+  "author": {
+    "name": "Julie Ralph",
+    "email": "ju.ralph@gmail.com"
+  },
+  "bin": {
+    "protractor": "bin/protractor",
+    "webdriver-manager": "bin/webdriver-manager"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/protractor/issues"
+  },
+  "dependencies": {
+    "adm-zip": "0.4.4",
+    "glob": "~3.2",
+    "jasminewd": "1.1.0",
+    "lodash": "~2.4.1",
+    "minijasminenode": "1.1.1",
+    "optimist": "~0.6.0",
+    "q": "1.0.0",
+    "request": "~2.36.0",
+    "saucelabs": "~0.1.0",
+    "selenium-webdriver": "2.44.0",
+    "source-map-support": "~0.2.6"
+  },
+  "description": "Webdriver E2E test wrapper for Angular.",
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "chai-as-promised": "~4.1.0",
+    "cucumber": "~0.3.3",
+    "expect.js": "~0.2.0",
+    "express": "~3.3.4",
+    "jasmine-reporters": "~0.2.1",
+    "jshint": "2.5.0",
+    "lodash": "~2.4.1",
+    "mocha": "1.21.4",
+    "rimraf": "~2.2.6"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "090b11d671a3a4f0a5945f3e3d048c18efbd3435",
+    "tarball": "https://registry.npmjs.org/protractor/-/protractor-1.4.0.tgz"
+  },
+  "gitHead": "58197ea68cfdf89771ad326457669e68f8add571",
+  "homepage": "https://github.com/angular/protractor",
+  "keywords": [
+    "angular",
+    "test",
+    "testing",
+    "webdriver",
+    "webdriverjs",
+    "selenium"
+  ],
+  "license": "MIT",
+  "main": "lib/protractor.js",
+  "maintainers": [
+    {
+      "name": "juliemr",
+      "email": "ju.ralph@gmail.com"
+    },
+    {
+      "name": "angularcore",
+      "email": "angular-core+npm@google.com"
+    }
+  ],
+  "name": "protractor",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular/protractor.git"
+  },
+  "scripts": {
+    "pretest": "jshint lib spec",
+    "start": "testapp/scripts/web-server.js",
+    "test": "scripts/test.js"
+  },
+  "version": "1.4.0"
+}
