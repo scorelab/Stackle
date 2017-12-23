@@ -1,5 +1,5 @@
 # Introduction
-Stackle is an web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows administrator of an organization to create a forum thread for the particular organization. Users signing in is able to view forums of the organizations they contribute to and engage in the forum discussions.
+Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in are able to view forums of the organizations they contribute to and engage in the forum discussions.
 
 # Implementation Details
 MEAN stack is used for developing Stackle. 
