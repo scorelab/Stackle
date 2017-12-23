@@ -12,10 +12,10 @@
         }else{
             $scope.error = true;
         }
-    })
+    });
 
     $scope.comment = '';
-    
+
 
   }
 })();
