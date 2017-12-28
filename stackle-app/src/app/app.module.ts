@@ -11,6 +11,7 @@ import { SecureModule } from './secure/secure.module';
 // services 
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
+import { StackService } from './services/stack.service';
 
 import { AppComponent } from './app.component';
 
@@ -20,6 +21,7 @@ import { SecureComponent } from './secure/secure.component';
 import { CommonFeedComponent } from './secure/common-feed/common-feed.component';
 import { ProfileComponent } from './secure/profile/profile.component';
 import { LoginComponent } from './public/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { LoginComponent } from './public/login/login.component';
   ],
   providers: [
     AuthService,
-    PostService
+    PostService,
+    StackService
   ],
   bootstrap: [AppComponent]
 })

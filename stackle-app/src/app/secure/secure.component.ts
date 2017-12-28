@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
+import { StackService } from '../services/stack.service';
 
 @Component({
   selector: 'app-secure',
@@ -10,12 +11,22 @@ import { AuthService } from '../services/auth.service';
 })
 export class SecureComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private auth: AuthService,
+    private stackService: StackService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.stackService.getAllOrgs().subscribe((response)=> {
+      console.log(response);
+    })
+    // this.stackService.getAllOrgs().subscribe(res => {
+    //   console.log(res);
+    // });
   }
 
-  public navigateToCreatePost(){
+  public navigateToCreatePost() {
     this.router.navigate(['app/createPost']);
   }
 
