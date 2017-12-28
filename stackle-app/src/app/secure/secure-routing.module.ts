@@ -5,7 +5,7 @@ import { SecureComponent } from './secure.component'
 import { ProfileComponent } from './profile/profile.component';
 import { CommonFeedComponent } from './common-feed/common-feed.component';
 import { PostComponent } from './shared/post/post.component';
-
+import { CreatePostComponent} from './create-post/create-post.component';
 
 
 const routes: Routes = [
@@ -21,6 +21,9 @@ const routes: Routes = [
             },
             {
                 path: 'post/:id', component: PostComponent
+            },
+            {
+                path: 'createPost', component: CreatePostComponent
             }
         ]
     }

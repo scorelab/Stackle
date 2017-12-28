@@ -5,6 +5,7 @@ import { MaterialModule} from '../material/material.module';
 import { SecureRoutingModule } from './secure-routing.module';
 import { SecureComponent } from './secure.component';
 import { PostComponent } from './shared/post/post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { PostComponent } from './shared/post/post.component';
     MaterialModule,
   ],
   declarations: [
-    PostComponent
+    PostComponent,
+    CreatePostComponent
   ],
   exports: [
     MaterialModule
