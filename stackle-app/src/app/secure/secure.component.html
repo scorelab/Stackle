@@ -6,10 +6,14 @@
     <div class="col col-md-5">
     </div>
     <div class="col col-md-1">
-      <h3 class="mat-h3"><a routerLink="commonFeed">Home</a></h3>
+      <h3 class="mat-h3">
+        <a routerLink="commonFeed">Home</a>
+      </h3>
     </div>
     <div class="col col-md-1 nav-text">
-      <h3 class="mat-h3"><a routerLink="profile">Profile</a></h3>
+      <h3 class="mat-h3">
+        <a routerLink="profile">Profile</a>
+      </h3>
     </div>
     <div class="col col-md-1 nav-text">
       <h3 class="mat-h3" (click)="auth.logout()">Logout</h3>
@@ -23,9 +27,19 @@
           <mat-form-field>
             <input matInput placeholder="Stack Name">
           </mat-form-field>
-          <button mat-button color="primary" type="submit">Search</button>
+          <button mat-button color="primary" type="submit">
+            <mat-icon matListIcon>find_in_page</mat-icon>
+            Search
+          </button>
         </form>
       </div>
+      <!-- <hr> -->
+      <mat-list>
+        <mat-list-item class="mat-menu-item">
+          <mat-icon matListIcon>note_add</mat-icon>
+          Discuss a issue
+        </mat-list-item>
+      </mat-list>
       <hr>
       <div class="mat-typography">
         <h4 class="mat-h4">Your Stacks</h4>
