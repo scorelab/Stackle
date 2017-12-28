@@ -121,6 +121,9 @@ module.exports = function (app, db) {
 
 	//get all stacks (orgs)
 	app.get('/api/orgs', function (req, res) {
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		
 		Stack.find({}, function (err, stacks) {
 			if (err)
 				console.log("Errors retrieving stacks!");
