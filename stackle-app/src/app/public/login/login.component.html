@@ -1,22 +1,13 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Stackle Login</a>
-  
-        <button
-          class="btn btn-primary btn-margin"
-          *ngIf="!auth.isAuthenticated()"
-          (click)="auth.login()">
-            Log In
-        </button>
-  
-        <button
-          class="btn btn-primary btn-margin"
-          *ngIf="auth.isAuthenticated()"
-          (click)="auth.logout()">
-            Log Out
-        </button>
-  
-      </div>
+<div class="container-fluid login-body" id="landing-banner">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="header mat-h1">Stackle by SCoRe</h1>
     </div>
-  </nav>
+    <div class="col-md-6">
+      <button class="btn btn-margin login-btn" *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
+        Log in to get started
+      </button>
+    </div>
+
+  </div>
+</div>
