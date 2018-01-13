@@ -1,9 +1,33 @@
 {
   "name": "stackleapp",
+  "version": "1.0.0",
+  "description": "Web Communication portal for OpenSource organizations to discuss project ideas and issues ",
   "private": true,
   "scripts": {
     "start": "gulp serve"
   },
+ "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scorelab/Stackle.git"
+  },
+  "keywords": [
+    "stackle",
+    "SCORE"
+  ],
+  "author": "SCoRe Lab",
+  "license": "Apache Version 2",
+  "bugs": {
+    "url": "https://github.com/scorelab/Stackle/issues"
+  },
+  "contributors": [
+    "Pasan Missaka Gamaetige (https://github.com/psnmissaka)",
+    "Łukasz Myśliwiec <lmysliwiec10@gmail.com> (https://github.com/TheLukaszNs)",
+    "Tharindu Prabhath Ranathunga <tharindu.prf@gmail.com> (https://github.com/tharindupr)",
+    "shravyanandyala (https://github.com/shravyanandyala)",
+    "Milindu Sanoj Kumarage (http://agentmilindu.com)",
+    "Charitha Madusanka <charithcc@apache.org> (https://github.com/charithccmc)"
+  ],
+  "homepage": "https://github.com/scorelab/Stackle/tree/master/stackle_app#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",

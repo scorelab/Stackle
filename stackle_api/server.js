@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 var argv = require('minimist')(process.argv.slice(2));
