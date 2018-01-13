@@ -1,3 +1,23 @@
+.logo{
+	text-align: center;
+	padding: 50px;
+}
+.logo img{
+	height: 90px
+}h1{
+font-family: Roboto Thin;
+color: #3f51b5;
+padding: 10px;
+text-align: center;
+}
+h3{
+	
+font-family: Roboto Light;
+padding: 10px;
+color: #3f51b5;
+	text-align:center;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -35,6 +55,7 @@ body {
 .footer {
   padding-top: 19px;
   color: #777;
+  text-align: right;
   border-top: 1px solid #e5e5e5;
 }
 
@@ -68,7 +89,7 @@ body {
 }
 
 #notification{
-  background-color: white;
+  background-color: red;
   height: 100%;
   width: 25%;
 }
