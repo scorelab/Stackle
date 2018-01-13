@@ -1,3 +1,4 @@
+![readmeimg](https://user-images.githubusercontent.com/17242746/34909933-442e4dc8-f8d1-11e7-8f90-b0aa6dfa12e7.jpg)
 # Introduction
 Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in are able to view forums of the organizations they contribute to and engage in the forum discussions.
 
