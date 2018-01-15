@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Stackle</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="icon" href="images/favicon.ico" />
+</head>
+
+<body class="is-loading">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <section id="main">
+            <header>
+                <span class="avatar"><img src="images/avatar.jpg" alt="" /></span>
+                <h1>Stackle</h1>
+                <p>Stackle is an web communication portal aimed at providing <br> Open Source organizations a platform to have discussions on<br> their github projects and their issues.</p>
+            </header>
+            <footer>
+                <ul class="icons">
+                    <li><a href="https://github.com/scorelab/Stackle" target="blank" class="fa-code">Code</a></li>
+                    <li><a href="https://github.com/scorelab/Stackle/issues" target="blank" class="fa-exclamation">Issues</a></li>
+                    <li><a href="https://github.com/scorelab/Stackle/wiki" target="blank" class="fa-file">Wiki</a></li>
+                </ul>
+            </footer>
+        </section>
+
+        <footer id="footer">
+            <!--provide space from below -->
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
+    <script>
+        if ('addEventListener' in window) {
+            window.addEventListener('load', function() {
+                document.body.className = document.body.className.replace(/\bis-loading\b/, '');
+            });
+            document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+        }
+    </script>
+
+</body>
+
+</html>
