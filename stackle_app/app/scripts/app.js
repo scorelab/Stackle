@@ -73,5 +73,5 @@ angular
       .state('otherwise',{
         url : '/#!/*path',
         templateUrl : '404.html'
-      })
+      });
   });
