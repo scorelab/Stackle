@@ -12,8 +12,8 @@
 
             $http.get(apiurl).then(function (response) {
                 callback(response.data);
-            })
-        }
+            });
+        };
 
         var getPost = function (postid, callback) {
             var apiUrl = server + 'api/post/' + postid;
@@ -21,7 +21,7 @@
             $http.get(apiUrl).then(function (response) {
                 callback(response.data);
             });
-        }
+        };
 
         var getOrgPosts = function (orgname, callback) {
             var apiUrl = server + 'api/posts/org/'+ orgname;
@@ -30,14 +30,14 @@
                 callback(response.data);
             }, function(error){
                 callback(error);
-            })
+            });
         };
 
         return {
             getAllPosts: getAllPosts,
             getPost: getPost,
             getOrgPosts : getOrgPosts
-        }
+        };
     }
 
 })();
