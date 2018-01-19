@@ -33,12 +33,22 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
 ## Stackle API
 1. `cd` in to the **stackle_api** directory.
 2. Run `npm install` to install the packages required. 
-3. once all the packages are installed run `npm start`
+3. Once all the packages are installed run `npm start`
 
 ## Stackle App
 1. `cd`in to the **stackle_app** directory
-2. run `npm install` to install the packages required.
+2. Run `npm install` to install the packages required.
 3. Once all the packages are installed, run `gulp serve`
+
+## Running Tests (Protractor)
+1. Run `npm install -g protractor` to install protractor globally.
+2. To get started with a Selenium Server, run
+   ```
+   webdriver-manager update
+   webdriver-manager start
+   ```
+3. `cd` in to **root** directory and run `./ui-tests.sh`
+4. To add more tests, edit **stackle_tests.js** located in **stackle_app**
 
 # Running with Docker
 1. Change the url in the database config file in stackle_api/config/database.js  as `url : 'mongodb://mongo:27017/stackle'`

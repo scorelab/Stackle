@@ -23,25 +23,19 @@
   <!-- endbuild -->
 </head>
 
-<body ng-app="stackleAppApp">
+<body ng-app="stackleAppApp" style="overflow-y:hidden;">
   <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
   <!-- Add your site or application content here -->
-  <div class="header">
+  <div class="header" style="margin:0px;">
     <toolbar></toolbar>
   </div>
 
   <!-- <div ng-view=""></div> -->
-  <div id="main_ui_sref">
-    <ui-view></ui-view>
-  </div>
-
-  <div class="footer">
-    <div class="container">
-      <p><span class="glyphicon glyphicon-heart"></span> SCoReLab of UCSC</p>
-    </div>
+  <div id="main_ui_sref" style="height:92%;margin:0px;">
+    <iframe frameborder="no" scrolling="no" src="landing_page/index.html" style="width:100%;height:100%;"></iframe>
   </div>
 
 
