@@ -1,4 +1,4 @@
-<div class="container">
+ t<div class="container">
     <div class="stacklePost" layout-margin layout-padding>
         <div layout="row">
             <div flex="20">
@@ -22,16 +22,16 @@
                     <div flex="80">
                         <div ng-repeat="comment in post.comments">
                             <md-content>{{comment.description}}</md-content>
-                            <p class="poster"> by {{comment.user}}</p>
+                            <p class="poster">Comment By {{comment.user}}</p>
                         </div>
                     </div>
                 </div>
                 <div>
                     <form>
                         <md-input-container class="md-block">
-                            <input aria-label="Type your Comment" type="text" ng-model="comment">
+                            <input aria-label="Comment on this post" type="text" ng-model="comment">
                         </md-input-container>
-                        <md-button md-no-ink class="md-primary">Comment</md-button>
+                        <md-button md-no-ink class="md-primary">Send Comment</md-button>
                     </form>
                 </div>
             </div>
