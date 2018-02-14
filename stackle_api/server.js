@@ -43,6 +43,3 @@ mongoose.connect(database.url,function(err){
 });     // connect to mongoDB database on modulus.io
 
 module.exports = app;
-  
-
-
