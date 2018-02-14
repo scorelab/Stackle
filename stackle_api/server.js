@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
-var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose'); 
 var database = require('./config/database');            // load the database config
 var morgan = require('morgan');             // log requests to the console (express4)
@@ -40,14 +39,10 @@ mongoose.connect(database.url,function(err){
         return console.log("Couldnt connect to db url 1. connecting to alternate");
     }else{
         console.log("Mongo connect sucess!");
-    }
-    
-    app.listen(port, function(){
-        console.log("App listening on port " + port);
-    });
-    
+    }  
 });     // connect to mongoDB database on modulus.io
-   
+
+module.exports = app;
   
 
 
