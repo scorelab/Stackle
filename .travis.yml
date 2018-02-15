@@ -1,2 +1,7 @@
 language: node_js
-script : stackle_api/server.js
+node_js:
+  - "node"
+install:
+ - cd stackle_api
+ - npm install
+script : node server.js &
