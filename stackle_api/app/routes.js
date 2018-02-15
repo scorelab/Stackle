@@ -202,8 +202,4 @@ module.exports = function (app, db) {
 
 	app.get('/api/notifications', function (req, res) { });
 
-	app.get('/*', function (req, res) {
-		res.sendfile('./public/404.html');
-	});
-
 }
