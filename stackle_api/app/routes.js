@@ -52,8 +52,8 @@ module.exports = function (app, db) {
 		var objectid = req.params.postid;
 		Post.findOne({ _id: objectid }, function (err, post) {
 			if (err) {
-			  // Since the post was not found therefore use status code 404
-				res.status(404).send(err)
+			  //  Since the post was not found therefore use status code 404
+				res.status(404).send(err);
 			} else {
 				res.status(200).send(post);
 			}
@@ -152,7 +152,7 @@ module.exports = function (app, db) {
 			if (err) {
 				res.status(500).send("Couldn't delete Stack");
 			} else {
-				res.status(200).send("")
+				res.status(200).send("");
 			}
 		})
 	})
