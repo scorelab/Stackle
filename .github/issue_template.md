@@ -1,9 +1,9 @@
-## Before you describe your issue, idea or feauture, please consider using this issue template.
+## Before you describe your issue, idea or feature, please consider using this issue template.
 
-## Type of issue
+## Type of issue:
 - [ ] Bug / Error
 - [ ] Idea / Feature
-- [ ] Improvment detail
+- [ ] Improvement detail
 
 ## Short description on the issue
 
