@@ -85,7 +85,7 @@ module.exports = function (app, db) {
 		var id = req.params.user;
 		Post.find({ user: id }, function (err, posts) {
 			if (err) {
-        console.log("Error getting posts");
+        console.log("Erorr getting posts");
         res.status(500).send("Error");
       } else {
         res.send(posts);
@@ -100,7 +100,7 @@ module.exports = function (app, db) {
 		var orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
 			if (err) {
-        console.log(`Error getting posts from ${orgname}`);
+        console.log(`Error getting posts from $orgname`);
         res.status(500).send(`Error getting posts from ${orgname}`);
       } else {
         res.send(posts);
@@ -116,7 +116,7 @@ module.exports = function (app, db) {
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
 				console.log('Error');
-				res.status(500).send("Error")
+				res.status(500).send("Error");
 			} else {
 				res.send(org);
 			}
@@ -136,7 +136,7 @@ module.exports = function (app, db) {
 		Stack.find({}, function (err, stacks) {
 			if (err) {
         console.log("Errors retrieving stacks!");
-        res.status(500).send("Error retrieving stacks!")
+        res.status(500).send("Error retrieving stacks!");
       } else {
         res.send(stacks);
       }
@@ -165,7 +165,7 @@ module.exports = function (app, db) {
 			if (err) {
 				res.send("Couldn't delete Stack");
 			} else {
-				res.send("")
+				res.send("");
 			}
 		})
 	})
