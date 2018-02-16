@@ -14,11 +14,13 @@ module.exports = function (app, db) {
 
 	//api
 	app.get('/api/login/', function (req, res) {
+	  res.status(501).send("Not Implemented")
 	})
 
 	app.get('/home', function (req, res) {
 		//needs to intergrate with github for implementation
-		res.end();
+    // Status code would be 501 since not implemented yet
+		res.status(501).end();
 	})
 
 	//get all posts
@@ -26,9 +28,12 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		Post.find({}, function (err, posts) {
-			if (err)
+			if (err) {
 				console.log("Cant get all posts!")
-			res.send(posts);
+        res.status(500).send("error getting all the posts")
+			} else {
+        res.send(posts);
+      }
 		})
 	})
 
@@ -70,6 +75,7 @@ module.exports = function (app, db) {
 				res.send("Sucessfully Deleted");
 			} else {
 				console.log("Null pointer");
+				res.status(500).send("Error")
 			}
 		})
 	})
@@ -78,9 +84,12 @@ module.exports = function (app, db) {
 	app.get('/api/posts/:user', function (req, res) {
 		var id = req.params.user;
 		Post.find({ user: id }, function (err, posts) {
-			if (err)
-				console.log("Erorr getting posts");
-			res.send(posts);
+			if (err) {
+        console.log("Error getting posts");
+        res.status(500).send("Error")
+      } else {
+        res.send(posts);
+      }
 		})
 	})
 
@@ -90,10 +99,12 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		var orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
-			if (err)
-				console.log(`Error getting posts from $orgname`);
-			else
-				res.send(posts);
+			if (err) {
+        console.log(`Error getting posts from ${orgname}`);
+        res.status(500).send(`Error getting posts from ${orgname}`)
+      } else {
+        res.send(posts);
+      }
 		})
 	})
 
@@ -105,6 +116,7 @@ module.exports = function (app, db) {
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
 				console.log('Error');
+				res.status(500).send("Error")
 			} else {
 				res.send(org);
 			}
@@ -122,10 +134,12 @@ module.exports = function (app, db) {
 	//get all stacks (orgs)
 	app.get('/api/orgs', function (req, res) {
 		Stack.find({}, function (err, stacks) {
-			if (err)
-				console.log("Errors retrieving stacks!");
-			else
-				res.send(stacks);
+			if (err) {
+        console.log("Errors retrieving stacks!");
+        res.status(500).send("Error retrieving stacks!")
+      } else {
+        res.send(stacks);
+      }
 		})
 	})
 
