@@ -2,12 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
-var mongoose = require('mongoose'); 
-var database = require('./config/database');            // load the database config
-var morgan = require('morgan');             // log requests to the console (express4)
-var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var db = mongoose.connection;
+const mongoose = require('mongoose');
+const database = require('./config/database');            // load the database config
+const morgan = require('morgan');             // log requests to the console (express4)
+const bodyParser = require('body-parser');    // pull information from HTML POST (express4)
+const methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+const db = mongoose.connection;
 
 app.use('/', express.static(__dirname +  '/'));
 app.use(morgan('dev'));                                         // log every request to the console
