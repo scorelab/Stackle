@@ -30,7 +30,7 @@ module.exports = function (app, db) {
 		Post.find({}, function (err, posts) {
 			if (err) {
 				console.log("Cant get all posts!")
-        res.status(500).send("error getting all the posts")
+        res.status(500).send("error getting all the posts");
 			} else {
         res.send(posts);
       }
@@ -75,7 +75,7 @@ module.exports = function (app, db) {
 				res.send("Sucessfully Deleted");
 			} else {
 				console.log("Null pointer");
-				res.status(500).send("Error")
+				res.status(500).send("Error");
 			}
 		})
 	})
@@ -86,7 +86,7 @@ module.exports = function (app, db) {
 		Post.find({ user: id }, function (err, posts) {
 			if (err) {
         console.log("Error getting posts");
-        res.status(500).send("Error")
+        res.status(500).send("Error");
       } else {
         res.send(posts);
       }
@@ -101,7 +101,7 @@ module.exports = function (app, db) {
 		Post.find({ org_name: orgname }, function (err, posts) {
 			if (err) {
         console.log(`Error getting posts from ${orgname}`);
-        res.status(500).send(`Error getting posts from ${orgname}`)
+        res.status(500).send(`Error getting posts from ${orgname}`);
       } else {
         res.send(posts);
       }
