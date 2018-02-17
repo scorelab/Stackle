@@ -19,21 +19,33 @@
             vm.logout = logout;
             vm.auth = auth;
 
+            vm.isAuthenticated = isLoggedIn();
+
             function login(){
                 auth.signin({},function(profile, token){
                     store.set('profile', profile);
                     store.set('id_token', token);
                     $location.path('/landing');
+                    vm.isAuthenticated = true;
                 }, function(err){
                     console.log(err);
                 });
             }
 
             function logout(){
+                vm.isAuthenticated = false;
                 store.remove('profile');
                 store.remove('id_token');
                 auth.signout();
                 $location.path('/home');
+            }
+
+            //check if the user is logged in or not
+            function isLoggedIn(){
+              if(store.get('id_token'))
+                return true;
+
+              return false;
             }
         }
 })();
