@@ -56,7 +56,7 @@ angular
         controller : 'landingController'
       })
       .state('main',{
-        url : '',
+        url : '/main',
         templateUrl : 'views/main.html',
         controller : 'MainCtrl'
       })
@@ -73,5 +73,9 @@ angular
       .state('otherwise',{
         url : '/#!/*path',
         templateUrl : '404.html'
+      })
+      .state('staticLanding', {
+        url: '',
+        templateUrl: 'views/static-landing.html'
       })
   });
