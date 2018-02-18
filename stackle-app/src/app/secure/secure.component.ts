@@ -15,7 +15,9 @@ export class SecureComponent implements OnInit {
     private auth: AuthService,
     private stackService: StackService,
     private router: Router
-  ) { }
+  ) {
+    auth.handleAuthentication();
+   }
 
   ngOnInit() {
     this.stackService.getAllOrgs().subscribe((response)=> {

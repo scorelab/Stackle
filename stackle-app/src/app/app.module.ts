@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms'
 
 // material module
 import { MaterialModule } from './material/material.module';
@@ -38,6 +39,7 @@ import { LoginComponent } from './public/login/login.component';
     BrowserAnimationsModule,
     HttpModule,
     AppRoutingModule,
+    FormsModule,
     MaterialModule,
     PublicModule,
     SecureModule
