@@ -19,6 +19,14 @@
             vm.logout = logout;
             vm.auth = auth;
 
+            //check if the user is logged in or not
+            function isLoggedIn(){
+              if(store.get('id_token'))
+                return true;
+
+              return false;
+            }
+
             vm.isAuthenticated = isLoggedIn();
 
             function login(){
@@ -40,12 +48,5 @@
                 $location.path('/home');
             }
 
-            //check if the user is logged in or not
-            function isLoggedIn(){
-              if(store.get('id_token'))
-                return true;
-
-              return false;
-            }
         }
 })();
