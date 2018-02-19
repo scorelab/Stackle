@@ -14,7 +14,7 @@ module.exports = function (app, db) {
 
     //api
     app.get('/api/login/', function (req, res) {
-        res.status(501).send("Not Implemented")
+        res.status(501).send("Not Implemented");
     })
 
     app.get('/home', function (req, res) {
@@ -43,7 +43,7 @@ module.exports = function (app, db) {
         post.save(function (err, post) {
             if (err) {
                 console.log("error saving the post");
-                res.send("error!")
+                res.send("error!");
             } else {
                 res.send("Sucessfully saved the post!");
             }
@@ -57,7 +57,7 @@ module.exports = function (app, db) {
         var objectid = req.params.postid;
         Post.findOne({_id: objectid}, function (err, post) {
             if (err) {
-                res.send(err)
+                res.send(err);
             } else {
                 res.send(post);
             }
