@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('stackleAppApp')
-  .controller('profileController', function ($http, $scope) {
+  .controller('profileController', function ($http, $scope, auth) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -9,5 +9,7 @@ angular.module('stackleAppApp')
     ];
 
     $scope.profile = JSON.parse(localStorage.getItem("profile"));
+
+    $scope.auth = auth;
 
   });
