@@ -28,7 +28,7 @@ module.exports = function (app, db) {
 		Post.find({}, function (err, posts) {
 			if (err)
 				console.log("Cant get all posts!")
-			res.send(posts);
+			res.status(200).send(posts);
 		})
 	})
 
@@ -38,9 +38,9 @@ module.exports = function (app, db) {
 		post.save(function (err, post) {
 			if (err) {
 				console.log("error saving the post");
-				res.send("error!")
+				res.status(500).send("error!")
 			} else {
-				res.send("Sucessfully saved the post!");
+				res.status(201).send("Sucessfully saved the post!");
 			}
 		});
 	})
@@ -52,9 +52,9 @@ module.exports = function (app, db) {
 		var objectid = req.params.postid;
 		Post.findOne({ _id: objectid }, function (err, post) {
 			if (err) {
-				res.send(err)
+				res.status(404).send(err);
 			} else {
-				res.send(post);
+				res.status(200).send(post);
 			}
 		})
 	})
@@ -65,9 +65,9 @@ module.exports = function (app, db) {
 		Post.remove({ _id: postid }, function (err, success) {
 			if (err) {
 				console.log(err);
-				res.send("Error deleting the document");
+				res.status(500).send("Error deleting the document");
 			} else if (success) {
-				res.send("Sucessfully Deleted");
+				res.status(200).send("Sucessfully Deleted");
 			} else {
 				console.log("Null pointer");
 			}
@@ -80,7 +80,7 @@ module.exports = function (app, db) {
 		Post.find({ user: id }, function (err, posts) {
 			if (err)
 				console.log("Erorr getting posts");
-			res.send(posts);
+			res.status(200).send(posts);
 		})
 	})
 
@@ -93,7 +93,7 @@ module.exports = function (app, db) {
 			if (err)
 				console.log(`Error getting posts from $orgname`);
 			else
-				res.send(posts);
+				res.status(200).send(posts);
 		})
 	})
 
@@ -106,7 +106,7 @@ module.exports = function (app, db) {
 			if (err) {
 				console.log('Error');
 			} else {
-				res.send(org);
+				res.status(200).send(org);
 			}
 		})
 	})
@@ -125,7 +125,7 @@ module.exports = function (app, db) {
 			if (err)
 				console.log("Errors retrieving stacks!");
 			else
-				res.send(stacks);
+				res.status(200).send(stacks);
 		})
 	})
 
@@ -135,11 +135,11 @@ module.exports = function (app, db) {
 		stack.save(function (err, stack) {
 			if (err) {
 				console.log("Error saving the stack to database");
-				res.send("Error saving stack!");
+				res.status(500).send("Error saving stack!");
 			} else if (stack) {
-				res.send("Sucessfully created the stack");
+				res.status(201).send("Sucessfully created the stack");
 			} else {
-				res.send("Null");
+				res.status(500).send("Null");
 			}
 		})
 	})
@@ -149,9 +149,9 @@ module.exports = function (app, db) {
 		var stack_id = req.params.stackid;
 		Stack.remove({ _id: stack_id }, function (err, success) {
 			if (err) {
-				res.send("Couldn't delete Stack");
+				res.status(500).send("Couldn't delete Stack");
 			} else {
-				res.send("")
+				res.status(200).send("");
 			}
 		})
 	})
@@ -163,9 +163,9 @@ module.exports = function (app, db) {
 		var query = { userId : userid };
 		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
 			if(err){
-				res.send("Error Updating");
+				res.status(500).send("Error Updating");
 			}else{
-				res.send("Success!!");
+				res.status(200).send("Success!!");
 			}
 		});
 	})
@@ -177,12 +177,12 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		User.findOne({userId : req.params.userid}, function(err, result){
 			if(err){
-				res.send(err);
+				res.status(500).send(err);
 			}else if(result){
 				var sub_stack = result.subscribed_stacks;
-				res.send(sub_stack);
+				res.status(200).send(sub_stack);
 			}else{
-				res.send("Can't get!");
+				res.status(500).send("Can't get!");
 			}
 		})
 	})
@@ -193,9 +193,9 @@ module.exports = function (app, db) {
 		user.save(function (err, user) {
 			if (err) {
 				console.log("Error saving the stack to database");
-				res.send("Error saving user!");
+				res.status(500).send("Error saving user!");
 			} else {
-				res.send("Sucessfully created the user");
+				res.status(201).send("Sucessfully created the user");
 			}
 		})
 	})
