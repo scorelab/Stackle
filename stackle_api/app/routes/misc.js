@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/home', function (req, res) {
     //needs to intergrate with github for implementation
     res.end();
-})
+});
 
 router.get('/*', function (req, res) {
     res.sendfile('./public/404.html');

@@ -20,20 +20,20 @@ router.post('/create', function (req, res) {
         } else {
             res.send("Null");
         }
-    })
-})
+    });
+});
 
 //getting subscribed stacks for a user
-router.get('/subscribed/:userid', function (req, res) {
+router.get('/subscribed/:userId', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    User.findOne({userId: req.params.userid}, function (err, result) {
+    User.findOne({userId: req.params.userId}, function (err, result) {
         if (err) {
             res.send(err);
         } else if (result) {
-            let sub_stack = result.subscribed_stacks;
-            res.send(sub_stack);
+            let subStack = result.subscribed_stacks;
+            res.send(subStack);
         } else {
             res.send("Can't get!");
         }

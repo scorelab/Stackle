@@ -10,11 +10,12 @@ const Stack = require('../../models/stack');
 //get all stacks (orgs)
 router.get('/', function (req, res) {
     Stack.find({}, function (err, stacks) {
-        if (err)
+        if (err) {
             console.log("Errors retrieving stacks!");
-        else
+        } else {
             res.send(stacks);
-    })
-})
+        }
+    });
+});
 
 exports = module.exports = router;

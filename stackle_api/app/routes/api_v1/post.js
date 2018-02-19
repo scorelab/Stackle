@@ -4,23 +4,23 @@
 const express = require('express');
 const router = express.Router();
 
-const postModels = require('../../models/post')
+const postModels = require('../../models/post');
 
 const Post = postModels.Post;
 
 //get a post by id
-router.get('/:postid', function (req, res) {
+router.get('/:postId', function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    let objectid = req.params.postid;
-    Post.findOne({_id: objectid}, function (err, post) {
+    let objectId = req.params.postId;
+    Post.findOne({_id: objectId}, function (err, post) {
         if (err) {
-            res.send(err)
+            res.send(err);
         } else {
             res.send(post);
         }
-    })
-})
+    });
+});
 
 //delete a post by ID
 router.delete('/api/post/:postid', function (req, res) {
@@ -34,7 +34,7 @@ router.delete('/api/post/:postid', function (req, res) {
         } else {
             console.log("Null pointer");
         }
-    })
-})
+    });
+});
 
 exports = module.exports = router;

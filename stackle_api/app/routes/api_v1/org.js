@@ -18,7 +18,7 @@ router.get('/:orgname', function (req, res) {
         } else {
             res.send(org);
         }
-    })
-})
+    });
+});
 
 exports = module.exports = router;

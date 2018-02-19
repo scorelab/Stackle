@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 
-const postModels = require('../../models/post')
+const postModels = require('../../models/post');
 const Stack = require('../../models/stack');
 const User = require('../../models/user');
 
@@ -31,12 +31,12 @@ router.post('/comment/:postid', function (req, res) {
 
 //delete stack
 router.delete('/delete/stack/:stackid', function (req, res) {
-    let stack_id = req.params.stackid;
-    Stack.remove({_id: stack_id}, function (err, success) {
+    let stackId = req.params.stackid;
+    Stack.remove({_id: stackId}, function (err, success) {
         if (err) {
             res.send("Couldn't delete Stack");
         } else {
-            res.send("")
+            res.send("Stack Deleted");
         }
     })
 })
