@@ -9,6 +9,7 @@ module.exports = {
         'standard'
     ],
     rules: {
-
+        "semi": ["error", "always"],
+        "indent": ["error", "tab"]
     }
 }
