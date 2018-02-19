@@ -17,7 +17,7 @@ const Comment = postModels.Comment;
 
 //api
 router.get('/login', function (req, res) {
-})
+});
 
 //comment on a post
 router.post('/comment/:postid', function (req, res) {
@@ -25,7 +25,7 @@ router.post('/comment/:postid', function (req, res) {
     let query = {_id: postid};
     let comment = new Comment(req.body);
     Post.update(query, {comments: []});
-})
+});
 
 
 
@@ -38,8 +38,8 @@ router.delete('/delete/stack/:stackid', function (req, res) {
         } else {
             res.send("Stack Deleted");
         }
-    })
-})
+    });
+});
 
 //user subscribing to an stack
 router.post('/subscribe', function (req, res) {
@@ -53,7 +53,7 @@ router.post('/subscribe', function (req, res) {
             res.send("Success!!");
         }
     });
-})
+});
 
 
 
@@ -67,8 +67,8 @@ router.post('/newuser', function (req, res) {
         } else {
             res.send("Sucessfully created the user");
         }
-    })
-})
+    });
+});
 
 router.get('/notifications', function (req, res) {
 });

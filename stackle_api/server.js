@@ -18,7 +18,7 @@ app.use(methodOverride());
 
 // var routes = require('./app/routes')(app,db);
 
-app.use('/api', require('./app/routes/api_v1'))
+app.use('/api', require('./app/routes/api_v1'));
 
 // The routes present here has to be sorted into meaningful routes
 app.use('/', require('./app/routes/misc'));

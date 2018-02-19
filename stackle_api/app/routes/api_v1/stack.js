@@ -37,8 +37,8 @@ router.get('/subscribed/:userId', function (req, res) {
         } else {
             res.send("Can't get!");
         }
-    })
-})
+    });
+});
 
 
 exports = module.exports = router;
