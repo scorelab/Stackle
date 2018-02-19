@@ -15,16 +15,16 @@
       })
     }
 
-    var getSubscribedStacks = function(userid, callback){
-      var apiUrl = server + 'api/stack/subscribed/'+ userid;
-      $http.get(apiUrl).then(function(response){
+    var getSubscribedStacks = function (userid, callback) {
+      var apiUrl = server + 'api/stack/subscribed/' + userid;
+      $http.get(apiUrl).then(function (response) {
         return callback(response.data);
       })
     };
 
     return {
       getOrgs: getOrgs,
-      getSubscribedStacks : getSubscribedStacks
+      getSubscribedStacks: getSubscribedStacks
     }
   }
 })();

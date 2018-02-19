@@ -23,6 +23,7 @@ body {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 }
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -47,6 +48,7 @@ body {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
+
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
@@ -56,18 +58,19 @@ body {
 .marketing {
   margin: 40px 0;
 }
+
 .marketing p + h4 {
   margin-top: 28px;
 }
 
-#newsfeed{
+#newsfeed {
   background-color: white;
   height: 100%;
   width: 50%;
 
 }
 
-#notification{
+#notification {
   background-color: white;
   height: 100%;
   width: 25%;
@@ -86,41 +89,43 @@ body {
     padding-left: 0;
     padding-right: 0;
   }
+
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
 }
 
-.stacklePost{
+.stacklePost {
   background-color: white;
 }
 
-.comments{
-  margin-left : 5px;
+.comments {
+  margin-left: 5px;
   font-size: 14px;
 }
 
-.poster{
-  font-size : 12px;
+.poster {
+  font-size: 12px;
   color: #777;
 }
 
-.tag_chips{
+.tag_chips {
   font-size: 12px;
-} 
+}
 
-.postvote{
+.postvote {
   text-align: center;
 }
 
-.tagslike{
+.tagslike {
   margin-right: 5px;
-  margin-left : 5px;
+  margin-left: 5px;
   padding: 5px;
   font-size: 14px;
   background-color: greenyellow;
