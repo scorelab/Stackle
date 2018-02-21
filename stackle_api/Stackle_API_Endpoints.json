@@ -32,7 +32,7 @@
                 ],
                 "body": {
                     "mode": "raw",
-                    "raw": "{\r\n\ttitle : \"This is the title\",\r\n\tdescription : \"Description about the post\",\r\n\torg_name : \"Orgname\",\r\n\ttags : [],\r\n\trepository : \"URL to the repository\",\r\n\tlink_issue : \"URL to the Issue\",\r\n\tuser : \"UserId\",\r\n\tdate : \"2017-11-28\",\r\n\tvotes : 0,\r\n\tcomments : []\r\n}"
+                    "raw": "{\r\n\ttitle : \"This is the title\",\r\n\tdescription : \"Description about the post\",\r\n\torg_name : \"Orgname\",\r\n\ttags : [],\r\n\trepository : \"URL to the repository\",\r\n\tlinkIssue : \"URL to the Issue\",\r\n\tuser : \"UserId\",\r\n\tdate : \"2017-11-28\",\r\n\tvotes : 0,\r\n\tcomments : []\r\n}"
                 },
                 "description": ""
             },
