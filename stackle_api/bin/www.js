@@ -31,26 +31,26 @@ function normalizePort(val) {
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "8080");
-app.set("port", port);
+var port = normalizePort(process.env.PORT || '8080');
+app.set('port', port);
 
 /**
- * Event listener for HTTP server "error" event.
+ * Event listener for HTTP server 'error' event.
  */
 
 function onError(error) {
-    if (error.syscall !== "listen") {
+    if (error.syscall !== 'listen') {
         throw error;
     }
 
     // handle specific listen errors with friendly messages
     switch (error.code) {
-        case "EACCES":
-            console.error(port + " requires elevated privileges");
+        case 'EACCES':
+            console.error(port + ' requires elevated privileges');
             process.exit(1);
             break;
-        case "EADDRINUSE":
-            console.error(port + " is already in use");
+        case 'EADDRINUSE':
+            console.error(port + ' is already in use');
             process.exit(1);
             break;
         default:
@@ -69,6 +69,6 @@ var server = http.createServer(app);
  */
 
 server.listen(port, () => {
-    console.log("Server listening at localhost:" + port);
+    console.log('Server listening at localhost:' + port);
 });
-server.on("error", onError);
+server.on('error', onError);

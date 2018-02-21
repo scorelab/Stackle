@@ -30,16 +30,15 @@ angular
                     $httpProvider,
                     jwtInterceptorProvider,
                     $mdIconProvider) {
-
+    
     authProvider.init({
       domain: 'psnmissaka.au.auth0.com',
       clientID: 'f6ewsNvcnhe8ODntv_FAD_lW_YPvxN5X'
     });
-
-    $mdIconProvider
-      .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+    
+    $mdIconProvider.iconSet('social', 'img/icons/sets/social-icons.svg', 24)
       .defaultIconSet('img/icons/sets/core-icons.svg', 24);
-
+    
     $stateProvider
       .state('home', {
         url: '/home',
