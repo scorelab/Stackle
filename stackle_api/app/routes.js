@@ -1,27 +1,24 @@
 // application -------------------------------------------------------------
-var mongoose = require('mongoose');
+const User = require('./models/user');
+const Stack = require('./models/stack');
 
-var User = require('./models/user');
-var Stack = require('./models/stack');
+const postModels = require('./models/post')
 
-var postModels = require('./models/post')
-
-var Post = postModels.Post;
-var Comment = postModels.Comment;
-var Reply = postModels.Reply;
+const Post = postModels.Post;
+const Comment = postModels.Comment;
 
 module.exports = function (app, db) {
 
     //api
     app.get('/api/login/', function (req, res) {
         res.status(501).send("Not Implemented");
-    })
+    });
 
     app.get('/home', function (req, res) {
         //needs to intergrate with github for implementation
         // Status code would be 501 since not implemented yet
         res.status(501).end();
-    })
+    });
 
     //get all posts
     app.get('/api/posts', function (req, res) {
@@ -29,17 +26,17 @@ module.exports = function (app, db) {
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         Post.find({}, function (err, posts) {
             if (err) {
-                console.log("Cant get all posts!")
+                console.log("Cant get all posts!");
                 res.status(500).send("error getting all the posts");
             } else {
                 res.send(posts);
             }
-        })
-    })
+        });
+    });
 
     //save a post
     app.post('/api/user/post', function (req, res) {
-        var post = new Post(req.body);
+        let post = new Post(req.body);
         post.save(function (err, post) {
             if (err) {
                 console.log("error saving the post");
@@ -48,25 +45,25 @@ module.exports = function (app, db) {
                 res.send("Sucessfully saved the post!");
             }
         });
-    })
+    });
 
     //get a post by id
     app.get('/api/post/:postid', function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        var objectid = req.params.postid;
+        let objectid = req.params.postid;
         Post.findOne({_id: objectid}, function (err, post) {
             if (err) {
                 res.send(err);
             } else {
                 res.send(post);
             }
-        })
-    })
+        });
+    });
 
     //delete a post by ID
     app.delete('/api/post/:postid', function (req, res) {
-        var postid = req.params.postid;
+        let postid = req.params.postid;
         Post.remove({_id: postid}, function (err, success) {
             if (err) {
                 console.log(err);
@@ -77,12 +74,12 @@ module.exports = function (app, db) {
                 console.log("Null pointer");
                 res.status(500).send("Error");
             }
-        })
-    })
+        });
+    });
 
     //returns posts by a specific user
     app.get('/api/posts/:user', function (req, res) {
-        var id = req.params.user;
+        let id = req.params.user;
         Post.find({user: id}, function (err, posts) {
             if (err) {
                 console.log("Erorr getting posts");
@@ -90,14 +87,14 @@ module.exports = function (app, db) {
             } else {
                 res.send(posts);
             }
-        })
-    })
+        });
+    });
 
     //returns posts relating to specific org
     app.get('/api/posts/org/:org_name', function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        var orgname = req.params.org_name;
+        let orgname = req.params.org_name;
         Post.find({org_name: orgname}, function (err, posts) {
             if (err) {
                 console.log(`Error getting posts from $orgname`);
@@ -105,14 +102,14 @@ module.exports = function (app, db) {
             } else {
                 res.send(posts);
             }
-        })
-    })
+        });
+    });
 
     //get a specific org
     app.get('/api/org/:orgname', function (req, res) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        var orgname = req.params.orgname;
+        let orgname = req.params.orgname;
         Stack.find({name: orgname}, function (err, org) {
             if (err) {
                 console.log('Error');
@@ -120,16 +117,16 @@ module.exports = function (app, db) {
             } else {
                 res.send(org);
             }
-        })
-    })
+        });
+    });
 
     //comment on a post
     app.post('/api/comment/:postid', function (req, res) {
-        var postid = req.params.postid;
-        var query = {_id: postid};
-        var comment = new Comment(req.body);
+        let postid = req.params.postid;
+        let query = {_id: postid};
+        let comment = new Comment(req.body);
         Post.update(query, {comments: []});
-    })
+    });
 
     //get all stacks (orgs)
     app.get('/api/orgs', function (req, res) {
@@ -140,12 +137,12 @@ module.exports = function (app, db) {
             } else {
                 res.send(stacks);
             }
-        })
-    })
+        });
+    });
 
     //create stack
     app.post('/api/stack/create', function (req, res) {
-        var stack = new Stack(req.body);
+        let stack = new Stack(req.body);
         stack.save(function (err, stack) {
             if (err) {
                 console.log("Error saving the stack to database");
@@ -155,26 +152,26 @@ module.exports = function (app, db) {
             } else {
                 res.send("Null");
             }
-        })
-    })
+        });
+    });
 
     //delete stack
     app.delete('api/delete/stack/:stackid', function (req, res) {
-        var stack_id = req.params.stackid;
+        let stack_id = req.params.stackid;
         Stack.remove({_id: stack_id}, function (err, success) {
             if (err) {
                 res.send("Couldn't delete Stack");
             } else {
                 res.send("");
             }
-        })
-    })
+        });
+    });
 
     //user subscribing to an stack
     app.post('/api/subscribe', function (req, res) {
-        var userid = req.body.uid;
-        var stackname = req.body.stack_name;
-        var query = {userId: userid};
+        let userid = req.body.uid;
+        let stackname = req.body.stack_name;
+        let query = {userId: userid};
         User.findOneAndUpdate(query, {$push: {subscribed_stacks: stackname}}, function (err, noaffected) {
             if (err) {
                 res.send("Error Updating");
@@ -182,7 +179,7 @@ module.exports = function (app, db) {
                 res.send("Success!!");
             }
         });
-    })
+    });
 
     //getting subscribed stacks for a user
     app.get('/api/stack/subscribed/:userid', function (req, res) {
@@ -193,17 +190,17 @@ module.exports = function (app, db) {
             if (err) {
                 res.send(err);
             } else if (result) {
-                var sub_stack = result.subscribed_stacks;
+                let sub_stack = result.subscribed_stacks;
                 res.send(sub_stack);
             } else {
                 res.send("Can't get!");
             }
-        })
-    })
+        });
+    });
 
     //create user
     app.post('/api/newuser', function (req, res) {
-        var user = new User(req.body);
+        let user = new User(req.body);
         user.save(function (err, user) {
             if (err) {
                 console.log("Error saving the stack to database");
@@ -211,8 +208,8 @@ module.exports = function (app, db) {
             } else {
                 res.send("Sucessfully created the user");
             }
-        })
-    })
+        });
+    });
 
     app.get('/api/notifications', function (req, res) {
     });
@@ -220,5 +217,4 @@ module.exports = function (app, db) {
     app.get('/*', function (req, res) {
         res.sendfile('./public/404.html');
     });
-
 }
