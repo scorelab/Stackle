@@ -4,15 +4,15 @@
  * Module dependencies.
  */
 
-var app = require("../server");
-var http = require("http");
+const app = require("../server");
+const http = require("http");
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
-    var port = parseInt(val, 10);
+    const port = parseInt(val, 10);
 
     if (isNaN(port)) {
         // named pipe
@@ -31,7 +31,7 @@ function normalizePort(val) {
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "8080");
+const port = normalizePort(process.env.PORT || "8080");
 app.set("port", port);
 
 /**
@@ -62,7 +62,7 @@ function onError(error) {
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
