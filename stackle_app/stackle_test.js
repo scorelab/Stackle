@@ -1,32 +1,25 @@
-describe('Stackle homepage', function() {
-	it("Test Login Button",function(){
-		browser.get('http://localhost:9000/');
-		element(by.buttonText('Login')).click();
-	});
-	it("Sign in through github and continue if returning",function(){
-		browser.get('http://localhost:9000/');
-		element(by.buttonText('Login')).click();
-		browser.sleep(2500);
-		var ifAlready = $('div.a0-github');
-		if(browser.isElementPresent(ifAlready)){
-			ifAlready.click();		
-		} else {
-			$('div.a0-guest').click();
-		};
-	});
-	it("Loggin in with invalid credentials",function(){
-		browser.get('http://localhost:9000/');
-		element(by.buttonText('Login')).click();
-		browser.sleep(5000);
-		var ifAlready = $('div.a0-github');
-		if(browser.isElementPresent(ifAlready)){
-			$('div.a0-email div.a0-input-box input').clear().sendKeys('someone@mail.com');
-			$('div.a0-password div.a0-input-box input').clear().sendKeys('incorrect');
-			$('div.a0-action button').click();
-			browser.sleep(2000);
-			expect($('h2.a0-error').getText()).toEqual('Wrong email or password.');
-		} else {
-			$('div.a0-guest').click();
-		};
-	});
-});
+describe('Check The Login Button and try loggin in with incorrect credentials', function () {
+  it('Should check that the login button works', function () {
+    cy.visit('http://localhost:9000/#!/home')
+    cy.get('button').click()
+    cy.get('input:first').should('have.attr', 'placeholder', 'Email').clear().type('test@m.com').should('have.value', 'test@m.com')
+    cy.get('input:last').should('have.attr', 'placeholder', 'Password').clear().type('test')
+    cy.get('button:last').should('have.attr', 'type', 'submit').click().wait(10000)
+    cy.get('h2').contains('Wrong email or password.')
+  })
+})
+describe('Check The Login Button and Try Loggin In with correct credentials and check if the buttons on the webpage work', function () {
+  it('Should check that the login button works', function () {
+    cy.visit('http://localhost:9000/#!/home')
+    cy.get('button').click()
+    cy.get('input:first').should('have.attr', 'placeholder', 'Email').clear().type('test@test.com').should('have.value', 'test@test.com')
+    cy.get('input:last').should('have.attr', 'placeholder', 'Password').clear().type('testing')
+    cy.get('button:last').should('have.attr', 'type', 'submit').click().wait(10000)
+    cy.get('a:first').click({multiple: true})
+    cy.get('a').should('have.attr', 'class', 'md-button ng-scope md-ink-ripple active').click({
+      force: true,
+      multiple: true
+    })
+  })
+})
+

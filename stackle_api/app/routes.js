@@ -8,7 +8,6 @@ const Post = postModels.Post;
 const Comment = postModels.Comment;
 
 module.exports = function (app, db) {
-
 	//api
 	app.get('/api/login/', function (req, res) {
 	})

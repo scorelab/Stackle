@@ -3,33 +3,33 @@
  * (c) 2010-2017 Google, Inc. http://angularjs.org
  * License: MIT
  */
-(function(window, angular) {'use strict';
+(function (window, angular) {
+  'use strict';
 
-/**
- * @ngdoc module
- * @name ngCookies
- * @description
- *
- * # ngCookies
- *
- * The `ngCookies` module provides a convenient wrapper for reading and writing browser cookies.
- *
- *
- * <div doc-module-components="ngCookies"></div>
- *
- * See {@link ngCookies.$cookies `$cookies`} for usage.
- */
+  /**
+   * @ngdoc module
+   * @name ngCookies
+   * @description
+   *
+   * # ngCookies
+   *
+   * The `ngCookies` module provides a convenient wrapper for reading and writing browser cookies.
+   *
+   *
+   * <div doc-module-components="ngCookies"></div>
+   *
+   * See {@link ngCookies.$cookies `$cookies`} for usage.
+   */
 
 
-angular.module('ngCookies', ['ng']).
-  info({ angularVersion: '1.6.4' }).
+  angular.module('ngCookies', ['ng']).info({angularVersion: '1.6.4'}).
   /**
    * @ngdoc provider
    * @name $cookiesProvider
    * @description
    * Use `$cookiesProvider` to change the default behavior of the {@link ngCookies.$cookies $cookies} service.
    * */
-   provider('$cookies', [/** @this */function $CookiesProvider() {
+  provider('$cookies', [/** @this */function $CookiesProvider() {
     /**
      * @ngdoc property
      * @name $cookiesProvider#defaults
@@ -96,7 +96,7 @@ angular.module('ngCookies', ['ng']).
      *   }]);
      * ```
      */
-    this.$get = ['$$cookieReader', '$$cookieWriter', function($$cookieReader, $$cookieWriter) {
+    this.$get = ['$$cookieReader', '$$cookieWriter', function ($$cookieReader, $$cookieWriter) {
       return {
         /**
          * @ngdoc method
@@ -108,7 +108,7 @@ angular.module('ngCookies', ['ng']).
          * @param {string} key Id to use for lookup.
          * @returns {string} Raw cookie value.
          */
-        get: function(key) {
+        get: function (key) {
           return $$cookieReader()[key];
         },
 
@@ -122,7 +122,7 @@ angular.module('ngCookies', ['ng']).
          * @param {string} key Id to use for lookup.
          * @returns {Object} Deserialized cookie value.
          */
-        getObject: function(key) {
+        getObject: function (key) {
           var value = this.get(key);
           return value ? angular.fromJson(value) : value;
         },
@@ -136,7 +136,7 @@ angular.module('ngCookies', ['ng']).
          *
          * @returns {Object} All cookies
          */
-        getAll: function() {
+        getAll: function () {
           return $$cookieReader();
         },
 
@@ -152,7 +152,7 @@ angular.module('ngCookies', ['ng']).
          * @param {Object=} options Options object.
          *    See {@link ngCookies.$cookiesProvider#defaults $cookiesProvider.defaults}
          */
-        put: function(key, value, options) {
+        put: function (key, value, options) {
           $$cookieWriter(key, value, calcOptions(options));
         },
 
@@ -168,7 +168,7 @@ angular.module('ngCookies', ['ng']).
          * @param {Object=} options Options object.
          *    See {@link ngCookies.$cookiesProvider#defaults $cookiesProvider.defaults}
          */
-        putObject: function(key, value, options) {
+        putObject: function (key, value, options) {
           this.put(key, angular.toJson(value), options);
         },
 
@@ -183,35 +183,35 @@ angular.module('ngCookies', ['ng']).
          * @param {Object=} options Options object.
          *    See {@link ngCookies.$cookiesProvider#defaults $cookiesProvider.defaults}
          */
-        remove: function(key, options) {
+        remove: function (key, options) {
           $$cookieWriter(key, undefined, calcOptions(options));
         }
       };
     }];
   }]);
 
-angular.module('ngCookies').
-/**
- * @ngdoc service
- * @name $cookieStore
- * @deprecated
- * sinceVersion="v1.4.0"
- * Please use the {@link ngCookies.$cookies `$cookies`} service instead.
- *
- * @requires $cookies
- *
- * @description
- * Provides a key-value (string-object) storage, that is backed by session cookies.
- * Objects put or retrieved from this storage are automatically serialized or
- * deserialized by angular's toJson/fromJson.
- *
- * Requires the {@link ngCookies `ngCookies`} module to be installed.
- *
- * @example
- *
- * ```js
- * angular.module('cookieStoreExample', ['ngCookies'])
- *   .controller('ExampleController', ['$cookieStore', function($cookieStore) {
+  angular.module('ngCookies').
+  /**
+   * @ngdoc service
+   * @name $cookieStore
+   * @deprecated
+   * sinceVersion="v1.4.0"
+   * Please use the {@link ngCookies.$cookies `$cookies`} service instead.
+   *
+   * @requires $cookies
+   *
+   * @description
+   * Provides a key-value (string-object) storage, that is backed by session cookies.
+   * Objects put or retrieved from this storage are automatically serialized or
+   * deserialized by angular's toJson/fromJson.
+   *
+   * Requires the {@link ngCookies `ngCookies`} module to be installed.
+   *
+   * @example
+   *
+   * ```js
+   * angular.module('cookieStoreExample', ['ngCookies'])
+   *   .controller('ExampleController', ['$cookieStore', function($cookieStore) {
  *     // Put cookie
  *     $cookieStore.put('myFavorite','oatmeal');
  *     // Get cookie
@@ -219,9 +219,9 @@ angular.module('ngCookies').
  *     // Removing a cookie
  *     $cookieStore.remove('myFavorite');
  *   }]);
- * ```
- */
- factory('$cookieStore', ['$cookies', function($cookies) {
+   * ```
+   */
+  factory('$cookieStore', ['$cookies', function ($cookies) {
 
     return {
       /**
@@ -234,7 +234,7 @@ angular.module('ngCookies').
        * @param {string} key Id to use for lookup.
        * @returns {Object} Deserialized cookie value, undefined if the cookie does not exist.
        */
-      get: function(key) {
+      get: function (key) {
         return $cookies.getObject(key);
       },
 
@@ -248,7 +248,7 @@ angular.module('ngCookies').
        * @param {string} key Id for the `value`.
        * @param {Object} value Value to be stored.
        */
-      put: function(key, value) {
+      put: function (key, value) {
         $cookies.putObject(key, value);
       },
 
@@ -261,71 +261,71 @@ angular.module('ngCookies').
        *
        * @param {string} key Id of the key-value pair to delete.
        */
-      remove: function(key) {
+      remove: function (key) {
         $cookies.remove(key);
       }
     };
 
   }]);
 
-/**
- * @name $$cookieWriter
- * @requires $document
- *
- * @description
- * This is a private service for writing cookies
- *
- * @param {string} name Cookie name
- * @param {string=} value Cookie value (if undefined, cookie will be deleted)
- * @param {Object=} options Object with options that need to be stored for the cookie.
- */
-function $$CookieWriter($document, $log, $browser) {
-  var cookiePath = $browser.baseHref();
-  var rawDocument = $document[0];
+  /**
+   * @name $$cookieWriter
+   * @requires $document
+   *
+   * @description
+   * This is a private service for writing cookies
+   *
+   * @param {string} name Cookie name
+   * @param {string=} value Cookie value (if undefined, cookie will be deleted)
+   * @param {Object=} options Object with options that need to be stored for the cookie.
+   */
+  function $$CookieWriter($document, $log, $browser) {
+    var cookiePath = $browser.baseHref();
+    var rawDocument = $document[0];
 
-  function buildCookieString(name, value, options) {
-    var path, expires;
-    options = options || {};
-    expires = options.expires;
-    path = angular.isDefined(options.path) ? options.path : cookiePath;
-    if (angular.isUndefined(value)) {
-      expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
-      value = '';
+    function buildCookieString(name, value, options) {
+      var path, expires;
+      options = options || {};
+      expires = options.expires;
+      path = angular.isDefined(options.path) ? options.path : cookiePath;
+      if (angular.isUndefined(value)) {
+        expires = 'Thu, 01 Jan 1970 00:00:00 GMT';
+        value = '';
+      }
+      if (angular.isString(expires)) {
+        expires = new Date(expires);
+      }
+
+      var str = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+      str += path ? ';path=' + path : '';
+      str += options.domain ? ';domain=' + options.domain : '';
+      str += expires ? ';expires=' + expires.toUTCString() : '';
+      str += options.secure ? ';secure' : '';
+
+      // per http://www.ietf.org/rfc/rfc2109.txt browser must allow at minimum:
+      // - 300 cookies
+      // - 20 cookies per unique domain
+      // - 4096 bytes per cookie
+      var cookieLength = str.length + 1;
+      if (cookieLength > 4096) {
+        $log.warn('Cookie \'' + name +
+          '\' possibly not set or overflowed because it was too large (' +
+          cookieLength + ' > 4096 bytes)!');
+      }
+
+      return str;
     }
-    if (angular.isString(expires)) {
-      expires = new Date(expires);
-    }
 
-    var str = encodeURIComponent(name) + '=' + encodeURIComponent(value);
-    str += path ? ';path=' + path : '';
-    str += options.domain ? ';domain=' + options.domain : '';
-    str += expires ? ';expires=' + expires.toUTCString() : '';
-    str += options.secure ? ';secure' : '';
-
-    // per http://www.ietf.org/rfc/rfc2109.txt browser must allow at minimum:
-    // - 300 cookies
-    // - 20 cookies per unique domain
-    // - 4096 bytes per cookie
-    var cookieLength = str.length + 1;
-    if (cookieLength > 4096) {
-      $log.warn('Cookie \'' + name +
-        '\' possibly not set or overflowed because it was too large (' +
-        cookieLength + ' > 4096 bytes)!');
-    }
-
-    return str;
+    return function (name, value, options) {
+      rawDocument.cookie = buildCookieString(name, value, options);
+    };
   }
 
-  return function(name, value, options) {
-    rawDocument.cookie = buildCookieString(name, value, options);
-  };
-}
+  $$CookieWriter.$inject = ['$document', '$log', '$browser'];
 
-$$CookieWriter.$inject = ['$document', '$log', '$browser'];
-
-angular.module('ngCookies').provider('$$cookieWriter', /** @this */ function $$CookieWriterProvider() {
-  this.$get = $$CookieWriter;
-});
+  angular.module('ngCookies').provider('$$cookieWriter', /** @this */ function $$CookieWriterProvider() {
+    this.$get = $$CookieWriter;
+  });
 
 
 })(window, window.angular);
