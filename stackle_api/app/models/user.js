@@ -14,7 +14,7 @@ var userSchema = mongoose.Schema({
 		email : String,
 		name : String
 	},
-	subscribed_stacks : []
+	subscribedStacks : []
 });
 
 module.exports = mongoose.model('User', userSchema);
