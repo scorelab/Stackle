@@ -6,7 +6,7 @@
   "scripts": {
     "start": "gulp serve"
   },
- "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/scorelab/Stackle.git"
   },

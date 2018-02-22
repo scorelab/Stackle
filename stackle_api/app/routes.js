@@ -20,8 +20,7 @@ module.exports = function (app, db) {
 
 	//get all posts
 	app.get('/api/posts', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 		Post.find({}, function (err, posts) {
 			if (err)
 				console.log("Cant get all posts!")
@@ -44,8 +43,7 @@ module.exports = function (app, db) {
 
 	//get a post by id
 	app.get('/api/post/:postid', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		
 		let objectid = req.params.postid;
 		Post.findOne({ _id: objectid }, function (err, post) {
 			if (err) {
@@ -83,8 +81,7 @@ module.exports = function (app, db) {
 
 	//returns posts relating to specific org
 	app.get('/api/posts/org/:org_name', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		
 		let orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
 			if (err)
@@ -96,8 +93,7 @@ module.exports = function (app, db) {
 
 	//get a specific org
 	app.get('/api/org/:orgname', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		
 		let orgname = req.params.orgname;
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
@@ -169,9 +165,7 @@ module.exports = function (app, db) {
 
 	//getting subscribed stacks for a user
 	app.get('/api/stack/subscribed/:userid', function(req ,res){
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	
 		User.findOne({userId : req.params.userid}, function(err, result){
 			if(err){
 				res.status(500).send(err);
