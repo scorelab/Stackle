@@ -53,7 +53,11 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
-    process.env.NODE_ENV !== "DEVELOPMENT" ? res.send(`<h1>Error Code: ${err.status || 500}</h1>`) : res.send(`<h1>Error Code: ${err.status || 500}</h1><br><p>${err.stack}</p>`);
+    if(process.env.NODE_ENV !== "DEVELOPMENT") {
+        res.send(`<h1>Error Code: ${err.status || 500}</h1>`);
+    } else {
+        res.send(`<h1>Error Code: ${err.status || 500}</h1><br><p>${err.stack}</p>`);
+    }
 });
 
 module.exports = app;
