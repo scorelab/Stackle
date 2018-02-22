@@ -162,7 +162,7 @@ module.exports = function (app, db) {
 		const findQuery = {
 			userId: request.body.uid,
 		};
-		User.findOneAndUpdate(findQuery, { $push: { subscribedStacks : stackName } }, (error, updatedResult) => {
+		User.findOneAndUpdate(findQuery, { $push: { subscribed_stacks : stackName } }, (error, updatedResult) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
@@ -179,7 +179,7 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
 			
-			return returnWithResponse.configureReturnData({ status: 200, result: userDetails.subscribedStacks }, response);
+			return returnWithResponse.configureReturnData({ status: 200, result: userDetails.subscribed_stacks }, response);
 		});
 	});
 
