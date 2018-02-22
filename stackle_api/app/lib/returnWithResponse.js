@@ -27,6 +27,6 @@ function configureReturnData(data, response) {
     status: data.status,
     result: data.result,
   });
-};
+}
 
 module.exports.configureReturnData = configureReturnData;
