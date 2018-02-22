@@ -26,50 +26,13 @@ module.exports = function (app, db) {
 	app.get('/api/posts', function (request, response) {
 		Post.find({}, (error, postsDetails) => {
 			if (error) {
-				return returnWithResponse.configureReturnData({
-					status: 400,
-					result: error
-				}, response);
+				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
 
-			return returnWithResponse.configureReturnData({
-				status: 200,
-				result: postsDetails,
-			}, response);
+			return returnWithResponse.configureReturnData({ status: 200, result: postsDetails }, response);
 		});
 	});
-	'use strict';
-
-	/**
-	 * pass the response object and data you want to throw
-	 * Example 
-	 * {
-	 *  status: 200 - required
-	 *  result: any - required
-	 * }
-	 * @param { Object } data status
-	 * @param { Object } response response
-	 */
-	function configureReturnData(data, response) {
-		if (!!!~Object.keys(data).indexOf('status')) {
-			throw new Error('Attribute status is missing');
-		}
-		
-		if (!!!~Object.keys(data).indexOf('result')) {
-			throw new Error('Attribute result is missing');
-		}
 	
-		response.header("Access-Control-Allow-Origin", "*");
-		res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-		response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		response.status(data.status);
-		response.send({
-			status: data.status,
-			result: data.result,
-		});
-	};
-	
-	module.exports.configureReturnData = configureReturnData;
 	//save a post
 	app.post('/api/user/post', function (request, response) {
 		const post = new Post(request.body);
@@ -84,7 +47,7 @@ module.exports = function (app, db) {
 
 	//get a post by id
 	app.get('/api/post/:postid', function (request, response) {
-		const  postId = request.params.postid;
+		const  postId = request.params.postId;
 		Post.findOne({ _id: postId }, (error, postDetails) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
@@ -96,7 +59,7 @@ module.exports = function (app, db) {
 
 	//delete a post by ID
 	app.delete('/api/post/:postid', function (request, response) {
-		const postId = request.params.postid;
+		const postId = request.params.postId;
 		Post.remove({ _id: postId }, (error, result) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
@@ -120,7 +83,7 @@ module.exports = function (app, db) {
 
 	//returns posts relating to specific organisation
 	app.get('/api/posts/org/:org_name', function (request, response) {
-		const organisationName = request.params.org_name;
+		const organisationName = request.params.organisationName;
 		Post.find({ org_name: organisationName }, (error, organisationPosts) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
@@ -145,7 +108,7 @@ module.exports = function (app, db) {
 	// comment on a post
 	app.post('/api/comment/:postid', function (request, response) {
 		const query = {
-			_id: request.params.postid,
+			_id: request.params.postId,
 		};
 		const comment = new Comment(request.body);
 		Post.update(query, { comments: [] }, (error, result) => {
@@ -183,28 +146,28 @@ module.exports = function (app, db) {
 
 	// delete stack
 	app.delete('api/delete/stack/:stackid', function (request, response) {
-		const stackId = request.params.stackid;
+		const stackId = request.params.stackId;
 		Stack.remove({ _id: stackId }, (error, result) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
-			return returnWithResponse.configureReturnData({ status: 200, result: `${stackId} was sucessfully deleted` },
+			return returnWithResponse.configureReturnData({ status: 200, result: `${ stackId } was sucessfully deleted` },
 			response);
 		});
 	});
 
 	// user subscribing to an stack
 	app.post('/api/subscribe', function (request, response) {
-		const stackName = request.body.stack_name;
+		const stackName = request.body.stackName;
 		const findQuery = {
 			userId: request.body.uid,
 		};
-		User.findOneAndUpdate(findQuery, { $push: { subscribed_stacks : stackName } }, (err, noaffected) => {
+		User.findOneAndUpdate(findQuery, { $push: { subscribedStacks : stackName } }, (error, updatedResult) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
 			
-			return returnWithResponse.configureReturnData({ status: 200,result: `${stackId} was sucessfully deleted`},
+			return returnWithResponse.configureReturnData({ status: 200,result: `${ stackName } was sucessfully updated`},
 			response);
 		});
 	});
@@ -216,7 +179,7 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
 			
-			return returnWithResponse.configureReturnData({ status: 200, result: userDetails.subscribed_stacks }, response);
+			return returnWithResponse.configureReturnData({ status: 200, result: userDetails.subscribedStacks }, response);
 		});
 	});
 
