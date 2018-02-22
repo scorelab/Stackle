@@ -15,12 +15,12 @@ module.exports = function (app, db) {
 
 	//api
 	app.get('/api/login/', function (request, response) {
-	})
+	});
 
 	app.get('/home', function (request, response) {
 		//needs to intergrate with github for implementation
 		response.end();
-	})
+	});
 
 	//get all posts
 	app.get('/api/posts', function (request, response) {
