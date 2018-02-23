@@ -6,7 +6,8 @@
 
   function ViewPostController ($scope, postService) {
     // $scope.title = "This works!";
-    postService.getPost('594e14fdb95cd72f0034ebc5', function (data){
+    postService.getPost('594e13c3ed47d406c47174ee', function (data){
+        
         if(data._id){
             $scope.post = data;
         }else{

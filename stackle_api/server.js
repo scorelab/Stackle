@@ -12,11 +12,13 @@ const db = mongoose.connection;
 // Adding cors library for cross orgin resource sharing
 const cors = require("cors")
 
+mongoose.Promise = global.Promise
+
 app.use('/', express.static(__dirname + '/'));
 app.use(morgan('dev'));                                         // log every request to the console
-app.use(bodyParser.urlencoded({'extended': 'true'}));            // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
-app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 // Adding cors middleware to express
 app.use(cors())
@@ -33,16 +35,32 @@ require("./app/routes")(app, db);
 //     res.status(500).send('Something broke!')
 // });
 
-mongoose.connect(database.url, function (err) {
-    console.log("Connecting to the database..");
-    if (err) {
-        mongoose.connect(database.alturl, function (err) {
-            return console.log(err);
-        })
-        return console.log("Couldnt connect to db url 1. connecting to alternate");
-    } else {
-        console.log("Mongo connect sucess!");
-    }
-});     // connect to mongoDB database on modulus.io
+
+mongoose.connect(database.LOCAL_DB, { useMongoClient: true }).then(() => {
+
+    console.log(`Connected to ${database.LOCAL_DB}`)
+
+}).catch(err => {
+
+    mongoose.connect(database.alturl, { useMongoClient: true }).then(() => {
+        console.log(`Connected to ${database.alturl}`)
+    }).catch(err => {
+        console.log(err)
+    })
+
+})
+
+
+// mongoose.connect(database.url, function (err) {
+//     console.log("Connecting to the database..");
+//     if (err) {
+//         mongoose.connect(database.alturl, function (err) {
+//             return console.log(err);
+//         })
+//         return console.log("Couldnt connect to db url 1. connecting to alternate");
+//     } else {
+//         console.log("Mongo connect sucess!");
+//     }
+// });     // connect to mongoDB database on modulus.io
 
 module.exports = app;
