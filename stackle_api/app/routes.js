@@ -21,11 +21,13 @@ module.exports = function (app, db) {
 		res.end();
 	})
 
+	/*    Routes to Handle Post      */
+	
 	//get all posts
-	app.get('/api/posts',postController.getAll)
+	app.get('/api/posts', postController.getAll)
 
 	//save a post
-	app.post('/api/user/post',postController.savePost)
+	app.post('/api/user/post', postController.savePost)
 
 	//get a post by id
 	app.get('/api/post/:postid', postController.getOne)
@@ -34,30 +36,17 @@ module.exports = function (app, db) {
 	app.delete('/api/post/:postid', postController.deletePost)
 
 	//returns posts by a specific user
-	app.get('/api/posts/:user', function (req, res) {
-		let id = req.params.user;
-		Post.find({ user: id }, function (err, posts) {
-			if (err)
-				console.log("Erorr getting posts");
-			res.status(200).send(posts);
-		})
-	})
+	app.get('/api/posts/:user', postController.getPostByUser)
 
 	//returns posts relating to specific org
-	app.get('/api/posts/org/:org_name', function (req, res) {
-		
-		let orgname = req.params.org_name;
-		Post.find({ org_name: orgname }, function (err, posts) {
-			if (err)
-				console.log(`Error getting posts from $orgname`);
-			else
-				res.status(200).send(posts);
-		})
-	})
+	app.get('/api/posts/org/:org_name', postController.getPostByOrganization)
+
+	/* End of Routes for Posts */
+
 
 	//get a specific org
 	app.get('/api/org/:orgname', function (req, res) {
-		
+
 		let orgname = req.params.orgname;
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
@@ -117,26 +106,26 @@ module.exports = function (app, db) {
 	app.post('/api/subscribe', function (req, res) {
 		let userid = req.body.uid;
 		let stackname = req.body.stack_name;
-		let query = { userId : userid };
-		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
-			if(err){
+		let query = { userId: userid };
+		User.findOneAndUpdate(query, { $push: { subscribed_stacks: stackname } }, function (err, noaffected) {
+			if (err) {
 				res.status(500).send("Error Updating");
-			}else{
+			} else {
 				res.status(200).send("Success!!");
 			}
 		});
 	})
 
 	//getting subscribed stacks for a user
-	app.get('/api/stack/subscribed/:userid', function(req ,res){
-	
-		User.findOne({userId : req.params.userid}, function(err, result){
-			if(err){
+	app.get('/api/stack/subscribed/:userid', function (req, res) {
+
+		User.findOne({ userId: req.params.userid }, function (err, result) {
+			if (err) {
 				res.status(500).send(err);
-			}else if(result){
+			} else if (result) {
 				let sub_stack = result.subscribed_stacks;
 				res.status(200).send(sub_stack);
-			}else{
+			} else {
 				res.status(500).send("Can't get!");
 			}
 		})

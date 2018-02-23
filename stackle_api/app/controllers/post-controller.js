@@ -55,26 +55,56 @@ class PostController {
 
     }
 
-
     // cruD
-
-    deletePost(req,res){
+    deletePost(req, res) {
 
         let postID = req.params.postid
 
-        let query = Post.remove({_id:postID})
+        let query = Post.remove({ _id: postID })
 
-        query.exec().then( success =>{
+        query.exec().then(success => {
             console.log(success);
             res.status(200).json("Post Deleted")
-        }).catch(err =>{
+        }).catch(err => {
             console.log("--------error-------")
             console.log(err)
             res.send(500).json("Error Deleting")
         })
+    }
+
+
+
+    // Helper Function
+
+    getPostByOrganization(req, res) {
+        let organizationName = req.params.orgname;
+
+        let query = Post.find({ org_name: organizationName })
+
+        query.exec().then(post => {
+            res.status(200).json(post)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).json(`Error getting post from ${organizationName}`)
+        })
+    }
+
+
+    getPostByUser(req, res) {
+        let userID = req.params.user;
+
+        let query = Post.find({ user: userID })
+        query.exec().then(post => {
+            res.status(200).json(post)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).json("Error getting post for user")
+        })
+
 
 
     }
+
 
 }
 
