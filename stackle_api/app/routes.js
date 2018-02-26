@@ -25,14 +25,13 @@ module.exports = function (app, db) {
 		Post.find({}, function (err, posts) {
 			if (err){
 				console.log("Cant get all posts!")
-				res.status(404).json({status: false, err})
+				res.status(404).json({status: false, err});
 			}
 			else if(!err && posts.length > 0){
 				res.status(200).json({status: true, posts});
 			}
-			else if(!err && posts.length == 0){
-				err_message = "No Post Data Available";
-				res.status(200).json({status: false, message: err_message});	
+			else if(!err && posts.length === 0){
+				res.status(200).json({status: false, message: "No Post Data Available"});	
 			}
 		})
 	})
@@ -42,12 +41,11 @@ module.exports = function (app, db) {
 		let post = new Post(req.body);
 		post.save(function (err, post) {
 			if (err) {
-				error_message = "error while saving the post";
-				console.log(error_message);
-				res.status(500).json({status: false, message: error_message});
+				console.log("error while saving the post");
+				res.status(500).json({status: false, message: "error while saving the post"});
 			} else {
-				success_message = "Sucessfully saved the post!";
-				res.status(201).json({status: true, message: success_message, post});
+				successMessage = "Sucessfully saved the post!";
+				res.status(201).json({status: true, message: successMessage, post});
 			}
 		});
 	})
@@ -59,8 +57,7 @@ module.exports = function (app, db) {
 		let objectid = req.params.postid;
 		Post.findOne({ _id: objectid }, function (err, post) {
 			if (err) {
-				error_message = "error while getting the post";
-				res.status(500).json({status: false, message: error_message});
+				res.status(500).json({status: false, message: "error while getting the post"});
 			} 
 			else if(!err && post) {
 				res.status(200).json({status: true, post});
@@ -93,7 +90,7 @@ module.exports = function (app, db) {
 		Post.find({ user: id }, function (err, posts) {
 			if (err){
 				console.log(`Error getting posts from user:$user`);
-				res.status(500).json({status: true, message: "Error getting posts" })
+				res.status(500).json({status: true, message: "Error getting posts" });
 			}
 			else if(!err && posts.length > 0){
 				res.status(200).json({status: true, posts});
@@ -114,7 +111,7 @@ module.exports = function (app, db) {
 		Post.find({ org_name: orgname }, function (err, posts) {
 			if (err){
 				console.log(`Error getting posts from $orgname`);
-				res.status(500).json({status: true, message: "Error getting posts" })
+				res.status(500).json({status: true, message: "Error getting posts" });
 			}
 			else if(!err && posts.length > 0){
 				res.status(200).json({status: true, posts});
