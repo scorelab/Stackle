@@ -44,7 +44,7 @@ module.exports = function (app, db) {
 				console.log("error while saving the post");
 				res.status(500).json({status: false, message: "error while saving the post"});
 			} else {
-				successMessage = "Sucessfully saved the post!";
+				const successMessage = "Sucessfully saved the post!";
 				res.status(201).json({status: true, message: successMessage, post});
 			}
 		});
@@ -89,15 +89,15 @@ module.exports = function (app, db) {
 		let id = req.params.user;
 		Post.find({ user: id }, function (err, posts) {
 			if (err){
-				console.log(`Error getting posts from user:$user`);
+				// console.log(`Error getting posts from user:$user`);
 				res.status(500).json({status: true, message: "Error getting posts" });
 			}
 			else if(!err && posts.length > 0){
 				res.status(200).json({status: true, posts});
 			}
-			else if(!err && posts.length == 0){
-				err_message = "No Post Data Available";
-				res.status(200).json({status: false, message: err_message});	
+			else if(!err && posts.length === 0){
+				const errMessage = "No Post Data Available";
+				res.status(200).json({status: false, message: errMessage});	
 			}
 			
 		})
@@ -110,15 +110,15 @@ module.exports = function (app, db) {
 		let orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
 			if (err){
-				console.log(`Error getting posts from $orgname`);
+				// console.log(`Error getting posts from $orgname`);
 				res.status(500).json({status: true, message: "Error getting posts" });
 			}
 			else if(!err && posts.length > 0){
 				res.status(200).json({status: true, posts});
 			}
 			else if(!err && posts.length == 0){
-				err_message = "No Post Data Available";
-				res.status(200).json({status: false, message: err_message});	
+				const errMessage = "No Post Data Available";
+				res.status(200).json({status: false, message: errMessage});	
 			}
 		})
 	})
@@ -154,7 +154,7 @@ module.exports = function (app, db) {
 	app.get('/api/orgs', function (req, res) {
 		Stack.find({}, function (err, stacks) {
 			if (err)
-				console.log("Errors retrieving stacks!");
+				// console.log("Errors retrieving stacks!");
 			else if(!err && stacks.length > 0)
 				res.status(200).json({status: true, stacks});
 			else if(!err && stacks.length == 0)
@@ -167,7 +167,7 @@ module.exports = function (app, db) {
 		let stack = new Stack(req.body);
 		stack.save(function (err, stack) {
 			if (err) {
-				console.log("Error saving the stack to database");
+				// console.log("Error saving the stack to database");
 				res.status(500).json({status: false, message: "Error saving stack!"});
 			} else if (stack) {
 				res.status(201).json({status: true, message: "Sucessfully created the stack", stack});
@@ -225,7 +225,7 @@ module.exports = function (app, db) {
 		let user = new User(req.body);
 		user.save(function (err, user) {
 			if (err) {
-				console.log("Error saving the stack to database");
+				// console.log("Error saving the stack to database");
 				res.status(500).json({status: false, message: "Error saving user!"});
 			} else {
 				res.status(201).send({status: true, message: "Sucessfully created the user"});
