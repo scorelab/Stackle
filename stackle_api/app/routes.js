@@ -46,8 +46,8 @@ module.exports = function (app, db) {
 	})
 
 	//get a post by id
-	app.get('/api/post/:postid', function (request, response) {
-		const  postId = request.params.postId;
+	app.get('/api/post/:postId', function (request, response) {
+		const postId = request.params.postId;
 		Post.findOne({ _id: postId }, (error, postDetails) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
@@ -55,10 +55,10 @@ module.exports = function (app, db) {
 
 			return returnWithResponse.configureReturnData({ status: 200, result: postDetails }, response);
 		});
-	})
+	});
 
 	//delete a post by ID
-	app.delete('/api/post/:postid', function (request, response) {
+	app.delete('/api/post/:postId', function (request, response) {
 		const postId = request.params.postId;
 		Post.remove({ _id: postId }, (error, result) => {
 			if (error) {
@@ -82,7 +82,7 @@ module.exports = function (app, db) {
 	});
 
 	//returns posts relating to specific organisation
-	app.get('/api/posts/org/:org_name', function (request, response) {
+	app.get('/api/posts/org/:organisationName', function (request, response) {
 		const organisationName = request.params.organisationName;
 		Post.find({ org_name: organisationName }, (error, organisationPosts) => {
 			if (error) {
@@ -94,8 +94,8 @@ module.exports = function (app, db) {
 	});
 
 	// get a specific organisation
-	app.get('/api/org/:orgname', function (request, response) {
-		const organisationName = request.params.orgname;
+	app.get('/api/org/:organisationName', function (request, response) {
+		const organisationName = request.params.organisationName;
 		Stack.find({ name: organisationName }, (error, organisationDetails) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
@@ -106,7 +106,7 @@ module.exports = function (app, db) {
 	})
 
 	// comment on a post
-	app.post('/api/comment/:postid', function (request, response) {
+	app.post('/api/comment/:postId', function (request, response) {
 		const query = {
 			_id: request.params.postId,
 		};
@@ -116,7 +116,7 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
 
-			return returnWithResponse.configureReturnData({ status: 200, result: `${ request.params.postid} successfully updated`},
+			return returnWithResponse.configureReturnData({ status: 200, result: `${ request.params.postId } successfully updated`},
 			response);
 		});
 	});
@@ -145,7 +145,7 @@ module.exports = function (app, db) {
 	});
 
 	// delete stack
-	app.delete('api/delete/stack/:stackid', function (request, response) {
+	app.delete('api/delete/stack/:stackId', function (request, response) {
 		const stackId = request.params.stackId;
 		Stack.remove({ _id: stackId }, (error, result) => {
 			if (error) {
@@ -173,8 +173,8 @@ module.exports = function (app, db) {
 	});
 
 	// getting subscribed stacks for a user
-	app.get('/api/stack/subscribed/:userid', function(request ,response) {
-		User.findOne({ userId : request.params.userid }, (error, userDetails) => {
+	app.get('/api/stack/subscribed/:userId', function(request ,response) {
+		User.findOne({ userId : request.params.userId }, (error, userDetails) => {
 			if (error) {
 				return returnWithResponse.configureReturnData({ status: 400, result: error }, response);
 			}
