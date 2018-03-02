@@ -5,6 +5,7 @@
  * For an example 
  * {
  *  status: 200 - required
+ *  success: true - required
  *  result: any - required
  * }
  * @param { Object } data status
@@ -13,6 +14,10 @@
 function configureReturnData(data, response) {
   if (!!!~Object.keys(data).indexOf('status')) {
     throw new Error('Attribute status is missing');
+  }
+  
+  if (!!!~Object.keys(data).indexOf('success')) {
+    throw new Error('Attribute success is missing');
   }
   
   if (!!!~Object.keys(data).indexOf('result')) {
@@ -25,6 +30,7 @@ function configureReturnData(data, response) {
   response.status(data.status);
   response.send({
     status: data.status,
+    success: data.success,
     result: data.result,
   });
 }
