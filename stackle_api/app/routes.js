@@ -48,7 +48,6 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedPost._id }, response);
 			});
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -66,7 +65,6 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 200, success: true, result: postDetails }, response);
 			});
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -85,7 +83,6 @@ module.exports = function (app, db) {
 			});
 
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -103,7 +100,6 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 200, success: true, result: userPosts }, response);
 			});
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -121,7 +117,6 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationPosts }, response);
 			});
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -139,7 +134,6 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationDetails }, response);
 			});
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -149,7 +143,7 @@ module.exports = function (app, db) {
 		try {
 			const validator = new Validator(request.params);
 			const input = validator.validateCommentOnPost();
-			const comment = new Comment(request.body);
+			const comment = new Comment(input);
 			Post.update({ _id: input.postId }, { comments: [] }, (error, result) => {
 				if (error) {
 					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
@@ -159,7 +153,6 @@ module.exports = function (app, db) {
 					response);
 			});
 		} catch (validationError) {
-			console.error('Error : ', validationError);
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}
 	});
@@ -177,14 +170,21 @@ module.exports = function (app, db) {
 
 	// create stack
 	app.post('/api/stack/create', function (request, response) {
-		const stack = new Stack(request.body);
-		stack.save((error, insertedStack) => {
-			if (error) {
-				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-			}
+		try {
+			const validator = new Validator(request.body);
+			const input = validator.validateCreateStack();
+			console.log('Input : ', input);
+			const stack = new Stack(input);
+			stack.save((error, insertedStack) => {
+				if (error) {
+					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+				}
 
-			return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedStack._id }, response);
-		});
+				return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedStack._id }, response);
+			});
+		} catch (validationError) {
+			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+		}
 	});
 
 	// delete stack
@@ -201,41 +201,56 @@ module.exports = function (app, db) {
 
 	// user subscribing to an stack
 	app.post('/api/subscribe', function (request, response) {
-		const stackName = request.body.stackName;
-		const findQuery = {
-			userId: request.body.uid,
-		};
-		User.findOneAndUpdate(findQuery, { $push: { subscribed_stacks: stackName } }, (error, updatedResult) => {
-			if (error) {
-				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-			}
+		try {
+			const validator = new Validator(request.body);
+			const input = validator.validateUserSubscribeStack();
+			User.findOneAndUpdate({ userId: input.userId }, { $push: { subscribed_stacks: input.stackName } }, (error, updatedResult) => {
+				if (error) {
+					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+				}
 
-			return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${stackName} was sucessfully updated` },
-				response);
-		});
+				return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${stackName} was sucessfully updated` },
+					response);
+			});
+		} catch (validationError) {
+			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+		}
 	});
 
 	// getting subscribed stacks for a user
 	app.get('/api/stack/subscribed/:userId', function (request, response) {
-		User.findOne({ userId: request.params.userId }, (error, userDetails) => {
-			if (error) {
-				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-			}
+		try {
+			const validator = new Validator(request.params);
+			const input = validator.validateGetUserSubscribeStack();
+			User.findOne({ userId: input.userId }, (error, userDetails) => {
+				if (error) {
+					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+				}
 
-			return returnWithResponse.configureReturnData({ status: 200, success: true, result: userDetails.subscribed_stacks }, response);
-		});
+				return returnWithResponse.configureReturnData({ status: 200, success: true, result: userDetails.subscribed_stacks }, response);
+			});
+
+		} catch (validationError) {
+			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+		}
 	});
 
 	// create user and retruning created user id
 	app.post('/api/newuser', function (request, response) {
-		const user = new User(request.body);
-		user.save(function (error, insertedUser) {
-			if (error) {
-				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-			}
+		try {
+			const validator = new Validator(request.body);
+			const input = validator.validateCreateNewUser();
+			const user = new User(input);
+			user.save(function (error, insertedUser) {
+				if (error) {
+					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+				}
 
-			return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedUser._id }, response);
-		});
+				return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedUser._id }, response);
+			});
+		} catch (validationError) {
+			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+		}
 	});
 
 	app.get('/api/notifications', function (request, response) { });
