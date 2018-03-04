@@ -1,6 +1,13 @@
 
 [![Join the chat at https://gitter.im/scorelab/scorelab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scorelab/scorelab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![GitHub license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/scorelab/stackle/master/LICENSE)
+
+[![Travis Build](https://api.travis-ci.org/scorelab/Stackle.svg?branch=master)](https://travis-ci.org/scorelab/Stackle)
+
+[![npm package][npm-badge]][npm]
+
+
 # Introduction
 Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in are able to view forums of the organizations they contribute to and engage in the forum discussions.
 
