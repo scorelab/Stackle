@@ -143,7 +143,7 @@ module.exports = function (app, db) {
 		try {
 			const validator = new Validator(request.params);
 			const input = validator.validateCommentOnPost();
-			const comment = new Comment(input);
+			const comment = new Comment(request.body);
 			Post.update({ _id: input.postId }, { comments: [] }, (error, result) => {
 				if (error) {
 					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
