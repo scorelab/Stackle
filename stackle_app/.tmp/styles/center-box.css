@@ -41,13 +41,8 @@
 	}
 
 	body.is-loading *, body.is-loading *:before, body.is-loading *:after {
-		-moz-animation: none !important;
 		-webkit-animation: none !important;
-		-ms-animation: none !important;
 		animation: none !important;
-		-moz-transition: none !important;
-		-webkit-transition: none !important;
-		-ms-transition: none !important;
 		transition: none !important;
 	}
 
@@ -79,16 +74,10 @@
 			opacity: 0;
 			z-index: 1;
 			background-color: #ffffff;
-			background-image: -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			background-image: -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			background-image: -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
 			background-image: linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
 			background-repeat: repeat,			no-repeat;
 			background-size: 100px 100px, cover;
 			background-position: top left,		center center;
-			-moz-transition: opacity 1.75s ease-out;
-			-webkit-transition: opacity 1.75s ease-out;
-			-ms-transition: opacity 1.75s ease-out;
 			transition: opacity 1.75s ease-out;
 		}
 
@@ -126,18 +115,12 @@
 		}
 
 	#main_ui_sref a {
-		-moz-transition: color 0.2s ease, border-color 0.2s ease;
-		-webkit-transition: color 0.2s ease, border-color 0.2s ease;
-		-ms-transition: color 0.2s ease, border-color 0.2s ease;
 		transition: color 0.2s ease, border-color 0.2s ease;
 		color: inherit;
 		text-decoration: none;
 	}
 
 		#main_ui_sref a:before {
-			-moz-transition: color 0.2s ease, text-shadow 0.2s ease;
-			-webkit-transition: color 0.2s ease, text-shadow 0.2s ease;
-			-ms-transition: color 0.2s ease, text-shadow 0.2s ease;
 			transition: color 0.2s ease, text-shadow 0.2s ease;
 		}
 
@@ -388,9 +371,6 @@
 		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		-moz-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		display: inline-block;
 		height: 2.75em;
@@ -485,17 +465,11 @@
 		cursor: default;
 		opacity: 0.95;
 		text-align: center;
-		-moz-transform-origin: 50% 50%;
 		-webkit-transform-origin: 50% 50%;
-		-ms-transform-origin: 50% 50%;
 		transform-origin: 50% 50%;
-		-moz-transform: rotateX(0deg);
 		-webkit-transform: rotateX(0deg);
-		-ms-transform: rotateX(0deg);
 		transform: rotateX(0deg);
-		-moz-transition: opacity 1s ease, -moz-transform 1s ease;
-		-webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
-		-ms-transition: opacity 1s ease, -ms-transform 1s ease;
+		transition: opacity 1s ease, -webkit-transform 1s ease;
 		transition: opacity 1s ease, transform 1s ease;
 	}
 
@@ -541,9 +515,7 @@
 
 		body.is-loading #main_ui_sref #main {
 			opacity: 0;
-			-moz-transform: rotateX(15deg);
 			-webkit-transform: rotateX(15deg);
-			-ms-transform: rotateX(15deg);
 			transform: rotateX(15deg);
 		}
 
@@ -552,22 +524,25 @@
 
 	#main_ui_sref #wrapper {
 		display: -moz-flex;
-		display: -webkit-flex;
 		display: -ms-flex;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 		-moz-align-items: center;
-		-webkit-align-items: center;
 		-ms-align-items: center;
-		align-items: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
 		-moz-justify-content: space-between;
-		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
-		justify-content: space-between;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
 		-moz-flex-direction: column;
-		-webkit-flex-direction: column;
 		-ms-flex-direction: column;
-		flex-direction: column;
-		-moz-perspective: 1000px;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		        flex-direction: column;
 		-webkit-perspective: 1000px;
 		-ms-perspective: 1000px;
 		perspective: 1000px;
