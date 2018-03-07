@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --timeout 10000",
-    "start": "nodemon server.js"
+    "start": "nodemon bin/www",
+    "serve": "node bin/www"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,11 @@
     "stackle",
     "SCORE"
   ],
-  "contributors":["Pasan Missaka Gamaetige","Tharindu Prabhath Ranathunga","Milindu Sanoj Kumarage"],
+  "contributors": [
+    "Pasan Missaka Gamaetige",
+    "Tharindu Prabhath Ranathunga",
+    "Milindu Sanoj Kumarage"
+  ],
   "author": "SCoRe Lab",
   "license": "Apache Version 2",
   "bugs": {
