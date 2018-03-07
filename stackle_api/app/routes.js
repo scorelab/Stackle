@@ -2,6 +2,9 @@
 const User = require('./models/user');
 const Stack = require('./models/stack');
 
+
+const postController = require('./controllers/post-controller')
+
 const postModels = require('./models/post')
 
 const Post = postModels.Post;
@@ -18,86 +21,32 @@ module.exports = function (app, db) {
 		res.end();
 	})
 
+	/*    Routes to Handle Post      */
+	
 	//get all posts
-	app.get('/api/posts', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		Post.find({}, function (err, posts) {
-			if (err)
-				console.log("Cant get all posts!")
-			res.status(200).send(posts);
-		})
-	})
+	app.get('/api/posts', postController.getAll)
 
 	//save a post
-	app.post('/api/user/post', function (req, res) {
-		let post = new Post(req.body);
-		post.save(function (err, post) {
-			if (err) {
-				console.log("error saving the post");
-				res.status(500).send("error!")
-			} else {
-				res.status(201).send("Sucessfully saved the post!");
-			}
-		});
-	})
+	app.post('/api/user/post', postController.savePost)
 
 	//get a post by id
-	app.get('/api/post/:postid', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		let objectid = req.params.postid;
-		Post.findOne({ _id: objectid }, function (err, post) {
-			if (err) {
-				res.status(404).send(err);
-			} else {
-				res.status(200).send(post);
-			}
-		})
-	})
+	app.get('/api/post/:postid', postController.getOne)
 
 	//delete a post by ID
-	app.delete('/api/post/:postid', function (req, res) {
-		let postid = req.params.postid;
-		Post.remove({ _id: postid }, function (err, success) {
-			if (err) {
-				console.log(err);
-				res.status(500).send("Error deleting the document");
-			} else if (success) {
-				res.status(200).send("Sucessfully Deleted");
-			} else {
-				console.log("Null pointer");
-			}
-		})
-	})
+	app.delete('/api/post/:postid', postController.deletePost)
 
 	//returns posts by a specific user
-	app.get('/api/posts/:user', function (req, res) {
-		let id = req.params.user;
-		Post.find({ user: id }, function (err, posts) {
-			if (err)
-				console.log("Erorr getting posts");
-			res.status(200).send(posts);
-		})
-	})
+	app.get('/api/posts/:user', postController.getPostByUser)
 
 	//returns posts relating to specific org
-	app.get('/api/posts/org/:org_name', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		let orgname = req.params.org_name;
-		Post.find({ org_name: orgname }, function (err, posts) {
-			if (err)
-				console.log(`Error getting posts from $orgname`);
-			else
-				res.status(200).send(posts);
-		})
-	})
+	app.get('/api/posts/org/:org_name', postController.getPostByOrganization)
+
+	/* End of Routes for Posts */
+
 
 	//get a specific org
 	app.get('/api/org/:orgname', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 		let orgname = req.params.orgname;
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
@@ -157,28 +106,26 @@ module.exports = function (app, db) {
 	app.post('/api/subscribe', function (req, res) {
 		let userid = req.body.uid;
 		let stackname = req.body.stack_name;
-		let query = { userId : userid };
-		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
-			if(err){
+		let query = { userId: userid };
+		User.findOneAndUpdate(query, { $push: { subscribed_stacks: stackname } }, function (err, noaffected) {
+			if (err) {
 				res.status(500).send("Error Updating");
-			}else{
+			} else {
 				res.status(200).send("Success!!");
 			}
 		});
 	})
 
 	//getting subscribed stacks for a user
-	app.get('/api/stack/subscribed/:userid', function(req ,res){
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		User.findOne({userId : req.params.userid}, function(err, result){
-			if(err){
+	app.get('/api/stack/subscribed/:userid', function (req, res) {
+
+		User.findOne({ userId: req.params.userid }, function (err, result) {
+			if (err) {
 				res.status(500).send(err);
-			}else if(result){
+			} else if (result) {
 				let sub_stack = result.subscribed_stacks;
 				res.status(200).send(sub_stack);
-			}else{
+			} else {
 				res.status(500).send("Can't get!");
 			}
 		})
