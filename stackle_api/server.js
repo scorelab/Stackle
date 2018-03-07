@@ -26,10 +26,13 @@ app.use(function (err, req, res, next) {
     res.status(500).send('Something broke!')
 });
 
-mongoose.connect(database.url, function (err) {
+
+const options = {useMongoClient: true};
+
+mongoose.connect(database.url, options, function (err) {
     console.log("Connecting to the database..");
     if (err) {
-        mongoose.connect(database.alturl, function (err) {
+        mongoose.connect(database.alturl, options, function (err) {
             return console.log(err);
         })
         return console.log("Couldnt connect to db url 1. connecting to alternate");

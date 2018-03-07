@@ -23,9 +23,16 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		Post.find({}, function (err, posts) {
-			if (err)
+			if (err){
 				console.log("Cant get all posts!")
-			res.status(200).send(posts);
+				res.status(404).json({status: false, err});
+			}
+			else if(!err && posts.length > 0){
+				res.status(200).json({status: true, posts});
+			}
+			else if(!err && posts.length === 0){
+				res.status(200).json({status: false, message: "No Post Data Available"});	
+			}
 		})
 	})
 
@@ -34,10 +41,11 @@ module.exports = function (app, db) {
 		let post = new Post(req.body);
 		post.save(function (err, post) {
 			if (err) {
-				console.log("error saving the post");
-				res.status(500).send("error!")
+				console.log("error while saving the post");
+				res.status(500).json({status: false, message: "error while saving the post"});
 			} else {
-				res.status(201).send("Sucessfully saved the post!");
+				const successMessage = "Sucessfully saved the post!";
+				res.status(201).json({status: true, message: successMessage, post});
 			}
 		});
 	})
@@ -49,9 +57,14 @@ module.exports = function (app, db) {
 		let objectid = req.params.postid;
 		Post.findOne({ _id: objectid }, function (err, post) {
 			if (err) {
-				res.status(404).send(err);
-			} else {
-				res.status(200).send(post);
+				res.status(500).json({status: false, message: "error while getting the post"});
+			} 
+			else if(!err && post) {
+				res.status(200).json({status: true, post});
+			}
+			//if post is null
+			else if(!err && !post){
+				res.status(200).json({status: false, message: "Post not found"});	
 			}
 		})
 	})
@@ -62,9 +75,9 @@ module.exports = function (app, db) {
 		Post.remove({ _id: postid }, function (err, success) {
 			if (err) {
 				console.log(err);
-				res.status(500).send("Error deleting the document");
+				res.status(500).json({status: false, message: "Error deleting the document"});
 			} else if (success) {
-				res.status(200).send("Sucessfully Deleted");
+				res.status(200).json({status: true, message: "Sucessfully Deleted"});
 			} else {
 				console.log("Null pointer");
 			}
@@ -75,9 +88,18 @@ module.exports = function (app, db) {
 	app.get('/api/posts/:user', function (req, res) {
 		let id = req.params.user;
 		Post.find({ user: id }, function (err, posts) {
-			if (err)
-				console.log("Erorr getting posts");
-			res.status(200).send(posts);
+			if (err){
+				// console.log(`Error getting posts from user:$user`);
+				res.status(500).json({status: true, message: "Error getting posts" });
+			}
+			else if(!err && posts.length > 0){
+				res.status(200).json({status: true, posts});
+			}
+			else if(!err && posts.length === 0){
+				const errMessage = "No Post Data Available";
+				res.status(200).json({status: false, message: errMessage});	
+			}
+			
 		})
 	})
 
@@ -87,10 +109,17 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
-			if (err)
-				console.log(`Error getting posts from $orgname`);
-			else
-				res.status(200).send(posts);
+			if (err){
+				// console.log(`Error getting posts from $orgname`);
+				res.status(500).json({status: true, message: "Error getting posts" });
+			}
+			else if(!err && posts.length > 0){
+				res.status(200).json({status: true, posts});
+			}
+			else if(!err && posts.length == 0){
+				const errMessage = "No Post Data Available";
+				res.status(200).json({status: false, message: errMessage});	
+			}
 		})
 	})
 
@@ -99,11 +128,16 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let orgname = req.params.orgname;
-		Stack.find({ name: orgname }, function (err, org) {
+		Stack.findOne({ name: orgname }, function (err, org) {
 			if (err) {
-				console.log('Error');
-			} else {
-				res.status(200).send(org);
+				res.status(500).json({status: false, message: "Error while fetching detail"});
+			} 
+			else if(!err && org) {
+				res.status(200).json({status: true, org});
+			}
+			//if org is NULL
+			else if(!err && !org){
+				res.status(500).json({status: false, message: orgname + " organisation not found !"});
 			}
 		})
 	})
@@ -120,9 +154,11 @@ module.exports = function (app, db) {
 	app.get('/api/orgs', function (req, res) {
 		Stack.find({}, function (err, stacks) {
 			if (err)
-				console.log("Errors retrieving stacks!");
-			else
-				res.status(200).send(stacks);
+				// console.log("Errors retrieving stacks!");
+			else if(!err && stacks.length > 0)
+				res.status(200).json({status: true, stacks});
+			else if(!err && stacks.length == 0)
+				res.json({status: false, message: "No Stack Data Available"});
 		})
 	})
 
@@ -131,12 +167,12 @@ module.exports = function (app, db) {
 		let stack = new Stack(req.body);
 		stack.save(function (err, stack) {
 			if (err) {
-				console.log("Error saving the stack to database");
-				res.status(500).send("Error saving stack!");
+				// console.log("Error saving the stack to database");
+				res.status(500).json({status: false, message: "Error saving stack!"});
 			} else if (stack) {
-				res.status(201).send("Sucessfully created the stack");
+				res.status(201).json({status: true, message: "Sucessfully created the stack", stack});
 			} else {
-				res.status(500).send("Null");
+				res.status(500).json({status: false, message: "Stack Creation Failed"});
 			}
 		})
 	})
@@ -146,9 +182,9 @@ module.exports = function (app, db) {
 		let stack_id = req.params.stackid;
 		Stack.remove({ _id: stack_id }, function (err, success) {
 			if (err) {
-				res.status(500).send("Couldn't delete Stack");
+				res.status(500).json({status: false, message: "Couldn't delete Stack"});
 			} else {
-				res.status(200).send("");
+				res.status(200).json({status: true, message: success});
 			}
 		})
 	})
@@ -160,9 +196,9 @@ module.exports = function (app, db) {
 		let query = { userId : userid };
 		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
 			if(err){
-				res.status(500).send("Error Updating");
+				res.status(500).json({status: false, message: "Error Updating"});
 			}else{
-				res.status(200).send("Success!!");
+				res.status(200).json({status: true, message: "Success!!"});
 			}
 		});
 	})
@@ -174,12 +210,12 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		User.findOne({userId : req.params.userid}, function(err, result){
 			if(err){
-				res.status(500).send(err);
+				res.status(500).json({status: false, message: "Operation Failed"});
 			}else if(result){
 				let sub_stack = result.subscribed_stacks;
-				res.status(200).send(sub_stack);
+				res.status(200).json({status: true, sub_stack});
 			}else{
-				res.status(500).send("Can't get!");
+				res.status(500).json({status: false, message: "No Data Found"});
 			}
 		})
 	})
@@ -189,10 +225,10 @@ module.exports = function (app, db) {
 		let user = new User(req.body);
 		user.save(function (err, user) {
 			if (err) {
-				console.log("Error saving the stack to database");
-				res.status(500).send("Error saving user!");
+				// console.log("Error saving the stack to database");
+				res.status(500).json({status: false, message: "Error saving user!"});
 			} else {
-				res.status(201).send("Sucessfully created the user");
+				res.status(201).send({status: true, message: "Sucessfully created the user"});
 			}
 		})
 	})
