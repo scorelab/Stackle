@@ -38,4 +38,22 @@ mongoose.connect(database.url, function (err) {
     }
 });     // connect to mongoDB database on modulus.io
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error("Not Found");
+    err.status = 404;
+    next(err);
+});
+  
+// error handler
+app.use(function(err, req, res, next) {
+    // render the error page
+    res.status(err.status || 500);
+    if(process.env.NODE_ENV !== "DEVELOPMENT") {
+        res.send(`<h1>Error Code: ${err.status || 500}</h1>`);
+    } else {
+        res.send(`<h1>Error Code: ${err.status || 500}</h1><br><p>${err.stack}</p>`);
+    }
+});
+
 module.exports = app;
