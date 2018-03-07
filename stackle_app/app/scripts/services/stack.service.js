@@ -18,7 +18,7 @@
         return "Can't get!";
       }
 
-    }
+    };
 
     var stackExist = function (name, cb) {
       if (name) {
@@ -31,9 +31,9 @@
           return cb(true);
         }, function (error) {
           return cb(error);
-        })
+        });
       }
-    }
+    };
 
     var createStack = function (name, username) {
       var url = "https://api.github.com/orgs/{{name}}/members";
@@ -41,16 +41,16 @@
       $http.get(url).then(function (response) {
         var members = JSON.parse(response.data);
         for (var member in members) {
-          if (member.login == name) {
+          if (member.login === name) {
             return "you are a member";
           } else {
             return "you are not a member";
           }
         }
       }, function error(response) {
-        return "error occured!"
-      })
-    }
+        return "error occured!";
+      });
+    };
 
     var subscribeStack = function (userid, stackname, callback) {
       var apiUrl = 'http://localhost:8080/api/subscribe';
@@ -62,7 +62,7 @@
         callback(response);
       }, function (error) {
         callback(error);
-      })
+      });
     };
 
     return {
@@ -70,7 +70,7 @@
       createStack: createStack,
       stackExist: stackExist,
       subscribeStack: subscribeStack
-    }
+    };
 
   }
 })();
