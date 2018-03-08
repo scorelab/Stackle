@@ -204,7 +204,7 @@ module.exports = function (app, db) {
 		try {
 			const validator = new Validator(request.body);
 			const input = validator.validateUserSubscribeStack();
-			User.findOneAndUpdate({ userId: input.userId }, { $push: { subscribed_stacks: input.stackName } }, (error, updatedResult) => {
+			User.findOneAndUpdate({ userId: input.userId }, { $push: { subscribedStacks: input.stackName } }, (error, updatedResult) => {
 				if (error) {
 					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
 				}
@@ -227,7 +227,7 @@ module.exports = function (app, db) {
 					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
 				}
 
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: userDetails.subscribed_stacks }, response);
+				return returnWithResponse.configureReturnData({ status: 200, success: true, result: userDetails.subscribedStacks }, response);
 			});
 
 		} catch (validationError) {

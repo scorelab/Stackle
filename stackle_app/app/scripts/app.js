@@ -73,9 +73,10 @@ angular
       .state('otherwise',{
         url : '/#!/*path',
         templateUrl : '404.html'
+
       })
       .state('staticLanding', {
         url: '',
         templateUrl: 'views/static-landing.html'
-      })
+      });
   });

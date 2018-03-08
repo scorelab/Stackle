@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --timeout 10000",
-    "start": "nodemon bin/www"
+    "start": "nodemon bin/www",
+    "serve": "node bin/www"
   },
   "repository": {
     "type": "git",
