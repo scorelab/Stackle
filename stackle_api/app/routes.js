@@ -158,7 +158,7 @@ module.exports = function (app, db) {
 		let userid = req.body.uid;
 		let stackname = req.body.stack_name;
 		let query = { userId : userid };
-		User.findOneAndUpdate(query, {$push: {subscribed_stacks : stackname}}, function(err, noaffected){
+		User.findOneAndUpdate(query, {$push: {subscribedStacks : stackname}}, function(err, noaffected){
 			if(err){
 				res.status(500).send("Error Updating");
 			}else{
@@ -176,7 +176,7 @@ module.exports = function (app, db) {
 			if(err){
 				res.status(500).send(err);
 			}else if(result){
-				let sub_stack = result.subscribed_stacks;
+				let sub_stack = result.subscribedStacks;
 				res.status(200).send(sub_stack);
 			}else{
 				res.status(500).send("Can't get!");
