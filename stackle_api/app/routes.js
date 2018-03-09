@@ -30,43 +30,42 @@ module.exports = function (app, db) {
 	})
 
 	//save a post
-	app.post('/api/user/post', function (req, res) {
+	app.post('/api/user/post', function (req, res, next) {
 		let post = new Post(req.body);
 		post.save(function (err, post) {
 			if (err) {
 				console.log("error saving the post");
-				res.status(500).send("error!")
-			} else {
-				res.status(201).send("Sucessfully saved the post!");
+				next(err);
 			}
+			res.status(201).send("Sucessfully saved the post!");
 		});
 	})
 
 	//get a post by id
-	app.get('/api/post/:postid', function (req, res) {
+	app.get('/api/post/:postid', function (req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let objectid = req.params.postid;
 		Post.findOne({ _id: objectid }, function (err, post) {
 			if (err) {
-				res.status(404).send(err);
-			} else {
-				res.status(200).send(post);
+				next(err);
 			}
+			res.status(200).send(post);
 		})
 	})
 
 	//delete a post by ID
-	app.delete('/api/post/:postid', function (req, res) {
+	app.delete('/api/post/:postid', function (req, res, next) {
 		let postid = req.params.postid;
 		Post.remove({ _id: postid }, function (err, success) {
 			if (err) {
 				console.log(err);
-				res.status(500).send("Error deleting the document");
+				next(err);
 			} else if (success) {
 				res.status(200).send("Sucessfully Deleted");
 			} else {
 				console.log("Null pointer");
+				next(new Error("Null pointer"));
 			}
 		})
 	})
@@ -82,29 +81,29 @@ module.exports = function (app, db) {
 	})
 
 	//returns posts relating to specific org
-	app.get('/api/posts/org/:org_name', function (req, res) {
+	app.get('/api/posts/org/:org_name', function (req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
-			if (err)
+			if (err) {
 				console.log(`Error getting posts from $orgname`);
-			else
-				res.status(200).send(posts);
+				next(err);
+			}
+			res.status(200).send(posts);
 		})
 	})
 
 	//get a specific org
-	app.get('/api/org/:orgname', function (req, res) {
+	app.get('/api/org/:orgname', function (req, res, next) {
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let orgname = req.params.orgname;
 		Stack.find({ name: orgname }, function (err, org) {
 			if (err) {
-				console.log('Error');
-			} else {
-				res.status(200).send(org);
+				next(err);
 			}
+			res.status(200).send(org);
 		})
 	})
 
@@ -117,83 +116,80 @@ module.exports = function (app, db) {
 	})
 
 	//get all stacks (orgs)
-	app.get('/api/orgs', function (req, res) {
+	app.get('/api/orgs', function (req, res, next) {
 		Stack.find({}, function (err, stacks) {
-			if (err)
-				console.log("Errors retrieving stacks!");
-			else
-				res.status(200).send(stacks);
+			if (err) {
+				next(err);
+			}
+			res.status(200).send(stacks);
 		})
 	})
 
 	//create stack
-	app.post('/api/stack/create', function (req, res) {
+	app.post('/api/stack/create', function (req, res, next) {
 		let stack = new Stack(req.body);
 		stack.save(function (err, stack) {
 			if (err) {
 				console.log("Error saving the stack to database");
-				res.status(500).send("Error saving stack!");
+				next(err);
 			} else if (stack) {
 				res.status(201).send("Sucessfully created the stack");
 			} else {
-				res.status(500).send("Null");
+				next(new Error("Null"));
 			}
 		})
 	})
 
 	//delete stack
-	app.delete('api/delete/stack/:stackid', function (req, res) {
+	app.delete('api/delete/stack/:stackid', function (req, res, next) {
 		let stack_id = req.params.stackid;
 		Stack.remove({ _id: stack_id }, function (err, success) {
 			if (err) {
-				res.status(500).send("Couldn't delete Stack");
-			} else {
-				res.status(200).send("");
+				next(err);
 			}
+			res.status(200).send("");
 		})
 	})
 
 	//user subscribing to an stack
-	app.post('/api/subscribe', function (req, res) {
+	app.post('/api/subscribe', function (req, res, next) {
 		let userid = req.body.uid;
 		let stackname = req.body.stack_name;
 		let query = { userId : userid };
 		User.findOneAndUpdate(query, {$push: {subscribedStacks : stackname}}, function(err, noaffected){
-			if(err){
-				res.status(500).send("Error Updating");
-			}else{
-				res.status(200).send("Success!!");
+			if(err) {
+				next(err);
 			}
+			res.status(200).send("Success!!");
 		});
 	})
 
 	//getting subscribed stacks for a user
-	app.get('/api/stack/subscribed/:userid', function(req ,res){
+	app.get('/api/stack/subscribed/:userid', function(req, res, next){
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		User.findOne({userId : req.params.userid}, function(err, result){
 			if(err){
-				res.status(500).send(err);
+				next(err);
 			}else if(result){
 				let sub_stack = result.subscribedStacks;
 				res.status(200).send(sub_stack);
 			}else{
-				res.status(500).send("Can't get!");
+				next(new Error("Can't get!"))
 			}
 		})
 	})
 
 	//create user
-	app.post('/api/newuser', function (req, res) {
+	app.post('/api/newuser', function (req, res, next) {
 		let user = new User(req.body);
 		user.save(function (err, user) {
 			if (err) {
 				console.log("Error saving the stack to database");
-				res.status(500).send("Error saving user!");
-			} else {
-				res.status(201).send("Sucessfully created the user");
+				next(err)
 			}
+			res.status(201).send("Sucessfully created the user");
 		})
 	})
 

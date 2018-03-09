@@ -18,13 +18,13 @@ app.use(methodOverride());
 // No need to store it into a variable
 require("./app/routes")(app, db);
 
-app.use(function (err, req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:8082");
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    console.error(err.stack);
-    res.status(500).send('Something broke!')
-});
+// app.use(function (err, req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "http://localhost:8082");
+//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     console.error(err.stack);
+//     res.status(500).send('Something broke!')
+// });
 
 mongoose.connect(database.url, function (err) {
     console.log("Connecting to the database..");
