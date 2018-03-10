@@ -10,7 +10,7 @@
                 templateUrl: 'views/toolbar.html',
                 controller : toolbarController,
                 controllerAs: 'toolbar'
-            }
+            };
         }
 
         function toolbarController(auth, store, $location){

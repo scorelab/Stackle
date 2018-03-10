@@ -10,12 +10,12 @@
     $scope.org_post = false;
     
     postService.getAllPosts(function(data){
-      if(data.length!=0){
+      if(data.length !== 0){
         $scope.posts = data;
       }else{
         $scope.postError = true;
       }
-    })
+    });
     
     $scope.searched = false;
 
@@ -31,20 +31,20 @@
 
         $scope.ifEx = stackService.stackExist($scope.org_name);
         $scope.searched = true;
-      })
-    }
+      });
+    };
     $scope.orgname = '';
 
     $scope.subscribe = function(user_id, org_name){
       stackService.subscribeStack(user_id, org_name, function(data){
         $scope.submessage = data;
         console.log($scope.submessage);
-      })
+      });
     };
 
     
     userService.getSubscribedStacks($scope.user_id, function(data){
-      if(data.length != 0){
+      if(data.length !== 0){
         $scope.sub_stacks = data;
       }else{
         $scope.subscribed = false;
@@ -57,7 +57,7 @@
         $scope.org_post = false;
         $scope.org_posts = res;
         $scope.org_post = true;
-      })
+      });
     };
 
   }
