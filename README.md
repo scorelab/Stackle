@@ -1,5 +1,6 @@
 
-[![Join the chat at https://gitter.im/scorelab/scorelab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scorelab/scorelab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/scorelab/scorelab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scorelab/scorelab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/scorelab/stackle/master/LICENSE) [![Travis Build](https://api.travis-ci.org/scorelab/Stackle.svg?branch=master)](https://travis-ci.org/scorelab/Stackle)
+
 
 # Introduction
 Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in are able to view forums of the organizations they contribute to and engage in the forum discussions.
@@ -32,6 +33,22 @@ These are the instructions on how to setup the project locally.
 
 For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/administration/install-community/) on installing MongoDB Community edtion.
 
+### On Mac
+
+1. Download the binary files for the desired release of MongoDB.
+Download the binaries from the [MongoDB Download Center](www.mongodb.com/download-center).
+2. Extract the files from the downloaded archive.
+For example, from a system shell, you can extract through the tar command:
+```tar -zxvf mongodb-osx-ssl-x86_64-3.6.3.tgz```
+3. Copy the extracted archive to the target directory.
+Copy the extracted folder to the location from which MongoDB will run.
+```mkdir -p mongodb```
+```cp -R -n mongodb-osx-ssl-x86_64-3.6.3/ mongodb```
+4. Ensure the location of the binaries is in the PATH variable.
+The MongoDB binaries are in the bin/ directory of the archive. To ensure that the binaries are in your PATH, you can modify your PATH.
+For example, you can add the following line to your shell’s rc file (e.g. ~/.bashrc):
+```export PATH=<mongodb-install-directory>/bin:$PATH```
+Replace <mongodb-install-directory> with the path to the extracted MongoDB archive.
 
 ## Stackle API
 1. `cd` in to the **stackle_api** directory.
@@ -62,5 +79,3 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
      sudo chmod +x /usr/local/bin/docker-compose
      ```
 3. Once build completes, run `docker-compose up`
-
-
