@@ -1,3 +1,4 @@
+![Stackle](https://gdurl.com/66Sl)
 
 [![Join the chat at https://gitter.im/scorelab/scorelab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/scorelab/scorelab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![GitHub license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://raw.githubusercontent.com/scorelab/stackle/master/LICENSE) [![Travis Build](https://api.travis-ci.org/scorelab/Stackle.svg?branch=master)](https://travis-ci.org/scorelab/Stackle)
 
