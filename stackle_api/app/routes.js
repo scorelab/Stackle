@@ -9,25 +9,30 @@ const Comment = postModels.Comment;
 
 module.exports = function (app, db) {
 
-	//api
-	app.get('/api/login/', function (req, res) {
-	})
+    //api
+    app.get('/api/login/', function (req, res) {
+        res.status(501).send("Not Implemented");
+    });
 
-	app.get('/home', function (req, res) {
-		//needs to intergrate with github for implementation
-		res.end();
-	})
+    app.get('/home', function (req, res) {
+        //needs to intergrate with github for implementation
+        // Status code would be 501 since not implemented yet
+        res.status(501).end();
+    });
 
-	//get all posts
-	app.get('/api/posts', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		Post.find({}, function (err, posts) {
-			if (err)
-				console.log("Cant get all posts!")
-			res.status(200).send(posts);
-		})
-	})
+    //get all posts
+    app.get('/api/posts', function (req, res) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        Post.find({}, function (err, posts) {
+            if (err) {
+                console.log("Cant get all posts!");
+                res.status(500).send("error getting all the posts");
+            } else {
+                res.send(posts);
+            }
+        });
+    });
 
 	//save a post
 	app.post('/api/user/post', function (req, res) {
@@ -67,6 +72,7 @@ module.exports = function (app, db) {
 				res.status(200).send("Sucessfully Deleted");
 			} else {
 				console.log("Null pointer");
+        res.status(500).send("Error");
 			}
 		})
 	})
@@ -75,11 +81,14 @@ module.exports = function (app, db) {
 	app.get('/api/posts/:user', function (req, res) {
 		let id = req.params.user;
 		Post.find({ user: id }, function (err, posts) {
-			if (err)
-				console.log("Erorr getting posts");
-			res.status(200).send(posts);
-		})
-	})
+			if (err){
+        console.log("Erorr getting posts");
+        res.status(500).send("Error");
+      } else {
+        res.status(200).send(posts);
+      }
+		});
+	});
 
 	//returns posts relating to specific org
 	app.get('/api/posts/org/:org_name', function (req, res) {
@@ -87,26 +96,29 @@ module.exports = function (app, db) {
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		let orgname = req.params.org_name;
 		Post.find({ org_name: orgname }, function (err, posts) {
-			if (err)
-				console.log(`Error getting posts from $orgname`);
-			else
-				res.status(200).send(posts);
+			if (err) {
+        console.log(`Error getting posts from $orgname`);
+        res.status(500).send(`Error getting posts from ${orgname}`);
+      } else {
+        res.send(posts);
+      }
 		})
 	})
 
 	//get a specific org
-	app.get('/api/org/:orgname', function (req, res) {
-		res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		let orgname = req.params.orgname;
-		Stack.find({ name: orgname }, function (err, org) {
-			if (err) {
-				console.log('Error');
-			} else {
-				res.status(200).send(org);
-			}
-		})
-	})
+  app.get('/api/org/:orgname', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    let orgname = req.params.orgname;
+    Stack.find({name: orgname}, function (err, org) {
+      if (err) {
+        console.log('Error');
+        res.status(500).send("Error");
+      } else {
+        res.status(200).send(org);
+      }
+    });
+  });
 
 	//comment on a post
 	app.post('/api/comment/:postid', function (req, res) {
@@ -115,16 +127,18 @@ module.exports = function (app, db) {
 		let comment = new Comment(req.body);
 		Post.update(query, { comments: [] });
 	})
-
-	//get all stacks (orgs)
-	app.get('/api/orgs', function (req, res) {
-		Stack.find({}, function (err, stacks) {
-			if (err)
-				console.log("Errors retrieving stacks!");
-			else
-				res.status(200).send(stacks);
-		})
-	})
+  
+  //get all stacks (orgs)
+    app.get('/api/orgs', function (req, res) {
+        Stack.find({}, function (err, stacks) {
+            if (err) {
+                console.log("Errors retrieving stacks!");
+                res.status(500).send("Error retrieving stacks!");
+            } else {
+                res.status(200).send(stacks);
+            }
+        });
+    });
 
 	//create stack
 	app.post('/api/stack/create', function (req, res) {
