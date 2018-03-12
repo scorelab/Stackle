@@ -5,5 +5,7 @@ module.exports = {
 
 /*
 To start local mongodb server use following command:
-sudo service mongod start
+LINUX: sudo service mongod start
+WINDOWS: mongod
+For More: https://github.com/scorelab/Stackle#installing-mongodb
 */
