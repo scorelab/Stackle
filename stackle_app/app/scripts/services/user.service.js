@@ -18,7 +18,7 @@
     var getSubscribedStacks = function(userid, callback){
       var apiUrl = server + 'api/stack/subscribed/'+ userid;
       $http.get(apiUrl).then(function(response){
-        return callback(response.data);
+        return callback(response.data.result);
       });
     };
 

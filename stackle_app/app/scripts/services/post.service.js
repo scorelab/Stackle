@@ -11,7 +11,7 @@
             var apiurl = server + 'api/posts';
 
             $http.get(apiurl).then(function (response) {
-                callback(response.data);
+                callback(response.data.result);
             });
         };
 
@@ -19,7 +19,7 @@
             var apiUrl = server + 'api/post/' + postid;
 
             $http.get(apiUrl).then(function (response) {
-                callback(response.data);
+                callback(response.data.result);
             });
         };
 
@@ -27,7 +27,7 @@
             var apiUrl = server + 'api/posts/org/'+ orgname;
 
             $http.get(apiUrl).then(function(response){
-                callback(response.data);
+                callback(response.data.result);
             }, function(error){
                 callback(error);
             });

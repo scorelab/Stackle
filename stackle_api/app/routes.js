@@ -16,12 +16,13 @@ module.exports = function (app, db) {
 
 	//api
 	app.get('/api/login/', function (request, response) {
-	})
+		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
+	});
 
+	//needs to intergrate with github for implementation
 	app.get('/home', function (request, response) {
-		//needs to intergrate with github for implementation
-		response.end();
-	})
+		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
+	});
 
 	//get all posts
 	app.get('/api/posts', function (request, response) {
