@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+
 const mongoose = require('mongoose');
 const database = require('./config/database');            // load the database config
 const morgan = require('morgan');             // log requests to the console (express4)
@@ -15,8 +16,12 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-// No need to store it into a variable
-require("./app/routes")(app, db);
+// var routes = require('./app/routes')(app,db);
+
+app.use('/api', require('./app/routes/api_v1'));
+
+// The routes present here has to be sorted into meaningful routes
+app.use('/', require('./app/routes/misc'));
 
 app.use(function (err, req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:8082");
