@@ -22,7 +22,7 @@ Validator.prototype.validateAddingPost = function() {
 
   if (!!!~Object.keys(this.input).indexOf('tags')) { throw new Error('Attribute tags is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('link_issue')) { throw new Error('Attribute link_issue is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('linkIssue')) { throw new Error('Attribute linkIssue is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
 
@@ -109,7 +109,7 @@ Validator.prototype.validateCreateStack = function() {
 
   if (!!!~Object.keys(this.input).indexOf('githubUrl')) { throw new Error('Attribute githubUrl is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('created_user')) { throw new Error('Attribute created_user is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('createdUser')) { throw new Error('Attribute createdUser is missing'); }
 
   return this.input;
 };
