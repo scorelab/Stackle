@@ -10,7 +10,7 @@
         {
             "name": "Getting all the posts",
             "request": {
-                "url": "http://localhost:3000/api/posts",
+                "url": "http://localhost:8080/api/posts",
                 "method": "GET",
                 "header": [],
                 "body": {},
@@ -21,7 +21,7 @@
         {
             "name": "Submitting a post",
             "request": {
-                "url": "http://localhost:3000/api/user/post",
+                "url": "http://localhost:8080/api/user/post",
                 "method": "POST",
                 "header": [
                     {
@@ -42,12 +42,12 @@
             "name": "Getting a particular post by postId",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/post/:postid",
+                    "raw": "http://localhost:8080/api/post/:postid",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "post",
@@ -72,12 +72,12 @@
             "name": "Deleting a post by postId",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/post/:postid",
+                    "raw": "http://localhost:8080/api/post/:postid",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "post",
@@ -102,12 +102,12 @@
             "name": "Getting posts by a particular user",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/posts/:userId",
+                    "raw": "http://localhost:8080/api/posts/:userId",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "posts",
@@ -132,12 +132,12 @@
             "name": "Getting posts related to specific organization by org name",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/posts/org/:orgname",
+                    "raw": "http://localhost:8080/api/posts/org/:orgname",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "posts",
@@ -163,12 +163,12 @@
             "name": "Getting details of a specific org",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/org/:orgname",
+                    "raw": "http://localhost:8080/api/org/:orgname",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "org",
@@ -193,12 +193,12 @@
             "name": "Post a comment on a post ",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/comment/:postId",
+                    "raw": "http://localhost:8080/api/comment/:postId",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "comment",
@@ -222,7 +222,7 @@
         {
             "name": "Getting all the stacks in Stackle",
             "request": {
-                "url": "http://localhost:3000/api/orgs",
+                "url": "http://localhost:8080/api/orgs",
                 "method": "GET",
                 "header": [],
                 "body": {},
@@ -233,7 +233,7 @@
         {
             "name": "Create a Stack",
             "request": {
-                "url": "http://localhost:3000/api/stack/create",
+                "url": "http://localhost:8080/api/stack/create",
                 "method": "POST",
                 "header": [
                     {
@@ -254,12 +254,12 @@
             "name": "Deleting a Stack",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/delete/stack/:stackid",
+                    "raw": "http://localhost:8080/api/delete/stack/:stackid",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "delete",
@@ -284,7 +284,7 @@
         {
             "name": "Subscribing to a Stack",
             "request": {
-                "url": "http://localhost:3000/api/subscribe",
+                "url": "http://localhost:8080/api/subscribe",
                 "method": "POST",
                 "header": [
                     {
@@ -305,12 +305,12 @@
             "name": "Getting the subscribed stack of a user",
             "request": {
                 "url": {
-                    "raw": "http://localhost:3000/api/stack/subscribed/:userid",
+                    "raw": "http://localhost:8080/api/stack/subscribed/:userid",
                     "protocol": "http",
                     "host": [
                         "localhost"
                     ],
-                    "port": "3000",
+                    "port": "8080",
                     "path": [
                         "api",
                         "stack",
@@ -335,7 +335,7 @@
         {
             "name": "Creating a new user",
             "request": {
-                "url": "http://localhost:3000/api/newuser",
+                "url": "http://localhost:8080/api/newuser",
                 "method": "POST",
                 "header": [
                     {
