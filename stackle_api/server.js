@@ -29,14 +29,17 @@ app.use(function (err, req, res, next) {
 const options = {useMongoClient: true};
 
 mongoose.connect(database.url, options, function (err) {
-    console.log("Connecting to the database..");
+    console.log("Connecting to the database...");
     if (err) {
+        console.log("\nCouldn't connect to local database. Please make sure your local mongodb server is running. \nFind more: https://github.com/scorelab/Stackle#installing-mongodb\n\nConnecting to alternative remote (mongolab) database ...");
         mongoose.connect(database.alturl, options, function (err) {
-            return console.log(err);
+            if (err) {
+                return console.log("\nCouldn't connect to remote (mongolab) database.");
+            }
+            return console.log("\nSuccessfully connected to remote (mongolab) database!");
         })
-        return console.log("Couldnt connect to db url 1. connecting to alternate");
     } else {
-        console.log("Mongo connect sucess!");
+        console.log("\nSuccessfully connected to local database!");
     }
 });     // connect to mongoDB database on modulus.io
 

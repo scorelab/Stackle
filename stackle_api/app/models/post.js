@@ -1,28 +1,28 @@
 const mongoose = require('mongoose');
 
 const replySchema = mongoose.Schema({
-    description: String,
-    user: String,
-    date: String
+    description: { type: String, required: true },
+    user: { type: String, required: true },
+    date: { type: String, required: true }
 });
 
 const commentSchema = mongoose.Schema({
-    description: String,
-    user: String,
+    description: { type: String, required: true },
+    user: { type: String, required: true },
     votes: Number,
-    date: String,
+    date: { type: String, required: true },
     replies: [replySchema]
 });
 
 const postSchema = mongoose.Schema({
-    title: String,
-    description: String,
-    org_name: String,
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    org_name: { type: String, required: true },
     tags: [],
     repository: String,
     linkIssue: String,
-    user: String,
-    date: String,
+    user: { type: String, required: true },
+    date: { type: String, required: true },
     votes: Number,
     comments: [commentSchema]
 });
