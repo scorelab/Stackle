@@ -24,9 +24,9 @@ function configureReturnData(data, response) {
     throw new Error('Attribute result is missing');
   }
 
-  response.header("Access-Control-Allow-Origin", "*");
+  //response.header("Access-Control-Allow-Origin", "*");
   // response.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  //response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   response.status(data.status);
   response.send({
     status: data.status,
