@@ -15,7 +15,7 @@ MEAN stack is used for developing Stackle.
 # Architecture
 Users interact with the application through the AngularJS front-end which communicates with Node-API to get and post data to the MongoDB server. The front-end also communicates with GitHub API to get data related to Users, repositories and organizations. Users can login to the application through auth0 login integrated to Stackle.
 
-![Architecture](https://imgur.com/yyX8Orn)
+![Architecture](./stackle_app/app/images/architecture.jpg)
 ***
 
 # Setting Up the Project
