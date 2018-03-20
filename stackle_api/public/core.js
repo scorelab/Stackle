@@ -12,6 +12,6 @@ stackleApp.controller('mainController', function($scope,$http){
 			console.log(data);
 		})
 		.error(function(data){
-			console.log('error'_data);
+			console.log('error',_data);
 		})
 });
