@@ -8,3 +8,6 @@
   /*background-color: #BDBDBD;*/
   text-align : center;
 }
+md-card._md{
+	height:92%;
+}
