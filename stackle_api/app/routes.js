@@ -24,6 +24,7 @@ module.exports = function (app, db) {
 		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
 	});
 
+
 	//get all posts
 	app.get('/api/posts', function (request, response) {
 		Post.find({}, (error, postsDetails) => {
@@ -257,7 +258,7 @@ module.exports = function (app, db) {
 	app.get('/api/notifications', function (request, response) { });
 
 	app.get('/*', function (request, response) {
-		response.sendfile('./public/404.html');
+		response.sendFile('./public/404.html');
 	});
 
 }
