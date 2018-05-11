@@ -2,20 +2,26 @@
   <div class="create-post-container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <form>
-          <div class="form-group">
-            <label for="titleInput">Title</label>
-            <input type="text" class="form-control" id="titleInput" placeholder="Title">
-          </div>
-          <div class="form-group">
-            <label for="descriptionInput">Description</label>
-            <textarea class="form-control" id="descriptionInput" placeholder="Description"></textarea>
-          </div>
-          <div class="form-group">
-            <button class="btn btn-primary">Create</button>
-            <button class="btn btn-default">Clear</button>
-          </div>
-        </form>
+        <mat-card>
+          <mat-card-title>Create Post</mat-card-title>
+          <mat-card-subtitle>Create a discussion about your issue</mat-card-subtitle>
+          <mat-card-content>
+            <div class="form-container">
+              <mat-form-field>
+                <input matInput placeholder="Title">
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput placeholder="Description"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button>Create</button>
+            <button mat-button>Clear</button>
+          </mat-card-actions>
+
+        </mat-card>
       </div>
     </div>
   </div>
