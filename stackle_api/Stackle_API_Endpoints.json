@@ -1,356 +1,450 @@
 {
-    "variables": [],
-    "info": {
-        "name": "Stackle",
-        "_postman_id": "150c721e-a0fc-6c19-9136-9b3dc11f4c43",
-        "description": "Stackle API end points",
-        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "Getting all the posts",
-            "request": {
-                "url": "http://localhost:8080/api/posts",
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Submitting a post",
-            "request": {
-                "url": "http://localhost:8080/api/user/post",
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "description": ""
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\r\n\ttitle : \"This is the title\",\r\n\tdescription : \"Description about the post\",\r\n\torg_name : \"Orgname\",\r\n\ttags : [],\r\n\trepository : \"URL to the repository\",\r\n\tlinkIssue : \"URL to the Issue\",\r\n\tuser : \"UserId\",\r\n\tdate : \"2017-11-28\",\r\n\tvotes : 0,\r\n\tcomments : []\r\n}"
-                },
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Getting a particular post by postId",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/post/:postid",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "post",
-                        ":postid"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "postid",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Deleting a post by postId",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/post/:postid",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "post",
-                        ":postid"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "postid",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "DELETE",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Getting posts by a particular user",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/posts/:userId",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "posts",
-                        ":userId"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "userId",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Getting posts related to specific organization by org name",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/posts/org/:orgname",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "posts",
-                        "org",
-                        ":orgname"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "orgname",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Getting details of a specific org",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/org/:orgname",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "org",
-                        ":orgname"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "orgname",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Post a comment on a post ",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/comment/:postId",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "comment",
-                        ":postId"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "postId",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "POST",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Getting all the stacks in Stackle",
-            "request": {
-                "url": "http://localhost:8080/api/orgs",
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": "returns all the organizations registred in Stackle"
-            },
-            "response": []
-        },
-        {
-            "name": "Create a Stack",
-            "request": {
-                "url": "http://localhost:8080/api/stack/create",
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "description": ""
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\r\n\t\"name\" : \"Org_name\",\r\n\t\"description\" : \"Small description about the organization\",\r\n\t\"stackleUrl\" : \"Stackle URL\", //this will be generated by the app\r\n\t\"githubUrl\" : \"Github URL\",\r\n\t\"createdUser\" : \"userId\"\r\n}"
-                },
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Deleting a Stack",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/delete/stack/:stackid",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "delete",
-                        "stack",
-                        ":stackid"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "stackid",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "DELETE",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Subscribing to a Stack",
-            "request": {
-                "url": "http://localhost:8080/api/subscribe",
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "description": ""
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\n\t\"uid\" : \"userId\",\n\t\"stack_name\" : \"Stack name\"\n}"
-                },
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Getting the subscribed stack of a user",
-            "request": {
-                "url": {
-                    "raw": "http://localhost:8080/api/stack/subscribed/:userid",
-                    "protocol": "http",
-                    "host": [
-                        "localhost"
-                    ],
-                    "port": "8080",
-                    "path": [
-                        "api",
-                        "stack",
-                        "subscribed",
-                        ":userid"
-                    ],
-                    "query": [],
-                    "variable": [
-                        {
-                            "key": "userid",
-                            "value": ""
-                        }
-                    ]
-                },
-                "method": "GET",
-                "header": [],
-                "body": {},
-                "description": ""
-            },
-            "response": []
-        },
-        {
-            "name": "Creating a new user",
-            "request": {
-                "url": "http://localhost:8080/api/newuser",
-                "method": "POST",
-                "header": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json",
-                        "description": ""
-                    }
-                ],
-                "body": {
-                    "mode": "raw",
-                    "raw": "{\r\n\t\"userId\" : String, //userId must be generated by the app\r\n\t\"github\" : {\r\n\t\t\"id\" : String, // github id\r\n\t\t\"token\" : String, // github tokenid\r\n\t\t\"email\" : String, // primary email for Github\r\n\t\t\"name\" : String // name as in Github\r\n\t},\r\n\t\"gitlab\" : {\r\n\t\t\"id\" : String, // gitlab id\r\n\t\t\"token\" : String, // gitlab tokenid\r\n\t\t\"email\" : String, // primary email for Gitlab\r\n\t\t\"name\" : String // name as in Gitlab\r\n\t},\r\n\tsubscribedStacks : []\r\n}"
-                },
-                "description": ""
-            },
-            "response": []
-        }
-    ]
+	"info": {
+		"name": "Stackle",
+		"_postman_id": "76c93e1f-ffd3-4aca-afd3-92e2c95d0a96",
+		"description": "Stackle API end points",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Getting a particular post by postId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/:postId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						":postId"
+					],
+					"variable": [
+						{
+							"key": "postId",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Submitting a post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"title\" : \"This is the title\",\r\n\t\"description\" : \"Description about the post\",\r\n\t\"org_name\" : \"Orgname\",\r\n\t\"tags\" : [],\r\n\t\"repository\" : \"URL to the repository\",\r\n\t\"linkIssue\" : \"URL to the Issue\",\r\n\t\"user\" : \"userid\",\r\n\t\"date\" : \"2017-11-28\",\r\n\t\"votes\" : 0,\r\n\t\"comments\" : []\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						"add"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Getting all the posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting a post by postId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/:postId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						":postId"
+					],
+					"variable": [
+						{
+							"key": "postId",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Getting posts by a particular user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/user/:userId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						"user",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Getting posts related to specific organization by org name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/org/:orgname",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						"org",
+						":orgname"
+					],
+					"variable": [
+						{
+							"key": "orgname",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Getting all the stacks in Stackle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stacks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stacks",
+						""
+					]
+				},
+				"description": "returns all the organizations registred in Stackle"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting details of a specific org",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stacks/:orgName",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stacks",
+						":orgName"
+					],
+					"variable": [
+						{
+							"key": "orgName",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Post a comment on a post ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Comment body\",\r\n    \"user\": \"commentor\",\r\n    \"votes\": 0,\r\n    \"date\": \"14-03-18\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/posts/comment/:postid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"posts",
+						"comment",
+						":postid"
+					],
+					"variable": [
+						{
+							"key": "postid",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Stack",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\" : \"Org_name\",\r\n\t\"description\" : \"Small description about the organization\",\r\n\t\"stackleUrl\" : \"Stackle URL\",\r\n\t\"githubUrl\" : \"Github URL\",\r\n\t\"createdUser\" : \"userId\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stacks/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stacks",
+						"create"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting a Stack",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stacks/:stackId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stacks",
+						":stackId"
+					],
+					"variable": [
+						{
+							"key": "stackId",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribing to a Stack",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\" : \"userid\",\n\t\"stackName\" : \"Stack name\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stacks/subscribe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stacks",
+						"subscribe"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Getting the subscribed stack of a user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/stacks/subscribed/:userid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"stacks",
+						"subscribed",
+						":userid"
+					],
+					"variable": [
+						{
+							"key": "userid",
+							"value": ""
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "Creating a new user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"userId\" : String, //userId must be generated by the app\r\n\t\"github\" : {\r\n\t\t\"id\" : String, // github id\r\n\t\t\"token\" : String, // github tokenid\r\n\t\t\"email\" : String, // primary email for Github\r\n\t\t\"name\" : String // name as in Github\r\n\t},\r\n\t\"gitlab\" : {\r\n\t\t\"id\" : String, // gitlab id\r\n\t\t\"token\" : String, // gitlab tokenid\r\n\t\t\"email\" : String, // primary email for Gitlab\r\n\t\t\"name\" : String // name as in Gitlab\r\n\t},\r\n\tsubscribedStacks : []\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"create"
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
 }

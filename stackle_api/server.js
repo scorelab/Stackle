@@ -6,7 +6,10 @@ const database = require('./config/database');            // load the database c
 const morgan = require('morgan');             // log requests to the console (express4)
 const bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 const methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-const db = mongoose.connection;
+const users = require('./app/routes/users');
+const posts = require('./app/routes/posts');
+const stacks = require('./app/routes/stacks');
+const general = require('./app/routes/general');
 const cors = require("cors");
 
 
@@ -17,8 +20,12 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 app.use(cors());
-// No need to store it into a variable
-require("./app/routes")(app, db);
+
+// routes
+app.use('/api/users',users); // routes for users
+app.use('/api/posts',posts); // routes for posts
+app.use('/api/stacks',stacks); // routes for stacks
+app.use('',general); // general routes
 
 // Commenting our code for custom middleware
 /* app.use(function (err, req, res, next) {
