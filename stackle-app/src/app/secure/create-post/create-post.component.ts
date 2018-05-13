@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreatePostComponent implements OnInit {
 
+  private username ;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  
 
 }

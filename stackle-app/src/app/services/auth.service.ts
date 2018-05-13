@@ -34,7 +34,7 @@ export class AuthService {
     this.lock.on('authenticated', (authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.router.navigate(['/']);
+        this.router.navigate(['/app/commonFeed']);
       }
     });
     this.lock.on('authorization_error', (err) => {
@@ -72,6 +72,8 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    console.log('auth tokens saved');
+    console.log(authResult);
   }
 
   public logout(): void {
