@@ -1,3 +1,7 @@
+.post-container {
+  margin-top: 5vh;
+}
+
 .description{
     padding : 3px;
     background-color: #F5F5F5;
@@ -17,4 +21,16 @@
 
 .comment-date{
     color : #78909C;
+}
+
+.comment-textarea {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+.form-container > * {
+  width: 100%;
 }
