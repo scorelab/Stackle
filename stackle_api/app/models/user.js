@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const Validator = require('../lib/validator').Validator;
+const returnWithResponse = require('../lib/returnWithResponse');
+
 
 const userSchema = mongoose.Schema({
     userId: String,

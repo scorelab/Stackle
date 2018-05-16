@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');    // pull information from HTML POST
 const methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 const db = mongoose.connection;
 const cors = require("cors");
+const postRouter = require('./app/routes/post');
 
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
@@ -18,8 +19,10 @@ app.use(cors());
 
 
 //serving static index.html file using middleware
-app.use('/', express.static(__dirname + '/'));                       //middleware handles serving up the content from root directory.
+app.use('/', express.static(__dirname + '/'));
 
+//serving endpoint related to post using middleware
+app.use('/api/post', postRouter);          
 
 var routes = require("./app/routes");
 routes(app, db);

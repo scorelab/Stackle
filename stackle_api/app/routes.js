@@ -15,6 +15,7 @@ const Reply = postModels.Reply;
 module.exports = function (app, db) {
 
 	//api
+	//TODO later
 	app.get('/api/login/', function (request, response) {
 		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
 	});
@@ -25,103 +26,6 @@ module.exports = function (app, db) {
 	});
 
 
-	//get all posts
-	app.get('/api/posts', function (request, response) {
-		Post.find({}, (error, postsDetails) => {
-			if (error) {
-				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-			}
-
-			return returnWithResponse.configureReturnData({ status: 200, success: true, result: postsDetails }, response);
-		});
-	});
-
-	//save a post
-	app.post('/api/user/post', function (request, response) {
-		try {
-			const validator = new Validator(request.body);
-			const input = validator.validateAddingPost();
-			const post = new Post(input);
-			post.save((error, insertedPost) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedPost._id }, response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
-
-	//get a post by id
-	app.get('/api/post/:postId', function (request, response) {
-		try {
-			const validator = new Validator(request.params);
-			const input = validator.validateGetPost();
-			Post.findOne({ _id: input.postId }, (error, postDetails) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: postDetails }, response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
-
-	//delete a post by ID
-	app.delete('/api/post/:postId', function (request, response) {
-		try {
-			const validator = new Validator(request.params);
-			const input = validator.validateDeletePost();
-			Post.remove({ _id: input.postId }, (error, result) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${postId} was sucessfully deleted` }, response);
-			});
-
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
-
-	//returns posts by a specific user
-	app.get('/api/posts/:user', function (request, response) {
-		try {
-			const validator = new Validator(request.params);
-			const input = validator.validatePostsByUser();
-			Post.find({ user: input.user }, (error, userPosts) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: userPosts }, response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
-
-	// returns posts relating to specific organisation
-	app.get('/api/posts/org/:organisationName', function (request, response) {
-		try {
-			const validator = new Validator(request.params);
-			const input = validator.validatePostToOrganisation();
-			Post.find({ org_name: input.organisationName }, (error, organisationPosts) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationPosts }, response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
 
 	// get a specific organisation
 	app.get('/api/org/:organisationName', function (request, response) {
@@ -140,24 +44,6 @@ module.exports = function (app, db) {
 		}
 	});
 
-	// comment on a post
-	app.post('/api/comment/:postId', function (request, response) {
-		try {
-			const validator = new Validator(request.params);
-			const input = validator.validateCommentOnPost();
-			const comment = new Comment(request.body);
-			Post.update({ _id: input.postId }, { comments: [] }, (error, result) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${request.params.postId} successfully updated` },
-					response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
 
 	// get all stacks (organisation)
 	app.get('/api/orgs', function (request, response) {

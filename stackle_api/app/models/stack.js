@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const Validator = require('../lib/validator').Validator;
+const returnWithResponse = require('../lib/returnWithResponse');
+
 
 const stackSchema = mongoose.Schema({
     name: { type: String, required: true },
