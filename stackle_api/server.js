@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-<<<<<<< HEAD
 const path = require('path');
 var port     = process.env.PORT || 3000;
 var mongoose = require('mongoose'); 
@@ -12,7 +11,6 @@ var methodOverride = require('method-override'); // simulate DELETE and PUT (exp
 var db = mongoose.connection;
 
 app.use('/', express.static(__dirname +  '/'));
-=======
 const mongoose = require('mongoose');
 const database = require('./config/database');            // load the database config
 const morgan = require('morgan');             // log requests to the console (express4)
@@ -22,7 +20,6 @@ const db = mongoose.connection;
 const cors = require("cors");
 const postRouter = require('./app/routes/post');
 
->>>>>>> upstream/master
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
@@ -50,7 +47,6 @@ routes(app, db);
 });*/
 
 
-<<<<<<< HEAD
 app.use(function (err, req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
@@ -58,8 +54,7 @@ app.use(function (err, req, res, next) {
   console.error(err.stack);
   res.status(500).send('Something broke!')
 });
-=======
->>>>>>> upstream/master
+
 
 const options = { useMongoClient: true };
 
