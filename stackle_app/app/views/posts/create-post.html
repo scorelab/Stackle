@@ -1,0 +1,27 @@
+<div class="container">
+	<div layout="row">
+		<div flex="60" class="stacklePost" layout-margin layout-padding>
+			<md-subheader class="md-primary">Create your Post</md-subheader>
+			<form>
+				<md-input-container>
+					<label for="title">Post Title</label>
+					<input type="text" ng-model="post.title" autocomplete="false">
+				 </md-input-container> 
+				<br>
+				<md-input-container class="md-block">
+					<label for="description">Describe the post</label>
+					<textarea ng-model="post.description" md-maxlength="200" rows="3" md-select-on-focus></textarea>
+				 </md-input-container> 
+				<br>
+				<md-input-container>
+					<label for="repo">Your Repository</label>
+					<input type="text" ng-model="post.repo">
+				 </md-input-container> 
+				<br>
+				<md-input-container>
+					<md-chips ng-model="ctrl.tags" md-separator-keys="ctrl.keys" placeholder="Enter a tag for the post" secondary-placeholder="Comma separated tags"></md-chips>
+				</md-input-container>
+			</form>
+		</div>
+	</div>
+</div>
