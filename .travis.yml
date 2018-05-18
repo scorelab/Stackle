@@ -1,10 +1,8 @@
 language: node_js
-<<<<<<< HEAD
-=======
+
 node_js:
   - "node"
 install:
  - cd stackle_api
  - npm install
 script : node server.js &
->>>>>>> upstream/master
