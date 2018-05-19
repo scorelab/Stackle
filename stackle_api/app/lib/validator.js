@@ -86,6 +86,7 @@ Validator.prototype.validateGetOrganisationDetails = function() {
   return this.input;
 };
 
+//Validating PostId
 Validator.prototype.validateCommentOnPost = function() {
   if (!this.input) { throw new Error('Input is undefined'); }
 
@@ -95,6 +96,34 @@ Validator.prototype.validateCommentOnPost = function() {
 
   return this.input;
 };
+
+//Validating Comment Body
+Validator.prototype.validateCommentBody = function(){
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('description')) { throw new Error('Attribute description is missing'); }
+
+  if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
+
+  if (!!!~Object.keys(this.input).indexOf('votes')) { throw new Error('Attribute votes is missing'); }
+
+  if (!!!~Object.keys(this.input).indexOf('date')) { throw new Error('Attribute date is missing'); }
+
+  return this.input;
+}
+
+//to Validate the Post Id while hitting endpoints of the APIs
+Validator.prototype.validatePostId = function(){
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('postId')) { throw new Error('Attribute postId is missing'); }
+
+  return this.input;
+}
 
 Validator.prototype.validateCreateStack = function() {
   if (!this.input) { throw new Error('Input is undefined'); }

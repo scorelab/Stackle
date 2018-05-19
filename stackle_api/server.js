@@ -9,6 +9,7 @@ const methodOverride = require('method-override'); // simulate DELETE and PUT (e
 const db = mongoose.connection;
 const cors = require("cors");
 const postRouter = require('./app/routes/post');
+const commentRouter = require('./app/routes/comment');
 
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
@@ -22,7 +23,8 @@ app.use(cors());
 app.use('/', express.static(__dirname + '/'));
 
 //serving endpoint related to post using middleware
-app.use('/api/post', postRouter);          
+app.use('/api/post', postRouter);
+app.use('/api/comment', commentRouter);          
 
 var routes = require("./app/routes");
 routes(app, db);

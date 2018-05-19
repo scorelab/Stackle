@@ -35,27 +35,21 @@ const Post = postModels.Post;
 		Post.deleteById(request, response);
 	});
 
+//to increment vote count on post
+	router.post('/vote/up/:postId', function(request, response){
+		Post.setVoteUp(request, response);
+	});
 
-/*
-//todo post body is not validated in a validator
-
-//to comment on a post
-	router.post('/comment/:postId', function (request, response) {
-		Post.commentById(request, response);
+//to increment vote count on post
+	router.post('/vote/down/:postId', function(request, response){
+		Post.setVoteDown(request, response);
 	});
 
 
-*/
-
 /*
 	TODO 
-	1. comment on post : post body is not validated in a validator
-	2. Add increment count
-	3. Add decrement count
-	4. Add tag to post
-	5. remove tag from post
-	6. result error should be in string while throwing error
-
+	1. Add tag to post
+	2. remove tag from post	
 */
 
 module.exports = router;
