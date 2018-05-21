@@ -46,7 +46,7 @@ postSchema.statics.setPost = function(request, response){
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedPost._id }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
 
@@ -74,7 +74,7 @@ postSchema.statics.getById = function(request, response){
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: postDetails }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
 
@@ -91,7 +91,7 @@ postSchema.statics.getAllByUser = function(request, response){
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: userPosts }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
 
@@ -108,7 +108,7 @@ postSchema.statics.getAllByOrg = function(request, response){
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationPosts }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
 
@@ -117,9 +117,11 @@ postSchema.statics.getAllByOrg = function(request, response){
 postSchema.statics.commentById = function(request, response){
         try {
             const validator = new Validator(request.params);
+            const bodyValidator = new Validator(request.body);
             const input = validator.validateCommentOnPost();
-            const comment = new Comment(request.body);
-            Post.update({ _id: input.postId }, { comments: [] }, (error, result) => {
+            const inputComment = bodyValidator.validateCommentBody();
+            const comment = new Comment(inputComment);
+            Post.findOneAndUpdate({ _id: input.postId }, {$push: {comments: inputComment}}, (error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -128,10 +130,68 @@ postSchema.statics.commentById = function(request, response){
                     response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
 
+
+//get All comments for a single post
+postSchema.statics.getAllComments = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateCommentOnPost();
+           
+            Post.findOne({ _id: input.postId }, (error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result.comments },
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+//to increment vote up on Post
+postSchema.statics.setVoteUp = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validatePostId();
+           
+            Post.findOneAndUpdate({ _id: input.postId }, {$inc: {votes:1}}, {new: true },(error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+//to increment vote up on Post
+postSchema.statics.setVoteDown = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validatePostId();
+           
+            Post.findOneAndUpdate({ _id: input.postId }, {$inc: {votes:-1}}, {new: true },(error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
 
 //DELETE - delete post by id
 postSchema.statics.deleteById = function(request, response){
@@ -149,7 +209,7 @@ postSchema.statics.deleteById = function(request, response){
             });
 
          } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
 
