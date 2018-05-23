@@ -33,24 +33,36 @@
           </button>
         </form>
       </div>
-      <!-- <hr> -->
-      <mat-list>
-        <mat-list-item class="mat-menu-item" (click)="navigateToCreatePost()">
-          <mat-icon matListIcon>note_add</mat-icon>
-          Discuss a issue
-        </mat-list-item>
-      </mat-list>
       <hr>
       <div class="mat-typography">
-        <h4 class="mat-h4">Your Stacks</h4>
         <mat-list>
-          <mat-list-item class="mat-menu-item">Score Lab</mat-list-item>
-          <mat-list-item class="mat-menu-item">Google</mat-list-item>
-          <mat-list-item class="mat-menu-item">Fossasia</mat-list-item>
+          <mat-list-item class="mat-menu-item" (click)="navigateToCreatePost()">
+            <mat-icon matListIcon>note_add</mat-icon>
+            Discuss a issue
+          </mat-list-item>
+          <h4 mat-subheader="">Your Stacks</h4>
+          <mat-list-item class="mat-menu-item">
+            <mat-icon mat-list-icon>
+              <img class="img-circle" src="../../assets/images/user_avatar.png">
+            </mat-icon>
+            Score Lab
+          </mat-list-item>
+          <mat-list-item class="mat-menu-item">
+            <mat-icon mat-list-icon>
+              <img class="img-circle" src="../../assets/images/user_avatar.png">
+            </mat-icon>
+            Google
+          </mat-list-item>
+          <mat-list-item class="mat-menu-item">
+            <mat-icon mat-list-icon>
+              <img class="img-circle" src="../../assets/images/user_avatar.png">
+            </mat-icon>
+            Fossasia
+          </mat-list-item>
         </mat-list>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10 view-container">
       <router-outlet></router-outlet>
     </div>
   </div>
