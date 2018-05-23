@@ -32,5 +32,9 @@ export class SecureComponent implements OnInit {
     this.router.navigate(['app/createPost']);
   }
 
+  public navigateToCommonFeed() {
+    this.router.navigate(['app/commonFeed']);
+  }
+
 
 }
