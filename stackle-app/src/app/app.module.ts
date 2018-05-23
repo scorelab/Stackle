@@ -22,7 +22,7 @@ import { SecureComponent } from './secure/secure.component';
 import { CommonFeedComponent } from './secure/common-feed/common-feed.component';
 import { ProfileComponent } from './secure/profile/profile.component';
 import { LoginComponent } from './public/login/login.component';
-import {PostComponent} from "./secure/shared/post/post.component";
+import {PostComponent} from './secure/shared/post/post.component';
 
 
 @NgModule({
