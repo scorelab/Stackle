@@ -3,12 +3,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 var port     = process.env.PORT || 3000;
-var mongoose = require('mongoose'); 
-var database = require('./config/database');            // load the database config
-var morgan = require('morgan');             // log requests to the console (express4)
-var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-var db = mongoose.connection;
 
 app.use('/', express.static(__dirname +  '/'));
 const mongoose = require('mongoose');
