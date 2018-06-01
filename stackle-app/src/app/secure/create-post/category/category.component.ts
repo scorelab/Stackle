@@ -9,8 +9,6 @@ export class CategoryComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() { }
 
 }

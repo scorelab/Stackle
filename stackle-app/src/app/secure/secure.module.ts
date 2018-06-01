@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule} from '../material/material.module';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
 
 import { SecureRoutingModule } from './secure-routing.module';
 import { SecureComponent } from './secure.component';

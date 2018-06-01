@@ -1,16 +1,23 @@
 <div class="container-fluid">
   <div class="row" id="home-nav">
-    <div class="col col-md-1  col-md-offset-11 nav-text">
-      <h3 class="mat-h3">
-        <a routerLink="profile">
-          <img class="img-circle" src="../../assets/images/user_avatar.png">
-          Profile
-        </a>
-      </h3>
+    <div class="col col-md-2  col-md-offset-10 nav-text">
+      <div class="nav-items">
+        <h3 class="mat-h3">
+          <a routerLink="profile">
+            <img class="img-circle" src="../../assets/images/user_avatar.png">
+            Profile
+          </a>
+        </h3>
+        <h3 class="mat-h3">
+          <a>
+            Logout
+          </a>
+        </h3>
+      </div>
     </div>
   </div>
   <div class="row" id="home-body">
-    <div class="col-md-2" id="sidebar">
+    <div id="sidebar">
       <h2 class="mat-h2">Stackle</h2>
       <h5 class="mat-h5">By Opensource for Opensource</h5>
       <hr>
@@ -58,7 +65,7 @@
         </mat-list>
       </div>
     </div>
-    <div class="col-md-10 view-container">
+    <div class="col-md-10 col-md-offset-2 view-container">
       <router-outlet></router-outlet>
     </div>
   </div>

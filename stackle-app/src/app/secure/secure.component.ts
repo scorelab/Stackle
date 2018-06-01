@@ -22,7 +22,7 @@ export class SecureComponent implements OnInit {
   ngOnInit() {
     this.stackService.getAllOrgs().subscribe((response)=> {
       console.log(response);
-    })
+    });
     // this.stackService.getAllOrgs().subscribe(res => {
     //   console.log(res);
     // });

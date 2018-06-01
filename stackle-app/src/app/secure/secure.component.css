@@ -27,6 +27,30 @@
     margin-right: 10px;
   }
 
+  .nav-items {
+    float: right;
+  }
+
+  #home-nav .col-md-2 {
+    padding: 0;
+  }
+  #home-nav h3 {
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 0;
+    text-align: center;
+    display: inline-block;
+  }
+
+  #home-nav h3:hover {
+    background-color: #414f57;
+    color: #ffffff;
+  }
+
+  #home-nav a {
+    text-decoration: none;
+    color: #ececec;
+  }
+
   #sidebar{
     background-color: #ECEFF1;
     height: 100vh;
@@ -63,5 +87,5 @@
   }
 
 .view-container {
-  float: right;
+  /*float: right;*/
 }
