@@ -1,46 +1,49 @@
-<div class="container-fluid">
-  <div *ngIf="loading">
-    <mat-progress-bar mode="query"></mat-progress-bar>
-  </div>
-  <div class="row" *ngIf="post">
-    <div>
-      <mat-card class="example-card col-md-6">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title (click)="navigateToPost(post._id)">
-            <b>{{post.title}}</b>
-          </mat-card-title>
-          <mat-card-subtitle>{{post.org_name}} Repository: {{post.repository}}</mat-card-subtitle>
-        </mat-card-header>
 
-        <mat-card-content class="description">
-          <p>
-            {{post.description}}
-          </p>
-        </mat-card-content>
-        <h5>{{post.votes}} Votes
-          <span>{{post.comments.length}} Comments</span>
-        </h5>
-        <mat-card-actions>
-          <button mat-button>Like</button>
-          <button mat-button>Share</button>
-        </mat-card-actions>
-        <hr>
-        <div class="comment-section" *ngIf="post.comments.length !== 0">
-          <div *ngFor="let comment of post.comments">
-            <mat-card-content class="comment">
-              <p>{{comment.description}} -
-                <span class="comment-user">{{comment.user}}</span>
-                <span class="comment-date">{{comment.date}}</span>
-              </p>
-            </mat-card-content>
-          </div>
-          <mat-card-actions>
-            <button mat-button>Comment</button>
-          </mat-card-actions>
+  <div class="post-container">
+    <mat-card class="example-card col-md-10 col-md-offset-1">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title (click)="navigateToPost(post._id)">
+          <b>{{post.title}}</b>
+        </mat-card-title>
+        <mat-card-subtitle>{{post.org_name}} Repository: {{post.repository}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="description">
+        <p>
+          {{post.description}}
+        </p>
+      </mat-card-content>
+      <h5>{{post.votes}} Votes
+        <span>{{post.comments.length}} Comments</span>
+      </h5>
+      <mat-card-actions>
+        <button mat-button>Like</button>
+        <button mat-button [matMenuTriggerFor]="menu">Share</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Facebook</button>
+          <button mat-menu-item>Twitter</button>
+        </mat-menu>
+      </mat-card-actions>
+      <hr>
+      <div class="comment-section" *ngIf="post.comments.length !== 0">
+        <div *ngFor="let comment of post.comments">
+          <mat-card-content class="comment">
+            <p>{{comment.description}} -
+              <span class="comment-user">{{comment.user}}</span>
+              <span class="comment-date">{{comment.date}}</span>
+            </p>
+          </mat-card-content>
         </div>
+        <div class="form-container">
+          <mat-form-field>
+            <textarea class="comment-textarea" matInput placeholder="Enter comment here"></textarea>
+          </mat-form-field>
+        </div>
+        <mat-card-actions>
+          <button mat-button>Comment</button>
+        </mat-card-actions>
+      </div>
 
-      </mat-card>
-    </div>
+    </mat-card>
   </div>
-</div>

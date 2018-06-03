@@ -9,7 +9,7 @@ import { MaterialModule } from './material/material.module';
 import { PublicModule } from './public/public.module';
 import { SecureModule } from './secure/secure.module';
 
-// services 
+// services
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { StackService } from './services/stack.service';
@@ -22,6 +22,7 @@ import { SecureComponent } from './secure/secure.component';
 import { CommonFeedComponent } from './secure/common-feed/common-feed.component';
 import { ProfileComponent } from './secure/profile/profile.component';
 import { LoginComponent } from './public/login/login.component';
+import {PostComponent} from './secure/shared/post/post.component';
 
 
 @NgModule({
@@ -31,8 +32,7 @@ import { LoginComponent } from './public/login/login.component';
     SecureComponent,
     CommonFeedComponent,
     ProfileComponent,
-    LoginComponent,
-
+    LoginComponent
   ],
   imports: [
     BrowserModule,

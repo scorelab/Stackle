@@ -1,22 +1,42 @@
-<div class="row">
-  <!-- <div class="col-md-8">
-    <div class="createPostForm">
-        Here goes the angular reactive form
+<div class="container-fluid">
+  <div class="create-post-container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <mat-card>
+          <mat-card-title>Create Post</mat-card-title>
+          <mat-card-subtitle>Create a discussion about your issue</mat-card-subtitle>
+          <mat-card-content>
+            <div class="form-container">
+              <!--<mat-form-field>-->
+                <!--<mat-select placeholder="Organization">-->
+                  <!--<mat-option>-->
+
+                  <!--</mat-option>-->
+                <!--</mat-select>-->
+              <!--</mat-form-field>-->
+              <!--<mat-form-field>-->
+                <!--<mat-select placeholder="Repository">-->
+                  <!--<mat-option >-->
+                    <!---->
+                  <!--</mat-option>-->
+                <!--</mat-select>-->
+              <!--</mat-form-field>-->
+              <mat-form-field>
+                <input matInput placeholder="Title">
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput placeholder="Description" rows="5" ></textarea>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button>Create</button>
+            <button mat-button>Clear</button>
+          </mat-card-actions>
+
+        </mat-card>
+      </div>
     </div>
-    
   </div>
-  <div class="col-md-4">
-    This is for adverts if it ever comes to that
-  </div> -->
-  <div class="col-md-12">
-  </div>
-  <div>
-    <form action="">
-      <input type="text" [(ngModel)]="username" name="username">
-    </form>
-    <button type="button" (click)="someFunction()">CHange name</button>
-    {{username}}
-  </div>
-
-
 </div>

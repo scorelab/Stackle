@@ -1,27 +1,26 @@
 <div class="container-fluid">
   <div class="row" id="home-nav">
-    <div class="col-md-4">
-      <h2 class="mat-h2">Stackle - By Opensource for Opensource</h2>
-    </div>
-    <div class="col col-md-5">
-    </div>
-    <div class="col col-md-1">
-      <h3 class="mat-h3">
-        <a routerLink="commonFeed">Home</a>
-      </h3>
-    </div>
-    <div class="col col-md-1 nav-text">
-      <h3 class="mat-h3">
-        <a routerLink="profile">Profile</a>
-      </h3>
-    </div>
-    <div class="col col-md-1 nav-text">
-      <h3 class="mat-h3" (click)="auth.logout()">Logout</h3>
+    <div class="col col-md-2  col-md-offset-10 nav-text">
+      <div class="nav-items">
+        <h3 class="mat-h3">
+          <a routerLink="profile">
+            <img class="img-circle" src="../../assets/images/user_avatar.png">
+            Profile
+          </a>
+        </h3>
+        <h3 class="mat-h3">
+          <a>
+            Logout
+          </a>
+        </h3>
+      </div>
     </div>
   </div>
   <div class="row" id="home-body">
-    <div class="col-md-2" id="sidebar">
-      <h4 class="mat-h4">Search for Stacks</h4>
+    <div id="sidebar">
+      <h2 class="mat-h2">Stackle</h2>
+      <h5 class="mat-h5">By Opensource for Opensource</h5>
+      <hr>
       <div class="example-container">
         <form>
           <mat-form-field>
@@ -33,24 +32,40 @@
           </button>
         </form>
       </div>
-      <!-- <hr> -->
-      <mat-list>
-        <mat-list-item class="mat-menu-item" (click)="navigateToCreatePost()">
-          <mat-icon matListIcon>note_add</mat-icon>
-          Discuss a issue
-        </mat-list-item>
-      </mat-list>
       <hr>
       <div class="mat-typography">
-        <h4 class="mat-h4">Your Stacks</h4>
         <mat-list>
-          <mat-list-item class="mat-menu-item">Score Lab</mat-list-item>
-          <mat-list-item class="mat-menu-item">Google</mat-list-item>
-          <mat-list-item class="mat-menu-item">Fossasia</mat-list-item>
+          <mat-list-item class="mat-menu-item" (click)="navigateToCommonFeed()">
+            <mat-icon matListIcon>home</mat-icon>
+            Home
+          </mat-list-item>
+          <mat-list-item class="mat-menu-item" (click)="navigateToCreatePost()">
+            <mat-icon matListIcon>note_add</mat-icon>
+            Discuss a issue
+          </mat-list-item>
+          <h4 mat-subheader="">Your Stacks</h4>
+          <mat-list-item class="mat-menu-item">
+            <mat-icon mat-list-icon>
+              <img class="img-circle" src="../../assets/images/user_avatar.png">
+            </mat-icon>
+            Score Lab
+          </mat-list-item>
+          <mat-list-item class="mat-menu-item">
+            <mat-icon mat-list-icon>
+              <img class="img-circle" src="../../assets/images/user_avatar.png">
+            </mat-icon>
+            Google
+          </mat-list-item>
+          <mat-list-item class="mat-menu-item">
+            <mat-icon mat-list-icon>
+              <img class="img-circle" src="../../assets/images/user_avatar.png">
+            </mat-icon>
+            Fossasia
+          </mat-list-item>
         </mat-list>
       </div>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10 col-md-offset-2 view-container">
       <router-outlet></router-outlet>
     </div>
   </div>

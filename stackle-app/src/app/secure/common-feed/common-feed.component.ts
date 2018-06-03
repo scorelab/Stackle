@@ -9,7 +9,7 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./common-feed.component.css']
 })
 export class CommonFeedComponent implements OnInit {
-  private loading: boolean = false;
+  private loading = false;
   private posts;
 
   constructor(
@@ -27,7 +27,7 @@ export class CommonFeedComponent implements OnInit {
     }, error => {
       console.log(error);
       this.loading = false;
-    })
+    });
   }
 
   private navigateToPost(post_id) {

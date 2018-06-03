@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { PostService } from '../../../services/post.service'
+import { PostService } from '../../../services/post.service';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +12,7 @@ import { PostService } from '../../../services/post.service'
 export class PostComponent implements OnInit {
   private postId;
   private post;
-  private loading: boolean = false;
+  private loading = false;
 
   constructor(
     private postService: PostService,
