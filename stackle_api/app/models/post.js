@@ -27,7 +27,7 @@ const postSchema = mongoose.Schema({
     user: { type: String, required: true },
     date: { type: String, required: true },
     votes: Number,
-    comments: [commentSchema]
+    comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 //CRUD operations for POST schema
@@ -52,11 +52,10 @@ postSchema.statics.setPost = function(request, response){
 
 //READ - get all posts
 postSchema.statics.getAll = function(request, response){
-    this.find({}, (error, postsDetails) => {
+    this.find({}).populate('comments').exec((error, postsDetails) => {
             if (error) {
                 return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
             }
-
             return returnWithResponse.configureReturnData({ status: 200, success: true, result: postsDetails }, response);
         });
 }
@@ -66,10 +65,14 @@ postSchema.statics.getById = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validateGetPost();
-            this.findOne({ _id: input.postId }, (error, postDetails) => {
+            this.findOne({ _id: input.postId }).populate('comments').exec((error, postDetails) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
+
+                if(!postDetails)
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post: ${input.postId} not found`}, response);
+
 
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: postDetails }, response);
             });
@@ -83,10 +86,14 @@ postSchema.statics.getAllByUser = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostsByUser();
-            this.find({ user: input.user }, (error, userPosts) => {
+            this.find({ user: input.user }).populate('comments').exec((error, userPosts) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
+
+                if(!userPosts || userPosts.length === 0)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Posts by ${input.user} user not found`}, response);
+
 
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: userPosts }, response);
             });
@@ -100,10 +107,14 @@ postSchema.statics.getAllByOrg = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostToOrganisation();
-            this.find({ org_name: input.organisationName }, (error, organisationPosts) => {
+            this.find({ org_name: input.organisationName }).populate('comments').exec((error, organisationPosts) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
+
+                if(!organisationPosts || organisationPosts.length === 0)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Posts by ${input.organisationName} organisation not found`}, response);
+
 
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationPosts }, response);
             });
@@ -120,13 +131,24 @@ postSchema.statics.commentById = function(request, response){
             const bodyValidator = new Validator(request.body);
             const input = validator.validateCommentOnPost();
             const inputComment = bodyValidator.validateCommentBody();
-            const comment = new Comment(inputComment);
-            Post.findOneAndUpdate({ _id: input.postId }, {$push: {comments: inputComment}}, (error, result) => {
+            var comment = new Comment(inputComment);
+            comment.save(function(err, data){
+                if(err)
+                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                else
+                    console.log(data);
+
+            });
+           
+            Post.findOneAndUpdate({ _id: input.postId }, {$push: {comments: comment._id}}, (error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${request.params.postId} successfully updated` },
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: comment},
                     response);
             });
         } catch (validationError) {
@@ -141,10 +163,14 @@ postSchema.statics.getAllComments = function(request, response){
             const validator = new Validator(request.params);
             const input = validator.validateCommentOnPost();
            
-            Post.findOne({ _id: input.postId }, (error, result) => {
+            Post.findOne({ _id: input.postId }).populate('comments').exec((error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
+
 
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: result.comments },
                     response);
@@ -160,12 +186,16 @@ postSchema.statics.setVoteUp = function(request, response){
             const validator = new Validator(request.params);
             const input = validator.validatePostId();
            
-            Post.findOneAndUpdate({ _id: input.postId }, {$inc: {votes:1}}, {new: true },(error, result) => {
+            Post.findOneAndUpdate({ _id: input.postId }, {$inc: {votes:1}}, {new: true }, (error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: {'votes' : result.votes} },
                     response);
             });
         } catch (validationError) {
@@ -174,7 +204,7 @@ postSchema.statics.setVoteUp = function(request, response){
 }
 
 
-//to increment vote up on Post
+//to decrement vote up on Post
 postSchema.statics.setVoteDown = function(request, response){
      try {
             const validator = new Validator(request.params);
@@ -185,8 +215,85 @@ postSchema.statics.setVoteDown = function(request, response){
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: {'votes' : result.votes}  },
                     response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+//ADD tag to post
+postSchema.statics.addTag = function(request, response){
+    try {
+            const validatorPostId = new Validator(request.params);
+            const input = validatorPostId.validatePostId();
+            var currentId = input.postId;
+
+            const validatorTag = new Validator(request.body);
+            const input2 = validatorTag.validateAddTag();
+            var currentTag = input2.tag;
+
+            Post.findOne({ _id: currentId }, (error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
+
+
+                var tagData = result.tags;
+                var check = tagData.indexOf(currentTag);
+                if(check === -1){
+                    result.tags.push(currentTag);
+                    result.save();
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentTag} added to post ${currentId}`}, response);
+                }
+                else{
+                    return returnWithResponse.configureReturnData({ status: 200, success: false, result: `Post: ${currentId} is already tagged with ${currentTag}`}, response);
+                }    
+               
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+//to remove tag from post
+postSchema.statics.removeTag = function(request, response){
+ try {
+            const validatorPostId = new Validator(request.params);
+            const input = validatorPostId.validatePostId();
+            var currentId = input.postId;
+
+            const validatorTag = new Validator(request.body);
+            const input2 = validatorTag.validateAddTag();
+            var currentTag = input2.tag;
+
+            Post.findOne({ _id: currentId }, (error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post: ${currentId} not found`}, response);
+
+                var tagData = result.tags;    
+                var check = tagData.indexOf(currentTag);
+                if(check === -1){
+                    return returnWithResponse.configureReturnData({ status: 200, success: false, result: `${currentTag} is not found in post: ${currentId}`}, response);
+                }
+                else{
+                    tagData.splice(check, 1);
+                    result.save();    
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentTag} tag is removed from the post : ${currentId}`}, response);
+                }    
+               
             });
         } catch (validationError) {
             return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
@@ -205,6 +312,10 @@ postSchema.statics.deleteById = function(request, response){
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
 
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
+
+
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentId} was sucessfully deleted` }, response);
             });
 
@@ -213,6 +324,100 @@ postSchema.statics.deleteById = function(request, response){
         }
 }
 
+//to delete all post
+postSchema.statics.deleteAll = function(request, response){
+    this.remove({}, function(err){
+         if(err)
+             return returnWithResponse.configureReturnData({ status: 400, success: false, result: err }, response);
+        
+
+         return returnWithResponse.configureReturnData({ status: 200, success: true, result: `All data removed.` }, response);
+     
+    });
+}
+
+//get comment by id
+commentSchema.statics.getCommentById = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateCommentId();
+            this.findOne({ _id: input.commentId }, (error, commentData) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!commentData)
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment: ${input.commentId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: commentData }, response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+//to increment vote up on Comment
+commentSchema.statics.setVoteUp = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateCommentId();
+           
+            this.findOneAndUpdate({ _id: input.commentId }, {$inc: {votes:1}}, {new: true },(error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${input.commentId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+//to decrement vote count on comment
+commentSchema.statics.setVoteDown = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateCommentId();
+           
+            this.findOneAndUpdate({ _id: input.commentId }, {$inc: {votes:-1}}, {new: true },(error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${input.commentId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+
+//to delete all comments
+commentSchema.statics.deleteAll = function(request, response){
+    this.remove({}, function(err){
+         if(err)
+             return returnWithResponse.configureReturnData({ status: 400, success: false, result: err }, response);
+        
+
+         return returnWithResponse.configureReturnData({ status: 200, success: true, result: `All Comment data removed.` }, response);
+     
+    });
+}
 
 const Post = mongoose.model('Post', postSchema);
 const Comment = mongoose.model('Comment', commentSchema);
