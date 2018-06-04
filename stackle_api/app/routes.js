@@ -27,53 +27,53 @@ module.exports = function (app, db) {
 
 
 
-	// get a specific organisation
-	app.get('/api/org/:organisationName', function (request, response) {
-		try {
-			const validator = new Validator(request.params);
-			const input = validator.validateGetOrganisationDetails();
-			Stack.find({ name: input.organisationName }, (error, organisationDetails) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
+	// // get a specific organisation
+	// app.get('/api/org/:organisationName', function (request, response) {
+	// 	try {
+	// 		const validator = new Validator(request.params);
+	// 		const input = validator.validateGetOrganisationDetails();
+	// 		Stack.find({ name: input.organisationName }, (error, organisationDetails) => {
+	// 			if (error) {
+	// 				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+	// 			}
 
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationDetails }, response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
+	// 			return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationDetails }, response);
+	// 		});
+	// 	} catch (validationError) {
+	// 		return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+	// 	}
+	// });
 
 
-	// get all stacks (organisation)
-	app.get('/api/orgs', function (request, response) {
-		Stack.find({}, (error, stacksDetails) => {
-			if (error) {
-				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-			}
+	// // get all stacks (organisation)
+	// app.get('/api/orgs', function (request, response) {
+	// 	Stack.find({}, (error, stacksDetails) => {
+	// 		if (error) {
+	// 			return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+	// 		}
 
-			return returnWithResponse.configureReturnData({ status: 200, success: true, result: stacksDetails }, response);
-		});
-	});
+	// 		return returnWithResponse.configureReturnData({ status: 200, success: true, result: stacksDetails }, response);
+	// 	});
+	// });
 
-	// create stack
-	app.post('/api/stack/create', function (request, response) {
-		try {
-			const validator = new Validator(request.body);
-			const input = validator.validateCreateStack();
-			console.log('Input : ', input);
-			const stack = new Stack(input);
-			stack.save((error, insertedStack) => {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
+	// // create stack
+	// app.post('/api/stack/create', function (request, response) {
+	// 	try {
+	// 		const validator = new Validator(request.body);
+	// 		const input = validator.validateCreateStack();
+	// 		console.log('Input : ', input);
+	// 		const stack = new Stack(input);
+	// 		stack.save((error, insertedStack) => {
+	// 			if (error) {
+	// 				return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+	// 			}
 
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedStack._id }, response);
-			});
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
+	// 			return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedStack._id }, response);
+	// 		});
+	// 	} catch (validationError) {
+	// 		return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+	// 	}
+	// });
 
 	// delete stack
 	app.delete('api/delete/stack/:stackId', function (request, response) {
@@ -118,24 +118,6 @@ module.exports = function (app, db) {
 				return returnWithResponse.configureReturnData({ status: 200, success: true, result: userDetails.subscribedStacks }, response);
 			});
 
-		} catch (validationError) {
-			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
-		}
-	});
-
-	// create user and retruning created user id
-	app.post('/api/newuser', function (request, response) {
-		try {
-			const validator = new Validator(request.body);
-			const input = validator.validateCreateNewUser();
-			const user = new User(input);
-			user.save(function (error, insertedUser) {
-				if (error) {
-					return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-				}
-
-				return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedUser._id }, response);
-			});
 		} catch (validationError) {
 			return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
 		}

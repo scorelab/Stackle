@@ -10,6 +10,8 @@ const db = mongoose.connection;
 const cors = require("cors");
 const postRouter = require('./app/routes/post');
 const commentRouter = require('./app/routes/comment');
+const userRouter = require('./app/routes/user');
+const stackRouter = require('./app/routes/stack');
 
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
@@ -24,7 +26,10 @@ app.use('/', express.static(__dirname + '/'));
 
 //serving endpoint related to post using middleware
 app.use('/api/post', postRouter);
-app.use('/api/comment', commentRouter);          
+app.use('/api/comment', commentRouter);
+app.use('/api/user', userRouter);
+app.use('/api/org', stackRouter);
+
 
 var routes = require("./app/routes");
 routes(app, db);
