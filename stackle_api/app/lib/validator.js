@@ -207,6 +207,7 @@ Validator.prototype.validateUserSubscribeStack = function() {
   return this.input;
 };
 
+
 Validator.prototype.validateGetUserSubscribeStack = function() {
   if (!this.input) { throw new Error('Input is undefined'); }
 

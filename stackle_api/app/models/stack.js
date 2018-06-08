@@ -42,8 +42,7 @@ stackSchema.statics.getAll = function(request, response){
 		});
 }
 
-
-//to get stack by ID
+//to get stack by Name
 stackSchema.statics.getByName = function(request, response){
      try {
 			const validator = new Validator(request.params);
@@ -60,6 +59,7 @@ stackSchema.statics.getByName = function(request, response){
 		}
 }
 
+//to get Stack by Id
 stackSchema.statics.getById = function(request, response){
      try {
 			const validator = new Validator(request.params);
@@ -76,8 +76,9 @@ stackSchema.statics.getById = function(request, response){
 		}
 }
 
+//Only For Developer Mode.
 
-
+//Delete Stack by ID
 stackSchema.statics.deleteById = function(request, response){
 	try {
 			const validator = new Validator(request.params);
@@ -96,7 +97,6 @@ stackSchema.statics.deleteById = function(request, response){
 		}
 }
 
-
 //to delete all post
 stackSchema.statics.clearAll = function(request, response){
     this.remove({}, function(err){
@@ -108,7 +108,6 @@ stackSchema.statics.clearAll = function(request, response){
      
     });
 }
-
 
 const Stack = mongoose.model('Stack', stackSchema);
 module.exports = Stack;

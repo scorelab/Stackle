@@ -25,8 +25,6 @@ const Model = require('../models/stack');
 	});
 
 
-
-
 //Only for developer Mode. Never consume below two APIs	
 
 //clear all data

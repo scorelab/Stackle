@@ -25,7 +25,15 @@ const userModel = require('../models/user');
 //subscribe a stack
 	router.post('/subscribe', function(request, response){
 		userModel.subscribe(request, response);
-	});	
+	});
+
+//unsubscribe a stack
+	router.post('/unsubscribe', function(request, response){
+		userModel.unsubscribe(request, response);
+	});
+
+
+// only for developer mode dont consume below APIs
 
 //clear all data
 	router.delete('/all', function(request, response){

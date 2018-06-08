@@ -113,6 +113,39 @@ userSchema.statics.subscribe = function(request, response){
         }
 }
 
+//unsubscribe the user from stack
+userSchema.statics.unsubscribe = function(request, response){
+    try {
+            const validator = new Validator(request.body);
+            //validating userId and stackId in body
+            const input = validator.validateUserSubscribeStack();
+            
+            this.findOne({ userId: input.userId }, (error, result) => {
+                 if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: `User: ${input.userId} not found`}, response);   
+           
+                var stacks = result.subscribedStacks;
+                var check = stacks.indexOf(input.stackId);
+                if(check === -1){
+                    return returnWithResponse.configureReturnData({ status: 200, success: false, result: `user ${input.userId} is not subscribed to stack : ${input.stackId} `}, response);
+                }
+                else{
+                   
+                    stacks.splice(check,1);
+                    result.save();
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `user ${input.userId} Unsubscribed to stack : ${input.stackId} `}, response);
+                }       
+
+            });
+
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
 
 //delete all user
 userSchema.statics.clearAll = function(request, response){
