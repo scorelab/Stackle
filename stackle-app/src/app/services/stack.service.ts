@@ -22,4 +22,11 @@ export class StackService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  //get all organizations subscribed by the user
+  public getAllOrgsByUser(userId) {
+    return this.http.get(`${this.apiUrl}/api/stack/subscribed/${userId}`, this.options)
+      .map((res: Response) => res.json())
+      .catch((error: any)=> Observable.throw(error.json().error || 'Server error'));
+  }
+
 }
