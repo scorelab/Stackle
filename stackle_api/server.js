@@ -20,7 +20,6 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride());
 app.use(cors());
 
-
 //serving static index.html file using middleware
 app.use('/', express.static(__dirname + '/'));
 
@@ -43,11 +42,10 @@ routes(app, db);
     res.status(500).send('Something broke!')
 });*/
 
+// Add option { useMongoClient: true } if mongoose version < 5
+var option = database.option(mongoose.version); 
 
-
-const options = { useMongoClient: true };
-
-mongoose.connect(database.url, options, function (err) {
+mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");
     if (err) {
         console.log("\nCouldn't connect to local database. Please make sure your local mongodb server is running. \nFind more: https://github.com/scorelab/Stackle#installing-mongodb\n\nConnecting to alternative remote (mongolab) database ...");

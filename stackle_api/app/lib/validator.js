@@ -22,7 +22,7 @@ Validator.prototype.validateAddingPost = function() {
 
   if (!!!~Object.keys(this.input).indexOf('tags')) { throw new Error('Attribute tags is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('link_issue')) { throw new Error('Attribute link_issue is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('linkIssue')) { throw new Error('Attribute link_issue is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
 

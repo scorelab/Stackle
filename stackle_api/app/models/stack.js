@@ -17,7 +17,6 @@ stackSchema.statics.createStack = function(request, response){
 	try {
 			const validator = new Validator(request.body);
 			const input = validator.validateCreateStack();
-			console.log('Input : ', input);
 			const stack = new Stack(input);
 			stack.save((error, insertedStack) => {
 				if (error) {

@@ -123,7 +123,6 @@ postSchema.statics.getAllByOrg = function(request, response){
         }
 }
 
-
 //Comment on a post
 postSchema.statics.commentById = function(request, response){
         try {
@@ -155,7 +154,6 @@ postSchema.statics.commentById = function(request, response){
             return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
-
 
 //get All comments for a single post
 postSchema.statics.getAllComments = function(request, response){
