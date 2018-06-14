@@ -21,3 +21,8 @@ mat-card-subtitle p {
   font-size: 12px;
   font-weight: 500;
 }
+
+.post-description {
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+}

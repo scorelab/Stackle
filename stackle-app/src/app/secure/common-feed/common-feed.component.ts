@@ -30,7 +30,6 @@ export class CommonFeedComponent implements OnInit {
   getAllPosts() {
     this.postService.getAllPosts().subscribe(response => {
       // this.loading = true;
-      console.log(response.json());
       this.posts = response.json().result;
       this.loading = false;
     }, error => {
