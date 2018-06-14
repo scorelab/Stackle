@@ -3,9 +3,21 @@
 }
 
 .post{
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 .example-header-image img{
   width: 30px;
+}
+
+.mat-chip {
+  font-size: 10px;
+  height: auto;
+  padding: 4px 10px !important;
+}
+
+mat-card-subtitle p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
 }

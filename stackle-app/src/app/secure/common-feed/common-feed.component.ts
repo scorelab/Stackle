@@ -20,10 +20,18 @@ export class CommonFeedComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.getAllPosts();
+  }
+
+  private navigateToPost(post_id) {
+    this.router.navigate(['app/post/' + post_id]);
+  }
+
+  getAllPosts() {
     this.postService.getAllPosts().subscribe(response => {
       // this.loading = true;
       console.log(response.json());
-      this.posts = response.json();
+      this.posts = response.json().result;
       this.loading = false;
     }, error => {
       console.log(error);
@@ -31,8 +39,10 @@ export class CommonFeedComponent implements OnInit {
     });
   }
 
-  private navigateToPost(post_id) {
-    this.router.navigate(['app/post/' + post_id]);
+  voteUp(id) {
+    this.postService.voteUp(id).subscribe( response => {
+      this.getAllPosts();
+    })
   }
 
 }

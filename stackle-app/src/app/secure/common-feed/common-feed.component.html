@@ -13,11 +13,20 @@
             <mat-card class="example-card col-md-12">
               <mat-card-header>
                 <div mat-card-avatar class="example-header-image">
-                  <img src="{{post.avatar_url}}">
+                  <img src="../../../assets/images/user_avatar.png">
                 </div>
-                <mat-card-title (click)="navigateToPost(post._id)">{{post.title}}</mat-card-title>
-                <mat-card-subtitle>{{post.org_name}} Repository: {{post.repository}}</mat-card-subtitle>
+                <mat-card-title (click)="navigateToPost(post._id)"><b>{{post.title}}</b></mat-card-title>
+                <mat-card-subtitle>
+                  <p>Repository: <a href="{{post.repository}}"> {{post.repository}} </a></p>
+                  <p>{{post.org_name}}</p>
+                </mat-card-subtitle>
               </mat-card-header>
+              <div>
+                <p>{{post.description}}</p>
+                <mat-chip-list>
+                  <mat-chip *ngFor="let tag of post.tags">{{tag.name}}</mat-chip>
+                </mat-chip-list>
+              </div>
 
               <!-- <mat-card-content>
               <p>
@@ -28,7 +37,7 @@
                 <span>{{post.comments.length}} Comments</span>
               </h5>
               <mat-card-actions>
-                <button mat-button>LIKE</button>
+                <button mat-button (click)="voteUp(post._id)">LIKE</button>
                 <button mat-button>SHARE</button>
               </mat-card-actions>
             </mat-card>
