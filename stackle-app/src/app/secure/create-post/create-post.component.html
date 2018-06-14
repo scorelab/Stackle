@@ -22,17 +22,40 @@
                 <!--</mat-select>-->
               <!--</mat-form-field>-->
               <mat-form-field>
-                <input matInput placeholder="Title">
+                <input matInput placeholder="Title" [(ngModel)]="postObject.title">
               </mat-form-field>
               <mat-form-field>
-                <textarea matInput placeholder="Description" rows="5" ></textarea>
+                <input matInput placeholder="Organization" [(ngModel)]="postObject.org_name">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Repository" [(ngModel)]="postObject.repository">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Issue" [(ngModel)]="postObject.link_issue">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let tag of postObject.tags" [selectable]="selectable"
+                            [removable]="removable" (removed)="removeTag(tag)">
+                      {{tag.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+                <input placeholder="Tags ..."
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="addTag($event)">
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput placeholder="Description" rows="5" [(ngModel)]="postObject.description"></textarea>
               </mat-form-field>
             </div>
           </mat-card-content>
 
           <mat-card-actions>
-            <button mat-button>Create</button>
-            <button mat-button>Clear</button>
+            <button mat-button (click)="createPost()">Create</button>
+            <button mat-button (click)="clear()">Clear</button>
           </mat-card-actions>
 
         </mat-card>

@@ -21,4 +21,11 @@ export class PostService {
     return this.http.get(`${this.apiUrl}/api/post/${id}`, this.options);
   }
 
+  createPost(postObject){
+    console.log("create post : post service : "+ postObject);
+    return this.http.post(`${this.apiUrl}/api/post/create`, postObject).map(function(response){
+      console.log(response);
+    }).subscribe();
+  }
+
 }

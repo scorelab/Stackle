@@ -8,6 +8,7 @@ import { PostService } from '../../services/post.service';
   templateUrl: './common-feed.component.html',
   styleUrls: ['./common-feed.component.css']
 })
+
 export class CommonFeedComponent implements OnInit {
   private loading = false;
   private posts;
