@@ -14,7 +14,7 @@ export class PostService {
   ) { }
 
   getAllPosts(params?){
-    return this.http.get(`${this.apiUrl}/api/posts`, this.options);
+    return this.http.get(`${this.apiUrl}/api/post/all`, this.options);
   }
 
   getPost(id){
@@ -24,6 +24,14 @@ export class PostService {
   createPost(postObject){
     console.log("create post : post service : "+ postObject);
     return this.http.post(`${this.apiUrl}/api/post/create`, postObject);
+  }
+
+  voteUp(id) {
+    return this.http.post(`${this.apiUrl}/api/post/vote/up/${id}`, {});
+  }
+
+  voteDown(id) {
+    return this.http.post(`${this.apiUrl}/api/post/vote/down/${id}`, {});
   }
 
 }
