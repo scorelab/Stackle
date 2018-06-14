@@ -15,17 +15,20 @@ export class CreatePostComponent implements OnInit {
   private username ;
   private postObject;
   private separatorKeyCodes;
+  private loading = false;
 
-  visible: boolean = true;
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = true;
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    // private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.postObject = {};
-    this.postObject.tags = [{name: "test"}];
+    this.postObject.tags = [];
     this.postObject.votes = 0;
     this.separatorKeyCodes = [ENTER, COMMA];
   }
@@ -43,7 +46,16 @@ export class CreatePostComponent implements OnInit {
     }else {
       this.postObject.date = new Date();
       this.postObject.user = "smpuser";
-      this.postService.createPost(this.postObject);
+      this.loading = true;
+      this.postService.createPost(this.postObject).subscribe( response => {
+        console.log(response);
+        if(response.status == 200){
+
+        }else{
+
+        }
+        // this.showSnackBar("Post created!");
+      })
     }
   };
 
@@ -75,4 +87,10 @@ export class CreatePostComponent implements OnInit {
       this.postObject.tags.splice(index,1);
     }
   }
+
+  // showSnackBar(message:String) {
+  //   this.snackBar.open(message, {
+  //     duration: 2000
+  //   })
+  // }
 }

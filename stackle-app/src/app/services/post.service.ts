@@ -23,9 +23,7 @@ export class PostService {
 
   createPost(postObject){
     console.log("create post : post service : "+ postObject);
-    return this.http.post(`${this.apiUrl}/api/post/create`, postObject).map(function(response){
-      console.log(response);
-    }).subscribe();
+    return this.http.post(`${this.apiUrl}/api/post/create`, postObject);
   }
 
 }
