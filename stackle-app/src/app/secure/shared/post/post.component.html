@@ -2,7 +2,11 @@
   <div class="post-container">
     <mat-card class="example-card col-md-10 col-md-offset-1">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
+        <div mat-card-avatar class="example-header-image">
+          <div mat-card-avatar class="example-header-image">
+            <img src="../../../assets/images/user_avatar.png">
+          </div>
+        </div>
         <mat-card-title (click)="navigateToPost(post._id)">
           <b>{{post.title}}</b>
         </mat-card-title>
@@ -13,6 +17,9 @@
         <p>
           {{post.description}}
         </p>
+        <mat-chip-list>
+          <mat-chip *ngFor="let tag of post.tags">{{tag.name}}</mat-chip>
+        </mat-chip-list>
       </mat-card-content>
       <h5>{{post.votes}} Votes
         <span>{{post.comments.length}} Comments</span>
@@ -26,23 +33,30 @@
         </mat-menu>
       </mat-card-actions>
       <hr>
+      <div class="form-container">
+        <mat-form-field>
+          <textarea class="comment-textarea" matInput placeholder="Enter comment here" [(ngModel)]="commentObject.description"></textarea>
+        </mat-form-field>
+      </div>
+      <mat-card-actions>
+        <button mat-button (click)="postComment()">Comment</button>
+      </mat-card-actions>
       <div class="comment-section" *ngIf="post.comments.length !== 0">
         <div *ngFor="let comment of post.comments">
           <mat-card-content class="comment">
             <p>{{comment.description}} -
               <span class="comment-user">{{comment.user}}</span>
-              <span class="comment-date">{{comment.date}}</span>
+              <span class="comment-date">{{comment.date | date}} {{comment.date | date:'shortTime'}}</span>
+              <button mat-icon-button>
+                <mat-icon matBadge="15" matBadgeColor="warn">thumb_up</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon matBadge="15" matBadgeColor="warn">thumb_down</mat-icon>
+              </button>
+              <a>Reply</a>
             </p>
           </mat-card-content>
         </div>
-        <div class="form-container">
-          <mat-form-field>
-            <textarea class="comment-textarea" matInput placeholder="Enter comment here"></textarea>
-          </mat-form-field>
-        </div>
-        <mat-card-actions>
-          <button mat-button>Comment</button>
-        </mat-card-actions>
       </div>
 
     </mat-card>

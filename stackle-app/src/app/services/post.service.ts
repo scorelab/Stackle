@@ -34,4 +34,7 @@ export class PostService {
     return this.http.post(`${this.apiUrl}/api/post/vote/down/${id}`, {});
   }
 
+  postComment(postId, commentObject) {
+    return this.http.post(`${this.apiUrl}/api/comment/${postId}`, commentObject);
+  }
 }
