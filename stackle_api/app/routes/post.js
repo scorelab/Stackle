@@ -28,12 +28,12 @@ const Post = postModels.Post;
 		Post.getAllByOrg(request, response);
 	});	
 
-//to clear model
+//to clear model - (only for developer mode)
 	router.delete('/all', function(request, response){
 		Post.deleteAll(request, response);
 	});
 
-//to delete a post by ID
+//to delete a post by ID - (only for developer mode)
 	router.delete('/:postId', function (request, response) {
 		Post.deleteById(request, response);
 	});

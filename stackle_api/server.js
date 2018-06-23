@@ -10,6 +10,8 @@ const db = mongoose.connection;
 const cors = require("cors");
 const postRouter = require('./app/routes/post');
 const commentRouter = require('./app/routes/comment');
+const userRouter = require('./app/routes/user');
+const stackRouter = require('./app/routes/stack');
 
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
@@ -18,13 +20,15 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride());
 app.use(cors());
 
-
 //serving static index.html file using middleware
 app.use('/', express.static(__dirname + '/'));
 
 //serving endpoint related to post using middleware
 app.use('/api/post', postRouter);
-app.use('/api/comment', commentRouter);          
+app.use('/api/comment', commentRouter);
+app.use('/api/user', userRouter);
+app.use('/api/org', stackRouter);
+
 
 var routes = require("./app/routes");
 routes(app, db);
@@ -38,11 +42,10 @@ routes(app, db);
     res.status(500).send('Something broke!')
 });*/
 
+// Add option { useMongoClient: true } if mongoose version < 5
+var option = database.option(mongoose.version); 
 
-
-const options = { useMongoClient: true };
-
-mongoose.connect(database.url, options, function (err) {
+mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");
     if (err) {
         console.log("\nCouldn't connect to local database. Please make sure your local mongodb server is running. \nFind more: https://github.com/scorelab/Stackle#installing-mongodb\n\nConnecting to alternative remote (mongolab) database ...");
