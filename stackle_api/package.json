@@ -33,11 +33,15 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
     "jwks-rsa": "^1.2.1",
     "method-override": "^2.3.10",
     "mongoose": "^5.1.5",
     "morgan": "^1.9.0",
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.3",
+    "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
+    "passport-http-bearer": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

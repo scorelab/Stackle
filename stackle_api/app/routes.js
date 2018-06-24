@@ -14,10 +14,9 @@ const Reply = postModels.Reply;
 
 module.exports = function (app, db) {
 
-	//api
-	//TODO later
-	app.get('/api/login/', function (request, response) {
-		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
+	
+	app.get('/login', function (request, response) {
+		response.redirect('/auth/github');
 	});
 
 	//needs to intergrate with github for implementation
