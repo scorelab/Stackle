@@ -13,6 +13,7 @@ import { SecureModule } from './secure/secure.module';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { StackService } from './services/stack.service';
+import { GithubService } from './services/github.service'
 
 import { AppComponent } from './app.component';
 
@@ -47,7 +48,8 @@ import {PostComponent} from './secure/shared/post/post.component';
   providers: [
     AuthService,
     PostService,
-    StackService
+    StackService,
+    GithubService
   ],
   bootstrap: [AppComponent]
 })
