@@ -8,6 +8,8 @@ import { GithubService } from '../../services/github.service';
 })
 export class ProfileComponent implements OnInit {
 
+  private profileObject;
+
   constructor(
     private gitHubService: GithubService
   ) { }
