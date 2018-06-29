@@ -22,7 +22,7 @@ Validator.prototype.validateAddingPost = function() {
 
   if (!!!~Object.keys(this.input).indexOf('tags')) { throw new Error('Attribute tags is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('link_issue')) { throw new Error('Attribute link_issue is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('linkIssue')) { throw new Error('Attribute link_issue is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
 
@@ -43,6 +43,18 @@ Validator.prototype.validateGetPost = function() {
 
   return this.input;
 };
+
+
+Validator.prototype.validateUserId = function() {
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('userId')) { throw new Error('Attribute userId is missing'); }
+
+  return this.input;
+};
+
 
 Validator.prototype.validateDeletePost = function() {
   if (!this.input) { throw new Error('Input is undefined'); }
@@ -80,6 +92,17 @@ Validator.prototype.validateGetOrganisationDetails = function() {
   if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
 
   if (!!!~Object.keys(this.input).indexOf('organisationName')) { throw new Error('Attribute organisationName is missing'); }
+
+  return this.input;
+};
+
+
+Validator.prototype.validateStackId = function() {
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('stackId')) { throw new Error('Attribute stackId is missing'); }
 
   return this.input;
 };
@@ -155,9 +178,9 @@ Validator.prototype.validateCreateStack = function() {
 
   if (!!!~Object.keys(this.input).indexOf('stackleUrl')) { throw new Error('Attribute stackleUrl is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('githubUrl')) { throw new Error('Attribute githubUrl is missing'); }
+  // if (!!!~Object.keys(this.input).indexOf('githubUrl')) { throw new Error('Attribute githubUrl is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('created_user')) { throw new Error('Attribute created_user is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('createdUser')) { throw new Error('Attribute createdUser is missing'); }
 
   return this.input;
 };
@@ -177,12 +200,13 @@ Validator.prototype.validateUserSubscribeStack = function() {
 
   if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
 
-  if (!!!~Object.keys(this.input).indexOf('stackName')) { throw new Error('Attribute stackName is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('stackId')) { throw new Error('Attribute stackId is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('userId')) { throw new Error('Attribute userId is missing'); }
 
   return this.input;
 };
+
 
 Validator.prototype.validateGetUserSubscribeStack = function() {
   if (!this.input) { throw new Error('Input is undefined'); }
@@ -199,14 +223,13 @@ Validator.prototype.validateCreateNewUser = function() {
 
   if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
 
-  if (!!!~Object.keys(this.input).indexOf('subscribed_stacks')) 
-  { throw new Error('Attribute subscribed_stacks is missing'); }
-
-  if (!!!~Object.keys(this.input).indexOf('gitlab')) { throw new Error('Attribute gitlab is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('token')) { throw new Error('Attribute token is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('userId')) { throw new Error('Attribute userId is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('github')) { throw new Error('Attribute github is missing'); }
+  if (!!!~Object.keys(this.input).indexOf('email')) { throw new Error('Attribute email is missing'); }
+
+  if (!!!~Object.keys(this.input).indexOf('name')) { throw new Error('Attribute name is missing'); }
 
   return this.input;
 };

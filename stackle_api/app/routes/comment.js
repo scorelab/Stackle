@@ -15,7 +15,7 @@ const Comment = postModels.Comment;
 		Model.getAllComments(request, response);
 	});
 
-//to clear all comment
+//to clear all comment - (only for developer mode)
 	router.delete('/all', function(request, response){
 		Comment.deleteAll(request, response);
 	});
