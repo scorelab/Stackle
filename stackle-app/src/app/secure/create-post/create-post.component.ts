@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import {MatChipInputEvent} from '@angular/material';
+import { MatSnackBar } from '@angular/material'
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
+import { Router } from '@angular/router';
 
 
 
@@ -23,7 +25,8 @@ export class CreatePostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    // private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -38,23 +41,27 @@ export class CreatePostComponent implements OnInit {
     console.log("create post called");
 
     if(this.postObject.title == "" || this.postObject.title == undefined){
-
+      this.showSnackBar('Please enter a title!');
     }else if(this.postObject.org_name == "" || this.postObject.org_name == undefined){
-
+      this.showSnackBar('Please enter an organization name!');
     }else if(this.postObject.repository == "" || this.postObject.repository == undefined){
+      this.showSnackBar('Please enter a repository!');
+    }else if(this.postObject.description == "" || this.postObject.description == undefined){
+      this.showSnackBar('Please enter a description!');
+    }
 
-    }else {
+    else {
       this.postObject.date = new Date();
       this.postObject.user = "smpuser";
       this.loading = true;
       this.postService.createPost(this.postObject).subscribe( response => {
         console.log(response);
         if(response.status == 200){
-
+            this.showSnackBar('Post created!');
+            this.router.navigate(['app/commonFeed']);
         }else{
-
+            this.showSnackBar('Could not create post!');
         }
-        // this.showSnackBar("Post created!");
       })
     }
   };
@@ -88,9 +95,9 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  // showSnackBar(message:String) {
-  //   this.snackBar.open(message, {
-  //     duration: 2000
-  //   })
-  // }
+  showSnackBar(message:String) {
+    this.snackBar.open(message, null {
+      duration: 2000
+    })
+  }
 }
