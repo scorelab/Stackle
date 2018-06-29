@@ -22,9 +22,7 @@ export class ProfileComponent implements OnInit {
   getProfileObject(){
     let username = 'ntbandara3';
     this.gitHubService.getProfileObject(username).subscribe(response => {
-        console.log(response);
-        this.profileObject = JSON.parse(response._body);
-        console.log(this.profileObject);
+        this.profileObject = JSON.parse(response['_body']);
     }, error => {
         console.error(error);
     })
