@@ -47,24 +47,9 @@ routes(app, db);
 });*/
 
 // Add option { useMongoClient: true } if mongoose version < 5
-var option = database.option(mongoose.version); 
+var option = database.option(mongoose.version);
 
-<<<<<<< HEAD
-app.use(function (err, req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  console.error(err.stack);
-  res.status(500).send('Something broke!')
-});
-
-
-const options = { useMongoClient: true };
-
-mongoose.connect(database.url, options, function (err) {
-=======
 mongoose.connect(database.url, option, function (err) {
->>>>>>> aa9f4d690fac64190024f490ca9fbe02b95499bc
     console.log("Connecting to the database...");
     if (err) {
         console.log("\nCouldn't connect to local database. Please make sure your local mongodb server is running. \nFind more: https://github.com/scorelab/Stackle#installing-mongodb\n\nConnecting to alternative remote (mongolab) database ...");

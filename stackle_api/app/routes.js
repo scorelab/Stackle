@@ -14,7 +14,6 @@ const Reply = postModels.Reply;
 
 module.exports = function (app, db) {
 
-<<<<<<< HEAD
     //api
     //TODO later
     app.get('/api/login/', function (request, response) {
@@ -149,23 +148,3 @@ module.exports = function (app, db) {
     });
 
 }
-=======
-	//api
-	//TODO later
-	app.get('/api/login/', function (request, response) {
-		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
-	});
-
-	//needs to intergrate with github for implementation
-	app.get('/home', function (request, response) {
-		return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
-	});
-
-	app.get('/api/notifications', function (request, response) { });
-
-	app.get('/*', function (request, response) {
-		response.sendFile('./public/404.html');
-	});
-
-}
->>>>>>> aa9f4d690fac64190024f490ca9fbe02b95499bc
