@@ -14,7 +14,6 @@ const Reply = postModels.Reply;
 
 module.exports = function (app, db) {
 
-
     //api
     //TODO later
     app.get('/api/login/', function (request, response) {
@@ -250,5 +249,4 @@ module.exports = function (app, db) {
     app.get('/*', function (request, response) {
         response.sendFile('./public/404.html');
     });
-
 }
