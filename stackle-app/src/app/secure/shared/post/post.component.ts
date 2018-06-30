@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
     this.post.comments = [];
     this.loading = true;
     this.commentObject = {};
-    this.commentObject.description = "test";
+    // this.commentObject.description = "test";
     this.commentObject.votes = 0;
     //Demo User
     this.commentObject.user = "smpuser";
@@ -50,6 +50,25 @@ export class PostComponent implements OnInit {
       this.commentObject.description = "";
       this.getPostData();
     })
+  }
+
+  voteOnPost(){
+    //TODO: check user - vote up/down
+    this.postService.voteUp(this.postId).subscribe( response => {
+      this.getPostData();
+    });
+  }
+
+  voteUpOnComment(id){
+      this.postService.voteUpOnComment(id).subscribe( response => {
+        this.getPostData();
+      })
+  }
+
+  voteDownOnComment(id){
+      this.postService.voteDownOnComment(id).subscribe( response => {
+        this.getPostData();
+      })
   }
 
 }
