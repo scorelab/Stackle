@@ -26,3 +26,7 @@ mat-card-subtitle p {
   white-space: pre-wrap;
   margin-bottom: 20px;
 }
+
+.feed-container {
+  margin-top: 10vh;
+}

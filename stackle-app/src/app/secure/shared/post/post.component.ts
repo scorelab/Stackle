@@ -21,6 +21,8 @@ export class PostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.post = {};
+    this.post.comments = [];
     this.loading = true;
     this.commentObject = {};
     this.commentObject.description = "test";
@@ -29,7 +31,6 @@ export class PostComponent implements OnInit {
     this.commentObject.user = "smpuser";
     this.activatedRoute.params.subscribe(params => {
       this.postId = params['id'];
-      // console.log(this.postId);
       this.getPostData();
     });
 
@@ -39,13 +40,11 @@ export class PostComponent implements OnInit {
     this.postService.getPost(this.postId).subscribe(post => {
       this.post = null;
       this.post = post.json().result;
-      console.log(post.json());
       this.loading = false;
     });
   }
 
   postComment(){
-    console.log(this.commentObject.description);
     this.commentObject.date = new Date();
     this.postService.postComment(this.postId, this.commentObject).subscribe( response => {
       this.commentObject.description = "";
