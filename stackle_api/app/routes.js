@@ -17,14 +17,21 @@ module.exports = function (app, db) {
     //api
     //TODO later
     app.get('/api/login/', function (request, response) {
-        return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
+        return returnWithResponse.configureReturnData({
+            status: 501,
+            success: false,
+            result: 'Not Implemented'
+        }, response);
     });
 
     //needs to intergrate with github for implementation
     app.get('/home', function (request, response) {
-        return returnWithResponse.configureReturnData({ status: 501, success: false, result: 'Not Implemented' }, response);
+        return returnWithResponse.configureReturnData({
+            status: 501,
+            success: false,
+            result: 'Not Implemented'
+        }, response);
     });
-
 
 
     // get a specific organisation
@@ -32,15 +39,27 @@ module.exports = function (app, db) {
         try {
             const validator = new Validator(request.params);
             const input = validator.validateGetOrganisationDetails();
-            Stack.find({ name: input.organisationName }, (error, organisationDetails) => {
+            Stack.find({name: input.organisationName}, (error, organisationDetails) => {
                 if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                    return returnWithResponse.configureReturnData({
+                        status: 400,
+                        success: false,
+                        result: error
+                    }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: organisationDetails }, response);
+                return returnWithResponse.configureReturnData({
+                    status: 200,
+                    success: true,
+                    result: organisationDetails
+                }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({
+                status: 502,
+                success: false,
+                result: validationError
+            }, response);
         }
     });
 
@@ -49,10 +68,14 @@ module.exports = function (app, db) {
     app.get('/api/orgs', function (request, response) {
         Stack.find({}, (error, stacksDetails) => {
             if (error) {
-                return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                return returnWithResponse.configureReturnData({status: 400, success: false, result: error}, response);
             }
 
-            return returnWithResponse.configureReturnData({ status: 200, success: true, result: stacksDetails }, response);
+            return returnWithResponse.configureReturnData({
+                status: 200,
+                success: true,
+                result: stacksDetails
+            }, response);
         });
     });
 
@@ -65,24 +88,40 @@ module.exports = function (app, db) {
             const stack = new Stack(input);
             stack.save((error, insertedStack) => {
                 if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                    return returnWithResponse.configureReturnData({
+                        status: 400,
+                        success: false,
+                        result: error
+                    }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedStack._id }, response);
+                return returnWithResponse.configureReturnData({
+                    status: 200,
+                    success: true,
+                    result: insertedStack._id
+                }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({
+                status: 502,
+                success: false,
+                result: validationError
+            }, response);
         }
     });
 
     // delete stack
     app.delete('api/delete/stack/:stackId', function (request, response) {
         const stackId = request.params.stackId;
-        Stack.remove({ _id: stackId }, (error, result) => {
+        Stack.remove({_id: stackId}, (error, result) => {
             if (error) {
-                return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                return returnWithResponse.configureReturnData({status: 400, success: false, result: error}, response);
             }
-            return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${stackId} was sucessfully deleted` },
+            return returnWithResponse.configureReturnData({
+                    status: 200,
+                    success: true,
+                    result: `${stackId} was sucessfully deleted`
+                },
                 response);
         });
     });
@@ -92,16 +131,28 @@ module.exports = function (app, db) {
         try {
             const validator = new Validator(request.body);
             const input = validator.validateUserSubscribeStack();
-            User.findOneAndUpdate({ userId: input.userId }, { $push: { subscribedStacks: input.stackName } }, (error, updatedResult) => {
+            User.findOneAndUpdate({userId: input.userId}, {$push: {subscribedStacks: input.stackName}}, (error, updatedResult) => {
                 if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                    return returnWithResponse.configureReturnData({
+                        status: 400,
+                        success: false,
+                        result: error
+                    }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${stackName} was sucessfully updated` },
+                return returnWithResponse.configureReturnData({
+                        status: 200,
+                        success: true,
+                        result: `${stackName} was sucessfully updated`
+                    },
                     response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({
+                status: 502,
+                success: false,
+                result: validationError
+            }, response);
         }
     });
 
@@ -110,16 +161,28 @@ module.exports = function (app, db) {
         try {
             const validator = new Validator(request.params);
             const input = validator.validateGetUserSubscribeStack();
-            User.findOne({ userId: input.userId }, (error, userDetails) => {
+            User.findOne({userId: input.userId}, (error, userDetails) => {
                 if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                    return returnWithResponse.configureReturnData({
+                        status: 400,
+                        success: false,
+                        result: error
+                    }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: userDetails.subscribedStacks }, response);
+                return returnWithResponse.configureReturnData({
+                    status: 200,
+                    success: true,
+                    result: userDetails.subscribedStacks
+                }, response);
             });
 
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({
+                status: 502,
+                success: false,
+                result: validationError
+            }, response);
         }
     });
 
@@ -131,20 +194,59 @@ module.exports = function (app, db) {
             const user = new User(input);
             user.save(function (error, insertedUser) {
                 if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                    return returnWithResponse.configureReturnData({
+                        status: 400,
+                        success: false,
+                        result: error
+                    }, response);
                 }
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: insertedUser._id }, response);
+                return returnWithResponse.configureReturnData({
+                    status: 200,
+                    success: true,
+                    result: insertedUser._id
+                }, response);
             });
         } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError }, response);
+            return returnWithResponse.configureReturnData({
+                status: 502,
+                success: false,
+                result: validationError
+            }, response);
         }
     });
 
-    app.get('/api/notifications', function (request, response) { });
+    app.get('/api/notifications', function (request, response) {
+    });
 
     app.get('/*', function (request, response) {
         response.sendFile('./public/404.html');
     });
 
+
+    //api
+    //TODO later
+    app.get('/api/login/', function (request, response) {
+        return returnWithResponse.configureReturnData({
+            status: 501,
+            success: false,
+            result: 'Not Implemented'
+        }, response);
+    });
+
+    //needs to intergrate with github for implementation
+    app.get('/home', function (request, response) {
+        return returnWithResponse.configureReturnData({
+            status: 501,
+            success: false,
+            result: 'Not Implemented'
+        }, response);
+    });
+
+    app.get('/api/notifications', function (request, response) {
+    });
+
+    app.get('/*', function (request, response) {
+        response.sendFile('./public/404.html');
+    });
 }
