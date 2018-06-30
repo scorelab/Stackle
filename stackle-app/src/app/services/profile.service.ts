@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 
 @Injectable()
-export class GithubService {
+export class ProfileService {
 
   private apiUrl = 'https://api.github.com';
 

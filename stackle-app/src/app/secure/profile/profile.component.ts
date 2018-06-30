@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubService } from '../../services/github.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,22 +9,26 @@ import { GithubService } from '../../services/github.service';
 export class ProfileComponent implements OnInit {
 
   private profileObject;
+  private loading = false;
 
   constructor(
-    private gitHubService: GithubService
+    private profileService: ProfileService
   ) { }
 
   ngOnInit() {
     this.profileObject = {};
     this.getProfileObject();
+    this.loading = true;
   }
 
   getProfileObject(){
     let username = 'ntbandara3';
-    this.gitHubService.getProfileObject(username).subscribe(response => {
+    this.profileService.getProfileObject(username).subscribe(response => {
         this.profileObject = JSON.parse(response['_body']);
+        this.loading = false;
     }, error => {
         console.error(error);
+        this.loading = false;
     })
   }
 
