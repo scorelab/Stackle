@@ -56,7 +56,6 @@ export class AuthService {
         this.lock.resumeAuth(window.location.hash, (err, authResult) => {
           if (err) {
             this.router.navigate(['/']);
-            console.log(err);
             alert(`Error: ${err.error}. Check the console for further details.`);
             return;
           }
@@ -72,8 +71,6 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    console.log('auth tokens saved');
-    console.log(authResult);
   }
 
   public logout(): void {

@@ -33,7 +33,6 @@ export class CommonFeedComponent implements OnInit {
       this.posts = response.json().result;
       this.loading = false;
     }, error => {
-      console.log(error);
       this.loading = false;
     });
   }

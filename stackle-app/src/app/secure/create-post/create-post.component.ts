@@ -38,8 +38,6 @@ export class CreatePostComponent implements OnInit {
 
 
   createPost = () => {
-    console.log("create post called");
-
     if(this.postObject.title == "" || this.postObject.title == undefined){
       this.showSnackBar('Please enter a title!');
     }else if(this.postObject.org_name == "" || this.postObject.org_name == undefined){
@@ -55,7 +53,6 @@ export class CreatePostComponent implements OnInit {
       this.postObject.user = "smpuser";
       this.loading = true;
       this.postService.createPost(this.postObject).subscribe( response => {
-        console.log(response);
         if(response.status == 200){
             this.showSnackBar('Post created!');
             this.router.navigate(['app/commonFeed']);
