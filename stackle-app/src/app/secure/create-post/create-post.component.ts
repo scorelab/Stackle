@@ -95,8 +95,8 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
-  showSnackBar(message:String) {
-    this.snackBar.open(message, null {
+  showSnackBar(message:string) {
+    this.snackBar.open(message, null, {
       duration: 2000
     })
   }
