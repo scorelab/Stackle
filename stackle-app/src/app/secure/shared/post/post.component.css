@@ -34,6 +34,13 @@
   width: 100%;
 }
 
+.comment-votes {
+  background-color: #efefef;
+  border-radius: 20px;
+  padding: 2px 5px;
+  margin-left: 10px;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;

@@ -55,7 +55,7 @@
             <p>{{comment.description}} -
               <span class="comment-user">{{comment.user}}</span>
               <span class="comment-date">{{comment.date | date}} {{comment.date | date:'shortTime'}}</span>
-              <span>{{comment.votes}}</span>
+              <span class="comment-votes">{{comment.votes}}</span>
               <button mat-icon-button (click)="voteUpOnComment(comment._id)">
                 <mat-icon matBadge="15" matBadgeColor="warn">thumb_up</mat-icon>
               </button>
