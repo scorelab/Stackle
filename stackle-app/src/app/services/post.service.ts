@@ -39,10 +39,10 @@ export class PostService {
   }
 
   voteUpOnComment(commentId) {
-    return this.http.post(`${this.apiUrl}/api/comment/vote/up/${commentId}`);
+    return this.http.post(`${this.apiUrl}/api/comment/vote/up/${commentId}`, {});
   }
 
   voteDownOnComment(commentId) {
-    return this.http.post(`${this.apiUrl}/api/comment/vote/down/${commentId}`);
+    return this.http.post(`${this.apiUrl}/api/comment/vote/down/${commentId}`, {});
   }
 }
