@@ -12,8 +12,8 @@ const replySchema = mongoose.Schema({
 const commentSchema = mongoose.Schema({
     description: { type: String, required: true },
     user: { type: String, required: true },
-    votes: Number,
     date: { type: String, required: true },
+    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     replies: [replySchema]
 });
 
@@ -26,7 +26,7 @@ const postSchema = mongoose.Schema({
     linkIssue: String,
     user: { type: String, required: true },
     date: { type: String, required: true },
-    votes: Number,
+    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
@@ -52,10 +52,12 @@ postSchema.statics.setPost = function(request, response){
 
 //READ - get all posts
 postSchema.statics.getAll = function(request, response){
-    this.find({}).populate('comments').exec((error, postsDetails) => {
+    this.find({}).populate('comments').populate('likes').exec((error, postsDetails) => {
             if (error) {
                 return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
             }
+
+            postsDetails.populate('likes').exec();
             return returnWithResponse.configureReturnData({ status: 200, success: true, result: postsDetails }, response);
         });
 }
@@ -65,7 +67,7 @@ postSchema.statics.getById = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validateGetPost();
-            this.findOne({ _id: input.postId }).populate('comments').exec((error, postDetails) => {
+            this.findOne({ _id: input.postId }).populate('comments').populate('likes').exec((error, postDetails) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -86,7 +88,7 @@ postSchema.statics.getAllByUser = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostsByUser();
-            this.find({ user: input.user }).populate('comments').exec((error, userPosts) => {
+            this.find({ user: input.user }).populate('comments').populate('likes').exec((error, userPosts) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -107,7 +109,7 @@ postSchema.statics.getAllByOrg = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostToOrganisation();
-            this.find({ org_name: input.organisationName }).populate('comments').exec((error, organisationPosts) => {
+            this.find({ org_name: input.organisationName }).populate('comments').populate('likes').exec((error, organisationPosts) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -161,7 +163,7 @@ postSchema.statics.getAllComments = function(request, response){
             const validator = new Validator(request.params);
             const input = validator.validateCommentOnPost();
            
-            Post.findOne({ _id: input.postId }).populate('comments').exec((error, result) => {
+            Post.findOne({ _id: input.postId }).populate('comments').populate('likes').exec((error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -179,47 +181,23 @@ postSchema.statics.getAllComments = function(request, response){
 }
 
 //to increment vote up on Post
-postSchema.statics.setVoteUp = function(request, response){
+postSchema.statics.getLikes = function(request, response){
      try {
             const validator = new Validator(request.params);
             const input = validator.validatePostId();
-           
-            Post.findOneAndUpdate({ _id: input.postId }, {$inc: {votes:1}}, {new: true }, (error, result) => {
-                if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+            
+            Post.findOne({_id: input.postId}).populate('likes').exec((err, result)=>{
+               if (err) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: err }, response);
                 }
 
-                if(!result)
+               if(!result)
                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
 
-
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: {'votes' : result.votes} },
-                    response);
-            });
-        } catch (validationError) {
-            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
-        }
-}
+                  return returnWithResponse.configureReturnData({ status: 200, success: true, result: result.likes}, response);
+            });    
 
 
-//to decrement vote up on Post
-postSchema.statics.setVoteDown = function(request, response){
-     try {
-            const validator = new Validator(request.params);
-            const input = validator.validatePostId();
-           
-            Post.findOneAndUpdate({ _id: input.postId }, {$inc: {votes:-1}}, {new: true },(error, result) => {
-                if (error) {
-                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-                }
-
-                if(!result)
-                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${input.postId} not found`}, response);
-
-
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: {'votes' : result.votes}  },
-                    response);
-            });
         } catch (validationError) {
             return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
@@ -298,6 +276,89 @@ postSchema.statics.removeTag = function(request, response){
         }
 }
 
+//POST- like the post
+postSchema.statics.setLikeUp = function(request, response){
+   
+    try{
+        //Valdiating postId in req.params
+        const validatorPostId = new Validator(request.params);
+        const input1 = validatorPostId.validatePostId();
+        const currentPostId = input1.postId;
+        
+        //Valdiating userId in req.body   
+        const validatorUserId = new Validator(request.body);
+        const input2 = validatorUserId.validateUserId();
+        const currentUserId = input2.userId;
+
+        this.findOne({_id: currentPostId}, (error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${currentPostId} not found`}, response);
+
+               var likeArray = result.likes;
+               var check = likeArray.indexOf(currentUserId);
+              
+               if(check === -1){
+                    result.likes.push(currentUserId);
+                    result.save();
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentUserId}: user liked the post-${currentPostId}`}, response);
+               }
+               else{
+                     return returnWithResponse.configureReturnData({ status: 200, success: false, result: `User already liked the post - ${currentPostId}`}, response);
+               }
+            });
+
+    }catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+    }
+
+}
+
+
+//POST- Dislike the post
+postSchema.statics.setLikeDown = function(request, response){
+        try{
+        //Valdiating postId in req.params
+        const validatorPostId = new Validator(request.params);
+        const input1 = validatorPostId.validatePostId();
+        const currentPostId = input1.postId;
+        
+        //Valdiating userId in req.body   
+        const validatorUserId = new Validator(request.body);
+        const input2 = validatorUserId.validateUserId();
+        const currentUserId = input2.userId;
+
+        this.findOne({_id: currentPostId}, (error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Post-${currentPostId} not found`}, response);
+
+               var likeArray = result.likes;
+               var check = likeArray.indexOf(currentUserId);
+              
+               if(check === -1){
+                    return returnWithResponse.configureReturnData({ status: 200, success: false, result: `${currentUserId}-user not found in the likes of the post-${currentPostId}`}, response);
+               }
+               else{
+
+                    result.likes.splice(check, 1);
+                    result.save();
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `User Disliked the post - ${currentPostId}`}, response);
+               }
+
+            });
+
+    }catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+    }    
+}
+
 //DELETE - delete post by id
 postSchema.statics.deleteById = function(request, response){
     try {
@@ -339,7 +400,7 @@ commentSchema.statics.getCommentById = function(request, response){
      try {
             const validator = new Validator(request.params);
             const input = validator.validateCommentId();
-            this.findOne({ _id: input.commentId }, (error, commentData) => {
+            this.findOne({ _id: input.commentId }).populate('likes').exec((error, commentData) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -355,54 +416,117 @@ commentSchema.statics.getCommentById = function(request, response){
         }
 }
 
+//to add user to like in comment
 
-//to increment vote up on Comment
-commentSchema.statics.setVoteUp = function(request, response){
-     try {
-            const validator = new Validator(request.params);
-            const input = validator.validateCommentId();
-           
-            this.findOneAndUpdate({ _id: input.commentId }, {$inc: {votes:1}}, {new: true },(error, result) => {
+commentSchema.statics.setLikeUpComment = function(request, response){
+   
+    try{
+        //Valdiating commentId in req.params
+        const validatorCommentId = new Validator(request.params);
+        const input1 = validatorCommentId.validateCommentId();
+        const currentCommentId = input1.commentId;
+        
+        //Valdiating userId in req.body   
+        const validatorUserId = new Validator(request.body);
+        const input2 = validatorUserId.validateUserId();
+        const currentUserId = input2.userId;
+
+        this.findOne({_id: currentCommentId}, (error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
 
                 if(!result)
-                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${input.commentId} not found`}, response);
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${currentCommentId} not found`}, response);
 
-
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
-                    response);
+               var likeArray = result.likes;
+               var check = likeArray.indexOf(currentUserId);
+              
+               if(check === -1){
+                    result.likes.push(currentUserId);
+                    result.save();
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentUserId}: user liked the comment-${currentCommentId}`}, response);
+               }
+               else{
+                     return returnWithResponse.configureReturnData({ status: 200, success: false, result: `User already liked the comment - ${currentCommentId}`}, response);
+               }
             });
-        } catch (validationError) {
+
+    }catch (validationError) {
             return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
-        }
+    }
+
 }
 
 
-//to decrement vote count on comment
-commentSchema.statics.setVoteDown = function(request, response){
-     try {
-            const validator = new Validator(request.params);
-            const input = validator.validateCommentId();
-           
-            this.findOneAndUpdate({ _id: input.commentId }, {$inc: {votes:-1}}, {new: true },(error, result) => {
+//to remove user from like in comment
+
+commentSchema.statics.setLikeDownComment = function(request, response){
+    
+    try{
+        //Valdiating commentId in req.params
+        const validatorCommentId = new Validator(request.params);
+        const input1 = validatorCommentId.validateCommentId();
+        const currentCommentId = input1.commentId;
+        
+        //Valdiating userId in req.body   
+        const validatorUserId = new Validator(request.body);
+        const input2 = validatorUserId.validateUserId();
+        const currentUserId = input2.userId;
+
+        this.findOne({_id: currentCommentId}, (error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
 
                 if(!result)
-                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${input.commentId} not found`}, response);
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${currentCommentId} not found`}, response);
 
+               var likeArray = result.likes;
+               var check = likeArray.indexOf(currentUserId);
+              
+               if(check === -1){
+                    return returnWithResponse.configureReturnData({ status: 200, success: false, result: `${currentUserId}-user not found in the likes of the Comment-${currentCommentId}`}, response);
+               }
+               else{
 
-                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result },
-                    response);
+                    result.likes.splice(check, 1);
+                    result.save();
+                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `User Disliked the Comment - ${currentCommentId}`}, response);
+               }
+
             });
-        } catch (validationError) {
+
+    }catch (validationError) {
             return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
-        }
+    }    
 }
 
+commentSchema.statics.getLikes = function(request, response){
+
+ try{
+        //Valdiating commentId in req.params
+        const validatorCommentId = new Validator(request.params);
+        const input1 = validatorCommentId.validateCommentId();
+        const currentCommentId = input1.commentId;
+        
+        this.findOne({_id: currentCommentId}).populate('likes').exec((error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${currentCommentId} not found`}, response);
+             
+                
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result.likes}, response);
+             
+            });
+
+    }catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+    }    
+}
 
 
 //to delete all comments

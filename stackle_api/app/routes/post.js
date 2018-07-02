@@ -38,15 +38,20 @@ const Post = postModels.Post;
 		Post.deleteById(request, response);
 	});
 
-//to increment vote count on post
-	router.post('/vote/up/:postId', function(request, response){
-		Post.setVoteUp(request, response);
-	});
+//to get Likes on post 
+  	router.get('/likes/:postId', function(request, response){ 
+    	Post.getLikes(request, response); 
+ 	 }); 
 
-//to decrement vote count on post
-	router.post('/vote/down/:postId', function(request, response){
-		Post.setVoteDown(request, response);
-	});
+//to like a post 
+  	router.post('/likes/up/:postId', function(request, response){ 
+    	Post.setLikeUp(request, response); 
+  	});   
+ 
+//to dislike the liked post 
+  	router.post('/likes/down/:postId', function(request, response){ 
+    	Post.setLikeDown(request, response); 
+  	});   
 
 //to add tag to post
 	router.post('/tag/add/:postId', function(request, response){
