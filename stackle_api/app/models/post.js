@@ -56,8 +56,6 @@ postSchema.statics.getAll = function(request, response){
             if (error) {
                 return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
             }
-
-            postsDetails.populate('likes').exec();
             return returnWithResponse.configureReturnData({ status: 200, success: true, result: postsDetails }, response);
         });
 }
