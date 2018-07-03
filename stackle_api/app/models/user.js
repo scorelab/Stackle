@@ -39,7 +39,7 @@ userSchema.statics.getAll = function(request, response){
         });
 }
 
-//get User by userId
+//get User by username
 userSchema.statics.getById = function(request, response){
      try {
             const validator = new Validator(request.params);
@@ -59,6 +59,31 @@ userSchema.statics.getById = function(request, response){
             return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
         }
 }
+
+//get user by db id
+userSchema.statics.getByDBId = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateUserId();
+            
+            this.findOne({ _id: input.userId }).populate('subscribedStacks').exec((error, data) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!data)
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: `User: ${input.userId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: data }, response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+
 
 userSchema.statics.getStacks = function(request, response){
      try {

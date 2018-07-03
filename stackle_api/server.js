@@ -12,6 +12,7 @@ const postRouter = require('./app/routes/post');
 const commentRouter = require('./app/routes/comment');
 const userRouter = require('./app/routes/user');
 const stackRouter = require('./app/routes/stack');
+const replyRouter = require('./app/routes/reply');
 
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
@@ -28,7 +29,7 @@ app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/user', userRouter);
 app.use('/api/org', stackRouter);
-
+app.use('/api/reply', replyRouter);
 
 var routes = require("./app/routes");
 routes(app, db);

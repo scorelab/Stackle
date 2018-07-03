@@ -14,7 +14,7 @@ const commentSchema = mongoose.Schema({
     user: { type: String, required: true },
     votes: Number,
     date: { type: String, required: true },
-    replies: [replySchema]
+    replies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reply'}]
 });
 
 const postSchema = mongoose.Schema({
@@ -52,7 +52,7 @@ postSchema.statics.setPost = function(request, response){
 
 //READ - get all posts
 postSchema.statics.getAll = function(request, response){
-    this.find({}).populate('comments').exec((error, postsDetails) => {
+    this.find({}).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).exec((error, postsDetails) => {
             if (error) {
                 return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
             }
@@ -65,7 +65,7 @@ postSchema.statics.getById = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validateGetPost();
-            this.findOne({ _id: input.postId }).populate('comments').exec((error, postDetails) => {
+            this.findOne({ _id: input.postId }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).exec((error, postDetails) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -86,7 +86,7 @@ postSchema.statics.getAllByUser = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostsByUser();
-            this.find({ user: input.user }).populate('comments').exec((error, userPosts) => {
+            this.find({ user: input.user }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).exec((error, userPosts) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -107,7 +107,7 @@ postSchema.statics.getAllByOrg = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostToOrganisation();
-            this.find({ org_name: input.organisationName }).populate('comments').exec((error, organisationPosts) => {
+            this.find({ org_name: input.organisationName }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).exec((error, organisationPosts) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -161,7 +161,7 @@ postSchema.statics.getAllComments = function(request, response){
             const validator = new Validator(request.params);
             const input = validator.validateCommentOnPost();
            
-            Post.findOne({ _id: input.postId }).populate('comments').exec((error, result) => {
+            Post.findOne({ _id: input.postId }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).exec((error, result) => {
                 if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -413,6 +413,101 @@ commentSchema.statics.deleteAll = function(request, response){
         
 
          return returnWithResponse.configureReturnData({ status: 200, success: true, result: `All Comment data removed.` }, response);
+     
+    });
+}
+
+
+// Reply create
+
+replySchema.statics.replyById = function(request, response){
+    try {
+            const validator = new Validator(request.params);
+            const bodyValidator = new Validator(request.body);
+
+            const input = validator.validateCommentId();
+            const inputComment = bodyValidator.validateReplyBody();
+
+            var reply = new Reply(inputComment);
+            reply.save(function(err, data){
+                if(err)
+                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                else
+                    console.log(data);
+            });
+           
+            Comment.findOneAndUpdate({ _id: input.commentId }, {$push: {replies: reply._id}}, (error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${input.commentId} not found`}, response);
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: reply},
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+// to get all replies for a single comment
+
+replySchema.statics.getAll = function(request, response){
+
+    try {
+            const validator = new Validator(request.params);
+            const input = validator.validateCommentId();
+           
+            Comment.findOne({ _id: input.commentId }).populate('replies').exec((error, result) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!result)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comment-${input.postId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: result.replies },
+                    response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+//get reply by id
+replySchema.statics.getReplyById = function(request, response){
+       try {
+            const validator = new Validator(request.params);
+            const input = validator.validateReplyId();
+            this.findOne({ _id: input.replyId }, (error, data) => {
+                if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!data)
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Reply: ${input.replyId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: data }, response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+//to clear all - only for developer use
+replySchema.statics.deleteAll = function(request, response){
+     this.remove({}, function(err){
+         if(err)
+             return returnWithResponse.configureReturnData({ status: 400, success: false, result: err }, response);
+        
+
+         return returnWithResponse.configureReturnData({ status: 200, success: true, result: `All replies data removed.` }, response);
      
     });
 }
