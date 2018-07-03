@@ -29,4 +29,10 @@ export class StackService {
       .catch((error: any)=> Observable.throw(error.json().error || 'Server error'));
   }
 
+  public createNewStack(stackObject) {
+    return this.http.post(`${this.apiUrl}/api/org/create`, stackObject)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 }
