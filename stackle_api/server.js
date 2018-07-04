@@ -1,6 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const path = require('path');
+var port     = process.env.PORT || 3000;
+
+app.use('/', express.static(__dirname +  '/'));
 const mongoose = require('mongoose');
 const database = require('./config/database');            // load the database config
 const morgan = require('morgan');             // log requests to the console (express4)
@@ -43,7 +47,7 @@ routes(app, db);
 });*/
 
 // Add option { useMongoClient: true } if mongoose version < 5
-var option = database.option(mongoose.version); 
+var option = database.option(mongoose.version);
 
 mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");

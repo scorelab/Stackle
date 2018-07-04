@@ -1,0 +1,8 @@
+<div class="box">
+  <div class="pizzaCat" *ngFor="let category of pizzas">
+    <h3>{{category.category}}</h3>
+    <ul>
+      <li *ngFor="let type of category.types">{{type.name}} Cost: {{type.price}}</li>
+    </ul>
+  </div>
+</div>
