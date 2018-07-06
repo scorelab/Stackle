@@ -1,10 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const path = require('path');
-var port     = process.env.PORT || 3000;
-
-app.use('/', express.static(__dirname +  '/'));
 const mongoose = require('mongoose');
 const database = require('./config/database');            // load the database config
 const morgan = require('morgan');             // log requests to the console (express4)
@@ -16,10 +12,6 @@ const postRouter = require('./app/routes/post');
 const commentRouter = require('./app/routes/comment');
 const userRouter = require('./app/routes/user');
 const stackRouter = require('./app/routes/stack');
-const passport = require('./app/lib/passport');
-const authConfig = require('./config/auth');
-const returnWithResponse = require('./app/lib/returnWithResponse');
-const UserModel = require('./app/models/user');
 
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
@@ -28,44 +20,15 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride());
 app.use(cors());
 
-//Initalizing passport engine
-app.use(passport.initialize());
-
-//Protecting every Post Request 
-app.post('*',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
-    console.log('Success');
-    next();   
-}, function(err, req ,res, next){
-  console.log('Failed');
-   returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied ! ' + err.toString()} ,res);
-});
-
-//Basic Routes
 //serving static index.html file using middleware
 app.use('/', express.static(__dirname + '/'));
+
+//serving endpoint related to post using middleware
 app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/user', userRouter);
 app.use('/api/org', stackRouter);
 
-//Auth and its callback
-app.get('/auth/github', passport.authenticate('github', {session: false}));
-app.get('/auth/github/callback', passport.authenticate('github', {failureRedirect : '/', failWithError: true, session: false}), function(request,response){
-    returnWithResponse.configureReturnData({status: 200, success: true, result: {token: request.user.token, userId: request.user.userId}}, response);
-}, function(err, request , response){
-    returnWithResponse.configureReturnData({status: 400, success: false, result: 'Authentication Failed'}, response);
-});
-
-//logout
-app.get('/logout' , function(request, response){
-    UserModel.logout(request, response);
-});
-
-app.get('/api/profile',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
-    returnWithResponse.configureReturnData({status: 200 , success: true, result: req.user} ,res);   
-}, function(err, req ,res, next){
-   returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied!'} ,res);
-});
 
 var routes = require("./app/routes");
 routes(app, db);
@@ -80,7 +43,7 @@ routes(app, db);
 });*/
 
 // Add option { useMongoClient: true } if mongoose version < 5
-var option = database.option(mongoose.version);
+var option = database.option(mongoose.version); 
 
 mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");

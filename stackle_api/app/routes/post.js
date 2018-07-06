@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const postModels = require('../models/post');
 const Post = postModels.Post;
-// const auth = require('../lib/auth');
 
 //to get all posts
 	router.get('/all', function (request, response) {
