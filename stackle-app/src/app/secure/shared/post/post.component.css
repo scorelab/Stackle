@@ -1,0 +1,51 @@
+.post-container {
+  margin-top: 10vh;
+}
+
+.description{
+  padding : 3px;
+  white-space: pre-wrap;
+}
+
+.mat-chip {
+  font-size: 10px;
+  height: auto;
+  padding: 4px 10px !important;
+}
+
+
+.comment-section{
+    /* background-color: #F5F5F5; */
+}
+
+.comment{
+    padding : 3px;
+}
+
+.comment-user{
+    color: #0D47A1
+}
+
+.comment-date{
+    color : #78909C;
+}
+
+.comment-textarea {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+.form-container > * {
+  width: 100%;
+}
+
+.example-header-image img{
+  width: 30px;
+}
+
+.comment mat-icon {
+  font-size: 14px;
+}

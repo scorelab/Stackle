@@ -1,0 +1,28 @@
+.header {
+    margin : 2%;
+}
+
+.login-btn {
+    font-family: Roboto;
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    background-color:#5b5e71c9;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    color: white;
+}
+#toolbar {
+    background-color: rgb(85, 70, 181);
+} 
+
+#landing-banner {
+    color: white;
+    background-image: url('../../../assets/images/Stackle-landing.jpg');
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
