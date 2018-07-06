@@ -5,9 +5,11 @@ const returnWithResponse = require('../lib/returnWithResponse');
 
 const userSchema = mongoose.Schema({
     userId: {type: String, required: true, unique: true},
-    token: {type: String, required: true, unique: true},
-    email: {type: String, required: true, unique: true},
+    token: {type: String, unique: false},
+    email: {type: String, required: true},
     name: {type: String, required: true},
+    picUrl: {type: String, required: false},
+    profileUrl: {type: String, required: false},
     subscribedStacks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Stack'}]
 });
 
@@ -156,6 +158,46 @@ userSchema.statics.clearAll = function(request, response){
 
          return returnWithResponse.configureReturnData({ status: 200, success: true, result: `All User data removed.` }, response);
      
+    });
+}
+
+//find or create user
+userSchema.statics.findOrCreateUser = function(user, cb){
+    this.findOne({userId: currentUser.userId}).exec(function(err, data){
+
+                if(err){
+                  cb(err, false);
+                }
+
+                else if(!data){
+                  var temp = new UserModel(currentUser);
+                  temp.save();
+                  cb(null, temp);
+                }
+                
+                else{
+                  data.token = token;
+                  data.save();
+                  cb(null, data);
+                } 
+
+              });
+}
+
+
+//LogoutHelper function
+userSchema.statics.logout = function(request ,response){
+    this.findOne({token: request.query.access_token}).exec(function(err, data){
+        if(err || !data){
+            return returnWithResponse.configureReturnData({status: 400, success: false, result: 'Logout Failed! Access Denied.'}, response);
+        }
+
+        else{
+            data.token = ' ';
+            data.save();
+         return returnWithResponse.configureReturnData({status: 200, success: true, result: 'User SuccessFully Logout'}, response);   
+        }
+
     });
 }
 
