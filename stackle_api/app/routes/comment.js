@@ -25,15 +25,20 @@ const Comment = postModels.Comment;
 		Comment.getCommentById(request, response);
 	});
 
-//to increment vote count in comment
-	router.post('/vote/up/:commentId', function(request, response){
-		Comment.setVoteUp(request, response);
-	});
-
-//to decrement vote count in comment
-	router.post('/vote/down/:commentId', function(request, response){
-		Comment.setVoteDown(request, response);
-	});
+//to get like array of users 
+  router.get('/likes/:commentId', function(request, response){ 
+    Comment.getLikes(request, response); 
+  });   
+ 
+//to like a post 
+  router.post('/likes/up/:commentId', function(request, response){ 
+    Comment.setLikeUpComment(request, response); 
+  });   
+ 
+//to dislike the liked post 
+  router.post('/likes/down/:commentId', function(request, response){ 
+    Comment.setLikeDownComment(request, response); 
+  });   
 
 
 /*
