@@ -1,3 +1,63 @@
-<p>
-  stack works!
-</p>
+<div class="container-fluid">
+
+  <div class="feed-container">
+
+    <div *ngIf="loading">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Common Feed</li>
+      </ol>
+    </nav>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div *ngIf="posts">
+
+          <div class="post-container">
+            <div class="row post" *ngFor="let post of posts">
+
+              <mat-card class="example-card col-md-12">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image">
+                    <img src="../../../assets/images/user_avatar.png">
+                  </div>
+                  <mat-card-title (click)="navigateToPost(post._id)"><b>{{post.title}}</b></mat-card-title>
+                  <mat-card-subtitle>
+                    <p>Repository: <a href="{{post.repository}}"> {{post.repository}} </a></p>
+                    <p>{{post.org_name}}</p>
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <div>
+                  <p class="post-description">{{post.description}}</p>
+                  <mat-chip-list>
+                    <mat-chip *ngFor="let tag of post.tags">{{tag.name}}</mat-chip>
+                  </mat-chip-list>
+                </div>
+
+                <!-- <mat-card-content>
+                <p>
+                  {{post.description}}
+                </p>
+              </mat-card-content> -->
+                <h5>{{post.votes}} Votes
+                  <span>{{post.comments.length}} Comments</span>
+                </h5>
+                <mat-card-actions>
+                  <button mat-button (click)="voteUp(post._id)">LIKE</button>
+                  <button mat-button>SHARE</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="!posts">
+          No posts available
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

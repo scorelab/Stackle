@@ -8,6 +8,7 @@ import { PostComponent } from './shared/post/post.component';
 import { CreatePostComponent} from './create-post/create-post.component';
 import { CreateStackComponent } from './create-stack/create-stack.component';
 import { StacksComponent } from './stacks/stacks.component';
+import { StackComponent } from './shared/stack/stack.component';
 
 const routes: Routes = [
     {
@@ -31,6 +32,9 @@ const routes: Routes = [
             },
             {
                 path: 'stacks', component: StacksComponent
+            },
+            {
+                path: 'stack', component: StackComponent
             }
         ]
     }
