@@ -71,4 +71,8 @@ export class PostComponent implements OnInit {
       })
   }
 
+  replyOnComment(id){
+    
+  }
+
 }

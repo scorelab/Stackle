@@ -27,8 +27,12 @@
             <input matInput placeholder="Stack Name">
           </mat-form-field>
           <button mat-button color="primary" type="submit">
-            <mat-icon matListIcon>find_in_page</mat-icon>
+            <mat-icon matListIcon>search</mat-icon>
             Search
+          </button>
+          <button mat-button color="primary" type="submit" (click)="navigateToStacks()">
+            <mat-icon matListIcon>view_headline</mat-icon>
+            View all
           </button>
         </form>
       </div>

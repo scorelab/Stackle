@@ -62,7 +62,10 @@
               <button mat-icon-button>
                 <mat-icon matBadge="15" matBadgeColor="warn" (click)="voteDownOnComment(comment._id)">thumb_down</mat-icon>
               </button>
-              <a>Reply</a>
+              <a>Reply</a><br>
+              <mat-form-field style="width: 50%; margin-left: 40px;">
+                <input matInput placeholder="Reply">
+              </mat-form-field>
             </p>
           </mat-card-content>
         </div>

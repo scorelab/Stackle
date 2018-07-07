@@ -38,6 +38,7 @@ export class CreateStackComponent implements OnInit {
       this.stackService.createNewStack(this.stackObject).subscribe( response => {
         if(response.status == 200){
           this.showSnackBar('Stack created!');
+          this.router.navigate(['app/stacks']);
         }else {
           this.showSnackBar('Could not create stack!');
         }

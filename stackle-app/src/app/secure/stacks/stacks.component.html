@@ -1,0 +1,59 @@
+<div class="container-fluid">
+
+  <div class="stacks-container">
+
+    <div *ngIf="loading">
+        <mat-progress-bar mode="query"></mat-progress-bar>
+    </div>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Stacks</li>
+      </ol>
+    </nav>
+
+    <div class="row">
+
+      <div class="col-md-10 col-md-offset-1">
+
+        <form>
+          <mat-form-field style="width: 60%;">
+            <input matInput placeholder="Search" [(ngModel)]="searchKey">
+          </mat-form-field>
+        </form>
+
+        <div *ngIf="stacks">
+
+          <div class="post-container">
+            <div class="row post" *ngFor="let stack of stacks">
+
+              <mat-card class="example-card col-md-12">
+                <div class="col-md-10">
+                  <mat-card-header>
+                    <div mat-card-avatar class="example-header-image">
+                      <img src="../../../assets/images/user_avatar.png">
+                    </div>
+                    <mat-card-title (click)="navigateToPost(post._id)"><b>{{stack.name}}</b></mat-card-title>
+                    <mat-card-subtitle>
+                      <p>Organization: <a href="{{stack.githubUrl}}"> {{stack.githubUrl}} </a></p>
+                    </mat-card-subtitle>
+                  </mat-card-header>
+                  <div>
+                    <p class="post-description">{{stack.description}}</p>
+                  </div>
+                </div>
+                <div class="col-md-2 text-center">
+                  <button mat-button>Subscribe</button>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="!stacks">
+          No posts available
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

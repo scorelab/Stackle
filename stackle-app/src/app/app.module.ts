@@ -24,6 +24,7 @@ import { CommonFeedComponent } from './secure/common-feed/common-feed.component'
 import { ProfileComponent } from './secure/profile/profile.component';
 import { LoginComponent } from './public/login/login.component';
 import {PostComponent} from './secure/shared/post/post.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {PostComponent} from './secure/shared/post/post.component';
     SecureComponent,
     CommonFeedComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

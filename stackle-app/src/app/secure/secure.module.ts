@@ -9,6 +9,8 @@ import { PostComponent } from './shared/post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CategoryComponent } from './create-post/category/category.component';
 import { CreateStackComponent } from './create-stack/create-stack.component';
+import { StackComponent } from './shared/stack/stack.component';
+import { StacksComponent } from './stacks/stacks.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { CreateStackComponent } from './create-stack/create-stack.component';
     PostComponent,
     CreatePostComponent,
     CategoryComponent,
-    CreateStackComponent
+    CreateStackComponent,
+    StackComponent,
+    StacksComponent
   ],
   exports: [
     MaterialModule

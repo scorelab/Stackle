@@ -23,6 +23,10 @@ export class SecureComponent implements OnInit {
     this.stackService.getAllOrgs().subscribe((response)=> {
 
     });
+
+    // this.stackService.getAllOrgsByUser().subscribe( response => {
+    //   console.log(response);
+    // }
   }
 
   public navigateToCreatePost() {
@@ -31,6 +35,14 @@ export class SecureComponent implements OnInit {
 
   public navigateToCommonFeed() {
     this.router.navigate(['app/commonFeed']);
+  }
+
+  public navigateToCreateStack() {
+    this.router.navigate(['app/createStack']);
+  }
+
+  public navigateToStacks() {
+    this.router.navigate(['app/stacks']);
   }
 
 

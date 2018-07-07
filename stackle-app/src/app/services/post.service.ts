@@ -45,4 +45,8 @@ export class PostService {
   voteDownOnComment(commentId) {
     return this.http.post(`${this.apiUrl}/api/comment/vote/down/${commentId}`, {});
   }
+
+  replyOnComment(commentId) {
+
+  }
 }
