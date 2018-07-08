@@ -13,7 +13,7 @@ const commentSchema = mongoose.Schema({
     description: { type: String, required: true },
     user: { type: String, required: true },
     date: { type: String, required: true },
-    replies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reply'}]
+    replies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reply'}],
     likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User2'}],
 });
 
@@ -559,8 +559,6 @@ replySchema.statics.replyById = function(request, response){
             reply.save(function(err, data){
                 if(err)
                      return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-                else
-                    console.log(data);
             });
            
             Comment.findOneAndUpdate({ _id: input.commentId }, {$push: {replies: reply._id}}, (error, result) => {
