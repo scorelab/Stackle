@@ -28,8 +28,6 @@ Validator.prototype.validateAddingPost = function() {
 
   if (!!!~Object.keys(this.input).indexOf('date')) { throw new Error('Attribute date is missing'); }
 
-  if (!!!~Object.keys(this.input).indexOf('votes')) { throw new Error('Attribute votes is missing'); }
-
   return this.input;
 };
 
@@ -127,8 +125,6 @@ Validator.prototype.validateCommentBody = function(){
   if (!!!~Object.keys(this.input).indexOf('description')) { throw new Error('Attribute description is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
-
-  if (!!!~Object.keys(this.input).indexOf('votes')) { throw new Error('Attribute votes is missing'); }
 
   if (!!!~Object.keys(this.input).indexOf('date')) { throw new Error('Attribute date is missing'); }
 

@@ -186,7 +186,6 @@ userSchema.statics.clearAll = function(request, response){
     });
 }
 
-
 //find or create user
 userSchema.statics.findOrCreateUser = function(user, cb){
     this.findOne({userId: currentUser.userId}).exec(function(err, data){
@@ -226,9 +225,6 @@ userSchema.statics.logout = function(request ,response){
 
     });
 }
-
-
-
 
 const User = mongoose.model('User2', userSchema);
 module.exports = User;
