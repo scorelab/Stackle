@@ -17,6 +17,12 @@ const userModel = require('../models/user');
 		userModel.getById(request, response);
 	});
 
+//get current user by DB ID
+	router.get('/id/:userId', function(request, response){
+		userModel.getByDBId(request, response);
+	});
+
+
 //get list of subscribed stacks
 	router.get('/stacks/:userId', function(request,response){
 		userModel.getStacks(request, response);
