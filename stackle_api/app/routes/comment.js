@@ -30,18 +30,19 @@ const Comment = postModels.Comment;
     Comment.getLikes(request, response); 
   });   
  
-//to like a post 
+//to like a comment 
   router.post('/likes/up/:commentId', function(request, response){ 
     Comment.setLikeUpComment(request, response); 
   });   
  
-//to dislike the liked post 
+//to dislike the liked comment 
   router.post('/likes/down/:commentId', function(request, response){ 
     Comment.setLikeDownComment(request, response); 
   });   
 
+//to get comment by user
+	router.get('/all/user/:user', function(request, response){
+		Comment.getAllCommentsByUser(request, response);
+	});	
 
-/*
-	3. Enpoints related to replies
-*/
 module.exports = router;

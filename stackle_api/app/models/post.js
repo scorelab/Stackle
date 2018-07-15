@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Validator = require('../lib/validator').Validator;
 const returnWithResponse = require('../lib/returnWithResponse');
+const User = require('./user');
 
 
 const replySchema = mongoose.Schema({
@@ -14,7 +15,7 @@ const commentSchema = mongoose.Schema({
     user: { type: String, required: true },
     date: { type: String, required: true },
     replies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reply'}],
-    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User2'}],
+    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User3'}],
 });
 
 const postSchema = mongoose.Schema({
@@ -26,7 +27,7 @@ const postSchema = mongoose.Schema({
     linkIssue: String,
     user: { type: String, required: true },
     date: { type: String, required: true },
-    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User2'}],
+    likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User3'}],
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
@@ -53,7 +54,7 @@ postSchema.statics.setPost = function(request, response){
 //READ - get all posts
 postSchema.statics.getAll = function(request, response){
   
-    this.find({}).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User2'}}).populate('likes').exec((error, postsDetails) => {
+    this.find({}).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User3'}}).populate('likes').exec((error, postsDetails) => {
             if (error) {
                 return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
             }
@@ -67,7 +68,7 @@ postSchema.statics.getById = function(request, response){
             const validator = new Validator(request.params);
             const input = validator.validateGetPost();
 
-      this.findOne({ _id: input.postId }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User2'}}).populate('likes').exec((error, postDetails) => {
+      this.findOne({ _id: input.postId }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User3'}}).populate('likes').exec((error, postDetails) => {
                if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
                 }
@@ -88,7 +89,7 @@ postSchema.statics.getAllByUser = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostsByUser();
-            this.find({ user: input.user }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User2'}}).populate('likes').exec((error, userPosts) => {
+            this.find({ user: input.user }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User3'}}).populate('likes').exec((error, userPosts) => {
 
               if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
@@ -110,7 +111,7 @@ postSchema.statics.getAllByOrg = function(request, response){
     try {
             const validator = new Validator(request.params);
             const input = validator.validatePostToOrganisation();
-            this.find({ org_name: input.organisationName }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate('likes').populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User2'}}).exec((error, organisationPosts) => {
+            this.find({ org_name: input.organisationName }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate('likes').populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User3'}}).exec((error, organisationPosts) => {
 
               if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
@@ -165,7 +166,7 @@ postSchema.statics.getAllComments = function(request, response){
             const validator = new Validator(request.params);
             const input = validator.validateCommentOnPost();
            
-            Post.findOne({ _id: input.postId }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User2'}}).exec((error, result) => {
+            Post.findOne({ _id: input.postId }).populate({path: 'comments', model: 'Comment', populate: {path: 'replies', model: 'Reply'}}).populate({path: 'comments', model: 'Comment', populate: {path: 'likes', model: 'User3'}}).exec((error, result) => {
 
              if (error) {
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
@@ -306,8 +307,22 @@ postSchema.statics.setLikeUp = function(request, response){
               
                if(check === -1){
                     result.likes.push(currentUserId);
-                    result.save();
-                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentUserId}: user liked the post-${currentPostId}`}, response);
+                    result.save(function(err){
+                        if(err)
+                            return returnWithResponse.configureReturnData({ status: 400, success: false, result: 'Internal Database error' }, response);
+                        
+                        else{
+                            User.findOne({_id: currentUserId}).exec(function(err, data){   
+                                if(err || !data)
+                                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: 'Invalid User Id' }, response);
+
+                                data.postLikes.push(currentPostId);
+                                data.save();
+                                return returnWithResponse.configureReturnData({ status: 200, success: true, result: `${currentUserId}: user liked the post-${currentPostId}`}, response);
+                            });
+                        }
+                       
+                    });
                }
                else{
                      return returnWithResponse.configureReturnData({ status: 200, success: false, result: `User already liked the post - ${currentPostId}`}, response);
@@ -351,9 +366,26 @@ postSchema.statics.setLikeDown = function(request, response){
                else{
 
                     result.likes.splice(check, 1);
-                    result.save();
-                    return returnWithResponse.configureReturnData({ status: 200, success: true, result: `User Disliked the post - ${currentPostId}`}, response);
-               }
+                    result.save(function(err){
+                        if(err)
+                            return returnWithResponse.configureReturnData({ status: 400, success: false, result: 'Internal Database error' }, response);
+                        
+                        else{
+
+                          User.findOne({_id: currentUserId}).exec(function(err, data){
+                                if(err || !data)
+                                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: 'Invalid User Id' }, response);
+                                
+                                var postIndex = data.postLikes.indexOf(currentPostId);
+                                data.postLikes.splice(postIndex, 1);
+                                data.save();
+                                return returnWithResponse.configureReturnData({ status: 200, success: true, result: `User Disliked the post - ${currentPostId}`}, response);
+                            });
+
+                          }
+
+                        });
+                    }
 
             });
 
@@ -544,6 +576,29 @@ commentSchema.statics.deleteAll = function(request, response){
     });
 }
 
+// to get All the comments for a specific user
+commentSchema.statics.getAllCommentsByUser = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateCommentsByUser();
+            this.find({ user: input.user }).populate('likes').populate('replies').exec((error, data) => {
+
+              if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!data || data.length === 0)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Comments by ${input.user} user not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: data }, response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
 
 // Reply create
 
@@ -615,6 +670,30 @@ replySchema.statics.getReplyById = function(request, response){
 
                 if(!data)
                     return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Reply: ${input.replyId} not found`}, response);
+
+
+                return returnWithResponse.configureReturnData({ status: 200, success: true, result: data }, response);
+            });
+        } catch (validationError) {
+            return returnWithResponse.configureReturnData({ status: 502, success: false, result: validationError.toString() }, response);
+        }
+}
+
+
+// to get All the replies for a specific user
+replySchema.statics.getAllRepliesByUser = function(request, response){
+     try {
+            const validator = new Validator(request.params);
+            const input = validator.validateRepliesByUser();
+
+            this.find({ user: input.user }).exec((error, data) => {
+
+              if (error) {
+                    return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
+                }
+
+                if(!data || data.length === 0)
+                   return returnWithResponse.configureReturnData({ status: 400, success: false, result: `Replies by ${input.user} user not found`}, response);
 
 
                 return returnWithResponse.configureReturnData({ status: 200, success: true, result: data }, response);
