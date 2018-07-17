@@ -24,7 +24,7 @@ export class StackService {
 
   //get all organizations subscribed by the user
   public getAllOrgsByUser(userId) {
-    return this.http.get(`${this.apiUrl}/api/stack/subscribed/${userId}`, this.options)
+    return this.http.get(`${this.apiUrl}/api/user/stacks/${userId}`, this.options)
       .map((res: Response) => res.json())
       .catch((error: any)=> Observable.throw(error.json().error || 'Server error'));
   }
@@ -33,6 +33,19 @@ export class StackService {
     return this.http.post(`${this.apiUrl}/api/org/create`, stackObject)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  public subscribeToStack(stackId, userId) {
+
+    let requestBody = {
+      stackId: stackId,
+      userId: userId
+    };
+
+    return this.http.post(`${this.apiUrl}/api/user/subscribe`, requestBody)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error) || 'Server error');
+
   }
 
 }

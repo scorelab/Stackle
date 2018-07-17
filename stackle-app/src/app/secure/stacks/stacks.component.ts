@@ -10,6 +10,7 @@ import { SearchPipe } from '../../pipes/search.pipe';
 export class StacksComponent implements OnInit {
 
   private stacks;
+  private user;
 
   constructor(
     private stackService: StackService
@@ -23,6 +24,16 @@ export class StacksComponent implements OnInit {
     this.stackService.getAllOrgs().subscribe( response => {
       console.log(response);
       this.stacks = response.result;
+    })
+  }
+
+  getCurrentUser(){
+    //TODO: get current user
+  }
+
+  subscribeToStack(stackId){
+    this.stackService.subscribeToStack(stackId, 123).subscribe( response => {
+      this.getAllOrgs();
     })
   }
 

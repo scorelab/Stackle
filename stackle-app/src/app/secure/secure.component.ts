@@ -11,6 +11,8 @@ import { StackService } from '../services/stack.service';
 })
 export class SecureComponent implements OnInit {
 
+  private subscribedStacks = [];
+
   constructor(
     private auth: AuthService,
     private stackService: StackService,
@@ -24,9 +26,10 @@ export class SecureComponent implements OnInit {
 
     });
 
-    // this.stackService.getAllOrgsByUser().subscribe( response => {
-    //   console.log(response);
-    // }
+    this.stackService.getAllOrgsByUser(123).subscribe( response => {
+      console.log(response);
+        this.subscribedStacks = response.result;
+    });
   }
 
   public navigateToCreatePost() {

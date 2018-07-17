@@ -52,24 +52,15 @@
             Create new stack
           </mat-list-item>
           <h4 mat-subheader="">Your Stacks</h4>
-          <mat-list-item class="mat-menu-item">
-            <mat-icon mat-list-icon>
-              <img class="img-circle" src="../../assets/images/user_avatar.png">
-            </mat-icon>
-            Score Lab
-          </mat-list-item>
-          <mat-list-item class="mat-menu-item">
-            <mat-icon mat-list-icon>
-              <img class="img-circle" src="../../assets/images/user_avatar.png">
-            </mat-icon>
-            Google
-          </mat-list-item>
-          <mat-list-item class="mat-menu-item">
-            <mat-icon mat-list-icon>
-              <img class="img-circle" src="../../assets/images/user_avatar.png">
-            </mat-icon>
-            Fossasia
-          </mat-list-item>
+          <div class="subscibed-stacks-container">
+            <mat-list-item class="mat-menu-item" *ngFor="let stack of subscribedStacks">
+              <mat-icon mat-list-icon>
+                <img class="img-circle" src="../../assets/images/user_avatar.png">
+              </mat-icon>
+              {{stack.name}}
+            </mat-list-item>
+            <p *ngIf="subscribedStacks.length === 0">You have no subscribed stacks!</p>
+          </div>
         </mat-list>
       </div>
     </div>
