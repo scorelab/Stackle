@@ -22,6 +22,8 @@ const authConfig = require('./config/auth');
 const returnWithResponse = require('./app/lib/returnWithResponse');
 const UserModel = require('./app/models/user');
 
+let dbURL = database.url;
+
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
@@ -33,13 +35,13 @@ app.use(cors());
 app.use(passport.initialize());
 
 //Protecting every Post Request 
-app.post('*',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
-    console.log('Success');
-    next();   
-}, function(err, req ,res, next){
-  console.log('Failed');
-   returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied ! ' + err.toString()} ,res);
-});
+// app.post('*',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
+    // console.log('Success');
+    // next();   
+// }, function(err, req ,res, next){
+  // console.log('Failed');
+   // returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied ! ' + err.toString()} ,res);
+// });
 
 //Basic Routes
 //serving static index.html file using middleware
@@ -84,6 +86,10 @@ routes(app, db);
 // Add option { useMongoClient: true } if mongoose version < 5
 var option = database.option(mongoose.version);
 
+if(app.get('env') === 'test')
+    dbURL = database.testurl;
+
+console.log('ENV :: ' + app.get('env') + " \n DBURL : " + dbURL);
 mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");
     if (err) {
