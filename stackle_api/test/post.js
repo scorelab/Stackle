@@ -8,9 +8,10 @@ const models = require('../app/models/post');
 const postModel = models['Post'];
 chai.use(chaiHttp);
 
+const username = 'DEMO';
+
 //GET testing all post 
 function testGetAll(done){
-
 	chai.request(server)
 			.get('/api/post/all')
 			.end(function(err, res){
@@ -28,7 +29,6 @@ function testGetAll(done){
 
 //GET testing a single post by postId
 function testGetSingleById(done, data){
-
 	chai.request(server)
 			.get('/api/post/' + data._id)
 			.end(function(err, res){
@@ -45,10 +45,10 @@ function testGetSingleById(done, data){
 
 
 //GET testing a single post by user
-function testGetSingleByUser(done, data){
+function testGetSingleByUser(done, username){
 
 	chai.request(server)
-			.get('/all/user/' + data.user)
+			.get('/api/post/all/user/' + username)
 			.end(function(err, res){
 				res.should.be.json;
 				res.body.should.be.a('object');
@@ -56,41 +56,109 @@ function testGetSingleByUser(done, data){
 				res.body.should.have.property('success');
 				res.body.should.have.property('result');
 				res.body.status.should.equal(200);
-				res.body.result.should.be.a('object');
+				res.body.result.should.be.a('array');
+				done();
+			});
+}
+
+//GET testing all post 
+function testGetAllByOrg(done, data){
+
+	chai.request(server)
+			.get('/api/post/all/org/' + data.org_name)
+			.end(function(err, res){
+				res.should.be.json;
+				res.body.should.be.a('object');
+				res.body.should.have.property('status');
+				res.body.should.have.property('success');
+				res.body.should.have.property('result');
+				res.body.status.should.equal(200);
+				res.body.result.should.be.a('array');
 				done();
 			});
 }
 
 
+//GET testing get likes
+
+function testGetLikes(done, data){
+
+	chai.request(server)
+			.get('/api/post/likes/' + data._id)
+			.end(function(err, res){
+				res.should.be.json;
+				res.body.should.be.a('object');
+				res.body.should.have.property('status');
+				res.body.should.have.property('success');
+				res.body.should.have.property('result');
+				res.body.status.should.equal(200);
+				res.body.result.should.be.a('array');
+				done();
+			});
+}
+
+
+//POST testing post creation
+
+function testPostCreate(done){
+	chai.request(server)
+		.post('/api/post/create')
+		.send({
+      		title: 'title',
+      		description: 'description',
+      		org_name: 'org_name',
+      		repository: 'repository',
+      		linkIssue: 'link',
+      		user: 'username',
+      		date: '19/07/2018',
+      		tags: [],
+      	})
+      	.end(function(err, res){
+      		res.should.be.json;
+      		res.body.should.be.a('object');
+      	 	res.body.should.have.property('success');
+      	 	res.body.should.have.property('result');
+      	 	res.body.should.have.property('status');
+      	 	res.body.result.should.be.a('string');
+      	 	res.body.status.should.equal(200);
+      	 	done();	
+
+      	});
+}
 
 //Note TODO : Kindly Turn OFF the Authentication on post request before test cases are run
 describe('POSTS', function(){
 
-	let newPost = {};
- 	
 	//before each testCase is run
  	beforeEach(function(done){
-    		newPost = new postModel({
-      		title: 'Post title',
-      		description: 'post description',
+	    let newPost = new postModel({
+      		title: 'Post_title',
+      		description: 'post_description',
       		org_name: 'org_name',
       		repository: 'repository',
-      		linkIssue: 'link of the issue',
-      		user: 'Demo User',
+      		linkIssue: 'link',
+      		user: username,
+      		tags: [],
       		date: '19/07/2018'
       	});
     
     	newPost.save(function(err) {
-      		done();
+			done();
     	});
   	});
 
 	//Droping Collection after every testCase
 	afterEach(function(done){
-    	postModel.collection.drop();
-    	done();
+    	postModel.remove({}, function(err){
+    		done();
+    	});
   	});
 
+
+	//Testing post creation
+	it('Testing /api/post/create', function(done){
+		testPostCreate(done);
+	});
 
 	// Testing all posts
 	it('Testing /api/post/all', function(done){
@@ -99,71 +167,31 @@ describe('POSTS', function(){
 
 	//Testing a single post by id
 	it('Testing /api/post/:postId', function(done){
-		testGetSingleById(done , newPost);
+		postModel.findOne({user: username}).exec(function(err, data){		
+			testGetSingleById(done , data);
+		});
 	});
 
-	//Testing a single post by user
-	it('Testing /api/post/all/user/:user', function(done){
-		testGetSingleByUser(done , newPost);
+	// Testing a single post by user
+	it('Testing /api/post/all/user/:user', function(done, newPost){
+		postModel.findOne({user: username}).exec(function(err, data){		
+			testGetSingleByUser(done , username);
+		});
+	});
+
+	//Testing all posts by org
+	it('Testing /api/post/all/org/:organisationName', function(done, newPost){
+		postModel.findOne({user: username}).exec(function(err, data){		
+			testGetAllByOrg(done , data);
+		});
+	});
+
+	//Testing get likes for a post
+	it('Testing /api/post/likes/:postId', function(done, newPost){
+		postModel.findOne({user: username}).exec(function(err, data){		
+			testGetLikes(done , data);
+		});
 	});
 
 
 });
-
-/*
-
-
-	
-//to create a post	
-	router.post('/create', function (request, response) {
-		Post.setPost(request, response);
-	});
-
-//to get all posts by a specific user
-	router.get('/all/user/:user', function (request, response) {
-		Post.getAllByUser(request, response);
-	});
-
-//to get all posts relating to specific organisation
-	router.get('/all/org/:organisationName', function (request, response) {
-		Post.getAllByOrg(request, response);
-	});	
-
-//to clear model - (only for developer mode)
-	router.delete('/all', function(request, response){
-		Post.deleteAll(request, response);
-	});
-
-//to delete a post by ID - (only for developer mode)
-	router.delete('/:postId', function (request, response) {
-		Post.deleteById(request, response);
-	});
-
-//to get Likes on post 
-  	router.get('/likes/:postId', function(request, response){ 
-    	Post.getLikes(request, response); 
- 	 }); 
-
-//to like a post 
-  	router.post('/likes/up/:postId', function(request, response){ 
-    	Post.setLikeUp(request, response); 
-  	});   
- 
-//to dislike the liked post 
-  	router.post('/likes/down/:postId', function(request, response){ 
-    	Post.setLikeDown(request, response); 
-  	});   
-
-//to add tag to post
-	router.post('/tag/add/:postId', function(request, response){
-		Post.addTag(request, response);
-	});
-
-//to remove tag from post
-	router.post('/tag/remove/:postId', function(request, response){
-		Post.removeTag(request, response);
-	});
-
-
-
-*/
