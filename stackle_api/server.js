@@ -16,6 +16,7 @@ const postRouter = require('./app/routes/post');
 const commentRouter = require('./app/routes/comment');
 const userRouter = require('./app/routes/user');
 const stackRouter = require('./app/routes/stack');
+const replyRouter = require('./app/routes/reply');
 const passport = require('./app/lib/passport');
 const authConfig = require('./config/auth');
 const returnWithResponse = require('./app/lib/returnWithResponse');
@@ -47,6 +48,7 @@ app.use('/api/post', postRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/user', userRouter);
 app.use('/api/org', stackRouter);
+app.use('/api/reply', replyRouter);
 
 //Auth and its callback
 app.get('/auth/github', passport.authenticate('github', {session: false}));

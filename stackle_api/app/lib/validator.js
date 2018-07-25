@@ -230,4 +230,34 @@ Validator.prototype.validateCreateNewUser = function() {
   return this.input;
 };
 
+
+//Validating Reply Body
+Validator.prototype.validateReplyBody = function(){
+  
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('description')) { throw new Error('Attribute description is missing'); }
+
+  if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
+
+  if (!!!~Object.keys(this.input).indexOf('date')) { throw new Error('Attribute date is missing'); }
+
+  return this.input;
+
+}
+
+
+//Validating reply ID
+Validator.prototype.validateReplyId = function(){
+   if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('replyId')) { throw new Error('Attribute replyId is missing'); }
+
+  return this.input;
+}
+
 module.exports.Validator = Validator;
