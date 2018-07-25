@@ -13,7 +13,8 @@ import { SecureModule } from './secure/secure.module';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { StackService } from './services/stack.service';
-import { ProfileService } from './services/profile.service'
+import { ProfileService } from './services/profile.service';
+import { UserService } from './services/user.service';
 
 import { AppComponent } from './app.component';
 
@@ -51,7 +52,8 @@ import { SearchPipe } from './pipes/search.pipe';
     AuthService,
     PostService,
     StackService,
-    ProfileService
+    ProfileService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

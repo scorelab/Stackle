@@ -33,7 +33,7 @@
                     <div mat-card-avatar class="example-header-image">
                       <img src="../../../assets/images/user_avatar.png">
                     </div>
-                    <mat-card-title (click)="navigateToPost(post._id)"><b>{{stack.name}}</b></mat-card-title>
+                    <mat-card-title><b>{{stack.name}}</b></mat-card-title>
                     <mat-card-subtitle>
                       <p>Organization: <a href="{{stack.githubUrl}}"> {{stack.githubUrl}} </a></p>
                     </mat-card-subtitle>
@@ -43,7 +43,13 @@
                   </div>
                 </div>
                 <div class="col-md-2 text-center">
-                  <button mat-button (click)="subscribeToStack(stack._id)">Subscribe</button>
+                  <ng-container *ngIf="user.subscribedStacks.includes(stack); then unsubscribed else subscribed"></ng-container>
+                  <ng-template #subscribed>
+                    <button mat-button (click)="subscribeToStack(stack)">Unsubscribe</button>
+                  </ng-template>
+                  <ng-template #unsubscribed>
+                    <button mat-button (click)="subscribeToStack(stack)">Subscribe</button>
+                  </ng-template>
                 </div>
               </mat-card>
             </div>

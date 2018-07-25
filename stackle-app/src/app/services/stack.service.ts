@@ -48,4 +48,17 @@ export class StackService {
 
   }
 
+  public unsubscribeFromStack(stackId, userId) {
+
+    let requestBody = {
+      stackId: stackId,
+      userId: userId
+    };
+
+    return this.http.post(`${this.apiUrl}/api/user/unsubscribe`, requestBody)
+      .map((res: Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error) || 'Server error');
+
+  }
+
 }
