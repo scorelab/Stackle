@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 
 const username = 'DEMO';
 
-
+// testing GET all comments for a single post
 function testGetAllCommentsForAPost(done, post){
 	chai.request(server)
 		.get('/api/comment/all/' + post._id)
@@ -30,6 +30,7 @@ function testGetAllCommentsForAPost(done, post){
 
 }
 
+// testing GET single comment 
 function testGetSingleComment(done, comment){
 	chai.request(server)
 		.get('/api/comment/' + comment._id)
@@ -45,6 +46,47 @@ function testGetSingleComment(done, comment){
 			done();
 		});
 }
+
+//testing POST creating a comment
+function testCommentCreate(done, post){
+	
+	chai.request(server)
+		.post('/api/comment/' + post._id)
+		.send({
+      		description: 'Comment description',
+      		user: 'username',
+      		date: '19/07/2018'
+      	})
+      	.end(function(err, res){
+      		res.should.be.json;
+      		res.body.should.be.a('object');
+      	 	res.body.should.have.property('success');
+      	 	res.body.should.have.property('result');
+      	 	res.body.should.have.property('status');
+      	 	res.body.result.should.be.a('object');
+      	 	res.body.status.should.equal(200);
+      	 	done();	
+
+      	});
+}
+
+// testing GET single comment 
+function testGetLikesUser(done, comment){
+	chai.request(server)
+		.get('/api/comment/likes/' + comment._id)
+		.end(function(err, res){
+
+			res.should.be.json;
+			res.body.should.be.a('object');
+			res.body.should.have.property('status');
+			res.body.should.have.property('success');
+			res.body.should.have.property('result');
+			res.body.status.should.equal(200);
+			res.body.result.should.be.a('array');
+			done();
+		});
+}
+
 
 //Note TODO : Kindly Turn OFF the Authentication on post request before test cases are run
 describe('Comments', function(){
@@ -86,6 +128,13 @@ describe('Comments', function(){
     	});
   	});
 
+	
+	// Testing POST creating comment
+	it('Testing /api/comment/:postId', function(done){
+		postModel.findOne({user: username}).exec(function(err, data){
+			testCommentCreate(done, data);
+		});
+	});
 
 	// Testing GET all comments for a post
 	it('Testing /api/comment/all/:postId', function(done){
@@ -101,27 +150,11 @@ describe('Comments', function(){
 		});
 	});
 
-
-
+	// Testing GET likes array of users 
+	it('Testing /api/comment/likes/:commentid', function(done){
+		commentModel.findOne({user: username}).exec(function(err, data){
+			testGetLikesUser(done, data);
+		});
+	});
+	
 });
-
-
-/*
-
-
-//to comment on a post
-	router.post('/:postId', function (request, response) {
-		Model.commentById(request, response);
-	});
-
-//to get Comment by Id
-	router.get('/:commentId', function(request, response){
-		Comment.getCommentById(request, response);
-	});
-
-//to get like array of users 
-  router.get('/likes/:commentId', function(request, response){ 
-    Comment.getLikes(request, response); 
-  });   
- 
-*/

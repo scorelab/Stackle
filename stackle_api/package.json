@@ -4,7 +4,7 @@
   "description": "Web Communication portal for OpenSource organizations to discuss project ideas and issues ",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "mocha --timeout 20000",
     "start": "nodemon bin/www",
     "serve": "node bin/www"
   },

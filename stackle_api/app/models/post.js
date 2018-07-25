@@ -138,9 +138,6 @@ postSchema.statics.commentById = function(request, response){
             comment.save(function(err, data){
                 if(err)
                      return returnWithResponse.configureReturnData({ status: 400, success: false, result: error }, response);
-                else
-                    console.log(data);
-
             });
            
             Post.findOneAndUpdate({ _id: input.postId }, {$push: {comments: comment._id}}, (error, result) => {
