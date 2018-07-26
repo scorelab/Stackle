@@ -7,22 +7,13 @@ const server = require('../server');
 const stackModel = require('../app/models/stack');
 const stackName = 'testStack';
 const BASEURL = '/api/org/';
+const userModel = require('../app/models/user');
+const demoUserToken = "THisIsADemoToken";
+const username = 'DEMO';
+
 chai.use(chaiHttp);
 
-
-/*
-
-const stackSchema = mongoose.Schema({
-    name: { type: String, required: true, unique: true},
-    description: { type: String, required: true },
-    stackleUrl: { type: String, required: true, unique: true},
-    githubUrl: String,
-    createdUser: { type: String, required: true, unique: false}
-});
-
-*/
-
-//GET testing all post 
+//GET testing all stack 
 function testGetAllStack(done){
 	chai.request(server)
 			.get(BASEURL + 'all')
@@ -38,10 +29,8 @@ function testGetAllStack(done){
 			});
 }
 
-
-//GET testing a single post by user
+//GET testing a single stack by user
 function testGetStackByName(done, stackName){
-
 	chai.request(server)
 			.get(BASEURL + 'name/' + stackName)
 			.end(function(err, res){
@@ -56,23 +45,25 @@ function testGetStackByName(done, stackName){
 			});
 }
 
+//POST testing stack creation
+function testStackCreate(done){
 
-/*
+	let newUser = new userModel({
+		userId: 'demoUserId',
+		token: demoUserToken,
+		email: 'email',
+		name: username,
+	});
 
-//POST testing post creation
-
-function testPostCreate(done){
-	chai.request(server)
-		.post('/api/post/create')
+	newUser.save(function(err){
+		chai.request(server)
+		.post(BASEURL +  'create?access_token=' + demoUserToken)
 		.send({
-      		title: 'title',
+      		name: 'name',
       		description: 'description',
-      		org_name: 'org_name',
-      		repository: 'repository',
-      		linkIssue: 'link',
-      		user: 'username',
-      		date: '19/07/2018',
-      		tags: [],
+      		stackleUrl: 'url_link',
+      		linkIssue: 'link_Issue',
+      		createdUser: 'demo',
       	})
       	.end(function(err, res){
       		res.should.be.json;
@@ -84,11 +75,29 @@ function testPostCreate(done){
       	 	res.body.status.should.equal(200);
       	 	done();	
 
+      	 	//removing user after testing
+      	 	newUser.remove({});
       	});
+	});
+
+	
 }
 
-*/
-
+//GET testing a single stack by ID
+function testGetStackById(done, stack){
+	chai.request(server)
+			.get(BASEURL + 'id/' + stack._id)
+			.end(function(err, res){
+				res.should.be.json;
+				res.body.should.be.a('object');
+				res.body.should.have.property('status');
+				res.body.should.have.property('success');
+				res.body.should.have.property('result');
+				res.body.status.should.equal(200);
+				res.body.result.should.be.a('object');
+				done();
+			});
+}
 
 //Note TODO : Kindly Turn OFF the Authentication on post request before test cases are run
 describe('STACK', function(){
@@ -114,74 +123,25 @@ describe('STACK', function(){
     	});
   	});
 
-
-	//Testing post creation
-	// it('Testing /api/post/create', function(done){
-		// testPostCreate(done);
-	// });
+	//Testing stack creation
+	it('Testing /api/org/create', function(done){
+		testStackCreate(done);
+	});
 
 	// Testing all stacks
 	it('Testing /api/org/all', function(done){
 		testGetAllStack(done);
 	});
 
-	//Testing a single post by id
+	//Testing GET stack  by name
 	it('Testing /api/org/name/:organisationName', function(done){
 		testGetStackByName(done, stackName);
 	});
 
-/*
-
-	// Testing a single post by user
-	it('Testing /api/post/all/user/:user', function(done, newPost){
-		postModel.findOne({user: username}).exec(function(err, data){		
-			testGetSingleByUser(done , username);
+	//Testing GET stack  by ID
+	it('Testing /api/org/id/:stackId', function(done){
+		stackModel.findOne({name: stackName}, function(err, stack){
+			testGetStackById(done, stack);
 		});
 	});
-
-	//Testing all posts by org
-	it('Testing /api/post/all/org/:organisationName', function(done, newPost){
-		postModel.findOne({user: username}).exec(function(err, data){		
-			testGetAllByOrg(done , data);
-		});
-	});
-
-	//Testing get likes for a post
-	it('Testing /api/post/likes/:postId', function(done, newPost){
-		postModel.findOne({user: username}).exec(function(err, data){		
-			testGetLikes(done , data);
-		});
-	});
-
-*/
-
 });
-
-
-/*
-
-
-//create a Stack
-	router.post('/create', function(request, response){
-		Model.createStack(request, response);
-	});
-
-//get All stacks
-	router.get('/all', function(request, response){
-		Model.getAll(request, response);
-	});	
-
-//get stack by name
-	router.get('/name/:organisationName', function(request, response){
-		Model.getByName(request, response);
-	});
-
-
-// Get stack by id 
-	router.get('/id/:stackId', function(request, response){
-		Model.getById(request, response);
-	});
-
-
-
-*/

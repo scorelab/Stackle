@@ -6,9 +6,12 @@ const should = chai.should();
 const server = require('../server');
 const models = require('../app/models/post');
 const postModel = models['Post'];
+const userModel = require('../app/models/user');
+const demoUserToken = "THisIsADemoToken";
+const username = 'DEMO';
+
 chai.use(chaiHttp);
 
-const username = 'DEMO';
 
 //GET testing all post 
 function testGetAll(done){
@@ -26,7 +29,6 @@ function testGetAll(done){
 			});
 }
 
-
 //GET testing a single post by postId
 function testGetSingleById(done, data){
 	chai.request(server)
@@ -42,7 +44,6 @@ function testGetSingleById(done, data){
 				done();
 			});
 }
-
 
 //GET testing a single post by user
 function testGetSingleByUser(done, username){
@@ -78,9 +79,7 @@ function testGetAllByOrg(done, data){
 			});
 }
 
-
 //GET testing get likes
-
 function testGetLikes(done, data){
 
 	chai.request(server)
@@ -97,12 +96,20 @@ function testGetLikes(done, data){
 			});
 }
 
-
 //POST testing post creation
-
 function testPostCreate(done){
+
+	let newUser = new userModel({
+		userId: 'demoUserId',
+		token: demoUserToken,
+		email: 'email',
+		name: username,
+	});
+
+	newUser.save(function(err){
+
 	chai.request(server)
-		.post('/api/post/create')
+		.post('/api/post/create?access_token=' + demoUserToken)
 		.send({
       		title: 'title',
       		description: 'description',
@@ -123,7 +130,10 @@ function testPostCreate(done){
       	 	res.body.status.should.equal(200);
       	 	done();	
 
+      	 	//removing user after completing testing
+      	 	userModel.remove({});
       	});
+	});
 }
 
 //Note TODO : Kindly Turn OFF the Authentication on post request before test cases are run

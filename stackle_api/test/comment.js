@@ -7,10 +7,11 @@ const server = require('../server');
 const models = require('../app/models/post');
 const postModel = models['Post'];
 const commentModel = models['Comment'];
+const userModel = require('../app/models/user');
+const demoUserToken = "THisIsADemoToken";
+const username = 'DEMO';
 
 chai.use(chaiHttp);
-
-const username = 'DEMO';
 
 // testing GET all comments for a single post
 function testGetAllCommentsForAPost(done, post){
@@ -49,9 +50,17 @@ function testGetSingleComment(done, comment){
 
 //testing POST creating a comment
 function testCommentCreate(done, post){
-	
-	chai.request(server)
-		.post('/api/comment/' + post._id)
+
+	let newUser = new userModel({
+		userId: 'demoUserId',
+		token: demoUserToken,
+		email: 'email',
+		name: username,
+	});
+
+	newUser.save(function(err){
+		chai.request(server)
+		.post('/api/comment/' + post._id + '?access_token=' + demoUserToken)
 		.send({
       		description: 'Comment description',
       		user: 'username',
@@ -67,7 +76,11 @@ function testCommentCreate(done, post){
       	 	res.body.status.should.equal(200);
       	 	done();	
 
+      	 	//removing user after completing testing
+      	 	userModel.remove({});
+
       	});
+	});
 }
 
 // testing GET single comment 
@@ -128,14 +141,6 @@ describe('Comments', function(){
     	});
   	});
 
-	
-	// Testing POST creating comment
-	it('Testing /api/comment/:postId', function(done){
-		postModel.findOne({user: username}).exec(function(err, data){
-			testCommentCreate(done, data);
-		});
-	});
-
 	// Testing GET all comments for a post
 	it('Testing /api/comment/all/:postId', function(done){
 		postModel.findOne({user: username}).exec(function(err, data){
@@ -156,5 +161,13 @@ describe('Comments', function(){
 			testGetLikesUser(done, data);
 		});
 	});
+
+	// Testing POST creating comment
+	it('Testing /api/comment/:postId', function(done){
+		postModel.findOne({user: username}).exec(function(err, data){
+			testCommentCreate(done, data);
+		});
+	});
+
 	
 });
