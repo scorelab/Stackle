@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PostService } from '../../../services/post.service';
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: 'app-post',
@@ -17,7 +18,8 @@ export class PostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -45,11 +47,19 @@ export class PostComponent implements OnInit {
   }
 
   postComment(){
-    this.commentObject.date = new Date();
-    this.postService.postComment(this.postId, this.commentObject).subscribe( response => {
-      this.commentObject.description = "";
-      this.getPostData();
-    })
+    // validate post content
+    if(this.commentObject.description === undefined || this.commentObject.description === ""){
+      this.showSnackBar("Please enter comment text");
+    }else {
+
+      this.commentObject.date = new Date();
+      this.postService.postComment(this.postId, this.commentObject).subscribe( response => {
+        this.commentObject.description = "";
+        this.getPostData();
+      })
+
+    }
+
   }
 
   voteOnPost(){
@@ -72,7 +82,13 @@ export class PostComponent implements OnInit {
   }
 
   replyOnComment(id){
-    
+
+  }
+
+  showSnackBar(message:string) {
+    this.snackBar.open(message, null, {
+      duration: 2000
+    })
   }
 
 }
