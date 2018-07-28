@@ -43,12 +43,12 @@
                   </div>
                 </div>
                 <div class="col-md-2 text-center">
-                  <ng-container *ngIf="user.subscribedStacks.includes(stack); then unsubscribed else subscribed"></ng-container>
+                  <ng-container *ngIf="checkSubscription(stack); then subscribed else unsubscribed"></ng-container>
                   <ng-template #subscribed>
-                    <button mat-button (click)="subscribeToStack(stack)">Unsubscribe</button>
+                    <button mat-raised-button="" (click)="subscribeToStack(stack)">Unsubscribe</button>
                   </ng-template>
                   <ng-template #unsubscribed>
-                    <button mat-button (click)="subscribeToStack(stack)">Subscribe</button>
+                    <button mat-raised-button="" (click)="subscribeToStack(stack)" color="warn">Subscribe</button>
                   </ng-template>
                 </div>
               </mat-card>

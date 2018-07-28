@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StackService } from '../../services/stack.service';
 import { UserService } from '../../services/user.service';
+import {stripSummaryForJitNameSuffix} from "@angular/compiler/src/aot/util";
 
 @Component({
   selector: 'app-stacks',
@@ -40,7 +41,7 @@ export class StacksComponent implements OnInit {
   subscribeToStack(stack){
     console.log(stack);
 
-    if(!this.user.subscribedStacks.includes(stack)){
+    if(!this.checkSubscription(stack)){
       console.log("subscribe");
       this.stackService.subscribeToStack(stack._id, 123).subscribe( response => {
         this.getCurrentUser();
@@ -51,6 +52,10 @@ export class StacksComponent implements OnInit {
         this.getCurrentUser();
       })
     }
+  }
+
+  checkSubscription(stack){
+    return !!this.user.subscribedStacks.find(item => item._id === stack._id);
   }
 
 }
