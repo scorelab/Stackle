@@ -101,8 +101,7 @@ function testGetLikesUser(done, comment){
 }
 
 
-//Note TODO : Kindly Turn OFF the Authentication on post request before test cases are run
-describe('Comments', function(){
+describe('Comments:- \n', function(){
 
 	//before each testCase is run
  	beforeEach(function(done){

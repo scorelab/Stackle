@@ -136,8 +136,7 @@ function testPostCreate(done){
 	});
 }
 
-//Note TODO : Kindly Turn OFF the Authentication on post request before test cases are run
-describe('POSTS', function(){
+describe('POSTS:- \n', function(){
 
 	//before each testCase is run
  	beforeEach(function(done){
