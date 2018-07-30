@@ -108,7 +108,7 @@ function testUserCreate(done){
 
 
 //Grouping user testCases
-describe('POSTS', function(){
+describe('User', function(){
 
 	//before each testCase is run
  	beforeEach(function(done){
