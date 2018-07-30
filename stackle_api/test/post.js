@@ -182,7 +182,7 @@ describe('POSTS', function(){
 		});
 	});
 
-	// Testing a single post by user
+	// Testing a all post by a single user
 	it('Testing /api/post/all/user/:user', function(done, newPost){
 		postModel.findOne({user: username}).exec(function(err, data){		
 			testGetSingleByUser(done , username);
