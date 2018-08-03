@@ -22,6 +22,8 @@ const authConfig = require('./config/auth');
 const returnWithResponse = require('./app/lib/returnWithResponse');
 const UserModel = require('./app/models/user');
 
+let dbURL = database.url;
+
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({ 'extended': 'true' }));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
@@ -83,6 +85,11 @@ routes(app, db);
 
 // Add option { useMongoClient: true } if mongoose version < 5
 var option = database.option(mongoose.version);
+
+if(app.get('env') === 'test'){
+    dbURL = database.testurl;
+    console.log('Testing ... \n');
+}
 
 mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");
