@@ -4,7 +4,7 @@
   "description": "Web Communication portal for OpenSource organizations to discuss project ideas and issues ",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "mocha --timeout 20000",
     "start": "nodemon bin/www",
     "serve": "node bin/www"
   },
@@ -46,7 +46,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.5.3"
   },
   "engines": {
     "node": "6.9.5"
