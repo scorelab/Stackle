@@ -17,7 +17,7 @@ export class AuthService {
       responseType: 'token id_token',
       audience: `https://${environment.AUTH0_DOMAIN}/userinfo`,
       params: {
-        scope: 'openid'
+        scope: 'openid profile'
       }
     }
   });
@@ -67,10 +67,12 @@ export class AuthService {
 
   private setSession(authResult): void {
     // Set the time that the access token will expire at
+    console.log("Auth Result:", authResult);
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('username', authResult.idTokenPayload.nickname);
   }
 
   public logout(): void {
@@ -78,6 +80,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('username');
     // Go back to the home route
     this.router.navigate(['/login']);
   }
