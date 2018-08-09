@@ -12,27 +12,27 @@
  * @param { Object } response response
  */
 function configureReturnData(data, response) {
-  if (!!!~Object.keys(data).indexOf('status')) {
-    throw new Error('Attribute status is missing');
-  }
-  
-  if (!!!~Object.keys(data).indexOf('success')) {
-    throw new Error('Attribute success is missing');
-  }
-  
-  if (!!!~Object.keys(data).indexOf('result')) {
-    throw new Error('Attribute result is missing');
-  }
+    if (!!!~Object.keys(data).indexOf('status')) {
+        throw new Error('Attribute status is missing');
+    }
 
-  //response.header("Access-Control-Allow-Origin", "*");
-  // response.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-  //response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  response.status(data.status);
-  response.json({
-    status: data.status,
-    success: data.success,
-    result: data.result,
-  });
+    if (!!!~Object.keys(data).indexOf('success')) {
+        throw new Error('Attribute success is missing');
+    }
+
+    if (!!!~Object.keys(data).indexOf('result')) {
+        throw new Error('Attribute result is missing');
+    }
+
+    //response.header("Access-Control-Allow-Origin", "*");
+    // response.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    //response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    response.status(data.status);
+    response.json({
+        status: data.status,
+        success: data.success,
+        result: data.result,
+    });
 }
 
 module.exports.configureReturnData = configureReturnData;

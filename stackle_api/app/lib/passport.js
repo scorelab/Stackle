@@ -1,7 +1,7 @@
-var passport = require('passport');
-var GithubStratergy = require('passport-github').Strategy;
-var BearerStratergy = require('passport-http-bearer').Strategy;
-var authConfig = require('../../config/auth');
+const passport = require('passport');
+const GithubStratergy = require('passport-github').Strategy;
+const BearerStratergy = require('passport-http-bearer').Strategy;
+const authConfig = require('../../config/auth');
 const UserModel = require('../models/user');
 
 //used by passport engine for serializing user

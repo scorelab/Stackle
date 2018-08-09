@@ -12,15 +12,15 @@ const Post = postModels.Post;
 const Comment = postModels.Comment;
 const Reply = postModels.Reply;
 
-module.exports = function (app, db) {
+module.exports = function(app, db) {
 
-// Login  
-	app.get('/login', function (request, response) {
-		response.redirect('/auth/github');
-	});
+    // Login  
+    app.get('/login', function(request, response) {
+        response.redirect('/auth/github');
+    });
 
-//needs to intergrate with github for implementation
-    app.get('/home', function (request, response) {
+    //needs to intergrate with github for implementation
+    app.get('/home', function(request, response) {
         return returnWithResponse.configureReturnData({
             status: 501,
             success: false,
@@ -32,7 +32,7 @@ module.exports = function (app, db) {
     // app.get('/api/notifications', function (request, response) {
     // });
 
-    app.get('/*', function (request, response) {
+    app.get('/*', function(request, response) {
         response.sendFile('./public/404.html');
     });
 }
