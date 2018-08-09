@@ -22,8 +22,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfileObject(){
-    let username = 'ntbandara3';
-    this.profileService.getProfileObject(username).subscribe(response => {
+    this.profileService.getProfileObject().subscribe(response => {
         this.profileObject = JSON.parse(response['_body']);
         this.loading = false;
     }, error => {
