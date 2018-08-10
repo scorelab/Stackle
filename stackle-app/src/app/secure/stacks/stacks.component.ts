@@ -31,7 +31,8 @@ export class StacksComponent implements OnInit {
   }
 
   getCurrentUser(){
-    this.userService.getUser(123).subscribe( response => {
+    var user = localStorage.getItem('username');
+    this.userService.getUser(user).subscribe( response => {
       this.user = response.result;
       console.log(response.result);
       this.getAllOrgs();
@@ -43,12 +44,12 @@ export class StacksComponent implements OnInit {
 
     if(!this.checkSubscription(stack)){
       console.log("subscribe");
-      this.stackService.subscribeToStack(stack._id, 123).subscribe( response => {
+      this.stackService.subscribeToStack(stack._id).subscribe( response => {
         this.getCurrentUser();
       })
     }else{
       console.log("unsubscribe");
-      this.stackService.unsubscribeFromStack(stack._id, 123).subscribe( response => {
+      this.stackService.unsubscribeFromStack(stack._id).subscribe( response => {
         this.getCurrentUser();
       })
     }

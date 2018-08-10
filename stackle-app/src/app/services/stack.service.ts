@@ -35,8 +35,9 @@ export class StackService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public subscribeToStack(stackId, userId) {
+  public subscribeToStack(stackId) {
 
+    var userId = localStorage.getItem('username');
     let requestBody = {
       stackId: stackId,
       userId: userId
@@ -48,7 +49,9 @@ export class StackService {
 
   }
 
-  public unsubscribeFromStack(stackId, userId) {
+  public unsubscribeFromStack(stackId) {
+
+    var userId = localStorage.getItem('username');
 
     let requestBody = {
       stackId: stackId,

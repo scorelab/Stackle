@@ -35,13 +35,13 @@ app.use(cors());
 app.use(passport.initialize());
 
 //Protecting every Post Request 
-app.post('*',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
-    console.log('Success');
-    next();   
-}, function(err, req ,res, next){
-  console.log('Failed');
-   returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied ! ' + err.toString()} ,res);
-});
+// app.post('*',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
+//     console.log('Success');
+//     next();
+// }, function(err, req ,res, next){
+//   console.log('Failed');
+//    returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied ! ' + err.toString()} ,res);
+// });
 
 //Basic Routes
 //serving static index.html file using middleware

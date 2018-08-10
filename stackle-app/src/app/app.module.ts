@@ -27,6 +27,8 @@ import { LoginComponent } from './public/login/login.component';
 import {PostComponent} from './secure/shared/post/post.component';
 import { SearchPipe } from './pipes/search.pipe';
 
+import { TokenInterceptor } from "./token.interceptor";
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { SearchPipe } from './pipes/search.pipe';
     PostService,
     StackService,
     ProfileService,
-    UserService
+    UserService,
+    TokenInterceptor
   ],
   bootstrap: [AppComponent]
 })
