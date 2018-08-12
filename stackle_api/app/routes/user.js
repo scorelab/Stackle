@@ -38,6 +38,10 @@ const userModel = require('../models/user');
 		userModel.unsubscribe(request, response);
 	});
 
+// get likes post by user
+	router.get('/likes/post/:userId', function(request, response){
+		userModel.getpostLikes(request, response);
+	});
 
 // only for developer mode dont consume below APIs
 

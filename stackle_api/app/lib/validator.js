@@ -105,6 +105,17 @@ Validator.prototype.validateStackId = function() {
   return this.input;
 };
 
+// To validate user while getting comments by user
+Validator.prototype.validateCommentsByUser = function(){
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
+
+  return this.input;
+}
+
 //Validating PostId
 Validator.prototype.validateCommentOnPost = function() {
   if (!this.input) { throw new Error('Input is undefined'); }
@@ -248,6 +259,16 @@ Validator.prototype.validateReplyBody = function(){
 
 }
 
+// To validate user while getting replies by user
+Validator.prototype.validateRepliesByUser = function(){
+  if (!this.input) { throw new Error('Input is undefined'); }
+
+  if (!Object.keys(this.input).length) { throw new Error('Empty Object has been passed'); }
+
+  if (!!!~Object.keys(this.input).indexOf('user')) { throw new Error('Attribute user is missing'); }
+
+  return this.input;
+}
 
 //Validating reply ID
 Validator.prototype.validateReplyId = function(){

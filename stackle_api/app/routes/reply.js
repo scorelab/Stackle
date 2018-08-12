@@ -23,4 +23,10 @@ const Reply = models.Reply;
 		Reply.getReplyById(request, response);
 	});
 
+//to get replies by user
+	router.get('/all/user/:user', function(request, response){
+		Reply.getAllRepliesByUser(request, response);
+	});
+
+
 module.exports = router;
