@@ -11,8 +11,12 @@ export class ProfileService {
     private http: Http
   ) { }
 
-  public getProfileObject(){
+  public getCurrentUser(){
     var username = localStorage.getItem('username');
+    return this.http.get(`${this.apiUrl}/users/${username}`);
+  }
+
+  public getProfileByUserName(username) {
     return this.http.get(`${this.apiUrl}/users/${username}`);
   }
 

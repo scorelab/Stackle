@@ -23,7 +23,10 @@ export class StackService {
   }
 
   //get all organizations subscribed by the user
-  public getAllOrgsByUser(userId) {
+  public getAllOrgsByUser() {
+
+    var userId = localStorage.getItem('username');
+
     return this.http.get(`${this.apiUrl}/api/user/stacks/${userId}`, this.options)
       .map((res: Response) => res.json())
       .catch((error: any)=> Observable.throw(error.json().error || 'Server error'));

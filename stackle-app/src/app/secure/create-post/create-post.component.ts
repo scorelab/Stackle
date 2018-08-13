@@ -50,7 +50,7 @@ export class CreatePostComponent implements OnInit {
 
     else {
       this.postObject.date = new Date();
-      this.postObject.user = "smpuser";
+      this.postObject.user = localStorage.getItem('username');
       this.loading = true;
       this.postService.createPost(this.postObject).subscribe( response => {
         if(response.status == 200){
