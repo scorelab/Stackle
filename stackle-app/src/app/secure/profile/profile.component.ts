@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfileObject(){
-    this.profileService.getProfileObject().subscribe(response => {
+    this.profileService.getCurrentUser().subscribe(response => {
         this.profileObject = JSON.parse(response['_body']);
         this.loading = false;
     }, error => {
