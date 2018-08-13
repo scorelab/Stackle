@@ -27,6 +27,7 @@ export class StacksComponent implements OnInit {
       console.log(response);
       this.stacks = [];
       this.stacks = response.result;
+      console.log(response);
     })
   }
 

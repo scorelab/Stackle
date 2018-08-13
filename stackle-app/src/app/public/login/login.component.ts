@@ -24,5 +24,8 @@ export class LoginComponent implements OnInit {
   }
 
 
+  login() {
+    window.open('http://localhost:8080/login');
+  }
 
 }
