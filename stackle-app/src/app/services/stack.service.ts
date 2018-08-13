@@ -17,7 +17,7 @@ export class StackService {
   constructor(private http: Http) { }
 
   public getAllOrgs() {
-    return this.http.get(`${this.apiUrl}/api/orgs`, this.options)
+    return this.http.get(`${this.apiUrl}/api/org/all`, this.options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

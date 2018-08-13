@@ -26,11 +26,11 @@ export class PostService {
   }
 
   voteUp(id) {
-    return this.http.post(`${this.apiUrl}/api/post/likes/up/${id}`, {});
+    return this.http.post(`${this.apiUrl}/api/post/likes/up/${id}`, {userId:localStorage.getItem('username')});
   }
 
   voteDown(id) {
-    return this.http.post(`${this.apiUrl}/api/post/likes/down/${id}`, {});
+    return this.http.post(`${this.apiUrl}/api/post/likes/down/${id}`, {userId:localStorage.getItem('username')});
   }
 
   //comments

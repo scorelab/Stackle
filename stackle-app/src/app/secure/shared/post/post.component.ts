@@ -30,7 +30,7 @@ export class PostComponent implements OnInit {
     // this.commentObject.description = "test";
     this.commentObject.votes = 0;
     //Demo User
-    this.commentObject.user = "smpuser";
+    this.commentObject.user = localStorage.getItem('username');
     this.activatedRoute.params.subscribe(params => {
       this.postId = params['id'];
       this.getPostData();
@@ -63,7 +63,6 @@ export class PostComponent implements OnInit {
   }
 
   voteOnPost(){
-    //TODO: check user - vote up/down
     this.postService.voteUp(this.postId).subscribe( response => {
       this.getPostData();
     });
