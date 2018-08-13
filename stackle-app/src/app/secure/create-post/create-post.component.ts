@@ -4,8 +4,8 @@ import {MatChipInputEvent} from '@angular/material';
 import { MatSnackBar } from '@angular/material'
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
-
-
+import {ProfileService} from "../../services/profile.service";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-create-post',
@@ -18,6 +18,7 @@ export class CreatePostComponent implements OnInit {
   private postObject;
   private separatorKeyCodes;
   private loading = false;
+  private subscribedStacks;
 
   selectable: boolean = true;
   removable: boolean = true;
@@ -25,6 +26,7 @@ export class CreatePostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
+    private userService: UserService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
@@ -34,6 +36,8 @@ export class CreatePostComponent implements OnInit {
     this.postObject.tags = [];
     this.postObject.votes = 0;
     this.separatorKeyCodes = [ENTER, COMMA];
+    this.subscribedStacks = [];
+    this.getSubscribedStacks();
   }
 
 
@@ -97,4 +101,11 @@ export class CreatePostComponent implements OnInit {
       duration: 2000
     })
   }
+
+  getSubscribedStacks(){
+    this.userService.getUser(localStorage.getItem('username')).subscribe(response => {
+      this.subscribedStacks = response.result.subscribedStacks;
+    })
+  }
+
 }
