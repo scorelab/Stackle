@@ -53,7 +53,7 @@
           </mat-list-item>
           <h4 mat-subheader="">Your Stacks</h4>
           <div class="subscibed-stacks-container">
-            <mat-list-item class="mat-menu-item" *ngFor="let stack of subscribedStacks">
+            <mat-list-item class="mat-menu-item" *ngFor="let stack of subscribedStacks" (click)="goToStack(stack.name)">
               <mat-icon mat-list-icon>
                 <img class="img-circle" src="../../assets/images/user_avatar.png">
               </mat-icon>

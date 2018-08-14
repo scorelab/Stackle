@@ -55,4 +55,8 @@ export class SecureComponent implements OnInit {
     })
   }
 
+  public goToStack(stackName) {
+    this.router.navigate(['app/stack'], { queryParams: { name: stackName }});
+  }
+
 }
