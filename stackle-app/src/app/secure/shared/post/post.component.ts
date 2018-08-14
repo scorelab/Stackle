@@ -14,6 +14,7 @@ export class PostComponent implements OnInit {
   private post;
   private loading = false;
   private commentObject;
+  private replyObject;
 
   constructor(
     private postService: PostService,
@@ -27,10 +28,12 @@ export class PostComponent implements OnInit {
     this.post.comments = [];
     this.loading = true;
     this.commentObject = {};
+    this.replyObject = {};
     // this.commentObject.description = "test";
     this.commentObject.votes = 0;
-    //Demo User
+    //Set User
     this.commentObject.user = localStorage.getItem('username');
+    this.replyObject.user = localStorage.getItem('username');
     this.activatedRoute.params.subscribe(params => {
       this.postId = params['id'];
       this.getPostData();
@@ -81,7 +84,15 @@ export class PostComponent implements OnInit {
   }
 
   replyOnComment(id){
-
+    if(this.replyObject.description === undefined || this.replyObject.description === ""){
+      this.showSnackBar("Please enter reply text");
+    }else{
+      this.replyObject.date = new Date();
+      this.postService.replyOnComment(id, this.replyObject).subscribe(response => {
+        this.replyObject.description = "";
+        this.getPostData();
+      })
+    }
   }
 
   showSnackBar(message:string) {

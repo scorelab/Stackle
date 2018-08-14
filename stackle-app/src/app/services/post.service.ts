@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { environment} from '../../environments/environment';
+import {Observable} from "../../../node_modules/rxjs";
 
 @Injectable()
 export class PostService {
@@ -18,7 +19,8 @@ export class PostService {
   }
 
   getAllPostsByOrg(orgName){
-    return this.http.get(`${this.apiUrl}/api/post/all/org/${orgName}`, this.options);
+    return this.http.get(`${this.apiUrl}/api/post/all/org/${orgName}`, this.options)
+      .catch((error: any)=> Observable.throw(error.json().error || 'Server error'));
   }
 
   getPost(id){
@@ -50,7 +52,7 @@ export class PostService {
     return this.http.post(`${this.apiUrl}/api/comment/likes/down/${commentId}`, {userId:localStorage.getItem('username')});
   }
 
-  replyOnComment(commentId) {
-
+  replyOnComment(commentId, replyObject) {
+    return this.http.post(`${this.apiUrl}/api/reply/${commentId}`, replyObject);
   }
 }

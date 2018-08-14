@@ -42,6 +42,8 @@ export class StackComponent implements OnInit {
     this.postService.getAllPostsByOrg(orgName).subscribe(response => {
       this.posts = response.json().result;
       this.loading = false;
+    }, error => {
+      this.posts = [];
     })
   }
 

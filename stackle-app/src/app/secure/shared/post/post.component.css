@@ -56,3 +56,8 @@
 .comment mat-icon {
   font-size: 14px;
 }
+
+
+.comment-content {
+  padding: 3px;
+}
