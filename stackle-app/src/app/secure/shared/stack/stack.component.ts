@@ -47,4 +47,8 @@ export class StackComponent implements OnInit {
     })
   }
 
+  private navigateToPost(post_id) {
+    this.router.navigate(['app/post/'+post_id]);
+  }
+
 }
