@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PostService } from '../../../services/post.service';
 import { MatSnackBar } from "@angular/material";
+import {ProfileService} from "../../../services/profile.service";
 
 @Component({
   selector: 'app-post',
@@ -18,6 +19,7 @@ export class PostComponent implements OnInit {
 
   constructor(
     private postService: PostService,
+    private profileService: ProfileService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private snackBar: MatSnackBar
@@ -38,7 +40,6 @@ export class PostComponent implements OnInit {
       this.postId = params['id'];
       this.getPostData();
     });
-
   }
 
   getPostData() {
@@ -98,6 +99,12 @@ export class PostComponent implements OnInit {
   showSnackBar(message:string) {
     this.snackBar.open(message, null, {
       duration: 2000
+    })
+  }
+
+  getUserPhotoUrl(userId){
+    this.profileService.getProfileByUserNameFromDB(userId).subscribe(response => {
+      return response.json().result.picUrl;
     })
   }
 

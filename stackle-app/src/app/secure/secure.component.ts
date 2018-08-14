@@ -50,8 +50,8 @@ export class SecureComponent implements OnInit {
   }
 
   public getUserProfileAvatar() {
-    this.profileService.getCurrentUser().subscribe( response => {
-      this.userAvatarUrl = JSON.parse(response._body).avatar_url;
+    this.profileService.getCurrentUserFromDB().subscribe( response => {
+      this.userAvatarUrl = response.json().result.picUrl;
     })
   }
 
