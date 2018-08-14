@@ -17,6 +17,10 @@ export class PostService {
     return this.http.get(`${this.apiUrl}/api/post/all`, this.options);
   }
 
+  getAllPostsByOrg(orgName){
+    return this.http.get(`${this.apiUrl}/api/post/all/org/${orgName}`, this.options);
+  }
+
   getPost(id){
     return this.http.get(`${this.apiUrl}/api/post/${id}`, this.options);
   }
