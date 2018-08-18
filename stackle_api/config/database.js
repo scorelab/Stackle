@@ -1,14 +1,16 @@
 module.exports = {
-	url : process.env.LOCAL_DB || "mongodb://localhost/main",
-	testurl: "mongodb://localhost/node-test",
-	alturl : "mongodb://ordinary:H3ll0w0rld@ds149201.mlab.com:49201/stackle",
-	option: function(version){
-			var opt ;
-			if(version < '5'){
-				opt = { useMongoClient: true };
-			}
-			return opt;
-	}
+    url: process.env.LOCAL_DB || "mongodb://localhost/main",
+    testurl: "mongodb://localhost/node-test",
+    alturl: "mongodb://ordinary:H3ll0w0rld@ds149201.mlab.com:49201/stackle",
+    option: function(version) {
+        var opt;
+        if (version < '5') {
+            opt = {
+                useMongoClient: true
+            };
+        }
+        return opt;
+    }
 };
 
 /*
