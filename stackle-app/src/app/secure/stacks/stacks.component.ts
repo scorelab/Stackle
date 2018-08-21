@@ -24,32 +24,26 @@ export class StacksComponent implements OnInit {
 
   getAllOrgs(){
     this.stackService.getAllOrgs().subscribe( response => {
-      console.log(response);
       this.stacks = [];
       this.stacks = response.result;
-      console.log(response);
     })
   }
 
   getCurrentUser(){
-    var user = localStorage.getItem('username');
+    const user = localStorage.getItem('username');
     this.userService.getUser(user).subscribe( response => {
       this.user = response.result;
-      console.log(response.result);
       this.getAllOrgs();
     })
   }
 
   subscribeToStack(stack){
-    console.log(stack);
 
     if(!this.checkSubscription(stack)){
-      console.log("subscribe");
       this.stackService.subscribeToStack(stack._id).subscribe( response => {
         this.getCurrentUser();
       })
     }else{
-      console.log("unsubscribe");
       this.stackService.unsubscribeFromStack(stack._id).subscribe( response => {
         this.getCurrentUser();
       })

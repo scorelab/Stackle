@@ -39,7 +39,6 @@ export class AuthService {
     });
     this.lock.on('authorization_error', (err) => {
       this.router.navigate(['/']);
-      console.log(err);
       alert(`Error: ${err.error}. Check the console for further details.`);
     });
   }
@@ -67,7 +66,6 @@ export class AuthService {
 
   private setSession(authResult): void {
     // Set the time that the access token will expire at
-    console.log("Auth Result:", authResult);
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);

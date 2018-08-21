@@ -4,8 +4,7 @@ import {MatChipInputEvent} from '@angular/material';
 import { MatSnackBar } from '@angular/material'
 import {ENTER, COMMA} from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
-import {ProfileService} from "../../services/profile.service";
-import {UserService} from "../../services/user.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: 'app-create-post',

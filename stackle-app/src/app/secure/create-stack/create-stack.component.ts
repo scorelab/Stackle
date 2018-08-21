@@ -23,8 +23,7 @@ export class CreateStackComponent implements OnInit {
   }
 
   createStack() {
-    // temp user
-    this.stackObject.createdUser = "ntbandara3";
+    this.stackObject.createdUser = localStorage.getItem('username');
 
     // validate user inputs
     if(this.stackObject.name == undefined || this.stackObject.name == ""){

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PostService } from '../../../services/post.service';
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar } from '@angular/material';
 import {ProfileService} from "../../../services/profile.service";
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
-  // encapsulation: ViewEncapsulation.None
 })
 export class PostComponent implements OnInit {
   private postId;
@@ -31,7 +30,6 @@ export class PostComponent implements OnInit {
     this.loading = true;
     this.commentObject = {};
     this.replyObject = {};
-    // this.commentObject.description = "test";
     this.commentObject.votes = 0;
     //Set User
     this.commentObject.user = localStorage.getItem('username');
@@ -99,12 +97,6 @@ export class PostComponent implements OnInit {
   showSnackBar(message:string) {
     this.snackBar.open(message, null, {
       duration: 2000
-    })
-  }
-
-  getUserPhotoUrl(userId){
-    this.profileService.getProfileByUserNameFromDB(userId).subscribe(response => {
-      return response.json().result.picUrl;
     })
   }
 

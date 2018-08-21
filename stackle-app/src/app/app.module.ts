@@ -27,7 +27,7 @@ import { LoginComponent } from './public/login/login.component';
 import {PostComponent} from './secure/shared/post/post.component';
 import { SearchPipe } from './pipes/search.pipe';
 
-import { TokenInterceptor } from "./token.interceptor";
+import { TokenInterceptor } from './token.interceptor';
 
 
 @NgModule({
