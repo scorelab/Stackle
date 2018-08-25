@@ -67,7 +67,7 @@ export class CreatePostComponent implements OnInit {
     this.postObject.title = "";
     this.postObject.org_name = "";
     this.postObject.repository = "";
-    this.postObject.issue = "";
+    this.postObject.linkIssue = "";
     this.postObject.description = "";
   };
 
