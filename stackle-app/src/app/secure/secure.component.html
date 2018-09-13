@@ -4,7 +4,7 @@
       <div class="nav-items">
         <h3 class="mat-h3">
           <a routerLink="profile">
-            <img class="img-circle" src="../../assets/images/user_avatar.png">
+            <img class="img-circle" src="{{userAvatarUrl}}">
             Profile
           </a>
         </h3>
@@ -27,8 +27,12 @@
             <input matInput placeholder="Stack Name">
           </mat-form-field>
           <button mat-button color="primary" type="submit">
-            <mat-icon matListIcon>find_in_page</mat-icon>
+            <mat-icon matListIcon>search</mat-icon>
             Search
+          </button>
+          <button mat-button color="primary" type="submit" (click)="navigateToStacks()">
+            <mat-icon matListIcon>view_headline</mat-icon>
+            View all
           </button>
         </form>
       </div>
@@ -43,25 +47,20 @@
             <mat-icon matListIcon>note_add</mat-icon>
             Discuss a issue
           </mat-list-item>
+          <mat-list-item class="mat-menu-item" (click)="navigateToCreateStack()">
+            <mat-icon matListIcon>note_add</mat-icon>
+            Create new stack
+          </mat-list-item>
           <h4 mat-subheader="">Your Stacks</h4>
-          <mat-list-item class="mat-menu-item">
-            <mat-icon mat-list-icon>
-              <img class="img-circle" src="../../assets/images/user_avatar.png">
-            </mat-icon>
-            Score Lab
-          </mat-list-item>
-          <mat-list-item class="mat-menu-item">
-            <mat-icon mat-list-icon>
-              <img class="img-circle" src="../../assets/images/user_avatar.png">
-            </mat-icon>
-            Google
-          </mat-list-item>
-          <mat-list-item class="mat-menu-item">
-            <mat-icon mat-list-icon>
-              <img class="img-circle" src="../../assets/images/user_avatar.png">
-            </mat-icon>
-            Fossasia
-          </mat-list-item>
+          <div class="subscibed-stacks-container">
+            <mat-list-item class="mat-menu-item" *ngFor="let stack of subscribedStacks" (click)="goToStack(stack.name)">
+              <mat-icon mat-list-icon>
+                <img class="img-circle" src="../../assets/images/user_avatar.png">
+              </mat-icon>
+              {{stack.name}}
+            </mat-list-item>
+            <p *ngIf="subscribedStacks.length === 0">You have no subscribed stacks!</p>
+          </div>
         </mat-list>
       </div>
     </div>

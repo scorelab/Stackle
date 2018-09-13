@@ -14,7 +14,11 @@
                 <input matInput placeholder="Title *" [(ngModel)]="postObject.title">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Organization *" [(ngModel)]="postObject.org_name">
+                <mat-select placeholder="Organization *" [(ngModel)]="postObject.org_name">
+                  <mat-option *ngFor="let stack of subscribedStacks" [value]="stack.name">
+                    {{stack.name}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
               <mat-form-field>
                 <input matInput placeholder="Repository *" [(ngModel)]="postObject.repository">

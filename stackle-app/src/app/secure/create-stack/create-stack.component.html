@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="create-post-container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <mat-card>
+          <mat-card-title>Create Stack</mat-card-title>
+          <mat-card-subtitle>
+            Create a stack for your organization<br>
+            <small>* required fields</small>
+          </mat-card-subtitle>
+          <mat-card-content>
+            <div class="form-container">
+              <mat-form-field>
+                <input matInput placeholder="Name *" [(ngModel)]="stackObject.name">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Description *" [(ngModel)]="stackObject.description">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Stackle URL *" [(ngModel)]="stackObject.stackleUrl">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="GitHub URL" [(ngModel)]="stackObject.githubUrl">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button (click)="createStack()">Create</button>
+            <button mat-button (click)="clear()">Clear</button>
+          </mat-card-actions>
+
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

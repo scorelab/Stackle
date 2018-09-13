@@ -52,18 +52,50 @@
       <div class="comment-section" *ngIf="post.comments.length !== 0">
         <div *ngFor="let comment of post.comments">
           <mat-card-content class="comment">
-            <p>{{comment.description}} -
-              <span class="comment-user">{{comment.user}}</span>
-              <span class="comment-date">{{comment.date | date}} {{comment.date | date:'shortTime'}}</span>
-              <span>{{comment.votes}}</span>
-              <button mat-icon-button (click)="voteUpOnComment(comment._id)">
-                <mat-icon matBadge="15" matBadgeColor="warn">thumb_up</mat-icon>
-              </button>
-              <button mat-icon-button>
-                <mat-icon matBadge="15" matBadgeColor="warn" (click)="voteDownOnComment(comment._id)">thumb_down</mat-icon>
-              </button>
-              <a>Reply</a>
-            </p>
+            <div>
+             <mat-card-header style="width: inherit;">
+               <div mat-card-avatar class="example-header-image">
+                 <div mat-card-avatar class="example-header-image">
+                   <img src="../../../assets/images/user_avatar.png">
+                 </div>
+               </div>
+               <mat-card-title>
+                 {{comment.description}} <br>
+
+                 <span class="comment-date">{{comment.date | date}} {{comment.date | date:'shortTime'}}</span>
+                 <span class="comment-votes">{{comment.votes}}</span>
+                 <button mat-icon-button (click)="voteUpOnComment(comment._id)">
+                   <mat-icon matBadge="15" matBadgeColor="warn">thumb_up</mat-icon>
+                 </button>
+                 <button mat-icon-button>
+                   <mat-icon matBadge="15" matBadgeColor="warn" (click)="voteDownOnComment(comment._id)">thumb_down</mat-icon>
+                 </button><br>
+                 <div class="reply-container" style="margin-left: 40px;">
+                   <div *ngFor="let reply of comment.replies">
+
+                     <mat-card-header>
+                       <div mat-card-avatar class="example-header-image">
+                         <div mat-card-avatar class="example-header-image">
+                           <img src="../../../assets/images/user_avatar.png">
+                         </div>
+                       </div>
+                       <mat-card-title>
+                         {{reply.description}} <br>
+                         <!--<span class="comment-user">{{reply.user}}</span>-->
+                         <span class="comment-date">{{reply.date | date}} {{reply.date | date:'shortTime'}}</span>
+                       </mat-card-title>
+                     </mat-card-header>
+
+                   </div>
+
+                   <mat-form-field style="width: 60%;">
+                     <textarea matInput placeholder="Reply" [(ngModel)]="replyObject.description"></textarea>
+                   </mat-form-field>
+                   <button mat-button (click)="replyOnComment(comment._id)">Reply</button>
+                 </div>
+               </mat-card-title>
+             </mat-card-header>
+            </div>
           </mat-card-content>
         </div>
       </div>

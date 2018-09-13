@@ -5,14 +5,29 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class ProfileService {
 
-  private apiUrl = 'https://api.github.com';
+  private gitHubApiUrl = 'https://api.github.com';
+  private apiUrl = 'http://localhost:8080';
 
   constructor(
     private http: Http
   ) { }
 
-  public getProfileObject(username){
-    return this.http.get(`${this.apiUrl}/users/${username}`);
+  public getCurrentUser(){
+    var username = localStorage.getItem('username');
+    return this.http.get(`${this.gitHubApiUrl}/users/${username}`);
+  }
+
+  public getCurrentUserFromDB() {
+    var username = localStorage.getItem('username');
+    return this.http.get(`${this.apiUrl}/api/user/${username}`);
+  }
+
+  public getProfileByUserName(username) {
+    return this.http.get(`${this.gitHubApiUrl}/users/${username}`);
+  }
+
+  public getProfileByUserNameFromDB(username){
+    return this.http.get(`${this.apiUrl}/api/user/${username}`);
   }
 
 }

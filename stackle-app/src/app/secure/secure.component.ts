@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
 import { StackService } from '../services/stack.service';
+import {ProfileService} from "../services/profile.service";
 
 @Component({
   selector: 'app-secure',
@@ -11,18 +12,25 @@ import { StackService } from '../services/stack.service';
 })
 export class SecureComponent implements OnInit {
 
+  private subscribedStacks = [];
+  private userAvatarUrl;
+
   constructor(
     private auth: AuthService,
     private stackService: StackService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) {
     auth.handleAuthentication();
    }
 
   ngOnInit() {
-    this.stackService.getAllOrgs().subscribe((response)=> {
 
+    this.stackService.getAllOrgsByUser().subscribe( response => {
+        this.subscribedStacks = response.result;
     });
+
+    this.getUserProfileAvatar();
   }
 
   public navigateToCreatePost() {
@@ -33,5 +41,22 @@ export class SecureComponent implements OnInit {
     this.router.navigate(['app/commonFeed']);
   }
 
+  public navigateToCreateStack() {
+    this.router.navigate(['app/createStack']);
+  }
+
+  public navigateToStacks() {
+    this.router.navigate(['app/stacks']);
+  }
+
+  public getUserProfileAvatar() {
+    this.profileService.getCurrentUserFromDB().subscribe( response => {
+      this.userAvatarUrl = response.json().result.picUrl;
+    })
+  }
+
+  public goToStack(stackName) {
+    this.router.navigate(['app/stack'], { queryParams: { name: stackName }});
+  }
 
 }
