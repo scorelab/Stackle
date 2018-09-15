@@ -13,7 +13,8 @@ import { SecureModule } from './secure/secure.module';
 import { AuthService } from './services/auth.service';
 import { PostService } from './services/post.service';
 import { StackService } from './services/stack.service';
-import { ProfileService } from './services/profile.service'
+import { ProfileService } from './services/profile.service';
+import { UserService } from './services/user.service';
 
 import { AppComponent } from './app.component';
 
@@ -24,6 +25,9 @@ import { CommonFeedComponent } from './secure/common-feed/common-feed.component'
 import { ProfileComponent } from './secure/profile/profile.component';
 import { LoginComponent } from './public/login/login.component';
 import {PostComponent} from './secure/shared/post/post.component';
+import { SearchPipe } from './pipes/search.pipe';
+
+import { TokenInterceptor } from './token.interceptor';
 
 
 @NgModule({
@@ -33,7 +37,8 @@ import {PostComponent} from './secure/shared/post/post.component';
     SecureComponent,
     CommonFeedComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,9 @@ import {PostComponent} from './secure/shared/post/post.component';
     AuthService,
     PostService,
     StackService,
-    ProfileService
+    ProfileService,
+    UserService,
+    TokenInterceptor
   ],
   bootstrap: [AppComponent]
 })

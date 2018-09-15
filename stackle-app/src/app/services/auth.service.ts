@@ -17,7 +17,7 @@ export class AuthService {
       responseType: 'token id_token',
       audience: `https://${environment.AUTH0_DOMAIN}/userinfo`,
       params: {
-        scope: 'openid'
+        scope: 'openid profile'
       }
     }
   });
@@ -39,7 +39,6 @@ export class AuthService {
     });
     this.lock.on('authorization_error', (err) => {
       this.router.navigate(['/']);
-      console.log(err);
       alert(`Error: ${err.error}. Check the console for further details.`);
     });
   }
@@ -71,6 +70,7 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('username', authResult.idTokenPayload.nickname);
   }
 
   public logout(): void {
@@ -78,6 +78,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('username');
     // Go back to the home route
     this.router.navigate(['/login']);
   }

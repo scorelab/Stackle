@@ -8,6 +8,9 @@ import { SecureComponent } from './secure.component';
 import { PostComponent } from './shared/post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CategoryComponent } from './create-post/category/category.component';
+import { CreateStackComponent } from './create-stack/create-stack.component';
+import { StackComponent } from './shared/stack/stack.component';
+import { StacksComponent } from './stacks/stacks.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { CategoryComponent } from './create-post/category/category.component';
   declarations: [
     PostComponent,
     CreatePostComponent,
-    CategoryComponent
+    CategoryComponent,
+    CreateStackComponent,
+    StackComponent,
+    StacksComponent
   ],
   exports: [
     MaterialModule

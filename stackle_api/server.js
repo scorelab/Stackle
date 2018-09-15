@@ -34,15 +34,6 @@ app.use(cors());
 //Initalizing passport engine
 app.use(passport.initialize());
 
-//Protecting every Post Request 
-app.post('*',passport.authenticate('bearer', { session: false, failWithError: true }), function(req, res, next){
-    console.log('Success');
-    next();   
-}, function(err, req ,res, next){
-  console.log('Failed');
-   returnWithResponse.configureReturnData({status: 400 , success: false, result: 'Access-Denied ! ' + err.toString()} ,res);
-});
-
 //Basic Routes
 //serving static index.html file using middleware
 app.use('/', express.static(__dirname + '/'));
@@ -55,7 +46,7 @@ app.use('/api/reply', replyRouter);
 //Auth and its callback
 app.get('/auth/github', passport.authenticate('github', {session: false}));
 app.get('/auth/github/callback', passport.authenticate('github', {failureRedirect : '/', failWithError: true, session: false}), function(request,response){
-    returnWithResponse.configureReturnData({status: 200, success: true, result: {token: request.user.token, userId: request.user.userId}}, response);
+    response.redirect('http://localhost:4200/callback?userId='.concat(request.user.userId)+"&token=".concat(request.user.token));
 }, function(err, request , response){
     returnWithResponse.configureReturnData({status: 400, success: false, result: 'Authentication Failed'}, response);
 });

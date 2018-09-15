@@ -59,6 +59,7 @@
     padding: 20px 0;
     text-align: center;
     z-index: 20;
+    width: 15%;
   }
 
   #sidebar h2 {
@@ -73,7 +74,7 @@
   }
 
   #sidebar button {
-    width: 80%;
+    /* width: 80%; */
   }
 
   #sidebar hr {

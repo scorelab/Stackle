@@ -12,30 +12,25 @@ import { ProfileService } from '../services/profile.service';
 })
 export class SecureComponent implements OnInit {
 
-private profileObj:any;
+  private subscribedStacks = [];
+  private userAvatarUrl;
 
   constructor(
     private auth: AuthService,
     private stackService: StackService,
-    private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService
   ) {
     auth.handleAuthentication();
    }
 
   ngOnInit() {
-    this.stackService.getAllOrgs().subscribe((response)=> {});
-    this.profileObj = {};
-    this.getProfileObj();
-  }
-  
-  getProfileObj() {
-    let username = 'ntbandara3'
-    this.profileService.getProfileObject(username).subscribe(response => {
-      this.profileObj = JSON.parse(response['_body']);
-    }, error => {
-        console.error(error)
+
+    this.stackService.getAllOrgsByUser().subscribe( response => {
+        this.subscribedStacks = response.result;
     });
+
+    this.getUserProfileAvatar();
   }
   
   public navigateToCreatePost() {
@@ -46,5 +41,22 @@ private profileObj:any;
     this.router.navigate(['app/commonFeed']);
   }
 
+  public navigateToCreateStack() {
+    this.router.navigate(['app/createStack']);
+  }
+
+  public navigateToStacks() {
+    this.router.navigate(['app/stacks']);
+  }
+
+  public getUserProfileAvatar() {
+    this.profileService.getCurrentUserFromDB().subscribe( response => {
+      this.userAvatarUrl = response.json().result.picUrl;
+    })
+  }
+
+  public goToStack(stackName) {
+    this.router.navigate(['app/stack'], { queryParams: { name: stackName }});
+  }
 
 }

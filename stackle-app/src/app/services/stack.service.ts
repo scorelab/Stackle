@@ -17,16 +17,54 @@ export class StackService {
   constructor(private http: Http) { }
 
   public getAllOrgs() {
-    return this.http.get(`${this.apiUrl}/api/orgs`, this.options)
+    return this.http.get(`${this.apiUrl}/api/org/all`, this.options)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   //get all organizations subscribed by the user
-  public getAllOrgsByUser(userId) {
-    return this.http.get(`${this.apiUrl}/api/stack/subscribed/${userId}`, this.options)
+  public getAllOrgsByUser() {
+
+    var userId = localStorage.getItem('username');
+
+    return this.http.get(`${this.apiUrl}/api/user/stacks/${userId}`, this.options)
       .map((res: Response) => res.json())
       .catch((error: any)=> Observable.throw(error.json().error || 'Server error'));
+  }
+
+  public createNewStack(stackObject) {
+    return this.http.post(`${this.apiUrl}/api/org/create`, stackObject)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  public subscribeToStack(stackId) {
+
+    var userId = localStorage.getItem('username');
+    let requestBody = {
+      stackId: stackId,
+      userId: userId
+    };
+
+    return this.http.post(`${this.apiUrl}/api/user/subscribe`, requestBody)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error) || 'Server error');
+
+  }
+
+  public unsubscribeFromStack(stackId) {
+
+    var userId = localStorage.getItem('username');
+
+    let requestBody = {
+      stackId: stackId,
+      userId: userId
+    };
+
+    return this.http.post(`${this.apiUrl}/api/user/unsubscribe`, requestBody)
+      .map((res: Response) => res.json())
+      .catch((error:any) => Observable.throw(error.json().error) || 'Server error');
+
   }
 
 }

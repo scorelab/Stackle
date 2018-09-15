@@ -6,7 +6,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { CommonFeedComponent } from './common-feed/common-feed.component';
 import { PostComponent } from './shared/post/post.component';
 import { CreatePostComponent} from './create-post/create-post.component';
-
+import { CreateStackComponent } from './create-stack/create-stack.component';
+import { StacksComponent } from './stacks/stacks.component';
+import { StackComponent } from './shared/stack/stack.component';
 
 const routes: Routes = [
     {
@@ -24,6 +26,15 @@ const routes: Routes = [
             },
             {
                 path: 'createPost', component: CreatePostComponent
+            },
+            {
+                path: 'createStack', component: CreateStackComponent
+            },
+            {
+                path: 'stacks', component: StacksComponent
+            },
+            {
+                path: 'stack', component: StackComponent
             }
         ]
     }

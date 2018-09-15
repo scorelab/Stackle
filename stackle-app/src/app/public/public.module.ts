@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
 
 import { PublicRoutingModule } from './public-routing.module';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,6 @@ import { PublicRoutingModule } from './public-routing.module';
     PublicRoutingModule,
     MaterialModule
   ],
-  declarations: []
+  declarations: [CallbackComponent]
 })
 export class PublicModule { }
