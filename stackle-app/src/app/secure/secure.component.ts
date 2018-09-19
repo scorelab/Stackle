@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
 import { StackService } from '../services/stack.service';
-import {ProfileService} from "../services/profile.service";
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-secure',
@@ -32,7 +32,7 @@ export class SecureComponent implements OnInit {
 
     this.getUserProfileAvatar();
   }
-
+  
   public navigateToCreatePost() {
     this.router.navigate(['app/createPost']);
   }

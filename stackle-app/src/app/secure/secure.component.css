@@ -85,6 +85,12 @@
   #sidebar mat-list-item img {
     width: 20px;
     margin-right: 10px;
+    margin-bottom: 50px;
+  }
+  
+  #foot-note {
+    margin-top: 140px;
+    margin-right: 80px;
   }
 
 .view-container {

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row" id="home-nav">
-    <div class="col col-md-2  col-md-offset-10 nav-text">
+    <div class="col col-md-4  col-md-offset-8 nav-text">
       <div class="nav-items">
         <h3 class="mat-h3">
           <a routerLink="profile">
@@ -19,7 +19,7 @@
   <div class="row" id="home-body">
     <div id="sidebar">
       <h2 class="mat-h2">Stackle</h2>
-      <h5 class="mat-h5">By Opensource for Opensource</h5>
+      <h5 class="mat-h5">By Opensource, For Opensource</h5>
       <hr>
       <div class="example-container">
         <form>
@@ -45,7 +45,7 @@
           </mat-list-item>
           <mat-list-item class="mat-menu-item" (click)="navigateToCreatePost()">
             <mat-icon matListIcon>note_add</mat-icon>
-            Discuss a issue
+            Discuss an issue
           </mat-list-item>
           <mat-list-item class="mat-menu-item" (click)="navigateToCreateStack()">
             <mat-icon matListIcon>note_add</mat-icon>
@@ -63,12 +63,12 @@
           </div>
         </mat-list>
       </div>
+      <div class="row" id="foot-note">
+        made with <i class="fas fa-heart" style="color:red;"></i> by SCoRE
+      </div>
     </div>
     <div class="col-md-10 col-md-offset-2 view-container">
       <router-outlet></router-outlet>
     </div>
-  </div>
-  <div class="row">
-    Developed by SCoRE
   </div>
 </div>

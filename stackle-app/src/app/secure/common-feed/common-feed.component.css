@@ -30,3 +30,7 @@ mat-card-subtitle p {
 .feed-container {
   margin-top: 10vh;
 }
+
+#ol {
+  margin-left: 70px;
+}
