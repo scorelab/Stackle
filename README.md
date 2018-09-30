@@ -8,12 +8,12 @@ Stackle is a web communication portal aimed at providing Open Source organizatio
 
 # Implementation Details
 MEAN stack is used for developing Stackle. 
- - Front-End is developed using AngularJS
+ - Front-End is developed using Angular
  - Back-end is handled by NodeJS using Express
  - MongoDB is used as the databases for storing data related to stackle
 
 # Architecture
-Users interact with the application through the AngularJS front-end which communicates with Node-API to get and post data to the MongoDB server. The front-end also communicates with GitHub API to get data related to Users, repositories and organizations. Users can login to the application through auth0 login integrated to Stackle.
+Users interact with the application through the Angular front-end which communicates with Node-API to get and post data to the MongoDB server. The front-end also communicates with GitHub API to get data related to Users, repositories and organizations. Users can login to the application through auth0 login integrated to Stackle.
 
 ![Architecture](./stackle_app/app/images/architecture.jpg)
 ***
@@ -58,9 +58,10 @@ Replace <mongodb-install-directory> with the path to the extracted MongoDB archi
 3. Once all the packages are installed run `npm start`
 
 ## Stackle App
-1. `cd`in to the **stackle_app** directory
+Make sure you have the [angular-cli](https://cli.angular.io/) installed. 
+1. `cd` in to the **stackle-app** directory
 2. Run `npm install` to install the packages required.
-3. Once all the packages are installed, run `gulp serve`
+3. Once all the packages are installed, run `npm start` or `ng serve -o`
 
 ## Running Tests (Protractor)
 1. Run `npm install -g protractor` to install protractor globally.
