@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .header {
     margin : 2%;
 }
 
 .login-btn {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     position: fixed;
     top: 2%;
     right: 2%;
@@ -22,6 +23,9 @@
 #landing-banner {
     color: white;
     background-image: url('../../../assets/images/Stackle-landing.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     position: absolute;
     width: 100%;
     height: 100%;
