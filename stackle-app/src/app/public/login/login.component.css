@@ -17,12 +17,38 @@
 }
 #toolbar {
     background-color: rgb(85, 70, 181);
-} 
+}
+.responsive {
+  text-align: center;
+  padding: 20px;
+  margin-top: 10%
+}
+img{
+  display: inline;
+  padding: 10px;
+}
 
-#landing-banner {
+@media only screen and (max-width: 600px) {
+    img {
+        display: inline;
+        padding: 10px;
+        width: 100%;
+        height: auto;
+    }
+}
+.body {
     color: white;
-    background-image: url('../../../assets/images/Stackle-landing.jpg');
+    background-color: #111111;
     position: absolute;
     width: 100%;
     height: 100%;
 }
+/*
+#landing-banner {
+    color: white;
+    background-image: url('../../../assets/images/stacklelogo.png');
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+*/
