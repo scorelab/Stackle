@@ -10,9 +10,9 @@ Stackle is a web communication portal aimed at providing Open Source organizatio
 
 MEAN stack is used for developing Stackle.
 
--   Front-End is developed using Angular
--   Back-end is handled by NodeJS using Express
--   MongoDB is used as the databases for storing data related to stackle
+-   Front-End is developed using Angular.
+-   Back-end is handled by NodeJS using Express.
+-   MongoDB is used as the databases for storing data related to stackle.
 
 # Architecture
 
@@ -46,8 +46,10 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
 
 -   For debian based system
 
-1. sudo apt-get update
-2. sudo apt install mongodb
+```bash
+sudo apt-get update
+sudo apt install mongodb
+```
 
 ### On Mac
 
@@ -70,21 +72,21 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
 
 1. `cd` in to the **stackle_api** directory.
 2. Run `npm install` to install the packages required.
-3. Once all the packages are installed run `npm start`
+3. Once all the packages are installed run `npm start`.
 
 ## Stackle App
 
 Make sure you have the [angular-cli](https://cli.angular.io/) installed.
 
-1. `cd` in to the **stackle-app** directory
+1. `cd` in to the **stackle-app** directory.
 2. Run `npm install` to install the packages required.
-3. Once all the packages are installed, run `npm start` or `ng serve -o`
+3. Once all the packages are installed, run `npm start` or `ng serve -o`.
 
 ## Running Tests (Protractor)
 
 1. Run `npm install -g protractor` to install protractor globally.
 2. To get started with a Selenium Server, run
-    ```
+    ```bash
     webdriver-manager update
     webdriver-manager start
     ```
