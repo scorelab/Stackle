@@ -57,13 +57,18 @@ Replace <mongodb-install-directory> with the path to the extracted MongoDB archi
 2. Run `npm install` to install the packages required. 
 3. Once all the packages are installed run `npm start`
 
+## Running API Tests
+1. `cd` in to the **stackle_api** directory.
+2. Run `npm test` to run unit tests for the API.
+3. If the tests are sucessful, all the POST and GET requests should pass sucessfully and end with `22 passing`.
+
 ## Stackle App
 Make sure you have the [angular-cli](https://cli.angular.io/) installed. 
 1. `cd` in to the **stackle-app** directory
 2. Run `npm install` to install the packages required.
 3. Once all the packages are installed, run `npm start` or `ng serve -o`
 
-## Running Tests (Protractor)
+## Running App Tests (Protractor)
 1. Run `npm install -g protractor` to install protractor globally.
 2. To get started with a Selenium Server, run
    ```
