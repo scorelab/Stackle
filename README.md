@@ -68,7 +68,7 @@ Make sure you have the [angular-cli](https://cli.angular.io/) installed.
 2. Run `npm install` to install the packages required.
 3. Once all the packages are installed, run `npm start` or `ng serve -o`
 
-## Running App Tests (Protractor)
+## Running Tests (Protractor)
 1. Run `npm install -g protractor` to install protractor globally.
 2. To get started with a Selenium Server, run
    ```
