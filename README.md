@@ -53,6 +53,7 @@ For example, you can add the following line to your shell’s rc file (e.g. ~/.b
 Replace <mongodb-install-directory> with the path to the extracted MongoDB archive.
 
 ## On Linux
+For Ubuntu,SUSE, and Debian systems, you can install mongoDB Community Edition using .deb packages. The process varies from distro to distro, so I suggest you visit the link below, select your distribution.
 
 https://docs.mongodb.com/manual/administration/install-on-linux/
 
