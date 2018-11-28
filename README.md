@@ -52,6 +52,10 @@ For example, you can add the following line to your shell’s rc file (e.g. ~/.b
 ```export PATH=<mongodb-install-directory>/bin:$PATH```
 Replace <mongodb-install-directory> with the path to the extracted MongoDB archive.
 
+## On Linux
+
+https://docs.mongodb.com/manual/administration/install-on-linux/
+
 ## Stackle API
 1. `cd` in to the **stackle_api** directory.
 2. Run `npm install` to install the packages required. 
