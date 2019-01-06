@@ -4,6 +4,7 @@
  */
 function Validator(input) {
     this.input = input;
+    this.inputObjKeys = Object.keys(input)
 };
 
 
@@ -12,39 +13,39 @@ Validator.prototype.validateAddingPost = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('title')) {
+    if (!this.input.title) {
         throw new Error('Attribute title is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('description')) {
+    if (!this.input.description) {
         throw new Error('Attribute description is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('repository')) {
+    if (!this.input.repository) {
         throw new Error('Attribute repository is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('org_name')) {
+    if (!this.input.org_name) {
         throw new Error('Attribute org_name is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('tags')) {
+    if (!this.input.tags) {
         throw new Error('Attribute tags is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('linkIssue')) {
+    if (!this.input.linkIssue) {
         throw new Error('Attribute link_issue is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('user')) {
+    if (!this.input.user) {
         throw new Error('Attribute user is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('date')) {
+    if (!this.input.date) {
         throw new Error('Attribute date is missing');
     }
 
@@ -57,11 +58,11 @@ Validator.prototype.validateGetPost = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('postId')) {
+    if (!this.input.postId) {
         throw new Error('Attribute postId is missing');
     }
 
@@ -74,11 +75,11 @@ Validator.prototype.validateUserId = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('userId')) {
+    if (!this.input.userId) {
         throw new Error('Attribute userId is missing');
     }
 
@@ -91,11 +92,11 @@ Validator.prototype.validateDeletePost = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('postId')) {
+    if (!this.input.postId) {
         throw new Error('Attribute postId is missing');
     }
 
@@ -107,11 +108,11 @@ Validator.prototype.validatePostsByUser = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('user')) {
+    if (!this.input.user) {
         throw new Error('Attribute user is missing');
     }
 
@@ -123,11 +124,11 @@ Validator.prototype.validatePostToOrganisation = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('organisationName')) {
+    if (!this.input.organisationName) {
         throw new Error('Attribute organisationName is missing');
     }
 
@@ -139,11 +140,11 @@ Validator.prototype.validateGetOrganisationDetails = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('organisationName')) {
+    if (!this.input.organisationName) {
         throw new Error('Attribute organisationName is missing');
     }
 
@@ -156,11 +157,11 @@ Validator.prototype.validateStackId = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('stackId')) {
+    if (!this.input.stackId) {
         throw new Error('Attribute stackId is missing');
     }
 
@@ -173,11 +174,11 @@ Validator.prototype.validateCommentsByUser = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('user')) {
+    if (!this.input.user) {
         throw new Error('Attribute user is missing');
     }
 
@@ -190,11 +191,11 @@ Validator.prototype.validateCommentOnPost = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('postId')) {
+    if (!this.input.postId) {
         throw new Error('Attribute postId is missing');
     }
 
@@ -207,19 +208,19 @@ Validator.prototype.validateCommentBody = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('description')) {
+    if (!this.input.description) {
         throw new Error('Attribute description is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('user')) {
+    if (!this.input.user) {
         throw new Error('Attribute user is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('date')) {
+    if (!this.input.date) {
         throw new Error('Attribute date is missing');
     }
 
@@ -232,11 +233,11 @@ Validator.prototype.validateCommentId = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('commentId')) {
+    if (!this.input.commentId) {
         throw new Error('Attribute commentId is missing');
     }
 
@@ -249,11 +250,11 @@ Validator.prototype.validatePostId = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('postId')) {
+    if (!this.input.postId) {
         throw new Error('Attribute postId is missing');
     }
 
@@ -265,11 +266,11 @@ Validator.prototype.validateAddTag = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('tag')) {
+    if (!this.input.tag) {
         throw new Error('Attribute tag is missing');
     }
 
@@ -281,25 +282,25 @@ Validator.prototype.validateCreateStack = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('name')) {
+    if (!this.input.name) {
         throw new Error('Attribute name is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('description')) {
+    if (!this.input.description) {
         throw new Error('Attribute description is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('stackleUrl')) {
+    if (!this.input.stackleUrl) {
         throw new Error('Attribute stackleUrl is missing');
     }
 
-    // if (!!!~Object.keys(this.input).indexOf('githubUrl')) { throw new Error('Attribute githubUrl is missing'); }
+    // if (!!!~this.inputObjKeys.indexOf('githubUrl')) { throw new Error('Attribute githubUrl is missing'); }
 
-    if (!!!~Object.keys(this.input).indexOf('createdUser')) {
+    if (!this.input.createdUser) {
         throw new Error('Attribute createdUser is missing');
     }
 
@@ -311,11 +312,11 @@ Validator.prototype.validateDeleteStack = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('stackId')) {
+    if (!this.input.stackId) {
         throw new Error('Attribute stackId is missing');
     }
 
@@ -327,15 +328,15 @@ Validator.prototype.validateUserSubscribeStack = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('stackId')) {
+    if (!!!~this.inputObjKeys.indexOf('stackId')) {
         throw new Error('Attribute stackId is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('userId')) {
+    if (!this.input.userId) {
         throw new Error('Attribute userId is missing');
     }
 
@@ -348,11 +349,11 @@ Validator.prototype.validateGetUserSubscribeStack = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('userId')) {
+    if (!this.input.userId) {
         throw new Error('Attribute userId is missing');
     }
 
@@ -364,23 +365,23 @@ Validator.prototype.validateCreateNewUser = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('token')) {
+    if (!this.input.token) {
         throw new Error('Attribute token is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('userId')) {
+    if (!this.input.userId) {
         throw new Error('Attribute userId is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('email')) {
+    if (!this.input.email) {
         throw new Error('Attribute email is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('name')) {
+    if (!this.input.name) {
         throw new Error('Attribute name is missing');
     }
 
@@ -395,19 +396,19 @@ Validator.prototype.validateReplyBody = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('description')) {
+    if (!this.input.description) {
         throw new Error('Attribute description is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('user')) {
+    if (!this.input.user) {
         throw new Error('Attribute user is missing');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('date')) {
+    if (!this.input.date) {
         throw new Error('Attribute date is missing');
     }
 
@@ -421,11 +422,11 @@ Validator.prototype.validateRepliesByUser = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('user')) {
+    if (!this.input.user) {
         throw new Error('Attribute user is missing');
     }
 
@@ -438,11 +439,11 @@ Validator.prototype.validateReplyId = function() {
         throw new Error('Input is undefined');
     }
 
-    if (!Object.keys(this.input).length) {
+    if (!this.inputObjKeys.length) {
         throw new Error('Empty Object has been passed');
     }
 
-    if (!!!~Object.keys(this.input).indexOf('replyId')) {
+    if (!this.input.replyId) {
         throw new Error('Attribute replyId is missing');
     }
 
