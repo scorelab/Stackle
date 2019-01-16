@@ -1,16 +1,9 @@
 /** -------------------------  application -------------------------------- */
-'use strict';
 const mongoose = require('mongoose');
-
-const User = require('./models/user');
-const Stack = require('./models/stack');
-const postModels = require('./models/post');
 const Validator = require('./lib/validator').Validator;
 const returnWithResponse = require('./lib/returnWithResponse');
-
-const Post = postModels.Post;
-const Comment = postModels.Comment;
-const Reply = postModels.Reply;
+const apiRouter = require('./routes/api');
+const authRouter = require('./routes/auth');
 
 module.exports = function(app, db) {
 
@@ -29,8 +22,16 @@ module.exports = function(app, db) {
     });
 
 
-    // app.get('/api/notifications', function (request, response) {
-    // });
+    app.use('/api', apiRouter);
+
+    //Auth and its callback
+    app.use('/auth', authRouter);
+    
+
+    //logout
+    app.get('/logout' , function(request, response){
+        UserModel.logout(request, response);
+    });
 
     app.get('/*', function(request, response) {
         response.sendFile('./public/404.html');
