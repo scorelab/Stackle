@@ -38,7 +38,7 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
 ### On Mac
 
 1. Download the binary files for the desired release of MongoDB.
-Download the binaries from the [MongoDB Download Center](www.mongodb.com/download-center).
+Download the binaries from the [MongoDB Download Center](https://www.mongodb.com/download-center).
 2. Extract the files from the downloaded archive.
 For example, from a system shell, you can extract through the tar command:
 ```tar -zxvf mongodb-osx-ssl-x86_64-3.6.3.tgz```
