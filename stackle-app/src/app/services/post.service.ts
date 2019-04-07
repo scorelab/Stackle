@@ -31,8 +31,8 @@ export class PostService {
     return this.http.post(`${this.apiUrl}/api/post/create`, postObject);
   }
 
-  voteUp(id) {
-    return this.http.post(`${this.apiUrl}/api/post/likes/up/${id}`, {userId:localStorage.getItem('username')});
+  voteUp(id,u_id) {
+    return this.http.post(`${this.apiUrl}/api/post/likes/up/${id}`, {userId:u_id});
   }
 
   voteDown(id) {

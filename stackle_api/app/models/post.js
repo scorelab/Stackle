@@ -606,7 +606,11 @@ postSchema.statics.setLikeUp = function(request, response) {
             var check = likeArray.indexOf(currentUserId);
 
             if (check === -1) {
-                result.likes.push(currentUserId);
+                 // result.likes.push(currentUserId)
+                // here instead of pushing currentuserID which you are sending github username in string we have to push 
+                // object id of that user from user schema that is why server carshes because you are pushing string to array
+                // of mongoose.Schema.Types.ObjectId
+                result.likes.push(mongoose.Types.ObjectId(currentUserId));
                 result.save(function(err) {
                     if (err)
                         return returnWithResponse.configureReturnData({
