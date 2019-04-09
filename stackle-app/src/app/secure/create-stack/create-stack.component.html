@@ -17,10 +17,10 @@
                 <input matInput placeholder="Description *" [(ngModel)]="stackObject.description">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Stackle URL *" [(ngModel)]="stackObject.stackleUrl">
+                <input type="url" class="url-input" matInput placeholder="Stackle URL *" [(ngModel)]="stackObject.stackleUrl">
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="GitHub URL" [(ngModel)]="stackObject.githubUrl">
+                <input type="url" class="url-input" matInput placeholder="GitHub URL" [(ngModel)]="stackObject.githubUrl">
               </mat-form-field>
             </div>
           </mat-card-content>

@@ -2,6 +2,10 @@
   margin-top: 10vh;
 }
 
+.form-container .url-input:invalid {
+  color: red;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
