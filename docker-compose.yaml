@@ -4,11 +4,13 @@ services:
       build: './stackle_api'
       ports:
         - "8080:8080"
-      links :
+      links:
         - mongo
     mongo:
-      image : mongo
+      image: mongo
+      restart: unless-stopped
+      
     angular:
-      build : './stackle_app'
-      ports : 
+      build: './stackle_app'
+      ports: 
         - "9000:9000"
