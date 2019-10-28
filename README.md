@@ -4,7 +4,7 @@
 
 
 # Introduction
-Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in are able to view forums of the organizations they contribute to and engage in the forum discussions.
+Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in can view forums of the organizations they contribute to and engage in the forum discussions.
 
 # Implementation Details
 MEAN stack is used for developing Stackle. 
@@ -13,13 +13,13 @@ MEAN stack is used for developing Stackle.
  - MongoDB is used as the databases for storing data related to stackle
 
 # Architecture
-Users interact with the application through the Angular front-end which communicates with Node-API to get and post data to the MongoDB server. The front-end also communicates with GitHub API to get data related to Users, repositories and organizations. Users can login to the application through auth0 login integrated to Stackle.
+Users interact with the application through the Angular front-end which communicates with Node-API to get and post data to the MongoDB server. The front-end also communicates with GitHub API to get data related to Users, repositories and organizations. Users can log in to the application through auth0 login integrated to Stackle.
 
 ![Architecture](./stackle_app/app/images/architecture.jpg)
 ***
 
 # Setting Up the Project
-These are the instructions on how to setup the project locally.
+These are the instructions on how to set up the project locally.
 
 ## Pre-requisites
 * NodeJS 6.X or higher
@@ -28,12 +28,12 @@ These are the instructions on how to setup the project locally.
 ## Installing MongoDB
 
 ### On Windows
-1. Download the lastest production release of MongoDB (3.4.6 or higher) from [here](https://www.mongodb.com/download-center#community).
-2. Create the data directory to store all data. Create a the directory on the drive from which you start MongoDB. (Ex: If you are starting the MongoDB from the drive 'C'. You should create the directory as C:\data\db\ ).
+1. Download the latest production release of MongoDB (3.4.6 or higher) from [here](https://www.mongodb.com/download-center#community).
+2. Create the data directory to store all data. Create a directory on the drive from which you start MongoDB. (Ex: If you are starting the MongoDB from the drive 'C'. You should create the directory as C:\data\db\ ).
 3. To start the MongoDB, fire up a command line and run **mongod.exe** (ex: "C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" )
 4. To connect to the MongoDB, use the **mongo.exe** shell. For that open up a command line an run *mongo*. (Ex: "C:\Program Files\MongoDB\Server\3.4\bin\mongo.exe" ).
 
-For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/administration/install-community/) on installing MongoDB Community edtion.
+For more information refer to the [MongoDB manual](https://docs.mongodb.com/manual/administration/install-community/) on installing MongoDB Community edition.
 
 ### On Mac
 
@@ -67,13 +67,13 @@ SUSE terminal command:
 https://docs.mongodb.com/manual/administration/install-on-linux/
 
 ## Stackle API
-1. `cd` in to the **stackle_api** directory.
+1. `cd` into the **stackle_api** directory.
 2. Run `npm install` to install the packages required. 
 3. Once all the packages are installed run `npm start`
 
 ## Stackle App
 Make sure you have the [angular-cli](https://cli.angular.io/) installed. 
-1. `cd` in to the **stackle-app** directory
+1. `cd` into the **stackle-app** directory
 2. Run `npm install` to install the packages required.
 3. Once all the packages are installed, run `npm start` or `ng serve -o`
 
