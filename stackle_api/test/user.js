@@ -10,6 +10,7 @@ const userModel = require('../app/models/user');
 
 const demoUserToken = "THis_Is_A_Demo_Token";
 const demoUserName = 'DEMO_User_ID_NAME';
+const demoStackID = '5dbb25b426334717b0238342';
 
 chai.use(chaiHttp);
 
@@ -107,6 +108,48 @@ function testUserCreate(done) {
 }
 
 
+
+//POST testing to subscribe a stack
+function testSubscribeStack(done) {
+chai.request(server)
+        .post('/api/user/subscribe')
+        .send({
+            stackId: demoStackID,
+            userId: demoUserName
+        })
+        .end(function(err, res) {
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.should.have.property('status');
+            res.body.result.should.be.a('string');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
+//POST testing to unsubscribe a stack
+function testUnsubscribeStack(done) {
+chai.request(server)
+        .post('/api/user/unsubscribe')
+        .send({
+            stackId: demoStackID,
+            userId: demoUserName
+        })
+        .end(function(err, res) {
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.should.have.property('status');
+            res.body.result.should.be.a('string');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
+
 //Grouping user testCases
 describe('User:- \n', function() {
 
@@ -161,6 +204,16 @@ describe('User:- \n', function() {
     //Testing POST: creating a USER
     it('Testing /api/user/create', function(done) {
         testUserCreate(done);
+    });
+
+    //Testing POST: subscribe a stack
+    it('Testing /api/user/subscribe', function(done) {
+        testSubscribeStack(done);
+    });
+
+    //Testing POST: unsubscribe a stack
+    it('Testing /api/user/unsubscribe', function(done) {
+        testUnsubscribeStack(done);
     });
 
 });
