@@ -7,7 +7,7 @@
 Stackle is a web communication portal aimed at providing Open Source organizations a platform to have discussions on their GitHub projects and their issues. It provides GitHub integration which allows the administrator of an organization to create a forum thread for the particular organization. Users signing in are able to view forums of the organizations they contribute to and engage in the forum discussions.
 
 # Implementation Details
-MEAN stack is used for developing Stackle. 
+MEAN stack is used for developing Stackle.
  - Front-End is developed using Angular
  - Back-end is handled by NodeJS using Express
  - MongoDB is used as the databases for storing data related to stackle
@@ -38,7 +38,7 @@ For more information refer the [MongoDB manual](https://docs.mongodb.com/manual/
 ### On Mac
 
 1. Download the binary files for the desired release of MongoDB.
-Download the binaries from the [MongoDB Download Center](www.mongodb.com/download-center).
+Download the binaries from the [MongoDB Download Center](https://www.mongodb.com/download-center).
 2. Extract the files from the downloaded archive.
 For example, from a system shell, you can extract through the tar command:
 ```tar -zxvf mongodb-osx-ssl-x86_64-3.6.3.tgz```
@@ -68,11 +68,11 @@ https://docs.mongodb.com/manual/administration/install-on-linux/
 
 ## Stackle API
 1. `cd` in to the **stackle_api** directory.
-2. Run `npm install` to install the packages required. 
+2. Run `npm install` to install the packages required.
 3. Once all the packages are installed run `npm start`
 
 ## Stackle App
-Make sure you have the [angular-cli](https://cli.angular.io/) installed. 
+Make sure you have the [angular-cli](https://cli.angular.io/) installed.
 1. `cd` in to the **stackle-app** directory
 2. Run `npm install` to install the packages required.
 3. Once all the packages are installed, run `npm start` or `ng serve -o`
@@ -90,7 +90,7 @@ Make sure you have the [angular-cli](https://cli.angular.io/) installed.
 # Running with Docker
 1. Change the url in the database config file in stackle_api/config/database.js  as `url : 'mongodb://mongo:27017/stackle'`
 2. In the root of the Stackle directory, run `docker-compose build`
-   - If you are on Linux machine, execute the following steps to install compose. 
+   - If you are on Linux machine, execute the following steps to install compose.
      ```
      sudo curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
      sudo chmod +x /usr/local/bin/docker-compose
