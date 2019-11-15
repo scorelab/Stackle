@@ -32,6 +32,8 @@ export class CreateStackComponent implements OnInit {
       this.showSnackBar('Please enter a description!');
     }else if(this.stackObject.stackleUrl == undefined || this.stackObject.stackleUrl == ""){
       this.showSnackBar('Please enter the Stackle URL!');
+    }else if (!this.checkUrl(this.stackObject.stackleUrl) || !this.checkUrl(this.stackObject.githubUrl)){
+      this.showSnackBar('Please enter a Valid URL!');
     }else {
 
       this.stackService.createNewStack(this.stackObject).subscribe( response => {
@@ -45,6 +47,12 @@ export class CreateStackComponent implements OnInit {
 
     }
 
+  }
+
+  checkUrl(url: any) {
+    const regx = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+    let urlIsValid = new RegExp(regx).test(url);
+    return urlIsValid;
   }
 
   clear() {

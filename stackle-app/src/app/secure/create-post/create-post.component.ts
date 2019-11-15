@@ -49,8 +49,9 @@ export class CreatePostComponent implements OnInit {
       this.showSnackBar('Please enter a repository!');
     }else if(this.postObject.description == "" || this.postObject.description == undefined){
       this.showSnackBar('Please enter a description!');
+    }else if (!this.checkUrl(this.postObject.repository)){
+      this.showSnackBar('Please enter a valid URL to the repository!');
     }
-
     else {
       this.postObject.date = new Date();
       this.postObject.user = localStorage.getItem('username');
@@ -65,6 +66,12 @@ export class CreatePostComponent implements OnInit {
       })
     }
   };
+
+  checkUrl(url: any) {
+    const regx = /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
+    let urlIsValid = new RegExp(regx).test(url);
+    return urlIsValid;
+  }
 
   clear = () => {
     this.postObject.title = "";

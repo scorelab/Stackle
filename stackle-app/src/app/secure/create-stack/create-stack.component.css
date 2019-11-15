@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
 }
+
+.form-container .url-input:invalid {
+  color: red;
+}
+
 .form-container > * {
   width: 100%;
 }
