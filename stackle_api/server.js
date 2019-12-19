@@ -82,7 +82,7 @@ if(app.get('env') === 'test'){
     console.log('Testing ... \n');
 }
 
-mongoose.connect(database.url, option, function (err) {
+mongoose.connect(database.url, option,  function (err) {
     console.log("Connecting to the database...");
     if (err) {
         console.log("\nCouldn't connect to local database. Please make sure your local mongodb server is running. \nFind more: https://github.com/scorelab/Stackle#installing-mongodb\n\nConnecting to alternative remote (mongolab) database ...");
