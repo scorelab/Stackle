@@ -1,5 +1,6 @@
 module.exports = {
-    url: process.env.LOCAL_DB || "mongodb://localhost/main",
+    // url: process.env.LOCAL_DB || "mongodb://localhost/main",
+    url: process.env.LOCAL_DB || "mongodb://mongo:27017/stackle",
     testurl: "mongodb://localhost/node-test",
     alturl: "mongodb://ordinary:H3ll0w0rld@ds149201.mlab.com:49201/stackle",
     option: function(version) {

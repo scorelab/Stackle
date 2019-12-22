@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PostService } from '../../../services/post.service';
 import { MatSnackBar } from '@angular/material';
 import {ProfileService} from "../../../services/profile.service";
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-post',
@@ -21,7 +22,8 @@ export class PostComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -65,8 +67,14 @@ export class PostComponent implements OnInit {
   }
 
   voteOnPost(){
-    this.postService.voteUp(this.postId).subscribe( response => {
-      this.getPostData();
+    this.userService.getUser(localStorage.getItem('username')).subscribe((data) => {
+      this.postService.voteUp(this.postId,data.result._id).subscribe(response => {
+        this.getPostData();
+      });
+    }, (err) => {
+
+    }, () => {
+      console.log("Completed");
     });
   }
 

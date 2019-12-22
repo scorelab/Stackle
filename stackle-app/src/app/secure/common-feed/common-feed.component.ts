@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PostService } from '../../services/post.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-common-feed',
@@ -15,7 +16,8 @@ export class CommonFeedComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private postService: PostService
+    private postService: PostService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,7 @@ export class CommonFeedComponent implements OnInit {
   }
 
   private navigateToPost(post_id) {
-    this.router.navigate(['app/post/'+post_id]);
+    this.router.navigate(['app/post/' + post_id]);
   }
 
   getAllPosts() {
@@ -38,9 +40,18 @@ export class CommonFeedComponent implements OnInit {
   }
 
   voteUp(id) {
-    this.postService.voteUp(id).subscribe( response => {
-      this.getAllPosts();
-    })
+    this.userService.getUser(localStorage.getItem('username')).subscribe((data) => {
+    //we have to push object id from document of this user so we have to pass that object id to backed
+    // we also have changed postService
+      this.postService.voteUp(id,data.result._id).subscribe(response => {
+        this.getAllPosts();
+      });
+    }, (err) => {
+
+    }, () => {
+      console.log("Completed");
+    });
+
   }
 
 }
