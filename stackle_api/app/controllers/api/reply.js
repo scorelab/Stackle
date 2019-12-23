@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const models = require('../models/post');
+const models = require('../../models/post');
 const Reply = models.Reply;
 
 //to reply on a comment

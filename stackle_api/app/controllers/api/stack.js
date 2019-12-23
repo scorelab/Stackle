@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Model = require('../models/stack');
+const Model = require('../../models/stack');
 
 //create a Stack
 router.post('/create', function(request, response) {
