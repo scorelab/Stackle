@@ -86,7 +86,7 @@ mongoose.connect(database.url, option, function (err) {
     console.log("Connecting to the database...");
     if (err) {
         console.log("\nCouldn't connect to local database. Please make sure your local mongodb server is running. \nFind more: https://github.com/scorelab/Stackle#installing-mongodb\n\nConnecting to alternative remote (mongolab) database ...");
-        mongoose.connect(database.alturl, options, function (err) {
+        mongoose.connect(database.alturl, option, function (err) {
             if (err) {
                 return console.log("\nCouldn't connect to remote (mongolab) database.");
             }
