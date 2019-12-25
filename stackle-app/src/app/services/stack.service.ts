@@ -67,4 +67,9 @@ export class StackService {
 
   }
 
+  public getStack(stackName){
+    return this.http.get(`${this.apiUrl}/api/org/name/${stackName}`)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error) || 'Server error');
+  }
 }

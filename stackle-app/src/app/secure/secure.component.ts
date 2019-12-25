@@ -14,6 +14,8 @@ export class SecureComponent implements OnInit {
 
   private subscribedStacks = [];
   private userAvatarUrl;
+  public stackNameToSearch: String;
+  public stackInfo: any;
 
   constructor(
     private auth: AuthService,
@@ -57,6 +59,21 @@ export class SecureComponent implements OnInit {
 
   public goToStack(stackName) {
     this.router.navigate(['app/stack'], { queryParams: { name: stackName }});
+  }
+
+  public onSearchSubmit(){
+    let stackToSearch = {
+      stackName: this.stackNameToSearch
+    };
+    console.log(stackToSearch);
+    this.stackService.getStack(stackToSearch.stackName).subscribe((res)=>{
+      console.log(res);
+      if(res.success){
+        this.stackInfo = res.result;
+      }
+    }, (err)=>{
+      console.log(err);
+    });
   }
 
 }

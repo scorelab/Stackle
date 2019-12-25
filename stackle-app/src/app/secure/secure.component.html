@@ -24,9 +24,9 @@
       <div class="example-container">
         <form>
           <mat-form-field>
-            <input matInput placeholder="Stack Name">
+            <input matInput placeholder="Stack Name" [(ngModel)]="stackNameToSearch" name="stackNameText">
           </mat-form-field>
-          <button mat-button color="primary" type="submit">
+          <button mat-button color="primary" type="submit" (click)="onSearchSubmit()">
             <mat-icon matListIcon>search</mat-icon>
             Search
           </button>
