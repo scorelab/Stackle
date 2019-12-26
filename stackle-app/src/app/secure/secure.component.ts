@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { AuthService } from '../services/auth.service';
-import { StackService } from '../services/stack.service';
-import { ProfileService } from '../services/profile.service';
+import { AuthService } from "../services/auth.service";
+import { StackService } from "../services/stack.service";
+import { ProfileService } from "../services/profile.service";
 
 @Component({
-  selector: 'app-secure',
-  templateUrl: './secure.component.html',
-  styleUrls: ['./secure.component.css']
+  selector: "app-secure",
+  templateUrl: "./secure.component.html",
+  styleUrls: ["./secure.component.css"]
 })
 export class SecureComponent implements OnInit {
-
   private subscribedStacks = [];
   private userAvatarUrl;
 
@@ -22,41 +21,39 @@ export class SecureComponent implements OnInit {
     private profileService: ProfileService
   ) {
     auth.handleAuthentication();
-   }
+  }
 
   ngOnInit() {
-
-    this.stackService.getAllOrgsByUser().subscribe( response => {
-        this.subscribedStacks = response.result;
+    this.stackService.subscribedStacks$.subscribe(allStacks => {
+      this.subscribedStacks = allStacks.result;
     });
-
+    this.stackService.getAllOrgsByUser().subscribe();
     this.getUserProfileAvatar();
   }
-  
+
   public navigateToCreatePost() {
-    this.router.navigate(['app/createPost']);
+    this.router.navigate(["app/createPost"]);
   }
 
   public navigateToCommonFeed() {
-    this.router.navigate(['app/commonFeed']);
+    this.router.navigate(["app/commonFeed"]);
   }
 
   public navigateToCreateStack() {
-    this.router.navigate(['app/createStack']);
+    this.router.navigate(["app/createStack"]);
   }
 
   public navigateToStacks() {
-    this.router.navigate(['app/stacks']);
+    this.router.navigate(["app/stacks"]);
   }
 
   public getUserProfileAvatar() {
-    this.profileService.getCurrentUserFromDB().subscribe( response => {
+    this.profileService.getCurrentUserFromDB().subscribe(response => {
       this.userAvatarUrl = response.json().result.picUrl;
-    })
+    });
   }
 
   public goToStack(stackName) {
-    this.router.navigate(['app/stack'], { queryParams: { name: stackName }});
+    this.router.navigate(["app/stack"], { queryParams: { name: stackName } });
   }
-
 }
