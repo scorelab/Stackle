@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { StackService } from '../../services/stack.service';
 import { UserService } from '../../services/user.service';
 import {stripSummaryForJitNameSuffix} from "@angular/compiler/src/aot/util";
@@ -42,10 +42,14 @@ export class StacksComponent implements OnInit {
     if(!this.checkSubscription(stack)){
       this.stackService.subscribeToStack(stack._id).subscribe( response => {
         this.getCurrentUser();
+        this.stackService.getAllOrgsByUser().subscribe();
+
       })
     }else{
       this.stackService.unsubscribeFromStack(stack._id).subscribe( response => {
         this.getCurrentUser();
+        this.stackService.getAllOrgsByUser().subscribe();
+
       })
     }
   }
