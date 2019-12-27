@@ -55,8 +55,8 @@
           </div>
 
         </div>
-        <div *ngIf="!posts">
-          No posts available
+        <div *ngIf="posts.length == 0 || posts == undefined ||  posts == null">
+          No posts available for {{orgName}}
         </div>
       </div>
     </div>
