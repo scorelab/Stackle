@@ -9,8 +9,8 @@ import {PostService} from "../../../services/post.service";
 })
 export class StackComponent implements OnInit {
 
-  private loading = false;
-  private posts;
+  public loading = false;
+  public posts: any = [];
   private orgName;
 
   constructor(
@@ -26,7 +26,6 @@ export class StackComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.orgName = params['name'];
 
-
       if(this.orgName === "" || this.orgName === undefined){
         this.router.navigate(['app/commonFeed']);
         return;
@@ -40,14 +39,15 @@ export class StackComponent implements OnInit {
 
   getPosts(orgName) {
     this.postService.getAllPostsByOrg(orgName).subscribe(response => {
+      console.log("response", response)
       this.posts = response.json().result;
       this.loading = false;
     }, error => {
-      this.posts = [];
+      this.loading = false;
     })
   }
 
-  private navigateToPost(post_id) {
+  public navigateToPost(post_id) {
     this.router.navigate(['app/post/'+post_id]);
   }
 
