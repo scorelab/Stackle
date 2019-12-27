@@ -10,6 +10,8 @@ const commentModel = models['Comment'];
 const userModel = require('../app/models/user');
 const demoUserToken = "THisIsADemoToken";
 const username = 'DEMO';
+const mongoose = require('mongoose');
+const userId = mongoose.Types.ObjectId('4edd40c86762e0fb12000003');
 
 chai.use(chaiHttp);
 
@@ -100,6 +102,59 @@ function testGetLikesUser(done, comment) {
         });
 }
 
+// to add user to like in comment
+function setLikeUpCommentHelper(done, comment){
+    chai.request(server)
+        .post('/api/comment/likes/up/' + comment._id)
+        .send({
+            userId: userId
+        })
+        .end(function(err, res){
+            res.should.be.json;
+            res.should.be.a('object');
+            res.body.should.have.property('status');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
+// to unlike the comment 
+function setLikeDownCommentHelper(done, comment) {
+    chai.request(server)
+        .post('/api/comment/likes/down/' + comment._id)
+        .send({
+            userId: userId
+        })
+        .end(function (err, res) {
+            res.should.be.json;
+            res.should.be.a('object');
+            res.body.should.have.property('status');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
+// To get the comment by user 
+function getCommentByUser(done, data){
+    chai.request(server)
+        .get('/api/comment/all/user/' + data.user)
+        .send({
+            user: data.user
+        })
+        .end(function(err, res){
+            res.should.be.json;
+            res.should.be.a('object');
+            res.body.should.have.property('status');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
 
 describe('Comments:- \n', function() {
 
@@ -137,7 +192,7 @@ describe('Comments:- \n', function() {
     afterEach(function(done) {
         postModel.remove({}, function(err) {
             commentModel.remove({}, function(err) {
-                done();
+                done(); 
             });
         });
     });
@@ -178,5 +233,33 @@ describe('Comments:- \n', function() {
         });
     });
 
+    // Testing likes up by a user 
+    it('Testing /api/comment/likes/up/:commentId', function(done){
+        commentModel.findOne({
+             user: username
+         })
+        .exec(function(err, data){
+            setLikeUpCommentHelper(done, data);
+        });
+    });
 
+    // Testing likes down by a user 
+    it('Testing /api/comment/likes/down/:commentId', function(done){
+        commentModel.findOne({
+            user: username
+        })
+        .exec(function(err, data){
+            setLikeDownCommentHelper(done, data);
+        });
+    });
+
+    // To get comment by a user 
+    it('Testing /all/user/:user', function (done) {
+        commentModel.findOne({
+            user: username
+        })
+        .exec(function(err, data){
+            getCommentByUser(done, data);
+        });
+    });
 });
