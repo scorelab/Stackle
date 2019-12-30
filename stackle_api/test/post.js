@@ -9,7 +9,8 @@ const postModel = models['Post'];
 const userModel = require('../app/models/user');
 const demoUserToken = "THisIsADemoToken";
 const username = 'DEMO';
-
+const mongoose = require('mongoose');
+let userId = '';
 chai.use(chaiHttp);
 
 
@@ -136,6 +137,93 @@ function testPostCreate(done) {
     });
 }
 
+// to add tag in the post 
+function testAddTag(done, data){
+    chai.request(server)
+        .post('/api/post/tag/add/' + data._id)
+        .send({
+            postId: data._id,
+            tag: 'testTag'
+        })
+        .end(function(err, res){
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.should.have.property('status');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
+// to remove tag in the post 
+function removeTag(done, data){
+    chai.request(server)
+        .post('/api/post/tag/remove/' + data._id)
+        .send({
+            postId: data._id,
+            tag: 'testTag'
+        })
+        .end(function(err, res){
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.should.have.property('status');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
+// testing likes/up the post 
+function likesUp(done, data){
+    // create a user for liking up the post 
+    let newUser = new userModel({
+        userId: 'demoUserId',
+        token: demoUserToken,
+        email: 'email',
+        name: username,
+    });
+    newUser.save(function(err){
+        userId = newUser._id;
+        chai.request(server)
+            .post('/api/post/likes/up/' + data._id)
+            .send({
+                postId: data._id,
+                userId: newUser._id
+            })
+            .end(function (err, res) {
+                res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.should.have.property('success');
+                res.body.should.have.property('result');
+                res.body.should.have.property('status');
+                done();
+                // remove the created user from userModel
+                userModel.remove({});
+            });
+    });
+}
+
+// testing likes/down the post 
+function likesDown(done, data){
+    chai.request(server)
+        .post('/api/post/likes/down/' + data._id)
+        .send({
+            postId: data._id,
+            userId: userId
+        })
+        .end(function (err, res) {
+            res.should.be.json;
+            res.body.should.be.a('object');
+            res.body.should.have.property('success');
+            res.body.should.have.property('result');
+            res.body.should.have.property('status');
+            res.body.status.should.equal(200);
+            done();
+        });
+}
+
 describe('POSTS:- \n', function() {
 
     //before each testCase is run
@@ -207,6 +295,42 @@ describe('POSTS:- \n', function() {
             user: username
         }).exec(function(err, data) {
             testGetLikes(done, data);
+        });
+    });
+
+    // Testing likes/up the post 
+    it('Testing /api/post/likes/up/:postId', function(done){
+        postModel.findOne({
+            user: username
+        }).exec(function(err, info){
+            likesUp(done, info);
+        });
+    });
+
+    // Testing like/down the post 
+    it('Testing /api/post/likes/down/:postId', function(done){
+        postModel.findOne({
+            user: username
+        }).exec(function(err, info){
+            likesDown(done, info);
+        });
+    });
+
+    // Testing add tag for a post 
+    it('Testing /api/post/tag/add/:postId', function(done){
+        postModel.findOne({
+            user: username
+        }).exec(function(err, info){
+            testAddTag(done, info);
+        });
+    });
+
+    // Testing remove tag for a post 
+    it('Testing /api/post/tag/remove/:postId', function(done){
+        postModel.findOne({
+            user: username
+        }).exec(function(err, info){
+            removeTag(done, info);
         });
     });
 
